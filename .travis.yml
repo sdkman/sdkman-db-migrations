@@ -2,7 +2,6 @@ services:
   - docker
 language: node_js
 node_js:
-  - "iojs"
   - "8"
 before_script:
   - npm install -g db-migrate
