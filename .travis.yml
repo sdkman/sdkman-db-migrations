@@ -1,0 +1,17 @@
+services:
+  - docker
+language: node_js
+node_js:
+  - "iojs"
+  - "8"
+before_script:
+  - npm install -g db-migrate
+  - npm install -g db-migrate-mongodb
+  - docker run -d --net=host --name mongo mongo:3.2
+  - ./wait-for-it.sh -h mongo -p 27017 -t 5 -- mongo --host localhost --port 27017 --eval 'db.version()'
+script:
+  - db-migrate up --env="dev"
+  - db-migrate up --env="prod"
+branches:
+  only:
+    - master
