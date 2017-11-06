@@ -1,0 +1,15 @@
+{
+	"defaultenv": "dev",
+	"dev": {
+		"driver": "mongodb",
+		"database": "sdkman",
+		"host": "localhost"
+	},
+	"prod": {
+		"driver": "mongodb",
+		"database": { "ENV": "MONGO_DATABASE" },
+		"host": { "ENV": "MONGO_HOST" },
+		"user": { "ENV": "MONGO_USER" },
+		"password": { "ENV": "MONGO_PASSWORD" }
+	}
+}
