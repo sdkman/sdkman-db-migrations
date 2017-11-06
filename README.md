@@ -69,6 +69,7 @@ And lastly, check to see if your migration made it's way into the datbase:
 Once we satisfied that everything worked, add and push this to your forked repo and raise a PR:
 
         $ git add migrations
+        $ git commit -m 'Added Maven 3.5.2'
         $ git push origin master
 
 ## Fast track
