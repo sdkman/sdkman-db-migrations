@@ -33,6 +33,40 @@ The declares environments:
 1. `dev`: A local mongodb installation on your machine used for testing locally.
 2. `prod`: The production instance of mongodb which will be updated from the CI build.
 
+## The Model
+
+The domain used for describing releases has two entities: `candidates` and `versions`. These are modelled as two distinct collections in our MongoDB datastore.
+
+### Candidates
+
+This collection holds information about the SDK itself including the name, description, website url, distribution and default version. A typical entry would look something like this:
+
+        { 
+                "_id" : ObjectId("562beacb601daf84cec59999"),
+                "candidate" : "scala", 
+                "default" : "2.12.4", 
+                "description" : "Scala is a programming language for general software applications. Scala has full support for functional programming and a very strong static type system...", 
+                "websiteUrl" : "http://www.scala-lang.org/", 
+                "name" : "Scala", 
+                "distribution" : "UNIVERSAL"
+        }
+
+The `distribution` is usually set to `UNIVERSAL` unless platform specific binaries are to be served in which case it should be set to `PLATFORM_SPECIFIC`.
+
+### Versions
+
+The `versions` collection will hold information about individual releases for a specific Candidate. It has fields representing the candidate, version, (absolute) URL to the binary, as well as platform.
+
+        {
+                "_id" : ObjectId("5a09d2dcffd8c740664b335b"), 
+                "candidate" : "kotlin", 
+                "version" : "1.1.60", 
+                "platform" : "UNIVERSAL", 
+                "url" : "https://github.com/JetBrains/kotlin/releases/download/v1.1.60/kotlin-compiler-1.1.60.zip"
+        }
+
+When serving up a simple universal zip binary, we always set the `platform` field to `UNIVERSAL`.
+
 ## Workflow
 
 Every new Version should be submitted as an individual database migration PR. Start by stepping into this repo folder and create a new migration script using the `db-migrate` CLI. We will be using a release of Maven 3.5.2 as an example:
@@ -52,8 +86,6 @@ A new migration script has now been created, open this script in your favourite 
             });
         };
 
-Everything above should be fairly obvious: the `platform` usually being `UNIVERSAL` and the `url` pointing to a final zip URL resource (no query parameters please!).
-
 Now run the migration locally to ensure that all is well:
 
         $ db-migrate up
@@ -71,6 +103,14 @@ Once we satisfied that everything worked, add and push this to your forked repo 
         $ git add migrations
         $ git commit -m 'Added Maven 3.5.2'
         $ git push origin master
+
+## Example migrations
+
+For convenience, some examples have been added to the `examples` folder of this repo. This contains examples for:
+
+* New Candidate
+* A Major Version release (default Version)
+* A Minor Version release (non-default Version)
 
 ## Fast track
 
