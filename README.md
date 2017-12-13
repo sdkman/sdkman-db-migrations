@@ -6,7 +6,7 @@ This enables the users of SDKMAN to contribute new Installation Candidates and r
 
 This repo uses the popular [db-migrate](https://db-migrate.readthedocs.io/en/latest/) database migration framework used in the node.js community. In order to contribute a PR, it is required to install the necessary toolchain first:
 
-1. Install [nojejs](https://nodejs.org/en/download/) on your system. Which usually includes `npm`, the Node Package Manager.
+1. Install [nodejs](https://nodejs.org/en/download/) on your system, which usually includes `npm`, the Node Package Manager.
 2. Perform a global install of `db-migrate` using `npm`. This might require `sudo` for access:
 
         $ sudo npm install -g db-migrate
@@ -29,7 +29,7 @@ The configuration file for `db-migrate` can be found in **database.json**, and i
 
 ## Environments
 
-The declares environments:
+The declared environments:
 1. `dev`: A local mongodb installation on your machine used for testing locally.
 2. `prod`: The production instance of mongodb which will be updated from the CI build.
 
