@@ -1,9 +1,10 @@
 services:
   - docker
 before_script:
-  - docker run -d --net=host --name mongo mongo:3.2
+  - docker run --rm -d --network=host --name mongo mongo:3.2
   - ./wait-for-it.sh -h mongo -p 27017 -t 5 -- mongo --host localhost --port 27017 --eval 'db.version()'
 script:
+  - ./gradlew clean run
 branches:
   only:
     - master
