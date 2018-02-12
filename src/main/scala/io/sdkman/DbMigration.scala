@@ -2,9 +2,13 @@ package io.sdkman
 
 import com.github.mongobee.Mongobee
 
-object DbMigration extends App {
-  val runner = new Mongobee("mongodb://localhost:27017")
-  runner.setDbName("sdkman")
-  runner.setChangeLogsScanPackage("io.sdkman.changelogs")
-  runner.execute()
+object DbMigration extends App with Configuration {
+
+  mongoUsernameO.fold(mongobee(s"mongodb://$mongoHost:$mongoPort")) { mongoUsername =>
+    mongobee(s"mongodb://$mongoUsername:$mongoPassword@$mongoHost:$mongoPort")
+  }.setDbName(mongoDatabase)
+    .setChangeLogsScanPackage("io.sdkman.changelogs")
+    .execute()
+
+  private def mongobee(url: String) = new Mongobee(url)
 }
