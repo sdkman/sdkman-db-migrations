@@ -2,12 +2,13 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import io.sdkman.CandidateVersion
 import org.bson.Document
 
 import scala.collection.JavaConverters._
 
 @ChangeLog(order = "001")
-class VersionsMigration extends MigrationDsl {
+class VersionsMigration {
 
   @ChangeSet(order = "001", id = "001-add_java_904_zulu", author = "marc0der")
   def migrate(db: MongoDatabase) = db.getCollection("versions").insertMany(List[Document](

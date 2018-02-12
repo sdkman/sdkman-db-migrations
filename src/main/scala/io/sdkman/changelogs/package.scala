@@ -1,10 +1,10 @@
-package io.sdkman.changelogs
+package io.sdkman
 
 import org.bson.Document
 
-case class CandidateVersion(candidate: String, version: String, platform: Option[String], url: String)
+import scala.language.implicitConversions
 
-trait MigrationDsl {
+package object changelogs {
 
   implicit def candidateVersionToDocument(cv: CandidateVersion): Document =
     new Document("candidate", cv.candidate)
