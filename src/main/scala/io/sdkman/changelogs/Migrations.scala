@@ -2,7 +2,6 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.CandidateVersion
 import org.bson.Document
 
 import scala.collection.JavaConverters._
