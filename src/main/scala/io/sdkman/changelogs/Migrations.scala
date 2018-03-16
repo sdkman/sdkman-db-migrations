@@ -17,4 +17,8 @@ class VersionsMigration {
   @ChangeSet(order = "002", id = "002-add_java_904_zulu", author = "marc0der")
   def migrate002(db: MongoDatabase) = db.getCollection("versions").insertOne(
     CandidateVersion("java", "9.0.4-zulu", Some("LINUX_64"), "https://cdn.azul.com/zulu/bin/zulu9.0.4.1-jdk9.0.4-linux_x64.tar.gz"))
+  
+  @ChangeSet(order = "003", id = "003-add_maven_353", author = "hho")
+  def migrate003(db: MongoDatabase) = db.getCollection("versions").insertOne(
+    CandidateVersion("maven", "3.5.3", Some("UNIVERSAL"), "https://archive.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip"))
 }
