@@ -19,7 +19,7 @@ class VersionsMigration {
     CandidateVersion("java", "9.0.4-zulu", Some("LINUX_64"), "https://cdn.azul.com/zulu/bin/zulu9.0.4.1-jdk9.0.4-linux_x64.tar.gz"))
 
   
-  @ChangeSet(order="003", id= "004-add_openjdk_latest",author="MaSven")
+  @ChangeSet(order="003", id= "003-add_openjdk_latest",author="MaSven")
   def migrate003(db: MongoDatabase) = db.getCollection("versions").insertMany(List[Document](
       CandidateVersion("java", "jdk9j9-9+181-openjdk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk9-openj9-releases/releases/download/jdk-9%2B181/OpenJDK9-OPENJ9_x64_Linux_jdk-9.181.tar.gz"),
       CandidateVersion("java","jdk9-9+181-opendjk",Some("LINUX_64"),"https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Linux_jdk-9.181.tar.gz"),
