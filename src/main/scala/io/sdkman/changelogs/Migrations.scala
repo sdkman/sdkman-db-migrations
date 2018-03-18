@@ -32,4 +32,7 @@ class VersionsMigration {
   @ChangeSet(order = "004", id = "004-change_java_default", author = "MaSven")
   def migrate004(implicit db: MongoDatabase) = updateCandidateDefault("java", "8u144-openjdk")
 
+  @ChangeSet(order = "005", id = "005-change_java_default_8u152_zulu", author = "MaSven")
+  def migrate005(implicit db: MongoDatabase) = updateCandidateDefault("java", "8u152-zulu")
+
 }
