@@ -1,8 +1,12 @@
 package io.sdkman
 
+import com.mongodb.client.MongoDatabase
+import com.mongodb.client.model.{Filters, Updates}
 import org.bson.Document
 
 import scala.language.implicitConversions
+
+import scala.collection.JavaConverters._
 
 package object changelogs {
 
@@ -31,4 +35,9 @@ package object changelogs {
       .append("version", cv.version)
       .append("platform", cv.platform.getOrElse("UNIVERSAL"))
       .append("url", cv.url)
+
+  def insertVersions(vs: Document*)(implicit db: MongoDatabase): Unit = db.getCollection("versions").insertMany(vs.asJava)
+
+  def updateCandidateDefault(c: String, d: String)(implicit db: MongoDatabase): Document =
+    db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", c), Updates.set("default", d))
 }
