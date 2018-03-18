@@ -37,7 +37,7 @@ class VersionsMigration {
 
 
   @ChangeSet(order = "006", id = "003-add_maven_353", author = "hho")
-  def migrate006(db: MongoDatabase) = {
+  def migrate006(implicit db: MongoDatabase) = {
     insertVersions(CandidateVersion("maven", "3.5.3", Some("UNIVERSAL"), "https://archive.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip"))
     updateCandidateDefault("maven", "3.5.3")
   }
