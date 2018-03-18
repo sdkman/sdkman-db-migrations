@@ -2,8 +2,10 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ ChangeLog, ChangeSet }
 import com.mongodb.client.MongoDatabase
-import org.bson.Document
 
+import com.mongodb.client.model.{ Filters, Updates }
+
+import org.bson.Document
 import scala.collection.JavaConverters._
 
 @ChangeLog(order = "001")
@@ -18,20 +20,20 @@ class VersionsMigration {
   def migrate002(db: MongoDatabase) = db.getCollection("versions").insertOne(
     CandidateVersion("java", "9.0.4-zulu", Some("LINUX_64"), "https://cdn.azul.com/zulu/bin/zulu9.0.4.1-jdk9.0.4-linux_x64.tar.gz"))
 
-  
-  @ChangeSet(order="003", id= "003-add_openjdk_latest",author="MaSven")
+  @ChangeSet(order = "003", id = "003-add_openjdk_latest", author = "MaSven")
   def migrate003(db: MongoDatabase) = db.getCollection("versions").insertMany(List[Document](
-      CandidateVersion("java", "jdk9j9-9+181-openjdk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk9-openj9-releases/releases/download/jdk-9%2B181/OpenJDK9-OPENJ9_x64_Linux_jdk-9.181.tar.gz"),
-      CandidateVersion("java","jdk9-9+181-opendjk",Some("LINUX_64"),"https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Linux_jdk-9.181.tar.gz"),
-      CandidateVersion("java","jdk9-9+181-opendjk",Some("MAC_OSX"),"https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Mac_jdk-9.181.tar.gz"),
-      CandidateVersion("java","jdk9-9+181-opendjk",Some("WINDOWS_64"),"https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Win_jdk-9.181.zip"),
-      CandidateVersion("java","jdk8-144-b01-opendjk",Some("LINUX_64"),"https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Linux_jdk8u144-b01.tar.gz"),
-      CandidateVersion("java","jdk8-144-b01-opendjk",Some("MAC_OSX"),"https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Mac_jdk8u144-b01.tar.gz"),
-      CandidateVersion("java","jdk8-144-b01-opendjk",Some("WINDOWS_64"),"https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Win_jdk8u144-b01.zip"),
-      CandidateVersion("java","jdk8j9-162-b12-opendjk",Some("LINUX_64"),"https://github.com/AdoptOpenJDK/openjdk8-openj9-releases/releases/download/jdk8u162-b12_openj9-0.8.0/OpenJDK8-OPENJ9_x64_Linux_jdk8u162-b12_openj9-0.8.0.tar.gz"),
-      CandidateVersion("java","jdk10-+23-opendjk",Some("LINUX_64"),"https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Linux_jdk-10.23.tar.gz"),
-      CandidateVersion("java","jdk10-+23-opendjk",Some("MAC_OSX"),"https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Mac_jdk-10.23.tar.gz")
-      ).asJava)
-   
-  
+    CandidateVersion("java", "jdk9j9-9+181-openjdk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk9-openj9-releases/releases/download/jdk-9%2B181/OpenJDK9-OPENJ9_x64_Linux_jdk-9.181.tar.gz"),
+    CandidateVersion("java", "jdk9-9+181-opendjk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Linux_jdk-9.181.tar.gz"),
+    CandidateVersion("java", "jdk9-9+181-opendjk", Some("MAC_OSX"), "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Mac_jdk-9.181.tar.gz"),
+    CandidateVersion("java", "jdk9-9+181-opendjk", Some("WINDOWS_64"), "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Win_jdk-9.181.zip"),
+    CandidateVersion("java", "jdk8-144-b01-opendjk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Linux_jdk8u144-b01.tar.gz"),
+    CandidateVersion("java", "jdk8-144-b01-opendjk", Some("MAC_OSX"), "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Mac_jdk8u144-b01.tar.gz"),
+    CandidateVersion("java", "jdk8-144-b01-opendjk", Some("WINDOWS_64"), "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Win_jdk8u144-b01.zip"),
+    CandidateVersion("java", "jdk8j9-162-b12-opendjk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk8-openj9-releases/releases/download/jdk8u162-b12_openj9-0.8.0/OpenJDK8-OPENJ9_x64_Linux_jdk8u162-b12_openj9-0.8.0.tar.gz"),
+    CandidateVersion("java", "jdk10+23-opendjk", Some("LINUX_64"), "https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Linux_jdk-10.23.tar.gz"),
+    CandidateVersion("java", "jdk10+23-opendjk", Some("MAC_OSX"), "https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Mac_jdk-10.23.tar.gz")).asJava)
+
+  @ChangeSet(order = "004", id = "004-change_java_default", author = "MaSven")
+  def migrate004(db: MongoDatabase) = db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", "java"), Updates.set("default", "jdk8-144-b01-opendjk"))
+
 }
