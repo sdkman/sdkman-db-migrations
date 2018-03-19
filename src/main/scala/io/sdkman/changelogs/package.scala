@@ -36,8 +36,12 @@ package object changelogs {
       .append("platform", cv.platform.getOrElse("UNIVERSAL"))
       .append("url", cv.url)
 
-  def insertVersions(vs: Document*)(implicit db: MongoDatabase): Unit = db.getCollection("versions").insertMany(vs.asJava)
+  def insertVersion(version: Document)(implicit db: MongoDatabase): Unit = db.getCollection("versions").insertOne(version)
 
-  def updateCandidateDefault(c: String, d: String)(implicit db: MongoDatabase): Document =
-    db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", c), Updates.set("default", d))
+  def insertVersions(versions: Document*)(implicit db: MongoDatabase): Unit = db.getCollection("versions").insertMany(versions.asJava)
+
+  def insertCandidate(candidate: Document)(implicit db: MongoDatabase): Unit = db.getCollection("candidates").insertOne(candidate)
+
+  def updateCandidateDefault(candidate: String, version: String)(implicit db: MongoDatabase): Document =
+    db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", candidate), Updates.set("default", version))
 }
