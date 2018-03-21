@@ -42,7 +42,7 @@ class VersionsMigration {
     updateCandidateDefault("maven", "3.5.3")
   }
 
-  @ChangeSet(order = "007", id = "007-change_openjdk_to_adoptopnjdk", author = "MaSven")
+  @ChangeSet(order = "007", id = "007-change_openjdk_to_adoptopenjdk", author = "MaSven")
   def migrate007(implicit db: MongoDatabase) = {
     updateVersion("9u181-openjdk", "9u181-adoptopenjdk")
     updateVersion("8u144-openjdk", "8u144-adoptopenjdk")
