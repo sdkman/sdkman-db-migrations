@@ -1,6 +1,6 @@
 package io.sdkman.changelogs
 
-import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
+import com.github.mongobee.changeset.{ ChangeLog, ChangeSet }
 import com.mongodb.client.MongoDatabase
 import org.bson.Document
 
@@ -35,16 +35,32 @@ class Migrations {
   @ChangeSet(order = "005", id = "005-change_java_default_8u152_zulu", author = "MaSven")
   def migrate005(implicit db: MongoDatabase) = updateCandidateDefault("java", "8u152-zulu")
 
-
   @ChangeSet(order = "006", id = "003-add_maven_353", author = "hho")
   def migrate006(implicit db: MongoDatabase) = {
     insertVersions(CandidateVersion("maven", "3.5.3", Some("UNIVERSAL"), "https://archive.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip"))
     updateCandidateDefault("maven", "3.5.3")
   }
 
+  @ChangeSet(order = "008", id = "008-change_openjdk_to_adoptopenjdk", author = "MaSven")
+  def migrate008(implicit db: MongoDatabase) = {
+    updateVersion("9u181-openjdk", "9u181-adoptopenjdk")
+    updateVersion("8u144-openjdk", "8u144-adoptopenjdk")
+    updateVersion("10u23-openjdk", "10u23-adoptopenjdk")
+  }
+
   @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
   def migrate007(implicit db: MongoDatabase) = {
     insertVersions(CandidateVersion("scala", "2.12.5", Some("UNIVERSAL"), "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
     updateCandidateDefault("scala", "2.12.5")
+
+  }
+
+  @ChangeSet(order = "009", id = "009-add_java_10_openjdk", author = "MaSven")
+  def migrate009(implicit db: MongoDatabase) = {
+    insertVersions(
+      CandidateVersion("java", "10-openjdk", Some("WINDOWS_64"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_windows-x64_bin.tar.gz"),
+      CandidateVersion("java", "10-openjdk", Some("MAC_OSX"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_osx-x64_bin.tar.gz"),
+      CandidateVersion("java", "10-openjdk", Some("LINUX_64"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz"))
+
   }
 }

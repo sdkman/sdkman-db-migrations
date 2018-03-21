@@ -1,26 +1,29 @@
 package io.sdkman
 
 import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.{Filters, Updates}
+import com.mongodb.client.model.{ Filters, Updates }
 import org.bson.Document
 
 import scala.language.implicitConversions
 
 import scala.collection.JavaConverters._
+import scala.collection.immutable.List
 
 package object changelogs {
 
-  case class Candidate(candidate: String,
-                       name: String,
-                       description: String,
-                       default: String,
-                       websiteUrl: String,
-                       distribution: String)
+  case class Candidate(
+    candidate:    String,
+    name:         String,
+    description:  String,
+    default:      String,
+    websiteUrl:   String,
+    distribution: String)
 
-  case class CandidateVersion(candidate: String,
-                              version: String,
-                              platform: Option[String],
-                              url: String)
+  case class CandidateVersion(
+    candidate: String,
+    version:   String,
+    platform:  Option[String],
+    url:       String)
 
   implicit def candidateToDocument(c: Candidate): Document =
     new Document("candidate", c.candidate)
@@ -44,4 +47,9 @@ package object changelogs {
 
   def updateCandidateDefault(candidate: String, version: String)(implicit db: MongoDatabase): Document =
     db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", candidate), Updates.set("default", version))
+
+  def updateVersion(version: String, newVersion: String)(implicit db: MongoDatabase): Unit = {
+    db.getCollection("versions").updateMany(Filters.eq("version", version), Updates.set("version", newVersion))
+  }
+
 }
