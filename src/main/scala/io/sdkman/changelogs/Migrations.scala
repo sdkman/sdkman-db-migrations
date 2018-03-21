@@ -41,7 +41,6 @@ class Migrations {
     updateCandidateDefault("maven", "3.5.3")
   }
 
-
   @ChangeSet(order = "008", id = "008-change_openjdk_to_adoptopenjdk", author = "MaSven")
   def migrate008(implicit db: MongoDatabase) = {
     updateVersion("9u181-openjdk", "9u181-adoptopenjdk")
@@ -53,6 +52,15 @@ class Migrations {
   def migrate007(implicit db: MongoDatabase) = {
     insertVersions(CandidateVersion("scala", "2.12.5", Some("UNIVERSAL"), "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
     updateCandidateDefault("scala", "2.12.5")
+
+  }
+
+  @ChangeSet(order = "009", id = "009-add_java_10_openjdk", author = "MaSven")
+  def migrate009(implicit db: MongoDatabase) = {
+    insertVersions(
+      CandidateVersion("java", "10-openjdk", Some("WINDOWS_64"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_windows-x64_bin.tar.gz"),
+      CandidateVersion("java", "10-openjdk", Some("MAC_OSX"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_osx-x64_bin.tar.gz"),
+      CandidateVersion("java", "10-openjdk", Some("LINUX_64"), "https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz"))
 
   }
 }
