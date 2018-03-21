@@ -7,7 +7,7 @@ import org.bson.Document
 import scala.collection.JavaConverters._
 
 @ChangeLog(order = "001")
-class VersionsMigration {
+class Migrations {
 
   @ChangeSet(order = "001", id = "001-add_java_904_zulu", author = "marc0der")
   def migrate001(db: MongoDatabase) = db.getCollection("versions").insertMany(List[Document](
@@ -41,10 +41,18 @@ class VersionsMigration {
     updateCandidateDefault("maven", "3.5.3")
   }
 
-  @ChangeSet(order = "007", id = "007-change_openjdk_to_adoptopenjdk", author = "MaSven")
-  def migrate007(implicit db: MongoDatabase) = {
+
+  @ChangeSet(order = "008", id = "008-change_openjdk_to_adoptopenjdk", author = "MaSven")
+  def migrate008(implicit db: MongoDatabase) = {
     updateVersion("9u181-openjdk", "9u181-adoptopenjdk")
     updateVersion("8u144-openjdk", "8u144-adoptopenjdk")
     updateVersion("10u23-openjdk", "10u23-adoptopenjdk")
+  }
+
+  @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
+  def migrate007(implicit db: MongoDatabase) = {
+    insertVersions(CandidateVersion("scala", "2.12.5", Some("UNIVERSAL"), "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
+    updateCandidateDefault("scala", "2.12.5")
+
   }
 }
