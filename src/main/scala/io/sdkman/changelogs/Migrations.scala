@@ -5,7 +5,6 @@ import com.mongodb.client.MongoDatabase
 import org.bson.Document
 
 import scala.collection.JavaConverters._
-import scala.collection.mutable.ListBuffer
 
 @ChangeLog(order = "001")
 class VersionsMigration {
