@@ -6,6 +6,7 @@ import org.bson.Document
 
 import scala.collection.JavaConverters._
 
+@deprecated
 @ChangeLog(order = "001")
 class Migrations {
 
