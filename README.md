@@ -1,5 +1,7 @@
 # SDKMAN Database Migrations
 
+[![Build Status](https://travis-ci.org/sdkman/sdkman-db-migrations.svg?branch=master)](https://travis-ci.org/sdkman/sdkman-db-migrations)
+
 This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API.
 
 ## Tools used
