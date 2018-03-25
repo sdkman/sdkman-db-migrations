@@ -17,10 +17,10 @@ package object changelogs {
                        websiteUrl: String,
                        distribution: String)
 
-  case class CandidateVersion(candidate: String,
-                              version: String,
-                              platform: Option[String],
-                              url: String)
+  case class Version(candidate: String,
+                     version: String,
+                     platform: Option[String],
+                     url: String)
 
   implicit def candidateToDocument(c: Candidate): Document =
     new Document("candidate", c.candidate)
@@ -30,7 +30,7 @@ package object changelogs {
       .append("website", c.websiteUrl)
       .append("distribution", c.distribution)
 
-  implicit def candidateVersionToDocument(cv: CandidateVersion): Document =
+  implicit def versionToDocument(cv: Version): Document =
     new Document("candidate", cv.candidate)
       .append("version", cv.version)
       .append("platform", cv.platform.getOrElse("UNIVERSAL"))
@@ -42,6 +42,6 @@ package object changelogs {
 
   def insertCandidate(candidate: Document)(implicit db: MongoDatabase): Unit = db.getCollection("candidates").insertOne(candidate)
 
-  def updateCandidateDefault(candidate: String, version: String)(implicit db: MongoDatabase): Document =
+  def setCandidateDefault(candidate: String, version: String)(implicit db: MongoDatabase): Document =
     db.getCollection("candidates").findOneAndUpdate(Filters.eq("candidate", candidate), Updates.set("default", version))
 }
