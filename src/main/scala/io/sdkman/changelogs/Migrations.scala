@@ -6,7 +6,7 @@ import org.bson.Document
 
 import scala.collection.JavaConverters._
 
-@deprecated
+@deprecated(message = "This class has been superceded by candidate specific migration classes", since = "#24")
 @ChangeLog(order = "001")
 class Migrations {
 

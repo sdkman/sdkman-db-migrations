@@ -2,7 +2,7 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.ChangeLog
 
-@ChangeLog("003")
+@ChangeLog(order = "003")
 class ScalaMigrations {
-
+  //TODO: Add new Scala migrations here
 }
