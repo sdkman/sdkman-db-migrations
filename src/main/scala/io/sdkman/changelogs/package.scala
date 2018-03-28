@@ -14,6 +14,26 @@ package object changelogs {
 
   val VersionsCollection = "versions"
 
+  trait Platform {
+    def id: String
+  }
+
+  case object Universal extends Platform {
+    override val id = "UNIVERSAL"
+  }
+
+  case object MacOSX extends Platform {
+    override val id = "MAC_OSX"
+  }
+
+  case object Windows extends Platform {
+    override val id = "WINDOWS_64"
+  }
+
+  case object Linux extends Platform {
+    override val id = "LINUX_64"
+  }
+
   case class Candidate(candidate: String,
                        name: String,
                        description: String,
@@ -52,13 +72,8 @@ package object changelogs {
   def removeCandidate(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(CandidatesCollection).deleteOne(new Document("candidate", candidate))
 
-  def removeVersion(candidate: String, version: String)(implicit db: MongoDatabase): Unit =
-    db.getCollection(VersionsCollection).deleteOne(new Document("candidate", candidate).append("version", version))
-
-  def removeVersions(candidate: String, versions: List[String])(implicit db: MongoDatabase): Unit = {
-    val coll = db.getCollection(VersionsCollection)
-    versions.foreach(v => coll.deleteOne(new Document("candidate", candidate).append("version", v)))
-  }
+  def removeVersion(candidate: String, version: String, platform: Platform = Universal)(implicit db: MongoDatabase): Unit =
+    db.getCollection(VersionsCollection).deleteOne(new Document("candidate", candidate).append("version", version).append("platform", platform.id))
 
   def removeAllVersions(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(VersionsCollection).deleteMany(new Document("candidate", candidate))
