@@ -49,10 +49,5 @@ class Migrations {
     setCandidateDefault("scala", "2.12.5")
   }
   
-  @ChangeSet(order = "009", id= "009-add_openjdk_10",author="MaSven")
-  def migrate009(implicit db:MongoDatabase)=insertVersions(
-    CandidateVersion("java","10.0.0-openjdk",Some("WINDOWS_64"),"https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_windows-x64_bin.tar.gz"),
-    CandidateVersion("java","10.0.0-openjdk",Some("MAC_OSX"),"https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_osx-x64_bin.tar.gz"),
-    CandidateVersion("java","10.0.0-openjdk",Some("LINUX_64"),"https://download.java.net/java/GA/jdk10/10/binaries/openjdk-10_linux-x64_bin.tar.gz")
-  )
+  
 }
