@@ -5,6 +5,9 @@ before_script:
   - ./wait-for-it.sh -h mongo -p 27017 -t 5 -- mongo --host localhost --port 27017 --eval 'db.version()'
 script:
   - ./gradlew clean run
+cache:
+  directories:
+  - "$HOME/.gradle"
 branches:
   only:
     - master
