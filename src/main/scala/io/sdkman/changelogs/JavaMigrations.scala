@@ -19,7 +19,8 @@ class JavaMigrations {
     Version("java", "9.0.4-openjdk", Some("LINUX_64"), "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz"),
     Version("java", "9.0.4-openjdk", Some("WINDOWS_64"), "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz"))
 
-  @ChangeSet(order = "003", id = "003-clean_up_openjdk_variants", author = "marc0der")
-  def migrate003(implicit db: MongoDatabase) =
-    removeVersions("9u181-openjdk", "9.0.1-zulu", "9.0.0-zulu", "8u144-zulu", "8u144-openjdk", "8u131-zulu", "10u23-openjdk")
+  @ChangeSet(order = "004", id = "004-clean_up_openjdk_variants", author = "marc0der")
+  def migrate004(implicit db: MongoDatabase) =
+    removeVersions("java",
+      List("9u181-openjdk", "9.0.1-zulu", "9.0.0-zulu", "8u144-zulu", "8u144-openjdk", "8u131-zulu", "10u23-openjdk"))
 }
