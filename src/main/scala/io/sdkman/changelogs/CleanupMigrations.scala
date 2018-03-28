@@ -29,4 +29,11 @@ class CleanupMigrations {
       }
     }
   }
+
+  @ChangeSet(order = "007", id = "007-temporary_remove_openjdk_10_osx", author = "marc0der")
+  def migrate007(implicit db: MongoDatabase) = {
+    List("9.0.4-openjdk", "10.0.0-openjdk").foreach { version =>
+      removeVersion("java", version, MacOSX)
+    }
+  }
 }
