@@ -55,7 +55,7 @@ package object changelogs {
   def removeVersion(candidate: String, version: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(VersionsCollection).deleteOne(new Document("candidate", candidate).append("version", version))
 
-  def removeVersions(candidate: String, versions: String*)(implicit db: MongoDatabase): Unit = {
+  def removeVersions(candidate: String, versions: List[String])(implicit db: MongoDatabase): Unit = {
     val coll = db.getCollection(VersionsCollection)
     versions.foreach(v => coll.deleteOne(new Document("candidate", candidate).append("version", v)))
   }
