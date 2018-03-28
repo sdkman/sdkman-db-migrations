@@ -4,9 +4,9 @@ import com.github.mongobee.Mongobee
 
 object DbMigration extends App with Configuration {
 
-  mongoUsernameO.fold(localMongoConn) { mongoUsername =>
-    remoteMongoConn(mongoUsername)
-  }.setDbName(mongoDatabase)
+  mongoUsernameO
+    .fold(localMongoConn)(mongoUsername => remoteMongoConn(mongoUsername))
+    .setDbName(mongoDatabase)
     .setChangeLogsScanPackage("io.sdkman.changelogs")
     .execute()
 
