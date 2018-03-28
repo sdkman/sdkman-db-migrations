@@ -49,11 +49,6 @@ class Migrations {
     setCandidateDefault("scala", "2.12.5")
   }
   
-  @ChangeSet(order = "008",id ="008-add_openjdk_9_0_4",author="MaSven")
-  def migrate008(implicit db: MongoDatabase)=insertVersions(
-    CandidateVersion("java","9.0.4-openjdk",Some("MAC_OSX"),"https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_osx-x64_bin.tar.gz"),
-    CandidateVersion("java","9.0.4-openjdk",Some("LINUX_64"),"https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz"),
-    CandidateVersion("java","9.0.4-openjdk",Some("WINDOWS_64"),"https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz")
-  )
+  
   
 }
