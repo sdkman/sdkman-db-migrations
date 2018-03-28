@@ -48,4 +48,6 @@ class Migrations {
     insertVersions(Version("scala", "2.12.5", Some("UNIVERSAL"), "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
     setCandidateDefault("scala", "2.12.5")
   }
+  
+  
 }
