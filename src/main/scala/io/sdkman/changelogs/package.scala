@@ -5,8 +5,8 @@ import com.mongodb.client.model.{Filters, Updates}
 import org.bson.Document
 
 import scala.language.implicitConversions
-
 import scala.collection.JavaConverters._
+import scala.compat.Platform
 
 package object changelogs {
 
@@ -43,8 +43,8 @@ package object changelogs {
 
   case class Version(candidate: String,
                      version: String,
-                     platform: Option[String],
-                     url: String)
+                     url: String,
+                     platform: Platform = Universal)
 
   implicit def candidateToDocument(c: Candidate): Document =
     new Document("candidate", c.candidate)
@@ -57,7 +57,7 @@ package object changelogs {
   implicit def versionToDocument(cv: Version): Document =
     new Document("candidate", cv.candidate)
       .append("version", cv.version)
-      .append("platform", cv.platform.getOrElse("UNIVERSAL"))
+      .append("platform", cv.platform.id)
       .append("url", cv.url)
 
   def insertVersion(version: Document)(implicit db: MongoDatabase): Unit =
