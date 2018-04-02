@@ -18,4 +18,8 @@ class JavaMigrations {
     Version("java", "9.0.4-openjdk", "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz", Linux),
     Version("java", "9.0.4-openjdk", "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_windows-x64_bin.tar.gz", Windows))
 
+  def migrate003(implicit db: MongoDatabase) = insertVersions(
+    Version("java", "10.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu10.1+11-jdk10-win_x64.zip", Windows),
+    Version("java", "10.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu10.1+11-jdk10-linux_x64.tar.gz", Linux),
+    Version("java", "10.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu10.1+11-jdk10-macosx_x64.zip", MacOSX))
 }
