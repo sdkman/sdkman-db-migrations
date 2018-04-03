@@ -51,7 +51,7 @@ package object changelogs {
       .append("name", c.name)
       .append("description", c.description)
       .append("default", c.default)
-      .append("website", c.websiteUrl)
+      .append("websiteUrl", c.websiteUrl)
       .append("distribution", c.distribution)
 
   implicit def versionToDocument(cv: Version): Document =

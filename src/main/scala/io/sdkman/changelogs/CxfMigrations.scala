@@ -16,6 +16,5 @@ class CxfMigrations {
         websiteUrl = "https://cxf.apache.org/",
         distribution = "UNIVERSAL"))
     insertVersion(Version("cxf", "3.2.4", "http://apache.mirror.anlx.net/cxf/3.2.4/apache-cxf-3.2.4.zip"))
-    setCandidateDefault("cxf", "3.2.4")
   }
 }
