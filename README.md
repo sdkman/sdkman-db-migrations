@@ -16,12 +16,6 @@ The build is a standard Gradle build, with migration code written in Scala. To r
 
         $ ./gradlew clean run
 
-## Environments
-
-The two environments as follows:
-1. `local`: A local mongodb installation on your machine used for testing locally. This is the default.
-2. `prod`: The production instance of mongodb which will be updated from the CI build. This is inferred by environment variables.
-
 ## The Model
 
 The domain used for describing releases has two entities: `candidates` and `versions`. These are modelled as two distinct collections in our MongoDB datastore.
@@ -62,7 +56,55 @@ When serving up a simple universal zip binary, we always set the `platform` fiel
 
 ## Workflow
 
-TODO: write me
+Migration scripts can be found under [changelogs](https://github.com/sdkman/sdkman-db-migrations/tree/master/src/main/scala/io/sdkman/changelogs) and are divided by candidate. Various helper functions have been provided at package scope to perform simple tasks such as adding a Version / Candidate or setting a new Default version.
+
+#### Adding a new Candidate migration class
+
+Simply fork this repository and then add a db migration in the appropriate file (create a new class if your Candidate is not represented). Also ensure that the changelog order is set to the next value available among migration classes:
+
+        @ChangeLog(order = "004")
+        class JBakeMigrations {
+            //TODO: migrations here
+        }
+
+#### Adding a new Version (universal binary)
+
+        @ChangeSet(order = "006", id = "006-add_scala_2_12_4", author = "marc0der")
+          def migrate006(implicit db: MongoDatabase) =
+            insertVersions(Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip"))
+
+#### Adding a new Default Version (universal binary)
+
+        @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
+          def migrate007(implicit db: MongoDatabase) = {
+            insertVersions(Version("scala", "2.12.5", "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
+            setCandidateDefault("scala", "2.12.5")
+        }
+
+#### Adding a new Version (platform specific)
+
+        @ChangeSet(order = "005", id = "005-add_oracle_jdk_10_0_0", author = "marc0der")
+          def migrate005(implicit db: MongoDatabase) = {
+            insertVersions(
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_osx-x64_bin.dmg", MacOSX),
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_linux-x64_bin.tar.gz", Linux),
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_windows-x64_bin.exe", Windows))
+        }
+
+#### Adding a new Candidate
+
+        @ChangeSet(order = "001", id = "001_add_cxf_3_2_4", author = "r0b0")
+        def migration001(implicit db: MongoDatabase) = {
+          insertCandidate(
+            Candidate(
+              candidate = "cxf",
+              name = "CXF",
+              description = "Apache CXF is an open source services framework...",
+              default = "3.2.4",
+              websiteUrl = "https://cxf.apache.org/",
+              distribution = "UNIVERSAL"))
+        }
+
 
 ## Fast track
 
