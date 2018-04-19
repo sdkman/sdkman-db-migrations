@@ -66,4 +66,24 @@ class JavaMigrations {
       Version("java", "7.0.171-zulu", "https://cdn.azul.com/zulu/bin/zulu7.22.0.3-jdk7.0.171-macosx_x64.zip", MacOSX)
     )
   }
+
+  @ChangeSet(order = "009", id = "009-add_oracle_8_0_171", author = "marc0der")
+  def migrate009(implicit db: MongoDatabase) = {
+    Seq(Linux, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.161-oracle", platform))
+    insertVersions(
+      Version("java", "8.0.171-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz", Linux),
+      Version("java", "8.0.171-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-windows-x64.exe", Windows),
+      Version("java", "8.0.171-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-macosx-x64.dmg", MacOSX)
+    )
+  }
+
+  @ChangeSet(order = "010", id = "010-add_oracle_10_0_1", author = "marc0der")
+  def migrate010(implicit db: MongoDatabase) = {
+    Seq(Linux, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "10.0.0-oracle", platform))
+    insertVersions(
+      Version("java", "10.0.1-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_linux-x64_bin.tar.gz", Linux),
+      Version("java", "10.0.1-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_windows-x64_bin.exe", Windows),
+      Version("java", "10.0.1-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_osx-x64_bin.dmg", MacOSX)
+    )
+  }
 }
