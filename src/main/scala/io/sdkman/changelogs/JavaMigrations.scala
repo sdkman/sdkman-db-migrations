@@ -86,4 +86,10 @@ class JavaMigrations {
       Version("java", "10.0.1-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.1+10/fb4372174a714e6b8c52526dc134031e/jdk-10.0.1_osx-x64_bin.dmg", MacOSX)
     )
   }
+
+  @ChangeSet(order = "011", id = "011-remove_oracle_9_0_4", author = "marc0der")
+  def migrate011(implicit db: MongoDatabase) = {
+    Seq(Linux, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "9.0.4-oracle", platform))
+  }
+
 }
