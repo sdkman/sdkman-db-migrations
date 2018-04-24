@@ -6,7 +6,6 @@ import org.bson.Document
 
 import scala.language.implicitConversions
 import scala.collection.JavaConverters._
-import scala.compat.Platform
 
 package object changelogs {
 
