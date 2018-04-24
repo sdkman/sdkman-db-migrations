@@ -13,8 +13,7 @@ class CxfMigrations {
         name = "CXF",
         description = "Apache CXF is an open source services framework. CXF helps you build and develop services using frontend programming APIs, like JAX-WS and JAX-RS. These services can speak a variety of protocols such as SOAP, XML/HTTP, RESTful HTTP, or CORBA and work over a variety of transports such as HTTP, JMS or JBI.",
         default = "3.2.4",
-        websiteUrl = "https://cxf.apache.org/",
-        distribution = UniversalDistribution))
+        websiteUrl = "https://cxf.apache.org/"))
     insertVersion(Version("cxf", "3.2.4", "http://apache.mirror.anlx.net/cxf/3.2.4/apache-cxf-3.2.4.zip"))
   }
 }

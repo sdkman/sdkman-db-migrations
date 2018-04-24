@@ -14,7 +14,7 @@ class GraalVMMigrations {
         description = "GraalVM is a universal virtual machine for running applications written in JavaScript, Python 3, Ruby, R, JVM-based languages like Java, Scala, Kotlin, and LLVM-based languages such as C and C++.",
         default = "1.0.0-rc1",
         websiteUrl = "http://graalvm.org",
-        distribution = PlatformSpecific))
+        distribution = "PLATFORM_SPECIFIC"))
 
     insertVersion(Version("graalvm", "1.0.0-rc1", "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz", Linux))
   }

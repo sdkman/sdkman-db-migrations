@@ -33,24 +33,12 @@ package object changelogs {
     override val id = "LINUX_64"
   }
 
-  trait Distribution {
-    def id: String
-  }
-
-  case object PlatformSpecific extends Distribution {
-    override val id = "PLATFORM_SPECIFIC"
-  }
-
-  case object UniversalDistribution extends Distribution {
-    override val id = "UNIVERSAL"
-  }
-
   case class Candidate(candidate: String,
                        name: String,
                        description: String,
                        default: String,
                        websiteUrl: String,
-                       distribution: Distribution = UniversalDistribution)
+                       distribution: String = "UNIVERSAL")
 
   case class Version(candidate: String,
                      version: String,
