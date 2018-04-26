@@ -71,13 +71,17 @@ Simply fork this repository and then add a db migration in the appropriate file 
 
         @ChangeSet(order = "006", id = "006-add_scala_2_12_4", author = "marc0der")
           def migrate006(implicit db: MongoDatabase) =
-            insertVersions(Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip"))
+            Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip").insert()
 
 #### Adding a new Default Version (universal binary)
 
         @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
           def migrate007(implicit db: MongoDatabase) = {
-            insertVersions(Version("scala", "2.12.5", "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"))
+            Version(
+                candidate = "scala",
+                version = "2.12.5",
+                url = "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"
+            ).insert()
             setCandidateDefault("scala", "2.12.5")
         }
 
@@ -85,24 +89,24 @@ Simply fork this repository and then add a db migration in the appropriate file 
 
         @ChangeSet(order = "005", id = "005-add_oracle_jdk_10_0_0", author = "marc0der")
           def migrate005(implicit db: MongoDatabase) = {
-            insertVersions(
+            List(
               Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_osx-x64_bin.dmg", MacOSX),
               Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_linux-x64_bin.tar.gz", Linux),
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_windows-x64_bin.exe", Windows))
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_windows-x64_bin.exe", Windows)
+            ).insert()
         }
 
 #### Adding a new Candidate
 
         @ChangeSet(order = "001", id = "001_add_cxf_3_2_4", author = "r0b0")
         def migration001(implicit db: MongoDatabase) = {
-          insertCandidate(
             Candidate(
               candidate = "cxf",
               name = "CXF",
               description = "Apache CXF is an open source services framework...",
               default = "3.2.4",
               websiteUrl = "https://cxf.apache.org/",
-              distribution = "UNIVERSAL"))
+              distribution = "UNIVERSAL").insert()
         }
 
 

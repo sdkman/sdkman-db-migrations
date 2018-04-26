@@ -5,13 +5,36 @@ import com.mongodb.client.model.{Filters, Updates}
 import org.bson.Document
 
 import scala.language.implicitConversions
-import scala.collection.JavaConverters._
 
 package object changelogs {
 
   val CandidatesCollection = "candidates"
 
   val VersionsCollection = "versions"
+
+  trait Migratable[A] {
+    def insert(a: A)(implicit db: MongoDatabase): Unit
+  }
+
+  implicit val candidateMigration = new Migratable[Candidate] {
+    override def insert(c: Candidate)(implicit db: MongoDatabase): Unit =
+      db.getCollection(CandidatesCollection)
+        .insertOne(candidateToDocument(c))
+  }
+
+  implicit val versionMigration = new Migratable[Version] {
+    override def insert(v: Version)(implicit db: MongoDatabase): Unit =
+      db.getCollection(VersionsCollection)
+        .insertOne(versionToDocument(v))
+  }
+
+  implicit def listMigration[A](implicit migratable: Migratable[A]): Migratable[List[A]] = new Migratable[List[A]] {
+    override def insert(xs: List[A])(implicit db: MongoDatabase): Unit = xs.foreach(migratable.insert)
+  }
+
+  implicit class MigrationOps[A](a: A) {
+    def insert()(implicit migratable: Migratable[A], db: MongoDatabase) = migratable.insert(a)
+  }
 
   trait Platform {
     def id: String
@@ -45,7 +68,7 @@ package object changelogs {
                      url: String,
                      platform: Platform = UniversalBinary)
 
-  implicit def candidateToDocument(c: Candidate): Document =
+  def candidateToDocument(c: Candidate): Document =
     new Document("candidate", c.candidate)
       .append("name", c.name)
       .append("description", c.description)
@@ -53,20 +76,12 @@ package object changelogs {
       .append("websiteUrl", c.websiteUrl)
       .append("distribution", c.distribution)
 
-  implicit def versionToDocument(cv: Version): Document =
+  def versionToDocument(cv: Version): Document =
     new Document("candidate", cv.candidate)
       .append("version", cv.version)
       .append("platform", cv.platform.id)
       .append("url", cv.url)
 
-  def insertVersion(version: Document)(implicit db: MongoDatabase): Unit =
-    db.getCollection(VersionsCollection).insertOne(version)
-
-  def insertVersions(versions: Document*)(implicit db: MongoDatabase): Unit =
-    db.getCollection(VersionsCollection).insertMany(versions.asJava)
-
-  def insertCandidate(candidate: Document)(implicit db: MongoDatabase): Unit =
-    db.getCollection(CandidatesCollection).insertOne(candidate)
 
   def removeCandidate(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(CandidatesCollection).deleteOne(new Document("candidate", candidate))
