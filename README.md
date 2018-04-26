@@ -106,7 +106,8 @@ Simply fork this repository and then add a db migration in the appropriate file 
               description = "Apache CXF is an open source services framework...",
               default = "3.2.4",
               websiteUrl = "https://cxf.apache.org/",
-              distribution = "UNIVERSAL").insert()
+              distribution = "UNIVERSAL"
+            ).insert()
         }
 
 
