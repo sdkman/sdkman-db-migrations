@@ -71,18 +71,16 @@ Simply fork this repository and then add a db migration in the appropriate file 
 
         @ChangeSet(order = "006", id = "006-add_scala_2_12_4", author = "marc0der")
           def migrate006(implicit db: MongoDatabase) =
-            Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip").insert()
+            Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip")
+              .insert()
 
 #### Adding a new Default Version (universal binary)
 
         @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
           def migrate007(implicit db: MongoDatabase) = {
-            Version(
-                candidate = "scala",
-                version = "2.12.5",
-                url = "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip"
-            ).insert()
-            setCandidateDefault("scala", "2.12.5")
+            Version( candidate = "scala", version = "2.12.5", url = "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip")
+              .insert()
+              .asCandidateDefault()
         }
 
 #### Adding a new Version (platform specific)
@@ -94,6 +92,7 @@ Simply fork this repository and then add a db migration in the appropriate file 
               Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_linux-x64_bin.tar.gz", Linux),
               Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_windows-x64_bin.exe", Windows)
             ).insert()
+            setCandidateDefault("java", "10.0.0-oracle")
         }
 
 #### Adding a new Candidate

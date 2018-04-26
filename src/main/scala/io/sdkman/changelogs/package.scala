@@ -12,6 +12,10 @@ package object changelogs {
 
   val VersionsCollection = "versions"
 
+  implicit class DefaultCandidate(v: Version)(implicit db: MongoDatabase) {
+    def asCandidateDefault(): Unit = setCandidateDefault(v.candidate, v.version)
+  }
+
   trait Migratable[A] {
     def insert(a: A)(implicit db: MongoDatabase): Unit
   }
@@ -33,7 +37,10 @@ package object changelogs {
   }
 
   implicit class MigrationOps[A](a: A) {
-    def insert()(implicit migratable: Migratable[A], db: MongoDatabase) = migratable.insert(a)
+    def insert()(implicit migratable: Migratable[A], db: MongoDatabase): A = {
+      migratable.insert(a)
+      a
+    }
   }
 
   trait Platform {
