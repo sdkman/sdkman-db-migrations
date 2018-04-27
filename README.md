@@ -67,30 +67,34 @@ Simply fork this repository and then add a db migration in the appropriate file 
             //TODO: migrations here
         }
 
-#### Adding a new Version (universal binary)
+#### Adding a new default Version (universal binary)
+
+        @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
+          def migrate007(implicit db: MongoDatabase) = {
+            Version("scala", "2.12.5", "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip")
+              .insert()
+              .asCandidateDefault()
+        }
+
+Alternatively, a function is provided on package scope that allows the default version to be set explicitly:
+
+        setCandidateDefault("groovy", "3.0.0")
+
+#### Adding a historic Version (universal binary)
 
         @ChangeSet(order = "006", id = "006-add_scala_2_12_4", author = "marc0der")
           def migrate006(implicit db: MongoDatabase) =
             Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip")
               .insert()
-
-#### Adding a new Default Version (universal binary)
-
-        @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
-          def migrate007(implicit db: MongoDatabase) = {
-            Version( candidate = "scala", version = "2.12.5", url = "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip")
-              .insert()
-              .asCandidateDefault()
-        }
-
-#### Adding a new Version (platform specific)
+        
+#### Adding a new Version for multiple platforms
 
         @ChangeSet(order = "005", id = "005-add_oracle_jdk_10_0_0", author = "marc0der")
           def migrate005(implicit db: MongoDatabase) = {
             List(
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_osx-x64_bin.dmg", MacOSX),
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_linux-x64_bin.tar.gz", Linux),
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/otn-pub/java/jdk/10+46/76eac37278c24557a3c4199677f19b62/jdk-10_windows-x64_bin.exe", Windows)
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
+              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
             ).insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
@@ -109,6 +113,11 @@ Simply fork this repository and then add a db migration in the appropriate file 
             ).insert()
         }
 
+#### Removal of Candidates and Versions
+
+        removeCandidate(candidate = "kobolt")
+        removeAllVersions(candidate = "kobolt")
+        removeVersion(candidate = "java", version = "10.0.0-oracle", platform)
 
 ## Fast track
 
