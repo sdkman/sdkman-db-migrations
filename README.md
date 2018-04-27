@@ -98,6 +98,8 @@ Alternatively, a function is provided on package scope that allows the default v
             ).insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
+        
+Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX` and `Universal` as the default.
 
 #### Adding a new Candidate
 
@@ -117,7 +119,7 @@ Alternatively, a function is provided on package scope that allows the default v
 
         removeCandidate(candidate = "kobolt")
         removeAllVersions(candidate = "kobolt")
-        removeVersion(candidate = "java", version = "10.0.0-oracle", platform)
+        removeVersion(candidate = "java", version = "10.0.0-oracle", platform = MacOSX)
 
 ## Fast track
 

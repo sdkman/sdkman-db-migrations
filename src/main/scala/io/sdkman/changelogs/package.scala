@@ -47,7 +47,7 @@ package object changelogs {
     def id: String
   }
 
-  case object UniversalBinary extends Platform {
+  case object Universal extends Platform {
     override val id = "UNIVERSAL"
   }
 
@@ -73,7 +73,7 @@ package object changelogs {
   case class Version(candidate: String,
                      version: String,
                      url: String,
-                     platform: Platform = UniversalBinary)
+                     platform: Platform = Universal)
 
   def candidateToDocument(c: Candidate): Document =
     new Document("candidate", c.candidate)
@@ -93,7 +93,7 @@ package object changelogs {
   def removeCandidate(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(CandidatesCollection).deleteOne(new Document("candidate", candidate))
 
-  def removeVersion(candidate: String, version: String, platform: Platform = UniversalBinary)(implicit db: MongoDatabase): Unit =
+  def removeVersion(candidate: String, version: String, platform: Platform = Universal)(implicit db: MongoDatabase): Unit =
     db.getCollection(VersionsCollection).deleteOne(new Document("candidate", candidate).append("version", version).append("platform", platform.id))
 
   def removeAllVersions(candidate: String)(implicit db: MongoDatabase): Unit =
