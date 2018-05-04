@@ -147,4 +147,7 @@ class JavaMigrations {
       Version("java", "10.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu10.2+3-jdk10.0.1-macosx_x64.tar.gz", MacOSX)
     ).insert()
   }
+
+  @ChangeSet(order = "017", id = "017-update_java_default", author = "vpavic")
+  def migrate017(implicit db: MongoDatabase) = setCandidateDefault("java", "8.0.172-zulu")
 }
