@@ -150,4 +150,14 @@ class JavaMigrations {
 
   @ChangeSet(order = "017", id = "017-update_java_default", author = "vpavic")
   def migrate017(implicit db: MongoDatabase) = setCandidateDefault("java", "8.0.172-zulu")
+
+  @ChangeSet(order = "018", id = "018-lemove_broken_zulu_jdks", author = "marc0der")
+  def migrate018(implicit db: MongoDatabase) = {
+    Seq(Linux, Windows).foreach { platform =>
+      removeVersion("java", "6.0.107-zulu", platform)
+      removeVersion("java", "7.0.181-zulu", platform)
+      removeVersion("java", "9.0.7-zulu", platform)
+    }
+    removeVersion("java", "9.0.7-zulu", MacOSX)
+  }
 }
