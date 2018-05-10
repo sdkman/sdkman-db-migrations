@@ -1,5 +1,6 @@
 package io.sdkman
 
+import com.github.mongobee.exception.MongobeeChangeSetException
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.{Filters, Updates}
 import org.bson.Document
@@ -16,29 +17,49 @@ package object changelogs {
     def asCandidateDefault(): Unit = setCandidateDefault(v.candidate, v.version)
   }
 
-  trait Migratable[A] {
+  trait Validator[A] {
+    def validUrl(a: A): Unit
+  }
+
+  implicit val versionValidation = new Validator[Version] with UrlValidation {
+    override def validUrl(v: Version): Unit =
+      if(resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
+  }
+
+  implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
+    override def validUrl(la: List[A]): Unit = la.foreach(validate.validUrl)
+  }
+
+  trait Migrator[A] {
     def insert(a: A)(implicit db: MongoDatabase): Unit
   }
 
-  implicit val candidateMigration = new Migratable[Candidate] {
+  implicit val candidateMigration = new Migrator[Candidate] {
     override def insert(c: Candidate)(implicit db: MongoDatabase): Unit =
       db.getCollection(CandidatesCollection)
         .insertOne(candidateToDocument(c))
   }
 
-  implicit val versionMigration = new Migratable[Version] {
+  implicit val versionMigration = new Migrator[Version] {
     override def insert(v: Version)(implicit db: MongoDatabase): Unit =
       db.getCollection(VersionsCollection)
         .insertOne(versionToDocument(v))
   }
 
-  implicit def listMigration[A](implicit migratable: Migratable[A]): Migratable[List[A]] = new Migratable[List[A]] {
+  implicit def listMigration[A](implicit migratable: Migrator[A]): Migrator[List[A]] = new Migrator[List[A]] {
     override def insert(xs: List[A])(implicit db: MongoDatabase): Unit = xs.foreach(migratable.insert)
   }
 
   implicit class MigrationOps[A](a: A) {
-    def insert()(implicit migratable: Migratable[A], db: MongoDatabase): A = {
-      migratable.insert(a)
+    def insert()(implicit migrator: Migrator[A], db: MongoDatabase): A = {
+      migrator.insert(a)
+      a
+    }
+  }
+
+  implicit class ValidationOps[A](a: A) {
+    def validate()(implicit validator: Validator[A]): A = {
+      validator.validUrl(a)
       a
     }
   }
