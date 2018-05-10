@@ -72,6 +72,7 @@ Simply fork this repository and then add a db migration in the appropriate file 
         @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
           def migrate007(implicit db: MongoDatabase) = {
             Version("scala", "2.12.5", "https://downloads.lightbend.com/scala/2.12.5/scala-2.12.5.zip")
+              .validate()
               .insert()
               .asCandidateDefault()
         }
@@ -85,6 +86,7 @@ Alternatively, a function is provided on package scope that allows the default v
         @ChangeSet(order = "006", id = "006-add_scala_2_12_4", author = "marc0der")
           def migrate006(implicit db: MongoDatabase) =
             Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip")
+              .validate()
               .insert()
         
 #### Adding a new Version for multiple platforms
@@ -95,7 +97,7 @@ Alternatively, a function is provided on package scope that allows the default v
               Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
               Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
               Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
-            ).insert()
+            ).validate().insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
         
