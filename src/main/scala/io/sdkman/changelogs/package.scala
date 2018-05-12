@@ -23,7 +23,7 @@ package object changelogs {
 
   implicit val versionValidation = new Validator[Version] with UrlValidation {
     override def validUrl(v: Version): Unit =
-      if(resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
+      if(!resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
   }
 
   implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
