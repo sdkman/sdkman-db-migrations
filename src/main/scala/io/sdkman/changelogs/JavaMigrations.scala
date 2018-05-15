@@ -215,4 +215,13 @@ class JavaMigrations {
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-macosx_x64.tar.gz", MacOSX)
     ).validate().insert()
   }
+
+  @ChangeSet(order = "025", id = "025-add_graalvm_1_0_0_rc_1", author = "marc0der")
+  def migrate025(implicit db: MongoDatabase) =
+    Version(
+      candidate = "java",
+      version = "1.0.0-rc1-graal",
+      url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
+      platform = Linux
+    ).validate().insert()
 }
