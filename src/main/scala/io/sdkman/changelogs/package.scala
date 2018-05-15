@@ -58,7 +58,7 @@ package object changelogs {
   }
 
   implicit class ValidationOps[A](a: A) {
-    def validate()(implicit validator: Validator[A]): A = {
+    def validateUrl()(implicit validator: Validator[A]): A = {
       validator.validUrl(a)
       a
     }

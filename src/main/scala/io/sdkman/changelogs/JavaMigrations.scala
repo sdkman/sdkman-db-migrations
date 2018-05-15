@@ -193,7 +193,7 @@ class JavaMigrations {
     List(
       Version("java", "6.0.107-zulu", "https://cdn.azul.com/zulu/bin/zulu6.20.0.1-jdk6.0.107-linux_x64.tar.gz", Linux),
       Version("java", "6.0.107-zulu", "https://cdn.azul.com/zulu/bin/zulu6.20.0.1-jdk6.0.107-win_x64.zip", Windows)
-    ).validate().insert()
+    ).validateUrl().insert()
   }
 
   @ChangeSet(order = "023", id = "023-add_zulu_7_0_181", author = "vpavic")
@@ -203,7 +203,7 @@ class JavaMigrations {
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-linux_x64.tar.gz", Linux),
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-win_x64.zip", Windows),
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-macosx_x64.tar.gz", MacOSX)
-    ).validate().insert()
+    ).validateUrl().insert()
   }
 
   @ChangeSet(order = "024", id = "024-add_zulu_9_0_7", author = "vpavic")
@@ -213,7 +213,7 @@ class JavaMigrations {
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-linux_x64.tar.gz", Linux),
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-win_x64.zip", Windows),
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-macosx_x64.tar.gz", MacOSX)
-    ).validate().insert()
+    ).validateUrl().insert()
   }
 
   @ChangeSet(order = "025", id = "025-add_graalvm_1_0_0_rc_1", author = "marc0der")
@@ -223,5 +223,5 @@ class JavaMigrations {
       version = "1.0.0-rc1-graal",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
       platform = Linux
-    ).validate().insert()
+    ).validateUrl().insert()
 }
