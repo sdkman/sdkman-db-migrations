@@ -87,7 +87,7 @@ package object changelogs {
   case class Candidate(candidate: String,
                        name: String,
                        description: String,
-                       default: Option[String],
+                       default: Option[String] = None,
                        websiteUrl: String,
                        distribution: String = "UNIVERSAL")
 
