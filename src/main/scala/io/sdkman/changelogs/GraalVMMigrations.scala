@@ -12,7 +12,7 @@ class GraalVMMigrations {
       candidate = "graalvm",
       name = "GraalVM",
       description = "GraalVM is a universal virtual machine for running applications written in JavaScript, Python 3, Ruby, R, JVM-based languages like Java, Scala, Kotlin, and LLVM-based languages such as C and C++.",
-      default = "1.0.0-rc1",
+      default = Some("1.0.0-rc1"),
       websiteUrl = "http://graalvm.org",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()

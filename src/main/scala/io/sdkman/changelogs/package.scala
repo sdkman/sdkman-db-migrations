@@ -23,7 +23,7 @@ package object changelogs {
 
   implicit val versionValidation = new Validator[Version] with UrlValidation {
     override def validUrl(v: Version): Unit =
-      if(!resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
+      if (!resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
   }
 
   implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
@@ -87,7 +87,7 @@ package object changelogs {
   case class Candidate(candidate: String,
                        name: String,
                        description: String,
-                       default: String,
+                       default: Option[String],
                        websiteUrl: String,
                        distribution: String = "UNIVERSAL")
 
@@ -96,13 +96,20 @@ package object changelogs {
                      url: String,
                      platform: Platform = Universal)
 
-  def candidateToDocument(c: Candidate): Document =
+  def candidateToDocument(c: Candidate): Document = c.default.fold {
     new Document("candidate", c.candidate)
       .append("name", c.name)
       .append("description", c.description)
-      .append("default", c.default)
       .append("websiteUrl", c.websiteUrl)
       .append("distribution", c.distribution)
+  } { default =>
+    new Document("candidate", c.candidate)
+      .append("name", c.name)
+      .append("description", c.description)
+      .append("default", default)
+      .append("websiteUrl", c.websiteUrl)
+      .append("distribution", c.distribution)
+  }
 
   def versionToDocument(cv: Version): Document =
     new Document("candidate", cv.candidate)
