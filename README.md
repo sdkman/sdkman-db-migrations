@@ -111,7 +111,6 @@ Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX`
               candidate = "cxf",
               name = "CXF",
               description = "Apache CXF is an open source services framework...",
-              default = "3.2.4",
               websiteUrl = "https://cxf.apache.org/",
               distribution = "UNIVERSAL"
             ).insert()
