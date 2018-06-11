@@ -14,11 +14,5 @@ class BpipeMigrations {
       default = Some("0.9.9.5"),
       websiteUrl = "http://bpipe.org"
     ).insert()
-
-    Version(
-      candidate = "bpipe",
-      version = "0.9.9.5",
-      url = "http://github.com/ssadedin/bpipe/releases/download/0.9.9.5/bpipe-0.9.9.5.zip"
-    ).insert()
   }
 }
