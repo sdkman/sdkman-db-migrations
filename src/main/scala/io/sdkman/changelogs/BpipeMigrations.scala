@@ -11,7 +11,6 @@ class BpipeMigrations {
     Candidate(candidate = "bpipe",
       name = "Bpipe",
       description = "Bpipe is a framework for running computational pipelines and workflows",
-      default = Some("0.9.9.5"),
       websiteUrl = "http://bpipe.org"
     ).insert()
   }
