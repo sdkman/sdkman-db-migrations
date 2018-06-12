@@ -3,6 +3,7 @@ package io.sdkman
 import com.github.mongobee.exception.MongobeeChangeSetException
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.{Filters, Updates}
+import com.typesafe.scalalogging.LazyLogging
 import org.bson.Document
 
 import scala.language.implicitConversions
@@ -21,7 +22,7 @@ package object changelogs {
     def validUrl(a: A): Unit
   }
 
-  implicit val versionValidation = new Validator[Version] with UrlValidation {
+  implicit val versionValidation = new Validator[Version] with UrlValidation with LazyLogging {
     override def validUrl(v: Version): Unit =
       if (!resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
   }
