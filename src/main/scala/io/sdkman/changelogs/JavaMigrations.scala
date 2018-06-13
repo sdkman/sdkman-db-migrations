@@ -224,4 +224,15 @@ class JavaMigrations {
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
       platform = Linux64
     ).validateUrl().insert()
+
+  def migrate026(implicit db: MongoDatabase) = {
+    removeVersion("java", "8.0.151-oracle", Linux32)
+    Version(
+      "java",
+      "8.0.162-oracle",
+      "http://download.oracle.com/otn/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-i586.tar.gz",
+      Linux32)
+      .validateUrl()
+      .insert()
+  }
 }
