@@ -32,8 +32,8 @@ package object changelogs {
     }
 
     private def checkResourceAvailable(url: String, cookie: Option[Cookie]) = {
-      val available = cookie.fold(resourceAvailable(url)) { cookie =>
-        resourceAvailable(url, Some(cookie))
+      val available = cookie.fold(resourceAvailable(url)) { c =>
+        resourceAvailable(url, Some(c))
       }
 
       if (!available) throw new MongobeeChangeSetException(s"Invalid url: $url")
