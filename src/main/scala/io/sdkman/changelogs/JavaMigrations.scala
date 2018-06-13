@@ -222,9 +222,11 @@ class JavaMigrations {
       candidate = "java",
       version = "1.0.0-rc1-graal",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
-      platform = Linux64
-    ).validateUrl().insert()
+      platform = Linux64)
+      .validateUrl()
+      .insert()
 
+  @ChangeSet(order = "026", id = "026-update_linux_32_oracle_java", author = "marc0der")
   def migrate026(implicit db: MongoDatabase) = {
     removeVersion("java", "8.0.151-oracle", Linux32)
     Version(
