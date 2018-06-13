@@ -24,7 +24,7 @@ class CleanupMigrations {
   @ChangeSet(order = "006", id = "006-clean_up_openjdk_variants", author = "marc0der")
   def migrate006(implicit db: MongoDatabase) = {
     List("9u181-openjdk", "9.0.1-zulu", "9.0.0-zulu", "8u144-zulu", "8u144-openjdk", "8u131-zulu", "10u23-openjdk").foreach { version =>
-      List(MacOSX, Windows, Linux).foreach { platform =>
+      List(MacOSX, Windows, Linux64).foreach { platform =>
         removeVersion("java", version, platform)
       }
     }

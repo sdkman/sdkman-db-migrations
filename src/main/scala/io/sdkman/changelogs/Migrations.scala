@@ -18,18 +18,18 @@ class Migrations {
 
   @ChangeSet(order = "002", id = "002-add_java_904_zulu", author = "marc0der")
   def migrate002(implicit db: MongoDatabase) =
-    Version("java", "9.0.4-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.4.1-jdk9.0.4-linux_x64.tar.gz", Linux).insert()
+    Version("java", "9.0.4-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.4.1-jdk9.0.4-linux_x64.tar.gz", Linux64).insert()
 
   @ChangeSet(order = "003", id = "003-add_openjdk_latest", author = "MaSven")
   def migrate003(implicit db: MongoDatabase) =
     List(
-      Version("java", "9u181-openjdk", "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Linux_jdk-9.181.tar.gz", Linux),
+      Version("java", "9u181-openjdk", "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Linux_jdk-9.181.tar.gz", Linux64),
       Version("java", "9u181-openjdk", "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Mac_jdk-9.181.tar.gz", MacOSX),
       Version("java", "9u181-openjdk", "https://github.com/AdoptOpenJDK/openjdk9-releases/releases/download/jdk-9%2B181/OpenJDK9_x64_Win_jdk-9.181.zip", Windows),
-      Version("java", "8u144-openjdk", "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Linux_jdk8u144-b01.tar.gz", Linux),
+      Version("java", "8u144-openjdk", "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Linux_jdk8u144-b01.tar.gz", Linux64),
       Version("java", "8u144-openjdk", "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Mac_jdk8u144-b01.tar.gz", MacOSX),
       Version("java", "8u144-openjdk", "https://github.com/AdoptOpenJDK/openjdk8-releases/releases/download/jdk8u144-b01/OpenJDK8_x64_Win_jdk8u144-b01.zip", Windows),
-      Version("java", "10u23-openjdk", "https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Linux_jdk-10.23.tar.gz", Linux),
+      Version("java", "10u23-openjdk", "https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Linux_jdk-10.23.tar.gz", Linux64),
       Version("java", "10u23-openjdk", "https://github.com/AdoptOpenJDK/openjdk10-releases/releases/download/jdk-10%2B23/OpenJDK10_x64_Mac_jdk-10.23.tar.gz", MacOSX)
     ).insert()
 

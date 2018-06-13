@@ -21,13 +21,13 @@ class GraalVMMigrations {
       candidate = "graalvm",
       version = "1.0.0-rc1",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
-      platform = Linux
+      platform = Linux64
     ).insert()
   }
 
   @ChangeSet(order = "002", id = "002_remove_candidate_and_version", author = "marc0der")
   def migration002(implicit db: MongoDatabase) = {
     removeCandidate("graalvm")
-    removeVersion("graalvm", "1.0.0-rc1", Linux)
+    removeVersion("graalvm", "1.0.0-rc1", Linux64)
   }
 }

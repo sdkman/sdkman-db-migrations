@@ -81,8 +81,12 @@ package object changelogs {
     override val id = "WINDOWS_64"
   }
 
-  case object Linux extends Platform {
+  case object Linux64 extends Platform {
     override val id = "LINUX_64"
+  }
+
+  case object Linux32 extends Platform {
+    override val id = "LINUX_32"
   }
 
   case class Candidate(candidate: String,
