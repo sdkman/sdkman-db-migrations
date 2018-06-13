@@ -23,8 +23,21 @@ package object changelogs {
   }
 
   implicit val versionValidation = new Validator[Version] with UrlValidation with LazyLogging {
-    override def validUrl(v: Version): Unit =
-      if (!resourceAvailable(v.url)) throw new MongobeeChangeSetException(s"Invalid url: $v")
+    override def validUrl(v: Version): Unit = {
+      if (v.url.contains("download.oracle.com")) {
+        checkResourceAvailable(v.url, Some(Cookie("oraclelicense", "accept-securebackup-cookie")))
+      } else {
+        checkResourceAvailable(v.url, None)
+      }
+    }
+
+    private def checkResourceAvailable(url: String, cookie: Option[Cookie]) = {
+      val available = cookie.fold(resourceAvailable(url)) { cookie =>
+        resourceAvailable(url, Some(cookie))
+      }
+
+      if (!available) throw new MongobeeChangeSetException(s"Invalid url: $url")
+    }
   }
 
   implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
