@@ -28,4 +28,9 @@ class CxfMigrations {
     Version("cxf", "3.2.4", "https://archive.apache.org/dist/cxf/3.2.4/apache-cxf-3.2.4.zip").validateUrl().insert()
     Version("cxf", "3.2.5", "https://archive.apache.org/dist/cxf/3.2.5/apache-cxf-3.2.5.zip").validateUrl().insert()
   }
+
+  @ChangeSet(order = "003", id = "003_make_3_2_5_default", author = "marc0der")
+  def migration003(implicit db: MongoDatabase) = {
+    setCandidateDefault("cxf", "3.2.5")
+  }
 }
