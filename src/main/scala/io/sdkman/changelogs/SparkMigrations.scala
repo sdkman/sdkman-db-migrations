@@ -19,4 +19,12 @@ class SparkMigrations {
       .insert()
       .asCandidateDefault()
   }
+
+  @ChangeSet(order = "003", id = "003-fix_broken_urls", author = "marc0der")
+  def migration003(implicit db: MongoDatabase) = Seq("2.0.2", "2.1.1", "2.1.2", "2.2.0", "2.2.1").foreach { version =>
+    removeVersion("spark", version)
+    Version("spark", version, s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-hadoop2.7.tgz")
+      .validateUrl()
+      .insert()
+  }
 }
