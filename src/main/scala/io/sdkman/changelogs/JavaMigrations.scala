@@ -239,7 +239,8 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "027", id = "027-add_graalvm_1_0_0_rc_3", author = "wololock")
-  def migrate027(implicit db: MongoDatabase) =
+  def migrate027(implicit db: MongoDatabase) = {
+    removeVersion("java", "1.0.0-rc1-graal", Linux64)
     Version(
       candidate = "java",
       version = "1.0.0-rc3-graal",
@@ -247,4 +248,5 @@ class JavaMigrations {
       platform = Linux64)
       .validateUrl()
       .insert()
+  }
 }
