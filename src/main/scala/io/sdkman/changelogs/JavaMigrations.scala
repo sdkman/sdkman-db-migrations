@@ -237,4 +237,14 @@ class JavaMigrations {
       .validateUrl()
       .insert()
   }
+
+  @ChangeSet(order = "027", id = "027-add_graalvm_1_0_0_rc_3", author = "wololock")
+  def migrate027(implicit db: MongoDatabase) =
+    Version(
+      candidate = "java",
+      version = "1.0.0-rc3-graal",
+      url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc3/graalvm-ce-1.0.0-rc3-linux-amd64.tar.gz",
+      platform = Linux64)
+      .validateUrl()
+      .insert()
 }
