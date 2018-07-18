@@ -249,4 +249,26 @@ class JavaMigrations {
       .validateUrl()
       .insert()
   }
+
+  @ChangeSet(order = "028", id = "028-release_oracle_java_8_0_181", author = "marc0der")
+  def migrate028(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.171-oracle", _))
+    List(
+      Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-macosx-x64.dmg", MacOSX),
+      Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-windows-x64.exe", Windows))
+      .validateUrl()
+      .insert()
+  }
+
+  @ChangeSet(order = "029", id = "029-release_oracle_java_10_0_2", author = "marc0der")
+  def migrate029(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "10.0.1-oracle", _))
+    List(
+      Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_osx-x64_bin.dmg", MacOSX),
+      Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_windows-x64_bin.exe", Windows))
+      .validateUrl()
+      .insert()
+  }
 }
