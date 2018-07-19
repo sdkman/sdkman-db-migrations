@@ -12,7 +12,7 @@ class ScalaMigrations {
       candidate = "scala",
       version = "2.12.6",
       url = "https://downloads.lightbend.com/scala/2.12.6/scala-2.12.6.zip")
-      .validateUrl()
+      .validate()
       .insert()
       .asCandidateDefault()
 

@@ -193,7 +193,7 @@ class JavaMigrations {
     List(
       Version("java", "6.0.107-zulu", "https://cdn.azul.com/zulu/bin/zulu6.20.0.1-jdk6.0.107-linux_x64.tar.gz", Linux64),
       Version("java", "6.0.107-zulu", "https://cdn.azul.com/zulu/bin/zulu6.20.0.1-jdk6.0.107-win_x64.zip", Windows)
-    ).validateUrl().insert()
+    ).validate().insert()
   }
 
   @ChangeSet(order = "023", id = "023-add_zulu_7_0_181", author = "vpavic")
@@ -203,7 +203,7 @@ class JavaMigrations {
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-linux_x64.tar.gz", Linux64),
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-win_x64.zip", Windows),
       Version("java", "7.0.181-zulu", "https://cdn.azul.com/zulu/bin/zulu7.23.0.1-jdk7.0.181-macosx_x64.tar.gz", MacOSX)
-    ).validateUrl().insert()
+    ).validate().insert()
   }
 
   @ChangeSet(order = "024", id = "024-add_zulu_9_0_7", author = "vpavic")
@@ -213,7 +213,7 @@ class JavaMigrations {
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-linux_x64.tar.gz", Linux64),
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-win_x64.zip", Windows),
       Version("java", "9.0.7-zulu", "https://cdn.azul.com/zulu/bin/zulu9.0.7.1-jdk9.0.7-macosx_x64.tar.gz", MacOSX)
-    ).validateUrl().insert()
+    ).validate().insert()
   }
 
   @ChangeSet(order = "025", id = "025-add_graalvm_1_0_0_rc_1", author = "marc0der")
@@ -223,7 +223,7 @@ class JavaMigrations {
       version = "1.0.0-rc1-graal",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc1/graalvm-ce-1.0.0-rc1-linux-amd64.tar.gz",
       platform = Linux64)
-      .validateUrl()
+      .validate()
       .insert()
 
   @ChangeSet(order = "026", id = "026-update_linux_32_oracle_java", author = "marc0der")
@@ -234,7 +234,7 @@ class JavaMigrations {
       version = "8.0.171-oracle",
       url = "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-i586.tar.gz",
       platform = Linux32)
-      .validateUrl()
+      .validate()
       .insert()
   }
 
@@ -246,7 +246,7 @@ class JavaMigrations {
       version = "1.0.0-rc3-graal",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc3/graalvm-ce-1.0.0-rc3-linux-amd64.tar.gz",
       platform = Linux64)
-      .validateUrl()
+      .validate()
       .insert()
   }
 
@@ -257,7 +257,7 @@ class JavaMigrations {
       Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz", Linux64),
       Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-macosx-x64.dmg", MacOSX),
       Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-windows-x64.exe", Windows))
-      .validateUrl()
+      .validate()
       .insert()
   }
 
@@ -268,7 +268,7 @@ class JavaMigrations {
       Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz", Linux64),
       Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_osx-x64_bin.dmg", MacOSX),
       Version("java", "10.0.2-oracle", "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_windows-x64_bin.exe", Windows))
-      .validateUrl()
+      .validate()
       .insert()
   }
 
@@ -276,7 +276,7 @@ class JavaMigrations {
   def migrate030(implicit db: MongoDatabase) = {
     removeVersion("java", "8.0.171-oracle", Linux32)
       Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-i586.tar.gz", Linux32)
-      .validateUrl()
+      .validate()
       .insert()
   }
 }

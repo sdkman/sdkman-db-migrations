@@ -25,8 +25,8 @@ class CxfMigrations {
   @ChangeSet(order = "002", id = "002_add_cxf_3_2_4-3_2_5", author = "marc0der")
   def migration002(implicit db: MongoDatabase) = {
     removeVersion("cxf", "3.2.4")
-    Version("cxf", "3.2.4", "https://archive.apache.org/dist/cxf/3.2.4/apache-cxf-3.2.4.zip").validateUrl().insert()
-    Version("cxf", "3.2.5", "https://archive.apache.org/dist/cxf/3.2.5/apache-cxf-3.2.5.zip").validateUrl().insert()
+    Version("cxf", "3.2.4", "https://archive.apache.org/dist/cxf/3.2.4/apache-cxf-3.2.4.zip").validate().insert()
+    Version("cxf", "3.2.5", "https://archive.apache.org/dist/cxf/3.2.5/apache-cxf-3.2.5.zip").validate().insert()
   }
 
   @ChangeSet(order = "003", id = "003_make_3_2_5_default", author = "marc0der")

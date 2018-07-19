@@ -19,10 +19,16 @@ package object changelogs {
   }
 
   trait Validator[A] {
+    def validVersion(a: A): Unit
     def validUrl(a: A): Unit
   }
 
   implicit val versionValidation = new Validator[Version] with UrlValidation with LazyLogging {
+
+    override def validVersion(v: Version): Unit =
+      if(v.version.length > 15)
+        throw new MongobeeChangeSetException(s"sVersion length exceeds 15 chars: ${v.version}")
+
     override def validUrl(v: Version): Unit = {
       if (v.url.contains("download.oracle.com")) {
         checkResourceAvailable(v.url, Some(Cookie("oraclelicense", "accept-securebackup-cookie")))
@@ -41,6 +47,8 @@ package object changelogs {
   }
 
   implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
+    override def validVersion(la: List[A]): Unit = la.foreach(validate.validVersion)
+
     override def validUrl(la: List[A]): Unit = la.foreach(validate.validUrl)
   }
 
@@ -72,8 +80,9 @@ package object changelogs {
   }
 
   implicit class ValidationOps[A](a: A) {
-    def validateUrl()(implicit validator: Validator[A]): A = {
+    def validate()(implicit validator: Validator[A]): A = {
       validator.validUrl(a)
+      validator.validVersion(a)
       a
     }
   }
