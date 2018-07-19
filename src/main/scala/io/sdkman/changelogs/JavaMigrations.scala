@@ -271,4 +271,12 @@ class JavaMigrations {
       .validateUrl()
       .insert()
   }
+
+  @ChangeSet(order = "030", id = "030-release_oracle_java_8_0_181_linux32", author = "marc0der")
+  def migrate030(implicit db: MongoDatabase) = {
+    removeVersion("java", "8.0.171-oracle", Linux32)
+      Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-i586.tar.gz", Linux32)
+      .validateUrl()
+      .insert()
+  }
 }
