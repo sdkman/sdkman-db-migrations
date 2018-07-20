@@ -40,10 +40,10 @@ class Migrations {
   def migrate005(implicit db: MongoDatabase) = setCandidateDefault("java", "8u152-zulu")
 
 
-  @ChangeSet(order = "006", id = "003-add_maven_353", author = "hho")
+  @ChangeSet(order = "006", id = "003-add_maven_354", author = "hho")
   def migrate006(implicit db: MongoDatabase) = {
-    Version("maven", "3.5.3", "https://archive.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.zip").insert()
-    setCandidateDefault("maven", "3.5.3")
+    Version("maven", "3.5.4", "https://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip").insert()
+    setCandidateDefault("maven", "3.5.4")
   }
 
   @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
