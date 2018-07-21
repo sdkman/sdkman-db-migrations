@@ -279,4 +279,16 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "031", id = "031-add_graalvm_1_0_0_rc_4", author = "wololock")
+  def migrate031(implicit db: MongoDatabase) = {
+    removeVersion("java", "1.0.0-rc3-graal", Linux64)
+    Version(
+      candidate = "java",
+      version = "1.0.0-rc4-graal",
+      url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc4/graalvm-ce-1.0.0-rc4-linux-amd64.tar.gz",
+      platform = Linux64)
+      .validate()
+      .insert()
+  }
 }
