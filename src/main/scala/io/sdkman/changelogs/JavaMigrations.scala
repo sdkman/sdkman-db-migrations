@@ -275,7 +275,7 @@ class JavaMigrations {
   @ChangeSet(order = "030", id = "030-release_oracle_java_8_0_181_linux32", author = "marc0der")
   def migrate030(implicit db: MongoDatabase) = {
     removeVersion("java", "8.0.171-oracle", Linux32)
-      Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-i586.tar.gz", Linux32)
+    Version("java", "8.0.181-oracle", "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-i586.tar.gz", Linux32)
       .validate()
       .insert()
   }
@@ -288,6 +288,24 @@ class JavaMigrations {
       version = "1.0.0-rc4-graal",
       url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc4/graalvm-ce-1.0.0-rc4-linux-amd64.tar.gz",
       platform = Linux64)
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "032", id = "032-add_graalvm_1_0_0_rc_5", author = "marc0der")
+  def migrate032(implicit db: MongoDatabase) = {
+    removeVersion("java", "1.0.0-rc4-graal", Linux64)
+    List(
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc5-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc5/graalvm-ce-1.0.0-rc5-linux-amd64.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc5-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc5/graalvm-ce-1.0.0-rc5-macos-amd64.tar.gz",
+        platform = MacOSX))
       .validate()
       .insert()
   }
