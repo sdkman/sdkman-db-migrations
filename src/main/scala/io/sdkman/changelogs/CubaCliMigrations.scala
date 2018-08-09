@@ -20,19 +20,19 @@ class CubaCliMigrations {
       Version(
         candidate = "cuba-cli",
         version = "1.0.1",
-        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-linux.zip",
+        url = "https://cuba-platform.bintray.com/tools/cuba-cli/1.0.1/cuba-cli-1.0.1-linux.zip",
         platform = Linux64
       ),
       Version(
         candidate = "cuba-cli",
         version = "1.0.1",
-        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-macos.zip",
+        url = "https://cuba-platform.bintray.com/tools/cuba-cli/1.0.1/cuba-cli-1.0.1-macos.zip",
         platform = MacOSX
       ),
       Version(
         candidate = "cuba-cli",
         version = "1.0.1",
-        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-windows.zip",
+        url = "https://cuba-platform.bintray.com/tools/cuba-cli/1.0.1/cuba-cli-1.0.1-windows.zip",
         platform = Windows
       ))
       .validate()
