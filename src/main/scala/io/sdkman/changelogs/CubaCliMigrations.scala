@@ -16,25 +16,26 @@ class CubaCliMigrations {
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
 
-    Version(
-      candidate = "cubacli",
-      version = "1.0.1",
-      url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-linux.zip",
-      platform = Linux64
-    ).insert()
-
-    Version(
-      candidate = "cubacli",
-      version = "1.0.1",
-      url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-macos.zip",
-      platform = MacOSX
-    ).insert()
-
-    Version(
-      candidate = "cubacli",
-      version = "1.0.1",
-      url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-windows.zip",
-      platform = Windows
-    ).insert()
+    List(
+      Version(
+        candidate = "cubacli",
+        version = "1.0.1",
+        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-linux.zip",
+        platform = Linux64
+      ),
+      Version(
+        candidate = "cubacli",
+        version = "1.0.1",
+        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-macos.zip",
+        platform = MacOSX
+      ),
+      Version(
+        candidate = "cubacli",
+        version = "1.0.1",
+        url = "https://bintray.com/cuba-platform/tools/download_file?file_path=cuba-cli%2F1.0.1%2Fcuba-cli-1.0.1-windows.zip",
+        platform = Windows
+      ))
+      .validate()
+      .insert()
   }
 }
