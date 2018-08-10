@@ -309,4 +309,24 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "033", id = "033-add_openjdk_java_11-ea-25", author = "mdeinum")
+  def migrate033(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.e.25-openjdk", "https://download.java.net/java/early_access/jdk11/25/GPL/openjdk-11-ea+25_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.e.25-openjdk", "https://download.java.net/java/early_access/jdk11/25/GPL/openjdk-11-ea+25_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.e.25-openjdk", "https://download.java.net/java/early_access/jdk11/25/GPL/openjdk-11-ea+25_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "034", id = "034-add_openjdk_java_12-ea-05", author = "mdeinum")
+  def migrate034(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.e.05-openjdk", "https://download.java.net/java/early_access/jdk12/5/GPL/openjdk-12-ea+5_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.e.05-openjdk", "https://download.java.net/java/early_access/jdk12/5/GPL/openjdk-12-ea+5_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.e.05-openjdk", "https://download.java.net/java/early_access/jdk12/5/GPL/openjdk-12-ea+5_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+  }
 }
