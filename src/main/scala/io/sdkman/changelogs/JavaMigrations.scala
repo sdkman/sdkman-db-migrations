@@ -68,4 +68,16 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "042", id = "042-add_openjdk_java_10.0.2", author = "marc0der")
+  def migrate042(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "10.0.0-open", _))
+    List(
+      Version("java", "10.0.2-open", "https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "10.0.2-open", "https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "10.0.2-open", "https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_windows-x64_bin.tar.gz", Windows))
+      .validate()
+      .insert()
+    setCandidateDefault("java", "10.0.2-open")
+  }
 }
