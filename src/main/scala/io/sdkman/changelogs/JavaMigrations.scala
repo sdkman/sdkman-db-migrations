@@ -80,4 +80,26 @@ class JavaMigrations {
       .insert()
     setCandidateDefault("java", "10.0.2-open")
   }
+
+  @ChangeSet(order = "043", id = "043-add_openjdk_java_11-ea-28", author = "mdeinum")
+  def migrate043(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.ea.26-open", _))
+    List(
+      Version("java", "11.ea.28-open", "https://download.java.net/java/early_access/jdk11/28/GPL/openjdk-11-ea+28_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.ea.28-open", "https://download.java.net/java/early_access/jdk11/28/GPL/openjdk-11-ea+28_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.ea.28-open", "https://download.java.net/java/early_access/jdk11/28/GPL/openjdk-11-ea+28_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "044", id = "044-add_openjdk_java_12-ea-08", author = "mdeinum")
+  def migrate044(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.06-open", _))
+    List(
+      Version("java", "12.ea.08-open", "https://download.java.net/java/early_access/jdk12/8/GPL/openjdk-12-ea+8_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.ea.08-open", "https://download.java.net/java/early_access/jdk12/8/GPL/openjdk-12-ea+8_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.ea.08-open", "https://download.java.net/java/early_access/jdk12/8/GPL/openjdk-12-ea+8_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+  }
 }
