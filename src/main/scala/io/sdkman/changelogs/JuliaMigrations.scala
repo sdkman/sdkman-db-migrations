@@ -33,7 +33,7 @@ class JuliaMigrations {
       Version(
         candidate   = "julia",
         version     = "1.0.0",
-        url         = "https://julialang-s3.julialang.org/bin/linux/armv7l/1.0/julia-1.0.0-linux-armv7l.tar.gz",
+        url         = "https://julialang-s3.julialang.org/bin/mac/x64/1.0/julia-1.0.0-mac64.dmg",
         platform    = MacOSX
       ))
       .validate()
