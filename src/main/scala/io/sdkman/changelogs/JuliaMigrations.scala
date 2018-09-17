@@ -21,20 +21,8 @@ class JuliaMigrations {
       Version(
         candidate   = "julia",
         version     = "1.0.0",
-        url         = "https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0.0-win64.exe",
-        platform    = Windows
-      ),
-      Version(
-        candidate   = "julia",
-        version     = "1.0.0",
         url         = "https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.0-linux-x86_64.tar.gz",
         platform    = Linux64
-      ),
-      Version(
-        candidate   = "julia",
-        version     = "1.0.0",
-        url         = "https://julialang-s3.julialang.org/bin/mac/x64/1.0/julia-1.0.0-mac64.dmg",
-        platform    = MacOSX
       ))
       .validate()
       .insert()
