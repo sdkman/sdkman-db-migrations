@@ -145,4 +145,22 @@ class JavaMigrations {
 
   @ChangeSet(order = "048", id = "048-set_openjdk_java_11.0.0_default", author = "marc0der")
   def migrate048(implicit db: MongoDatabase) = setCandidateDefault("java", "11.0.0-open")
+
+  @ChangeSet(order = "049", id = "049-add_graalvm_1_0_0_rc_7", author = "wololock")
+  def migrate049(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "1.0.0-rc6-graal", platform))
+    List(
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc7-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc7/graalvm-ce-1.0.0-rc7-linux-amd64.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc7-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc7/graalvm-ce-1.0.0-rc7-macos-amd64.tar.gz",
+        platform = MacOSX))
+      .validate()
+      .insert()
+  }
 }
