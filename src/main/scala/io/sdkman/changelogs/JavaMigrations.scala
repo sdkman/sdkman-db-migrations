@@ -185,4 +185,24 @@ class JavaMigrations {
     Seq(Linux64, Linux32, MacOSX, Windows).foreach(removeVersion("java", "8.0.181-oracle", _))
   }
 
+  @ChangeSet(order = "052", id = "052-add_openjdk_java_11.0.1", author = "mdeinum")
+  def migrate052(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.0-open", _))
+  }
+  @ChangeSet(order = "053", id = "053-add_openjdk_java_12-ea-15", author = "mdeinum")
+  def migrate053(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.ea.15-open", "https://download.java.net/java/early_access/jdk12/15/GPL/openjdk-12-ea+15_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.ea.15-open", "https://download.java.net/java/early_access/jdk12/15/GPL/openjdk-12-ea+15_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.ea.15-open", "https://download.java.net/java/early_access/jdk12/15/GPL/openjdk-12-ea+15_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.14-open", _))
+  }
 }
