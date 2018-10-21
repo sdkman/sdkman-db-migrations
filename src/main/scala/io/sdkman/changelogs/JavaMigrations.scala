@@ -209,4 +209,7 @@ class JavaMigrations {
 
   @ChangeSet(order = "054", id = "054-set_openjdk_java_11.0.1_default", author = "marc0der")
   def migrate054(implicit db: MongoDatabase) = setCandidateDefault("java", "11.0.1-open")
+
+  @ChangeSet(order = "055", id = "055-remove_oracle_jdk_10.0.2", author = "marc0der")
+  def migrate055(implicit db: MongoDatabase) = Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "10.0.2-oracle", _))
 }
