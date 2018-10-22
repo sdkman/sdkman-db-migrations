@@ -212,4 +212,22 @@ class JavaMigrations {
 
   @ChangeSet(order = "055", id = "055-remove_oracle_jdk_10.0.2", author = "marc0der")
   def migrate055(implicit db: MongoDatabase) = Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "10.0.2-oracle", _))
+
+  @ChangeSet(order = "056", id = "056-add_graalvm_1_0_0_rc_8", author = "wololock")
+  def migrate056(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "1.0.0-rc7-graal", platform))
+    List(
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc8-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc8/graalvm-ce-1.0.0-rc8-linux-amd64.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc8-graal",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc8/graalvm-ce-1.0.0-rc8-macos-amd64.tar.gz",
+        platform = MacOSX))
+      .validate()
+      .insert()
+  }
 }
