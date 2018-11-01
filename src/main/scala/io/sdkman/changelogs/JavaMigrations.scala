@@ -256,5 +256,15 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+  @ChangeSet(order = "059", id = "059-add_openjdk_java_12-ea-17", author = "mdeinum")
+  def migrate059(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.ea.17-open", "https://download.java.net/java/early_access/jdk12/17/GPL/openjdk-12-ea+17_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.ea.17-open", "https://download.java.net/java/early_access/jdk12/17/GPL/openjdk-12-ea+17_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.ea.17-open", "https://download.java.net/java/early_access/jdk12/17/GPL/openjdk-12-ea+17_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.15-open", _))
+  }
 
 }
