@@ -311,5 +311,15 @@ class JavaMigrations {
       Version("java", "8.0.192-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-jdk8.0.192-macosx_x64.tar.gz", MacOSX)
     ).validate().insert()
   }
+  @ChangeSet(order = "064", id = "064-add_openjdk_java_12-ea-20", author = "mdeinum")
+  def migrate064(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.ea.20-open", "https://download.java.net/java/early_access/jdk12/20/GPL/openjdk-12-ea+20_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.ea.20-open", "https://download.java.net/java/early_access/jdk12/20/GPL/openjdk-12-ea+20_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.ea.20-open", "https://download.java.net/java/early_access/jdk12/20/GPL/openjdk-12-ea+20_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.17-open", _))
+  }
 
 }
