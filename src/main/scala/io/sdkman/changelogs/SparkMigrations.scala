@@ -37,4 +37,13 @@ class SparkMigrations {
     }
     setCandidateDefault("spark", "2.4.0")
   }
+
+  @ChangeSet(order = "005", id = "005-add_spark_2.1.3", author = "machielg")
+  def migration005(implicit db: MongoDatabase) = {
+    Seq("2.1.3").foreach { version =>
+      Version("spark", version, s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-hadoop2.7.tgz")
+        .validate()
+        .insert()
+    }
+  }  
 }
