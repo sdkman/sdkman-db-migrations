@@ -47,6 +47,7 @@ class JavaMigrations {
   @ChangeSet(order = "039", id = "039-update_java_default", author = "vpavic")
   def migrate039(implicit db: MongoDatabase) = setCandidateDefault("java", "8.0.181-zulu")
 
+/**
   @ChangeSet(order = "040", id = "033-add_openjdk_java_11-ea-26", author = "mdeinum")
   def migrate040(implicit db: MongoDatabase) = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.e.25-openjdk", _))
@@ -57,6 +58,7 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+**/
 
   @ChangeSet(order = "041", id = "034-add_openjdk_java_12-ea-06", author = "mdeinum")
   def migrate041(implicit db: MongoDatabase) = {
@@ -80,6 +82,7 @@ class JavaMigrations {
     setCandidateDefault("java", "10.0.2-open")
   }
 
+/**
   @ChangeSet(order = "043", id = "043-add_openjdk_java_11-ea-28", author = "mdeinum")
   def migrate043(implicit db: MongoDatabase) = {
     List(
@@ -90,6 +93,7 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.ea.26-open", _))
   }
+**/
 
   @ChangeSet(order = "044", id = "044-add_openjdk_java_12-ea-08", author = "mdeinum")
   def migrate044(implicit db: MongoDatabase) = {
@@ -322,4 +326,8 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.17-open", _))
   }
 
+  @ChangeSet(order = "065", id = "065-remove-openjdk_java_11.e.26", author = "machielg")
+  def migrate065(implicit db: MongoDatabase) = {
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.e.26-openjdk", platform))
+  }
 }
