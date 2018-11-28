@@ -341,7 +341,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "067", id = "067-add_eclipsej9_openjdk_11", author = "munukutla")
-  def migrate066(implicit db: MongoDatabase) = {
+  def migrate067(implicit db: MongoDatabase) = {
     List(
       Version("java", "11-j9", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_linux_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz", Linux64),
       Version("java", "11-j9", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_mac_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz", MacOSX),
