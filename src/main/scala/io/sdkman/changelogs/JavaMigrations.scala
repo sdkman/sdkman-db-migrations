@@ -332,7 +332,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "066", id = "066-add_eclipsej9_openjdk_10", author = "munukutla")
-  def migrate065(implicit db: MongoDatabase) = {
+  def migrate066(implicit db: MongoDatabase) = {
     List(
       Version("java", "10-j9", "https://github.com/AdoptOpenJDK/openjdk10-openj9-releases/releases/download/jdk-10.0.2%2B13_openj9-0.9.0/OpenJDK10-OPENJ9_x64_Linux_jdk-10.0.2.13_openj9-0.9.0.tar.gz", Linux64),
       Version("java", "10-j9", "https://github.com/AdoptOpenJDK/openjdk10-openj9-releases/releases/download/jdk-10.0.2%2B13_openj9-0.9.0/OpenJDK10-OPENJ9_x64_Windows_jdk-10.0.2.13_openj9-0.9.0.zip", Windows))
@@ -341,7 +341,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "067", id = "067-add_eclipsej9_openjdk_11", author = "munukutla")
-  def migrate065(implicit db: MongoDatabase) = {
+  def migrate066(implicit db: MongoDatabase) = {
     List(
       Version("java", "11-j9", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_linux_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz", Linux64),
       Version("java", "11-j9", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_mac_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz", MacOSX),
