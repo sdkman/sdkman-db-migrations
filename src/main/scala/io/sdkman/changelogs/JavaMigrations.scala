@@ -348,12 +348,12 @@ class JavaMigrations {
     List(
       Version(
         candidate = "java",
-        version = "1.0.0-rc11-graa",
+        version = "1.0.0-rc11-grl",
         url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc11/graalvm-ce-1.0.0-rc11-linux-amd64.tar.gz",
         platform = Linux64),
       Version(
         candidate = "java",
-        version = "1.0.0-rc11-graa",
+        version = "1.0.0-rc11-grl",
         url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc11/graalvm-ce-1.0.0-rc11-macos-amd64.tar.gz",
         platform = MacOSX))
       .validate()
