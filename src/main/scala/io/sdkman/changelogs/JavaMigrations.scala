@@ -344,7 +344,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "069", id = "069-add_graalvm_1_0_0_rc_11", author = "ilopmar")
-  def migrate066(implicit db: MongoDatabase) = {
+  def migrate069(implicit db: MongoDatabase) = {
     List(
       Version(
         candidate = "java",
