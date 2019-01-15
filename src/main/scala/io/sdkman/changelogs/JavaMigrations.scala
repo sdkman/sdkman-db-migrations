@@ -1,4 +1,3 @@
-
 package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
@@ -305,5 +304,23 @@ class JavaMigrations {
       .insert()
     setCandidateDefault("java", "11.0.2-open")
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-open", _))
+  }
+
+  @ChangeSet(order = "073", id = "073-add_zulu_fx_8_0_192", author = "renannprado")
+  def migrate073(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-win_x64.zip", Windows),
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "074", id = "074-add_zulu_fx_11_0_1", author = "renannprado")
+  def migrate074(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-linux_x64.tar.gz", Linux64),
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-win_x64.zip", Windows),
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-macosx_x64.zip", MacOSX)
+    ).validate().insert()
   }
 }
