@@ -360,4 +360,13 @@ class JavaMigrations {
       .insert()
   }
 
+  @ChangeSet(order = "070", id = "070-add_corretto_8_0_192", author = "mdeinum")
+  def migrate070(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.192-amzn", "https://d3pxv6yz143wms.cloudfront.net/amazon-corretto-preview2-8u192-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.192-amzn", "https://d3pxv6yz143wms.cloudfront.net/amazon-corretto-preview2-8u192-windows-x64-jdk.zip", Windows),
+      Version("java", "8.0.192-amzn", "https://d3pxv6yz143wms.cloudfront.net/amazon-corretto-preview2-8u192-macosx-x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
 }
