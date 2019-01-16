@@ -98,7 +98,7 @@ class JavaMigrations {
       .insert()
   }
 
-`  @ChangeSet(order = "047", id = "047-add_openjdk_java_11.0.0", author = "mdeinum")
+  @ChangeSet(order = "047", id = "047-add_openjdk_java_11.0.0", author = "mdeinum")
   def migrate047(implicit db: MongoDatabase) = {
     List(
       Version("java", "11.0.0-open", "https://download.java.net/java/GA/jdk11/28/GPL/openjdk-11+28_linux-x64_bin.tar.gz", Linux64),
