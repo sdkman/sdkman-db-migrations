@@ -98,17 +98,6 @@ class JavaMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "047", id = "047-add_openjdk_java_11.0.0", author = "mdeinum")
-  def migrate047(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.0-open", "https://download.java.net/java/GA/jdk11/28/GPL/openjdk-11+28_linux-x64_bin.tar.gz", Linux64),
-      Version("java", "11.0.0-open", "https://download.java.net/java/GA/jdk11/28/GPL/openjdk-11+28_osx-x64_bin.tar.gz", MacOSX),
-      Version("java", "11.0.0-open", "https://download.java.net/java/GA/jdk11/28/GPL/openjdk-11+28_windows-x64_bin.zip", Windows))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.ea.28-open", _))
-  }
-
   @ChangeSet(order = "048", id = "048-set_openjdk_java_11.0.0_default", author = "marc0der")
   def migrate048(implicit db: MongoDatabase) = setCandidateDefault("java", "11.0.0-open")
 
@@ -128,17 +117,6 @@ class JavaMigrations {
         platform = MacOSX))
       .validate()
       .insert()
-  }
-
-  @ChangeSet(order = "052", id = "052-add_openjdk_java_11.0.1", author = "mdeinum")
-  def migrate052(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz", Linux64),
-      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_osx-x64_bin.tar.gz", MacOSX),
-      Version("java", "11.0.1-open", "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip", Windows))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.0-open", _))
   }
 
   @ChangeSet(order = "054", id = "054-set_openjdk_java_11.0.1_default", author = "marc0der")
