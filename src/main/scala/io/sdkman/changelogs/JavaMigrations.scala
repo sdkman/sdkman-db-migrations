@@ -294,4 +294,16 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, Linux32, MacOSX, Windows).foreach(removeVersion("java", "8.0.191-oracle", _))
   }
+
+  @ChangeSet(order = "072", id = "072-update_openjdk_11_0_2", author = "marc0der")
+  def migrate072(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    setCandidateDefault("java", "11.0.2-open")
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-open", _))
+  }
 }
