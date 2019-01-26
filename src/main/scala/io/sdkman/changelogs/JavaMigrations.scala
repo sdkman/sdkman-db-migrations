@@ -364,4 +364,13 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.1-zulu", platform))
   }
 
+  @ChangeSet(order = "079", id = "079-add_corretto_8_0_202", author = "joschi")
+  def migrate079(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-windows-x64-jdk.zip", Windows),
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-macosx-x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
 }
