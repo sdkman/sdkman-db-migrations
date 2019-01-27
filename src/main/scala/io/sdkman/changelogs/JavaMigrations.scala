@@ -371,6 +371,7 @@ class JavaMigrations {
       Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-windows-x64-jdk.zip", Windows),
       Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-macosx-x64.tar.gz", MacOSX)
     ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.192-amzn", platform))
   }
 
 }
