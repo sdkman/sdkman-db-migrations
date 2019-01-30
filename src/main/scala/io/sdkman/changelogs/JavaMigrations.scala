@@ -390,4 +390,22 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "081", id = "081-add_openj9_8_0_202", author = "joschi")
+  def migrate081(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_openj9_8u202b08_openj9-0.12.0.tar.gz", Linux64),
+      Version("java", "8.0.202-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_windows_openj9_8u202b08_openj9-0.12.0.zip", Windows),
+      Version("java", "8.0.202-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_mac_openj9_8u202b08_openj9-0.12.0.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "082", id = "082-add_openj9_11_0_2", author = "joschi")
+  def migrate082(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_linux_openj9_11.0.2_9_openj9-0.12.0.tar.gz", Linux64),
+      Version("java", "11.0.2-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_windows_openj9_11.0.2_9_openj9-0.12.0.zip", Windows),
+      Version("java", "11.0.2-j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_mac_openj9_11.0.2_9_openj9-0.12.0.tar.gz", MacOSX),
+    ).validate().insert()
+  }
 }
