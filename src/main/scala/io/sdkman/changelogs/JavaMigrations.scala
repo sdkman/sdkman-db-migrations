@@ -427,8 +427,28 @@ class JavaMigrations {
     ).validate().insert()
   }
 
-  @ChangeSet(order = "085", id = "085-add_openjdk_java_12-ea-31", author = "marc0der")
-  def migrate085(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "085", id = "085-add_zulu_7_0_211", author = "vpavic")
+  def migrate085(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "7.0.211-zulu", "https://cdn.azul.com/zulu/bin/zulu7.27.0.1-ca-jdk7.0.211-linux_x64.tar.gz", Linux64),
+      Version("java", "7.0.211-zulu", "https://cdn.azul.com/zulu/bin/zulu7.27.0.1-ca-jdk7.0.211-win_x64.zip", Windows)
+    ).validate().insert()
+    Seq(Linux64, Windows).foreach(platform => removeVersion(candidate = "java", version = "7.0.201-zulu", platform))
+  }
+
+  @ChangeSet(order = "086", id = "086-add_zulu_8_0_202", author = "vpavic")
+  def migrate086(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-win_x64.zip", Windows),
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.201-zulu", platform))
+  }
+
+
+  @ChangeSet(order = "087", id = "087-add_openjdk_java_12-ea-31", author = "marc0der")
+  def migrate087(implicit db: MongoDatabase): Unit = {
     List(
       Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_linux-x64_bin.tar.gz", Linux64),
       Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_osx-x64_bin.tar.gz", MacOSX),
@@ -438,8 +458,8 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.26-open", _))
   }
 
-  @ChangeSet(order = "086", id = "086-add_openjdk_java_13-ea-07", author = "marc0der")
-  def migrate086(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "088", id = "088-add_openjdk_java_13-ea-07", author = "marc0der")
+  def migrate088(implicit db: MongoDatabase): Unit = {
     List(
       Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_osx-x64_bin.tar.gz", MacOSX),
