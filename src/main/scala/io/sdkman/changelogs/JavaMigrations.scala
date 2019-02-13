@@ -476,6 +476,5 @@ class JavaMigrations {
       Version("java", "11.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.2/sapmachine-jdk-11.0.2_windows-x64_bin.zip", Windows))
       .validate()
       .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-sapmachine", _))
   }
 }
