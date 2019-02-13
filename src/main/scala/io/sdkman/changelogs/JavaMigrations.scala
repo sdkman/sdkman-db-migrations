@@ -468,7 +468,7 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.02-open", _))
   }
-  @ChangeSet(order = "089", id = "089-add_sapmachine_java_11.0.2 author = "msailer")
+  @ChangeSet(order = "089", id = "089-add_sapmachine_java_11.0.2", author = "msailer")
   def migrate089(implicit db: MongoDatabase): Unit = {
     List(
       Version("java", "11.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.2/sapmachine-jdk-11.0.2_linux-x64_bin.tar.gz", Linux64),
