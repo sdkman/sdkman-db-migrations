@@ -1,4 +1,3 @@
-
 package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
@@ -293,5 +292,189 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, Linux32, MacOSX, Windows).foreach(removeVersion("java", "8.0.191-oracle", _))
+  }
+
+  @ChangeSet(order = "072", id = "072-update_openjdk_11_0_2", author = "marc0der")
+  def migrate072(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    setCandidateDefault("java", "11.0.2-open")
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-open", _))
+  }
+
+  @ChangeSet(order = "073", id = "073-add_zulu_fx_8_0_192", author = "renannprado")
+  def migrate073(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-win_x64.zip", Windows),
+      Version("java", "8.0.192-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "074", id = "074-add_zulu_fx_11_0_1", author = "renannprado")
+  def migrate074(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-linux_x64.tar.gz", Linux64),
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-win_x64.zip", Windows),
+      Version("java", "11.0.1-fx-zulu", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-macosx_x64.zip", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "075", id = "075-readd_zulufx_8_0_192", author = "marc0der")
+  def migrate075(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.192-zulufx", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.192-zulufx", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-win_x64.zip", Windows),
+      Version("java", "8.0.192-zulufx", "https://cdn.azul.com/zulu/bin/zulu8.33.0.1-ca-fx-jdk8.0.192-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.192-fx-zulu", _))
+  }
+
+  @ChangeSet(order = "076", id = "076-readd_zulufx_11_0_1", author = "marc0der")
+  def migrate076(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.1-zulufx", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-linux_x64.tar.gz", Linux64),
+      Version("java", "11.0.1-zulufx", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-win_x64.zip", Windows),
+      Version("java", "11.0.1-zulufx", "https://cdn.azul.com/zulu/bin/zulu11.2.5-ca-fx-jdk11.0.1-macosx_x64.zip", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-fx-zulu", _))
+  }
+
+  @ChangeSet(order = "077", id = "077-add_zulu_8_0_201", author = "vpavic")
+  def migrate077(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.201-zulu", "https://cdn.azul.com/zulu/bin/zulu8.34.0.1-ca-jdk8.0.201-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.201-zulu", "https://cdn.azul.com/zulu/bin/zulu8.34.0.1-ca-jdk8.0.201-win_x64.zip", Windows),
+      Version("java", "8.0.201-zulu", "https://cdn.azul.com/zulu/bin/zulu8.34.0.1-ca-jdk8.0.201-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.192-zulu", platform))
+  }
+
+  @ChangeSet(order = "078", id = "078-add_zulu_11_0_2", author = "vpavic")
+  def migrate078(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-zulu", "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-jdk11.0.2-linux_x64.tar.gz", Linux64),
+      Version("java", "11.0.2-zulu", "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-jdk11.0.2-win_x64.zip", Windows),
+      Version("java", "11.0.2-zulu", "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-jdk11.0.2-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.1-zulu", platform))
+  }
+
+  @ChangeSet(order = "079", id = "079-add_corretto_8_0_202", author = "joschi")
+  def migrate079(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-windows-x64-jdk.zip", Windows),
+      Version("java", "8.0.202-amzn", "https://d2znqt9b1bc64u.cloudfront.net/amazon-corretto-8.202.08.2-macosx-x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.192-amzn", platform))
+  }
+
+  @ChangeSet(order = "080", id = "080-add_graalvm_1_0_0_rc_12", author = "wololock")
+  def migrate080(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc-12-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc12/graalvm-ce-1.0.0-rc12-linux-amd64.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc-12-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc12/graalvm-ce-1.0.0-rc12-macos-amd64.tar.gz",
+        platform = MacOSX))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "081", id = "081-add_openj9_8_0_202", author = "joschi")
+  def migrate081(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_openj9_8u202b08_openj9-0.12.0.tar.gz", Linux64),
+      Version("java", "8.0.202.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_windows_openj9_8u202b08_openj9-0.12.0.zip", Windows),
+      Version("java", "8.0.202.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_mac_openj9_8u202b08_openj9-0.12.0.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "082", id = "082-add_openj9_11_0_2", author = "joschi")
+  def migrate082(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_linux_openj9_11.0.2_9_openj9-0.12.0.tar.gz", Linux64),
+      Version("java", "11.0.2.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_windows_openj9_11.0.2_9_openj9-0.12.0.zip", Windows),
+      Version("java", "11.0.2.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_mac_openj9_11.0.2_9_openj9-0.12.0.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "083", id = "083-add_adoptopenjdk-hs_8_0_202", author = "joschi")
+  def migrate083(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u202b08.tar.gz", Linux64),
+      Version("java", "8.0.202.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u202b08.zip", Windows),
+      Version("java", "8.0.202.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_mac_hotspot_8u202b08.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "084", id = "084-add_adoptopenjdk-hs_11_0_2", author = "joschi")
+  def migrate084(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz", Linux64),
+      Version("java", "11.0.2.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.2_9.zip", Windows),
+      Version("java", "11.0.2.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_mac_hotspot_11.0.2_9.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "085", id = "085-add_zulu_7_0_211", author = "vpavic")
+  def migrate085(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "7.0.211-zulu", "https://cdn.azul.com/zulu/bin/zulu7.27.0.1-ca-jdk7.0.211-linux_x64.tar.gz", Linux64),
+      Version("java", "7.0.211-zulu", "https://cdn.azul.com/zulu/bin/zulu7.27.0.1-ca-jdk7.0.211-win_x64.zip", Windows)
+    ).validate().insert()
+    Seq(Linux64, Windows).foreach(platform => removeVersion(candidate = "java", version = "7.0.201-zulu", platform))
+  }
+
+  @ChangeSet(order = "086", id = "086-add_zulu_8_0_202", author = "vpavic")
+  def migrate086(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-win_x64.zip", Windows),
+      Version("java", "8.0.202-zulu", "https://cdn.azul.com/zulu/bin/zulu8.36.0.1-ca-jdk8.0.202-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.201-zulu", platform))
+  }
+
+
+  @ChangeSet(order = "087", id = "087-add_openjdk_java_12-ea-31", author = "marc0der")
+  def migrate087(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.26-open", _))
+  }
+
+  @ChangeSet(order = "088", id = "088-add_openjdk_java_13-ea-07", author = "marc0der")
+  def migrate088(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.02-open", _))
+  }
+  @ChangeSet(order = "089", id = "089-add_sapmachine_java_11.0.2", author = "msailer")
+  def migrate089(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "11.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.2/sapmachine-jdk-11.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.2/sapmachine-jdk-11.0.2_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.2/sapmachine-jdk-11.0.2_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
   }
 }
