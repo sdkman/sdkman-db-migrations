@@ -36,4 +36,9 @@ class CleanupMigrations {
       removeVersion("java", version, MacOSX)
     }
   }
+
+  @ChangeSet(order = "008", id = "008-remove-broken-kscript-2_7_0", author = "hho")
+  def migrate008(implicit db: MongoDatabase) = {
+    removeVersion("kscript", "2.7.0")
+  }
 }
