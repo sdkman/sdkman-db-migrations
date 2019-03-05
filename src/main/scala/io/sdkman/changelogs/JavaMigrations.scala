@@ -507,7 +507,7 @@ class JavaMigrations {
     ).validate().insert()
   }
 
-  @ChangeSet(order = "093", id = "080-add_graalvm_1_0_0_rc_13", author = "wololock")
+  @ChangeSet(order = "093", id = "093-add_graalvm_1_0_0_rc_13", author = "wololock")
   def migrate093(implicit db: MongoDatabase) = {
     List(
       Version(
