@@ -506,4 +506,21 @@ class JavaMigrations {
       Version("java", "11.0.2-amzn", "https://d2jnoze5tfhthg.cloudfront.net/amazon-corretto-11.0.2.9.1-macosx-x64.tar.gz", MacOSX)
     ).validate().insert()
   }
+
+  @ChangeSet(order = "093", id = "080-add_graalvm_1_0_0_rc_13", author = "wololock")
+  def migrate093(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc-13-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc13/graalvm-ce-1.0.0-rc13-linux-amd64.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "1.0.0-rc-13-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc13/graalvm-ce-1.0.0-rc13-macos-amd64.tar.gz",
+        platform = MacOSX))
+      .validate()
+      .insert()
+  }
 }
