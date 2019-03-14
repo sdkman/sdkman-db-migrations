@@ -464,10 +464,10 @@ class JavaMigrations {
       Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "13.ea.07-open", "https://download.java.net/java/early_access/jdk13/7/GPL/openjdk-13-ea+7_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.02-open", _))
   }
+
   @ChangeSet(order = "089", id = "089-add_sapmachine_java_11.0.2", author = "msailer")
   def migrate089(implicit db: MongoDatabase): Unit = {
     List(
@@ -522,5 +522,16 @@ class JavaMigrations {
         platform = MacOSX))
       .validate()
       .insert()
+  }
+
+  @ChangeSet(order = "094", id = "094-add_openjdk_java_13-ea-11", author = "marc0der")
+  def migrate088(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.07-open", _))
   }
 }
