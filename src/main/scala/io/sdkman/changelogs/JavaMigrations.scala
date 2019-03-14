@@ -525,7 +525,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "094", id = "094-add_openjdk_java_13-ea-11", author = "marc0der")
-  def migrate088(implicit db: MongoDatabase): Unit = {
+  def migrate094(implicit db: MongoDatabase): Unit = {
     List(
       Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_osx-x64_bin.tar.gz", MacOSX),
