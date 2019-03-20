@@ -543,6 +543,6 @@ class JavaMigrations {
       Version("java", "12.0.0-open", "https://download.java.net/java/GA/jdk12/GPL/openjdk-12_windows-x64_bin.zip", Windows))
       .validate()
       .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.31-open", _))
   }
 }
