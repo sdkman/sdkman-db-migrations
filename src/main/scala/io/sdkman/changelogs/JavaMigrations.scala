@@ -534,7 +534,7 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.07-open", _))
   }
-  
+
   @ChangeSet(order = "095", id = "095-add_openjdk_java_12.0.0", author = "bmuschko")
   def migrate095(implicit db: MongoDatabase): Unit = {
     List(
@@ -545,20 +545,20 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.31-open", _))
 
-  @ChangeSe5(order = "096", id = "096-add_graalvm_1_0_0_rc_14", author = "wololock")
-  def migrate096(implicit db: MongoDatabase) = {
-    List(
-      Version(
-        candidate = "java",
-        version = "1.0.0-rc-14-grl",
-        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc14/graalvm-ce-1.0.0-rc14-linux-amd64.tar.gz",
-        platform = Linux64),
-      Version(
-        candidate = "java",
-        version = "1.0.0-rc-14-grl",
-        url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc14/graalvm-ce-1.0.0-rc14-macos-amd64.tar.gz",
-        platform = MacOSX))
-      .validate()
-      .insert()
+    @ChangeSet(order = "096", id = "096-add_graalvm_1_0_0_rc_14", author = "wololock")
+    def migrate096(implicit db: MongoDatabase): Unit =
+      List(
+        Version(
+          candidate = "java",
+          version = "1.0.0-rc-14-grl",
+          url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc14/graalvm-ce-1.0.0-rc14-linux-amd64.tar.gz",
+          platform = Linux64),
+        Version(
+          candidate = "java",
+          version = "1.0.0-rc-14-grl",
+          url = "https://github.com/oracle/graal/releases/download/vm-1.0.0-rc14/graalvm-ce-1.0.0-rc14-macos-amd64.tar.gz",
+          platform = MacOSX))
+        .validate()
+        .insert()
   }
 }
