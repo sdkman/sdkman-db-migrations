@@ -561,4 +561,16 @@ class JavaMigrations {
         platform = MacOSX))
       .validate()
       .insert()
+
+  @ChangeSet(order = "097", id = "097-add_openjdk_java_13-ea-12", author = "eddumelendez")
+  def migrate097(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.11-open", _))
+  }
+
 }
