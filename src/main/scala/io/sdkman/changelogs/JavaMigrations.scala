@@ -535,7 +535,7 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.07-open", _))
   }
   
-  @ChangeSet(order = "095", id = "094-add_openjdk_java_12.0.0", author = "bmuschko")
+  @ChangeSet(order = "095", id = "095-add_openjdk_java_12.0.0", author = "bmuschko")
   def migrate095(implicit db: MongoDatabase): Unit = {
     List(
       Version("java", "12.0.0-open", "https://download.java.net/java/GA/jdk12/GPL/openjdk-12_linux-x64_bin.tar.gz", Linux64),
