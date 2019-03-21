@@ -573,4 +573,13 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.11-open", _))
   }
 
+  @ChangeSet(order = "098", id = "098-add_zulu_12_0_0", author = "jorsol")
+  def migrate098(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu12.1.3-ca-jdk12-linux_x64.tar.gz", Linux64),
+      Version("java", "12.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu12.1.3-ca-jdk12-win_x64.zip", Windows),
+      Version("java", "12.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu12.1.3-ca-jdk12-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+
 }
