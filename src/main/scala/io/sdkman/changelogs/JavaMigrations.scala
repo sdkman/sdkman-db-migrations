@@ -583,11 +583,11 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "099", id = "099-add_openjdk_java_13-ea-13", author = "eddumelendez")
-  def migrate097(implicit db: MongoDatabase): Unit = {
+  def migrate099(implicit db: MongoDatabase): Unit = {
     List(
-      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+13_linux-x64_bin.tar.gz", Linux64),
-      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+13_osx-x64_bin.tar.gz", MacOSX),
-      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+13_windows-x64_bin.zip", Windows))
+      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_windows-x64_bin.zip", Windows))
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.12-open", _))
