@@ -46,4 +46,10 @@ class SparkMigrations {
         .insert()
     }
   }  
+
+  @ChangeSet(order = "006", id = "006-add_spark_2.3.3", author = "marc0der")
+  def migration006(implicit db: MongoDatabase) =
+      Version("spark", "2.3.3", "https://archive.apache.org/dist/spark/spark-2.3.3/spark-2.3.3-bin-hadoop2.7.tgz")
+        .validate()
+        .insert()
 }
