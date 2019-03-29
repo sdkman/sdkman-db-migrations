@@ -241,7 +241,6 @@ class JavaMigrations {
       Version("java", "12.ea.26-open", "https://download.java.net/java/early_access/jdk12/26/GPL/openjdk-12-ea+26_linux-x64_bin.tar.gz", Linux64),
       Version("java", "12.ea.26-open", "https://download.java.net/java/early_access/jdk12/26/GPL/openjdk-12-ea+26_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "12.ea.26-open", "https://download.java.net/java/early_access/jdk12/26/GPL/openjdk-12-ea+26_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.20-open", _))
   }
@@ -252,7 +251,6 @@ class JavaMigrations {
       Version("java", "13.ea.02-open", "https://download.java.net/java/early_access/jdk13/2/GPL/openjdk-13-ea+2_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.02-open", "https://download.java.net/java/early_access/jdk13/2/GPL/openjdk-13-ea+2_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "13.ea.02-open", "https://download.java.net/java/early_access/jdk13/2/GPL/openjdk-13-ea+2_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
   }
 
@@ -453,7 +451,6 @@ class JavaMigrations {
       Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_linux-x64_bin.tar.gz", Linux64),
       Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "12.ea.31-open", "https://download.java.net/java/early_access/jdk12/31/GPL/openjdk-12+31_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.ea.26-open", _))
   }
@@ -530,7 +527,6 @@ class JavaMigrations {
       Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "13.ea.11-open", "https://download.java.net/java/early_access/jdk13/11/GPL/openjdk-13-ea+11_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.07-open", _))
   }
@@ -568,7 +564,6 @@ class JavaMigrations {
       Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "13.ea.12-open", "https://download.java.net/java/early_access/jdk13/12/GPL/openjdk-13-ea+12_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.11-open", _))
   }
@@ -588,8 +583,18 @@ class JavaMigrations {
       Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_linux-x64_bin.tar.gz", Linux64),
       Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_osx-x64_bin.tar.gz", MacOSX),
       Version("java", "13.ea.13-open", "https://download.java.net/java/early_access/jdk13/13/GPL/openjdk-13-ea+13_windows-x64_bin.zip", Windows))
-      .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.12-open", _))
+  }
+
+  @ChangeSet(order = "100", id = "100-add_openjdk_java_13-ea-14", author = "eddumelendez")
+  def migrate100(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.14-open", "https://download.java.net/java/early_access/jdk13/14/GPL/openjdk-13-ea+14_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.14-open", "https://download.java.net/java/early_access/jdk13/14/GPL/openjdk-13-ea+14_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.14-open", "https://download.java.net/java/early_access/jdk13/14/GPL/openjdk-13-ea+14_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.13-open", _))
   }
 }
