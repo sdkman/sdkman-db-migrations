@@ -625,4 +625,33 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "103", id = "103-add_bellsoft_8_0_202", author = "den1ska")
+  def migrate103(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.202-librca", "https://download.bell-sw.com/java/8u202/bellsoft-jdk8u202-linux-i586.tar.gz", Linux32),
+      Version("java", "8.0.202-librca", "https://download.bell-sw.com/java/8u202/bellsoft-jdk8u202-linux-amd64.tar.gz", Linux64),
+      Version("java", "8.0.202-librca", "https://download.bell-sw.com/java/8u202/bellsoft-jdk8u202-windows-amd64.zip", Windows),
+      Version("java", "8.0.202-librca", "https://download.bell-sw.com/java/8u202/bellsoft-jdk8u202-macos-amd64.zip", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "104", id = "104-add_bellsoft_11_0_2", author = "den1ska")
+  def migrate104(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-librca", "https://download.bell-sw.com/java/11.0.2/bellsoft-jdk11.0.2-linux-amd64.tar.gz", Linux64),
+      Version("java", "11.0.2-librca", "https://download.bell-sw.com/java/11.0.2/bellsoft-jdk11.0.2-windows-amd64.zip", Windows),
+      Version("java", "11.0.2-librca", "https://download.bell-sw.com/java/11.0.2/bellsoft-jdk11.0.2-macos-amd64.zip", MacOSX)
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "105", id = "105-add_bellsoft_12_0_0", author = "den1ska")
+  def migrate105(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.0-librca", "https://download.bell-sw.com/java/12/bellsoft-jdk12-linux-i586.tar.gz", Linux32),
+      Version("java", "12.0.0-librca", "https://download.bell-sw.com/java/12/bellsoft-jdk12-linux-amd64.tar.gz", Linux64),
+      Version("java", "12.0.0-librca", "https://download.bell-sw.com/java/12/bellsoft-jdk12-windows-amd64.zip", Windows),
+      Version("java", "12.0.0-librca", "https://download.bell-sw.com/java/12/bellsoft-jdk12-macos-amd64.zip", MacOSX)
+    ).validate().insert()
+  }
 }
