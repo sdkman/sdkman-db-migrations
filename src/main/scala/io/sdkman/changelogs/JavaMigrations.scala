@@ -654,4 +654,15 @@ class JavaMigrations {
       Version("java", "12.0.0-librca", "https://download.bell-sw.com/java/12/bellsoft-jdk12-macos-amd64.zip", MacOSX)
     ).validate().insert()
   }
+
+  @ChangeSet(order = "106", id = "106-add_openjdk_java_13-ea-16", author = "eddumelendez")
+  def migrate106(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.16-open", "https://download.java.net/java/early_access/jdk13/16/GPL/openjdk-13-ea+16_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.16-open", "https://download.java.net/java/early_access/jdk13/16/GPL/openjdk-13-ea+16_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.16-open", "https://download.java.net/java/early_access/jdk13/16/GPL/openjdk-13-ea+16_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.15-open", _))
+  }
 }
