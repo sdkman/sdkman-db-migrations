@@ -1,6 +1,7 @@
 # SDKMAN Database Migrations
 
 [![Build Status](https://travis-ci.org/sdkman/sdkman-db-migrations.svg?branch=master)](https://travis-ci.org/sdkman/sdkman-db-migrations)
+[![Gitter chat](https://badges.gitter.im/sdkman/cli-dev.png)](https://gitter.im/sdkman/cli-dev)
 
 This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API.
 
@@ -124,4 +125,4 @@ Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX`
 
 ## Fast track
 
-It is usually worth notifying us of the PR on the [cli-dev](gitter.im/sdkman/cli-dev) Gitter chat in case we miss your PR.
+It is usually worth notifying us of the PR on the [cli-dev](https://gitter.im/sdkman/cli-dev) Gitter chat in case we miss your PR.

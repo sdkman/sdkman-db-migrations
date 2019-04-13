@@ -4,6 +4,7 @@
 ### IntelliJ ###
 .idea
 out
+*.iml
 
 ### Git ###
 *.orig
