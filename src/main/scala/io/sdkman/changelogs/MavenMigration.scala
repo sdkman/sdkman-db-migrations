@@ -12,8 +12,6 @@ class MavenMigration {
       .insert()
       .asCandidateDefault()
   }
-<<<<<<< HEAD
-=======
 
   @ChangeSet(order = "002", id = "002-add_maven_3.6.0", author = "hho")
   def migration002(implicit db: MongoDatabase) = {
@@ -23,5 +21,11 @@ class MavenMigration {
       .asCandidateDefault()
   }
 
->>>>>>> 64a404783632c2924decdfd782ea5db8ad6cc480
+  @ChangeSet(order = "003", id = "003-add_maven_3.6.1", author = "philiplourandos")
+  def migration003(implicit db: MongoDatabase) = {
+    Version("maven", "3.6.1", "https://archive.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip")
+      .validate()
+      .insert()
+      .asCandidateDefault()
+  }  
 }
