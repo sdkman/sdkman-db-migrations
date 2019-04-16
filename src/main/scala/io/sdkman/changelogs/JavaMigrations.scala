@@ -767,4 +767,16 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.16-open", _))
   }
+
+  @ChangeSet(order = "117", id = "117-update_openjdk_11_0_3", author = "eddumelendez")
+  def migrate117(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3-open", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz", Linux64),
+      Version("java", "11.0.3-open", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.3_7.tar.gz", MacOSX),
+      Version("java", "11.0.3-open", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.3_7.zip", Windows))
+      .validate()
+      .insert()
+    setCandidateDefault("java", "11.0.3-open")
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-open", _))
+  }
 }
