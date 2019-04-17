@@ -676,4 +676,45 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
   }
+
+  
+  @ChangeSet(order = "108", id = "108-add_corretto_11.0.3", author = "philiplourandos")
+  def migrate108(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-linux-x64.tar.gz", Linux64),
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-windows-x64.zip", Windows),
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-macosx-x64.tar.gz", MacOSX))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-amzn", _))
+  }
+
+  @ChangeSet(order = "109", id = "109-add_corretto_8.0.212", author = "philiplourandos")
+  def migrate109(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-windows-x64-jdk.zip", Windows),
+      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-macosx-x64.tar.gz", MacOSX))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "110", id = "110-add_zulu_7_0_222", author = "philiplourandos")
+  def migrate110(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "7.0.222-zulu", "https://cdn.azul.com/zulu/bin/zulu7.29.0.5-ca-jdk7.0.222-linux_x64.tar.gz", Linux64),
+      Version("java", "7.0.222-zulu", "https://cdn.azul.com/zulu/bin/zulu7.29.0.5-ca-jdk7.0.222-win_x64.zip", Windows),
+      Version("java", "7.0.222-zulu", "https://cdn.azul.com/zulu/bin/zulu7.29.0.5-ca-jdk7.0.222-macosx_x64.zip", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows).foreach(platform => removeVersion(candidate = "java", version = "7.0.211-zulu", platform))
+  }
+
+  @ChangeSet(order = "111", id = "111-add_zulu_8_0_212", author = "philiplourandos")
+  def migrate111(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.212-zulu", "https://cdn.azul.com/zulu/bin/zulu8.38.0.13-ca-jdk8.0.212-linux_x64.tar.gz", Linux64),
+      Version("java", "8.0.212-zulu", "https://cdn.azul.com/zulu/bin/zulu8.38.0.13-ca-jdk8.0.212-win_x64.zip", Windows),
+      Version("java", "8.0.212-zulu", "https://cdn.azul.com/zulu/bin/zulu8.38.0.13-ca-jdk8.0.212-macosx_x64.zip", MacOSX)
+    ).validate().insert()
+  }
 }
