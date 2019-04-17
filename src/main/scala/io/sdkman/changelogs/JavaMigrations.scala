@@ -674,6 +674,7 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
   }
+
   @ChangeSet(order = "108", id = "108-add_corretto_11.0.3", author = "philiplourandos")
   def migrate108(implicit db: MongoDatabase) = {
     List(
@@ -714,5 +715,55 @@ class JavaMigrations {
       Version("java", "8.0.212-zulu", "https://cdn.azul.com/zulu/bin/zulu8.38.0.13-ca-jdk8.0.212-macosx_x64.tar.gz", MacOSX)
     ).validate().insert()
     Seq(Linux64, Windows).foreach(removeVersion(candidate = "java", version = "8.0.202-zulu", _))
+  }
+
+  @ChangeSet(order = "112", id = "112-add_zulu_11_0_3", author = "jorsol")
+  def migrate112(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3-zulu", "https://cdn.azul.com/zulu/bin/zulu11.31.11-ca-jdk11.0.3-linux_x64.tar.gz", Linux64),
+      Version("java", "11.0.3-zulu", "https://cdn.azul.com/zulu/bin/zulu11.31.11-ca-jdk11.0.3-win_x64.zip", Windows),
+      Version("java", "11.0.3-zulu", "https://cdn.azul.com/zulu/bin/zulu11.31.11-ca-jdk11.0.3-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.2-zulu", platform))
+  }
+
+  @ChangeSet(order = "113", id = "113-add_zulu_12_0_1", author = "jorsol")
+  def migrate113(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu12.2.3-ca-jdk12.0.1-linux_x64.tar.gz", Linux64),
+      Version("java", "12.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu12.2.3-ca-jdk12.0.1-win_x64.zip", Windows),
+      Version("java", "12.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu12.2.3-ca-jdk12.0.1-macosx_x64.tar.gz", MacOSX)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.0-zulu", platform))
+  }
+
+  @ChangeSet(order = "114", id = "114-add_sapmachine_java_11.0.3", author = "jorsol")
+  def migrate114(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "11.0.3-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.3/sapmachine-jdk-11.0.3_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.3-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.3/sapmachine-jdk-11.0.3_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.3-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.3/sapmachine-jdk-11.0.3_windows-x64_bin.zip", Windows)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.2-sapmchn", platform))
+  }
+
+  @ChangeSet(order = "115", id = "115-add_sapmachine_java_12.0.1", author = "jorsol")
+  def migrate115(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "12.0.1-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.1/sapmachine-jdk-12.0.1_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "12.0.1-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.1/sapmachine-jdk-12.0.1_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "12.0.1-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.1/sapmachine-jdk-12.0.1_windows-x64_bin.zip", Windows)
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.0-sapmchn", platform))
+  }
+
+  @ChangeSet(order = "116", id = "116-add_sapmachine_java_13-ea-16", author = "jorsol")
+  def migrate116(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_windows-x64_bin.zip", Windows)
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.15-sapmchnn", _))
   }
 }
