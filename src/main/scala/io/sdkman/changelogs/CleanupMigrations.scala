@@ -41,4 +41,9 @@ class CleanupMigrations {
   def migrate008(implicit db: MongoDatabase) = {
     removeVersion("kscript", "2.7.0")
   }
+
+  @ChangeSet(order = "009", id = "009-remove-oracle-java", author = "marc0der")
+  def migrate009(implicit db: MongoDatabase) =
+    Seq(Linux32, Linux64, MacOSX, Windows)
+      .foreach(platform => removeVersion("java", "8.0.201-oracle", platform))
 }
