@@ -676,4 +676,16 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
   }
+
+  @ChangeSet(order = "108", id = "108-add_oracle_java_8.0.211", author = "eddumelendez")
+  def migrate108(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.211-oracle", "https://download.oracle.com/otn/java/jdk/8u211-b12/478a62b7d4e34b78b671c754eaaf38ab/jdk-8u211-linux-x64.tar.gz", Linux64),
+      Version("java", "8.0.211-oracle", "https://download.oracle.com/otn/java/jdk/8u211-b12/478a62b7d4e34b78b671c754eaaf38ab/jdk-8u211-linux-i586.tar.gz", Linux32),
+      Version("java", "8.0.211-oracle", "https://download.oracle.com/otn/java/jdk/8u211-b12/478a62b7d4e34b78b671c754eaaf38ab/jdk-8u211-macosx-x64.dmg", MacOSX),
+      Version("java", "8.0.211-oracle", "https://download.oracle.com/otn/java/jdk/8u211-b12/478a62b7d4e34b78b671c754eaaf38ab/jdk-8u211-windows-x64.exe", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, Linux32, MacOSX, Windows).foreach(removeVersion("java", "8.0.201-oracle", _))
+  }
 }
