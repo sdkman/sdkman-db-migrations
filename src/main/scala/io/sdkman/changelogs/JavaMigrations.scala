@@ -676,4 +676,13 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
   }
+
+  @ChangeSet(order = "108", id = "108-add_corretto_11.0.3", author = "philiplourandos")
+  def migrate108(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-linux-x64.tar.gz", Linux64),
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-windows-x64.zip", Windows),
+      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-macosx-x64.tar.gz", MacOSX)
+    ).validate().insert()
+  }
 }
