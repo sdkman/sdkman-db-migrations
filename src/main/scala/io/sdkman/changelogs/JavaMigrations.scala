@@ -756,14 +756,4 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.0-sapmchn", platform))
   }
-
-  @ChangeSet(order = "116", id = "116-add_sapmachine_java_13-ea-16", author = "jorsol")
-  def migrate116(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_linux-x64_bin.tar.gz", Linux64),
-      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_osx-x64_bin.tar.gz", MacOSX),
-      Version("java", "13.ea.16-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-13%2B16/sapmachine-jdk-13-ea.16_windows-x64_bin.zip", Windows)
-    ).validate().insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.15-sapmchnn", _))
-  }
 }
