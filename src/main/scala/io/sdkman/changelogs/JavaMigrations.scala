@@ -807,7 +807,7 @@ class JavaMigrations {
       Version("java", "8.0.202.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_windows_hotspot_8u212b03.zip", Windows),
       Version("java", "8.0.202.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_mac_hotspot_8u212b03.tar.gz", MacOSX)
     ).validate().insert()
-    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", vwrsion = "8.0.202.hs-adpt", platform))
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "8.0.202.hs-adpt", platform))
   }
 
   @ChangeSet(order = "121", id = "121-add_adoptopenjdk-hs_11_0_3", author = "jaegerk")
