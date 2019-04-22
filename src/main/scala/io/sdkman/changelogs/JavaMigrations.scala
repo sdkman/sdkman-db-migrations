@@ -777,7 +777,7 @@ class JavaMigrations {
       .validate()
       .insert()
     setCandidateDefault("java", "11.0.3-open")
-    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "11.0.2-open", platform))
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-open", _))
   }
   
   @ChangeSet(order = "118", id = "118-add_openj9_8_0_212", author = "jaegerk")
