@@ -780,7 +780,7 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-open", _))
   }
   
-  @ChangeSet(order = "118", id = "118-add_openj9_8_0_212", author = "jaegerk")
+  @ChangeSet(order = "118", id = "118-add_adoptopenjdk-j9_8_0_212", author = "jaegerk")
   def migrate118(implicit db: MongoDatabase) = {
     List(
       Version("java", "8.0.212.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03_openj9-0.14.0/OpenJDK8U-jdk_x64_linux_openj9_8u212b03_openj9-0.14.0.tar.gz", Linux64),
@@ -790,7 +790,7 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "8.0.202.j9-adpt", platform))
   }
 
-  @ChangeSet(order = "119", id = "119-add_openj9_11_0_3", author = "jaegerk")
+  @ChangeSet(order = "119", id = "119-add_adoptopenjdk-j9_11_0_3", author = "jaegerk")
   def migrate119(implicit db: MongoDatabase) = {
     List(
       Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.3_7_openj9-0.14.0.tar.gz", Linux64),
