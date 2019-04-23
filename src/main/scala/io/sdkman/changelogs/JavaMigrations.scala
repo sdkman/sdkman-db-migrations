@@ -812,4 +812,15 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-librca", _))
   }
+
+  @ChangeSet(order = "125", id = "12-5update_openjdk_11_0_2", author = "eddumelendez")
+  def migrate125(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "11.0.2-open", "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-open", _))
+  }
 }
