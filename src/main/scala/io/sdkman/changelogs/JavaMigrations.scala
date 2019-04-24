@@ -826,6 +826,10 @@ class JavaMigrations {
 
   @ChangeSet(order = "126", id = "126-add_graalvm_1_0_0_rc_16", author = "wololock")
   def migrate126(implicit db: MongoDatabase) = {
+    Range(8,13).foreach(v => {
+      removeVersion(candidate = "java", version = s"1.0.0-rc-$v-grl", platform = Linux64)
+      removeVersion(candidate = "java", version = s"1.0.0-rc-$v-grl", platform = MacOSX)
+    })
     List(
       Version(
         candidate = "java",
