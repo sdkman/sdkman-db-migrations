@@ -889,4 +889,21 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2.j9-adpt", _))
   }
+  
+  @ChangeSet(order = "131", id = "131-add_adoptopenjdk-j9_12_0_1", author = "jaegerk")
+  def migrate131(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_linux_openj9_12.0.1_12_openj9-0.14.1.tar.gz", Linux64),
+      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_windows_openj9_12.0.1_12_openj9-0.14.1.zip", Windows),
+      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_mac_openj9_12.0.1_12_openj9-0.14.1.tar.gz", MacOSX)
+    ).validate().insert()
+  }
+  
+  @ChangeSet(order = "132", id = "132-add_adoptopenjdk-hs_12_0_1", author = "jaegerk")
+  def migrate132(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_linux_hotspot_12.0.1_12.tar.gz", Linux64),
+      Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_mac_hotspot_12.0.1_12.tar.gz", MacOSX)
+    ).validate().insert()
+  }
 }
