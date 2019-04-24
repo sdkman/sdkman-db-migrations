@@ -845,4 +845,48 @@ class JavaMigrations {
       }
     }
   }
+
+  @ChangeSet(order = "127", id = "127-add_adoptopenjdk-hs_8_0_212", author = "eddumelendez")
+  def migrate127(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.212.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_linux_hotspot_8u212b03.tar.gz", Linux64),
+      Version("java", "8.0.212.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_mac_hotspot_8u212b03.tar.gz", MacOSX),
+      Version("java", "8.0.212.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jdk_x64_windows_hotspot_8u212b03.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.202.hs-adpt", _))
+  }
+
+  @ChangeSet(order = "128", id = "128-add_openj9_8_0_212", author = "eddumelendez")
+  def migrate128(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.212.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03_openj9-0.14.0/OpenJDK8U-jdk_x64_linux_openj9_8u212b03_openj9-0.14.0.tar.gz", Linux64),
+      Version("java", "8.0.212.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03_openj9-0.14.0/OpenJDK8U-jdk_x64_mac_openj9_8u212b03_openj9-0.14.0.tar.gz", MacOSX),
+      Version("java", "8.0.212.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03_openj9-0.14.0/OpenJDK8U-jdk_x64_windows_openj9_8u212b03_openj9-0.14.0.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.202.j9-adpt", _))
+  }
+
+  @ChangeSet(order = "129", id = "129-add_adoptopenjdk-hs_11_0_3", author = "eddumelendez")
+  def migrate129(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz", Linux64),
+      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.3_7.tar.gz", MacOSX),
+      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.3_7.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2.hs-adpt", _))
+  }
+
+  @ChangeSet(order = "130", id = "130-add_openj9_11_0_3", author = "eddumelendez")
+  def migrate130(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.3_7_openj9-0.14.0.tar.gz", Linux64),
+      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_windows_openj9_11.0.3_7_openj9-0.14.0.zip", MacOSX),
+      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_mac_openj9_11.0.3_7_openj9-0.14.0.tar.gz", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2.j9-adpt", _))
+  }
 }
