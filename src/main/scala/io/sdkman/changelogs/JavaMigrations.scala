@@ -907,11 +907,21 @@ class JavaMigrations {
     ).validate().insert()
   }
   
+  @ChangeSet(order = "133", id = "133-add_openjdk_java_13-ea-18", author = "eddumelendez")
+  def migrate133(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.18-open", "https://download.java.net/java/early_access/jdk13/18/GPL/openjdk-13-ea+18_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.18-open", "https://download.java.net/java/early_access/jdk13/18/GPL/openjdk-13-ea+18_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.18-open", "https://download.java.net/java/early_access/jdk13/18/GPL/openjdk-13-ea+18_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.17-open", _))
+  }
+
   @ChangeSet(order = "134", id = "134-add_adoptopenjdk-hs-windows_12_0_1", author = "jaegerk")
   def migrate134(implicit db: MongoDatabase) = {
     List(
       Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_windows_hotspot_12.0.1_12.zip", Windows),
     ).validate().insert()
   }
-  
 }
