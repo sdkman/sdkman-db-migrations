@@ -935,4 +935,15 @@ class JavaMigrations {
       .insert()
   }
 
+  @ChangeSet(order = "136", id = "136-add_openjdk_java_13-ea-19", author = "eddumelendez")
+  def migrate136(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.19-open", "https://download.java.net/java/early_access/jdk13/19/GPL/openjdk-13-ea+19_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.19-open", "https://download.java.net/java/early_access/jdk13/19/GPL/openjdk-13-ea+19_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.19-open", "https://download.java.net/java/early_access/jdk13/19/GPL/openjdk-13-ea+19_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.18-open", _))
+  }
+
 }
