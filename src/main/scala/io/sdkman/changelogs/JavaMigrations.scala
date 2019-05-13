@@ -957,4 +957,27 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.19-open", _))
   }
 
+  @ChangeSet(order = "138", id = "138-add_graalvm_19_0_0", author = "ilopmar")
+  def migrate138(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        candidate = "java",
+        version = "19.0.0-graal-ce",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-linux-amd64-19.0.0.tar.gz",
+        platform = Linux64),
+      Version(
+        candidate = "java",
+        version = "19.0.0-graal-ce",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-darwin-amd64-19.0.0.tar.gz",
+        platform = MacOSX),
+      Version(
+        candidate = "java",
+        version = "19.0.0-graal-ce",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-windows-amd64-19.0.0.zip",
+        platform = Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "1.0.0-rc-14-grl", platform))
+  }
+
 }
