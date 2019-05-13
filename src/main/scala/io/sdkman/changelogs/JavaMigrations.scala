@@ -962,17 +962,17 @@ class JavaMigrations {
     List(
       Version(
         candidate = "java",
-        version = "19.0.0-grl-ce",
+        version = "19.0.0-grl",
         url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-linux-amd64-19.0.0.tar.gz",
         platform = Linux64),
       Version(
         candidate = "java",
-        version = "19.0.0-grl-ce",
+        version = "19.0.0-grl",
         url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-darwin-amd64-19.0.0.tar.gz",
         platform = MacOSX),
       Version(
         candidate = "java",
-        version = "19.0.0-grl-ce",
+        version = "19.0.0-grl",
         url = "https://github.com/oracle/graal/releases/download/vm-19.0.0/graalvm-ce-windows-amd64-19.0.0.zip",
         platform = Windows))
       .validate()
