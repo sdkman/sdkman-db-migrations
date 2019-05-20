@@ -969,4 +969,8 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.20-open", _))
   }
 
+  @ChangeSet(order = "140", id = "140-remove_graalvm_1_0_0_rc_15", author = "marc0der")
+  def migrate140(implicit db: MongoDatabase): Unit = removeVersion("java", "1.0.0-rc-15-grl")
+
+
 }
