@@ -43,7 +43,7 @@ class CubaCliMigrations {
   def migration002(implicit db: MongoDatabase) =
     Seq("1.0.1", "1.0.2", "1.0.3", "2.0.1", "2.0.2", "2.0.3", "2.0.4", "2.1.0").foreach { version =>
 
-      removeVersion("spark", version)
+      removeVersion("cuba", version)
       List(
         Version(
           candidate = "cuba",
