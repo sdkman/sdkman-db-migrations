@@ -1,10 +1,15 @@
-script:
-  - ./gradlew clean run
+jobs:
+  include:
+    - stage: pull_request
+      if: type = pull_request
+      script:
+        - echo "a pull request, for now do nothing"
+    - stage: migrate
+      if: branch = master
+      script:
+        - ./gradlew clean run
 cache:
   directories:
   - "$HOME/.gradle"
-branches:
-  only:
-    - master
 notifications:
   slack: sdkman:QdA1XVUuYDjlYL4Z7gm16OEc
