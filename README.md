@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/sdkman/sdkman-db-migrations.svg?branch=master)](https://travis-ci.org/sdkman/sdkman-db-migrations)
 [![Slack](https://slack.sdkman.io/badge.svg)](https://slack.sdkman.io)
 
-This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API.
+This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API. Do this by forking the repoistory, committing changes as described below and subsequently raising a pull request. 
 
 ## Tools used
 
