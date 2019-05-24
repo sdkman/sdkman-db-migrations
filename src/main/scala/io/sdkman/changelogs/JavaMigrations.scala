@@ -972,5 +972,14 @@ class JavaMigrations {
   @ChangeSet(order = "140", id = "140-remove_graalvm_1_0_0_rc_15", author = "marc0der")
   def migrate140(implicit db: MongoDatabase): Unit = removeVersion("java", "1.0.0-rc-15-grl")
 
-
+  @ChangeSet(order = "141", id = "141-add_openjdk_java_13-ea-22", author = "eddumelendez")
+  def migrate141(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.22-open", "https://download.java.net/java/early_access/jdk13/22/GPL/openjdk-13-ea+22_linux-x64_bin.tar.gz", Linux64),
+      Version("java", "13.ea.22-open", "https://download.java.net/java/early_access/jdk13/22/GPL/openjdk-13-ea+22_osx-x64_bin.tar.gz", MacOSX),
+      Version("java", "13.ea.22-open", "https://download.java.net/java/early_access/jdk13/22/GPL/openjdk-13-ea+22_windows-x64_bin.zip", Windows))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.21-open", _))
+  }
 }
