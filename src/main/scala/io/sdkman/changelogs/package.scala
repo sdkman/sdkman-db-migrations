@@ -20,13 +20,14 @@ package object changelogs {
 
   trait Validator[A] {
     def validVersion(a: A): Unit
+
     def validUrl(a: A): Unit
   }
 
   implicit val versionValidation = new Validator[Version] with UrlValidation with LazyLogging {
 
     override def validVersion(v: Version): Unit =
-      if(v.version.length > 15)
+      if (v.version.length > 15)
         throw new MongobeeChangeSetException(s"sVersion length exceeds 15 chars: ${v.version}")
 
     override def validUrl(v: Version): Unit = {
@@ -87,6 +88,38 @@ package object changelogs {
     }
   }
 
+  trait Vendor {
+    def id: String
+  }
+
+  case object AdoptOpenJDK extends Vendor {
+    override def id = "adopt"
+  }
+
+  case object Amazon extends Vendor {
+    override def id = "amazon"
+  }
+
+  case object Graal extends Vendor {
+    override def id = "graal"
+  }
+
+  case object Liberica extends Vendor {
+    override def id = "liberica"
+  }
+
+  case object OpenJDK extends Vendor {
+    override def id = "open"
+  }
+
+  case object SAP extends Vendor {
+    override def id = "sap"
+  }
+
+  case object Zulu extends Vendor {
+    override def id = "zulu"
+  }
+
   trait Platform {
     def id: String
   }
@@ -121,29 +154,35 @@ package object changelogs {
   case class Version(candidate: String,
                      version: String,
                      url: String,
-                     platform: Platform = Universal)
+                     platform: Platform = Universal,
+                     vendor: Option[Vendor] = None)
 
-  def candidateToDocument(c: Candidate): Document = c.default.fold {
-    new Document("candidate", c.candidate)
-      .append("name", c.name)
-      .append("description", c.description)
-      .append("websiteUrl", c.websiteUrl)
-      .append("distribution", c.distribution)
-  } { default =>
-    new Document("candidate", c.candidate)
-      .append("name", c.name)
-      .append("description", c.description)
-      .append("default", default)
-      .append("websiteUrl", c.websiteUrl)
-      .append("distribution", c.distribution)
+  def candidateToDocument(c: Candidate): Document = {
+    val doc = buildCandidateDocument(c.candidate, c.name, c.description, c.websiteUrl, c.distribution)
+    c.default.fold(doc) { default =>
+      doc.append("default", default)
+    }
   }
 
-  def versionToDocument(cv: Version): Document =
-    new Document("candidate", cv.candidate)
-      .append("version", cv.version)
-      .append("platform", cv.platform.id)
-      .append("url", cv.url)
+  private def buildCandidateDocument(candidate: String, name: String, description: String, websiteUrl: String, distribution: String) =
+    new Document("candidate", candidate)
+      .append("name", name)
+      .append("description", description)
+      .append("websiteUrl", websiteUrl)
+      .append("distribution", distribution)
 
+  def versionToDocument(cv: Version): Document = {
+    val doc = buildVersionDocument(cv.candidate, cv.version, cv.platform.id, cv.url)
+    cv.vendor.fold(doc) { vendor =>
+      doc.append("vendor", vendor.id)
+    }
+  }
+
+  private def buildVersionDocument(candidate: String, version: String, platform: String, url: String) =
+    new Document("candidate", candidate)
+      .append("version", version)
+      .append("platform", platform)
+      .append("url", url)
 
   def removeCandidate(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(CandidatesCollection).deleteOne(new Document("candidate", candidate))
