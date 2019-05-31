@@ -92,17 +92,28 @@ Alternatively, a function is provided on package scope that allows the default v
         
 #### Adding a new Version for multiple platforms
 
-        @ChangeSet(order = "005", id = "005-add_oracle_jdk_10_0_0", author = "marc0der")
+        @ChangeSet(order = "005", id = "005-add_openjdk_10_0_0", author = "marc0der")
           def migrate005(implicit db: MongoDatabase) = {
             List(
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
-              Version("java", "10.0.0-oracle", "http://download.oracle.com/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
+              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
+              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
+              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
             ).validate().insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
         
 Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX` and `Universal` as the default.
+
+#### Adding a new Java Version with Vendor
+
+        @ChangeSet(order = "005", id = "005-add_openjdk_10_0_0", author = "marc0der")
+          def migrate005(implicit db: MongoDatabase) =
+            Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows, Some(OpenJDK))
+                .validate().insert()
+        
+An optional `vendor` field can be set when instantiating a `Version` defaulting to `None`. It can explicitly
+be set to either `None` or a `Some`, in turn containing `AdoptOpenJDK`, `Amazon`, `Graal`, `Liberica`, `OpenJDK`,
+`SAP` or `Zulu` in the case of `Some`. **This field must now be set for all Java Versions** 
 
 #### Adding a new Candidate
 
