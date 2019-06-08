@@ -295,17 +295,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "1.0.0-rc-14-grl", platform))
   }
 
-  @ChangeSet(order = "142", id = "142-add_openjdk_java_13-ea-23", author = "eddumelendez")
-  def migrate142(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.23-open", "https://download.java.net/java/early_access/jdk13/23/GPL/openjdk-13-ea+23_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.23-open", "https://download.java.net/java/early_access/jdk13/23/GPL/openjdk-13-ea+23_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.23-open", "https://download.java.net/java/early_access/jdk13/23/GPL/openjdk-13-ea+23_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.22-open", _))
-  }
-
   @ChangeSet(order = "143", id = "143-add_openjdk_java_13-ea-24", author = "eddumelendez")
   def migrate143(implicit db: MongoDatabase): Unit = {
     List(
