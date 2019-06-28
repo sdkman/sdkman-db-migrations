@@ -320,17 +320,6 @@ class JavaMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "148", id = "148-add_openjdk_java_14-ea-2", author = "eddumelendez")
-  def migrate148(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "14.ea.2-open", "https://download.java.net/java/early_access/jdk14/2/GPL/openjdk-14-ea+2_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "14.ea.2-open", "https://download.java.net/java/early_access/jdk14/2/GPL/openjdk-14-ea+2_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "14.ea.2-open", "https://download.java.net/java/early_access/jdk14/2/GPL/openjdk-14-ea+2_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.1-open", _))
-  }
-
   @ChangeSet(order = "149", id = "149-add_openjdk_java_13-ea-27", author = "eddumelendez")
   def migrate149(implicit db: MongoDatabase): Unit = {
     List(
@@ -340,5 +329,16 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.26-open", _))
+  }
+
+  @ChangeSet(order = "150", id = "150-add_openjdk_java_14-ea-3", author = "eddumelendez")
+  def migrate150(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.2-open", _))
   }
 }
