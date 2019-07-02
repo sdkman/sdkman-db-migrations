@@ -295,14 +295,50 @@ class JavaMigrations {
     Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "1.0.0-rc-14-grl", platform))
   }
 
-  @ChangeSet(order = "144", id = "144-add_openjdk_java_13-ea-25", author = "Miuler")
-  def migrate144(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "144", id = "144-add_graalvm_19_0_2", author = "wololock")
+  def migrate144(implicit db: MongoDatabase) = {
     List(
-      Version("java", "13.ea.25-open", "https://download.java.net/java/early_access/jdk13/25/GPL/openjdk-13-ea+25_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.25-open", "https://download.java.net/java/early_access/jdk13/25/GPL/openjdk-13-ea+25_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.25-open", "https://download.java.net/java/early_access/jdk13/25/GPL/openjdk-13-ea+25_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      Version(
+        candidate = "java",
+        version = "19.0.2-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-linux-amd64-19.0.2.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.0.2-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-darwin-amd64-19.0.2.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.0.2-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.0.2/graalvm-ce-windows-amd64-19.0.2.zip",
+        platform = Windows,
+        vendor = Some(Graal)))
       .validate()
       .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.24-open", _))
+  }
+
+  @ChangeSet(order = "149", id = "149-add_openjdk_java_13-ea-27", author = "eddumelendez")
+  def migrate149(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.26-open", _))
+  }
+
+  @ChangeSet(order = "150", id = "150-add_openjdk_java_14-ea-3", author = "eddumelendez")
+  def migrate150(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.3-open", "https://download.java.net/java/early_access/jdk14/3/GPL/openjdk-14-ea+3_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.2-open", _))
   }
 }

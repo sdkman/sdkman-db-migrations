@@ -45,11 +45,21 @@ class SparkMigrations {
         .validate()
         .insert()
     }
-  }  
+  }
 
   @ChangeSet(order = "006", id = "006-add_spark_2.3.3", author = "marc0der")
   def migration006(implicit db: MongoDatabase) =
-      Version("spark", "2.3.3", "https://archive.apache.org/dist/spark/spark-2.3.3/spark-2.3.3-bin-hadoop2.7.tgz")
+    Version("spark", "2.3.3", "https://archive.apache.org/dist/spark/spark-2.3.3/spark-2.3.3-bin-hadoop2.7.tgz")
+      .validate()
+      .insert()
+
+  @ChangeSet(order = "007", id = "007-add_spark_2.4.x", author = "marc0der")
+  def migration007(implicit db: MongoDatabase) = {
+    Seq("2.4.1", "2.4.2", "2.4.3").foreach { version =>
+      Version("spark", version, s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-hadoop2.7.tgz")
         .validate()
         .insert()
+    }
+    setCandidateDefault("spark", "2.4.3")
+  }
 }
