@@ -348,13 +348,13 @@ class JavaMigrations {
       Version(
         candidate = "java",
         version = "19.1.0-grl",
-        url = "https://github.com/oracle/graal/releases/download/vm-19.1.0/graalvm-ce-darwin-amd64-19.1.0.tar.gz",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.1.0/graalvm-ce-linux-amd64-19.1.0.tar.gz",
         platform = Linux64,
         vendor = Some(Graal)),
       Version(
         candidate = "java",
         version = "19.1.0-grl",
-        url = "https://github.com/oracle/graal/releases/download/vm-19.1.0/graalvm-ce-linux-amd64-19.1.0.tar.gz",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.1.0/graalvm-ce-darwin-amd64-19.1.0.tar.gz",
         platform = MacOSX,
         vendor = Some(Graal)),
       Version(
