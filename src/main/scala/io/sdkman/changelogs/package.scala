@@ -93,19 +93,19 @@ package object changelogs {
   }
 
   case object AdoptOpenJDK extends Vendor {
-    override def id = "adopt"
+    override def id = "adpt"
   }
 
   case object Amazon extends Vendor {
-    override def id = "amazon"
+    override def id = "amzn"
   }
 
   case object Graal extends Vendor {
-    override def id = "graal"
+    override def id = "grl"
   }
 
   case object Liberica extends Vendor {
-    override def id = "liberica"
+    override def id = "librca"
   }
 
   case object OpenJDK extends Vendor {
@@ -113,11 +113,15 @@ package object changelogs {
   }
 
   case object SAP extends Vendor {
-    override def id = "sap"
+    override def id = "sapmchn"
   }
 
   case object Zulu extends Vendor {
     override def id = "zulu"
+  }
+
+  case object ZuluFX extends Vendor {
+    override def id = "zulufx"
   }
 
   trait Platform {
