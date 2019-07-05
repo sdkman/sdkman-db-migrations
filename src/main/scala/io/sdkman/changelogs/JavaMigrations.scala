@@ -361,4 +361,9 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "153", id = "153-remove_old_graalvm_19_0_0", author = "ilopmar")
+  def migrate153(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.0-grl", platform))
+  }
 }
