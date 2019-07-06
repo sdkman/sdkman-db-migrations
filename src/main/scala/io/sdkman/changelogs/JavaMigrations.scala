@@ -320,17 +320,6 @@ class JavaMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "149", id = "149-add_openjdk_java_13-ea-27", author = "eddumelendez")
-  def migrate149(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.27-open", "https://download.java.net/java/early_access/jdk13/27/GPL/openjdk-13-ea+27_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.26-open", _))
-  }
-
   @ChangeSet(order = "150", id = "150-add_openjdk_java_14-ea-3", author = "eddumelendez")
   def migrate150(implicit db: MongoDatabase): Unit = {
     List(
@@ -365,5 +354,16 @@ class JavaMigrations {
   @ChangeSet(order = "153", id = "153-remove_old_graalvm_19_0_0", author = "ilopmar")
   def migrate153(implicit db: MongoDatabase) = {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.0-grl", platform))
+  }
+
+  @ChangeSet(order = "154", id = "154-add_openjdk_java_13-ea-28", author = "eddumelendez")
+  def migrate154(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.27-open", _))
   }
 }
