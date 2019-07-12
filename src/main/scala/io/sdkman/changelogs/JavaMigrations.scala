@@ -345,17 +345,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.0-grl", platform))
   }
 
-  @ChangeSet(order = "154", id = "154-add_openjdk_java_13-ea-28", author = "eddumelendez")
-  def migrate154(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.28-open", "https://download.java.net/java/early_access/jdk13/28/GPL/openjdk-13-ea+28_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.27-open", _))
-  }
-
   @ChangeSet(order = "155", id = "155-add_openjdk_java_14-ea-4", author = "eddumelendez")
   def migrate155(implicit db: MongoDatabase): Unit = {
     List(
@@ -365,5 +354,16 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.3-open", _))
+  }
+
+  @ChangeSet(order = "156", id = "156-add_openjdk_java_13-ea-29", author = "eddumelendez")
+  def migrate156(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.28-open", _))
   }
 }
