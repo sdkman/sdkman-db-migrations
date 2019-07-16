@@ -57,17 +57,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-zulufx", _))
   }
 
-  @ChangeSet(order = "107", id = "107-add_openjdk_java_12.0.1", author = "eddumelendez")
-  def migrate107(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "12.0.1-open", "https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_linux-x64_bin.tar.gz", Linux64),
-      Version("java", "12.0.1-open", "https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_osx-x64_bin.tar.gz", MacOSX),
-      Version("java", "12.0.1-open", "https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip", Windows))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-open", _))
-  }
-
   @ChangeSet(order = "108", id = "108-add_corretto_11.0.3", author = "philiplourandos")
   def migrate108(implicit db: MongoDatabase) = {
     List(
@@ -365,5 +354,16 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.4-open", _))
+  }
+
+  @ChangeSet(order = "158", id = "158-add_openjdk_java_12.0.2", author = "eddumelendez")
+  def migrate158(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "12.0.2-open", "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "12.0.2-open", "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "12.0.2-open", "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-open", _))
   }
 }
