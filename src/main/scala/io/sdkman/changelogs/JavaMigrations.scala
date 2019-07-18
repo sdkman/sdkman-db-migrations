@@ -431,4 +431,24 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.2-grl", platform))
     Seq(Linux64, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "19.1.0-grl", platform))
   }
+
+  @ChangeSet(order = "165", id = "165-add_sapmchn_11_0_4", author = "jorsol")
+  def migrate165(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.4-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.4/sapmachine-jdk-11.0.4_linux-x64_bin.tar.gz", Linux64, Some(SAP)),
+      Version("java", "11.0.4-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.4/sapmachine-jdk-11.0.4_windows-x64_bin.zip", Windows, Some(SAP)),
+      Version("java", "11.0.4-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.4/sapmachine-jdk-11.0.4_osx-x64_bin.tar.gz", MacOSX, Some(SAP))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.3-sapmchn", platform))
+  }
+
+  @ChangeSet(order = "166", id = "166-add_sapmchn_12_0_2", author = "jorsol")
+  def migrate166(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "12.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.2/sapmachine-jdk-12.0.2_linux-x64_bin.tar.gz", Linux64, Some(SAP)),
+      Version("java", "12.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.2/sapmachine-jdk-12.0.2_windows-x64_bin.zip", Windows, Some(SAP)),
+      Version("java", "12.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.2/sapmachine-jdk-12.0.2_osx-x64_bin.tar.gz", MacOSX, Some(SAP))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.1-sapmchn", platform))
+  }
 }
