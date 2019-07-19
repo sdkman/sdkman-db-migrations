@@ -334,17 +334,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.0-grl", platform))
   }
 
-  @ChangeSet(order = "156", id = "156-add_openjdk_java_13-ea-29", author = "eddumelendez")
-  def migrate156(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.28-open", _))
-  }
-
   @ChangeSet(order = "157", id = "157-add_openjdk_java_14-ea-5", author = "eddumelendez")
   def migrate157(implicit db: MongoDatabase): Unit = {
     List(
@@ -450,5 +439,16 @@ class JavaMigrations {
       Version("java", "12.0.2-sapmchn", "https://github.com/SAP/SapMachine/releases/download/sapmachine-12.0.2/sapmachine-jdk-12.0.2_osx-x64_bin.tar.gz", MacOSX, Some(SAP))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.1-sapmchn", platform))
+  }
+
+  @ChangeSet(order = "167", id = "167-add_openjdk_java_13-ea-30", author = "eddumelendez")
+  def migrate167(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.29-open", _))
   }
 }
