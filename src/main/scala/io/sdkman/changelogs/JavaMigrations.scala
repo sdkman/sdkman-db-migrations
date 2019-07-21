@@ -334,28 +334,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.0.0-grl", platform))
   }
 
-  @ChangeSet(order = "156", id = "156-add_openjdk_java_13-ea-29", author = "eddumelendez")
-  def migrate156(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.29-open", "https://download.java.net/java/early_access/jdk13/29/GPL/openjdk-13-ea+29_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.28-open", _))
-  }
-
-  @ChangeSet(order = "157", id = "157-add_openjdk_java_14-ea-5", author = "eddumelendez")
-  def migrate157(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "14.ea.5-open", "https://download.java.net/java/early_access/jdk14/5/GPL/openjdk-14-ea+5_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "14.ea.5-open", "https://download.java.net/java/early_access/jdk14/5/GPL/openjdk-14-ea+5_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "14.ea.5-open", "https://download.java.net/java/early_access/jdk14/5/GPL/openjdk-14-ea+5_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.4-open", _))
-  }
-
   @ChangeSet(order = "158", id = "158-add_openjdk_java_12.0.2", author = "eddumelendez")
   def migrate158(implicit db: MongoDatabase): Unit = {
     List(
@@ -452,36 +430,58 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.1-sapmchn", platform))
   }
 
-  @ChangeSet(order = "167", id = "167-add_bellsoft_8_0_222", author = "morgion")
-  def migrate167(implicit db: MongoDatabase) = {
+  @ChangeSet(order = "167", id = "167-add_openjdk_java_13-ea-30", author = "eddumelendez")
+  def migrate167(implicit db: MongoDatabase): Unit = {
     List(
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212-librca", _))
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.29-open", _))
   }
 
-  @ChangeSet(order = "168", id = "168-add_bellsoft_11_0_4", author = "morgion")
-  def migrate168(implicit db: MongoDatabase) = {
+  @ChangeSet(order = "168", id = "168-add_openjdk_java_14-ea-6", author = "eddumelendez")
+  def migrate168(implicit db: MongoDatabase): Unit = {
     List(
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3-librca", _))
-  }
+      Version("java", "14.ea.6-open", "https://download.java.net/java/early_access/jdk14/6/GPL/openjdk-14-ea+6_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.6-open", "https://download.java.net/java/early_access/jdk14/6/GPL/openjdk-14-ea+6_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.6-open", "https://download.java.net/java/early_access/jdk14/6/GPL/openjdk-14-ea+6_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.5-open", _))
 
-  @ChangeSet(order = "169", id = "169-add_bellsoft_12_0_2", author = "morgion")
-  def migrate169(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
+    @ChangeSet(order = "169", id = "169-add_bellsoft_8_0_222", author = "morgion")
+    def migrate169(implicit db: MongoDatabase) = {
+      List(
+        Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-i586.tar.gz", Linux32, Some(Liberica)),
+        Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+        Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-windows-amd64.zip", Windows, Some(Liberica)),
+        Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-macos-amd64.zip", MacOSX, Some(Liberica))
+      ).validate().insert()
+      Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212-librca", _))
+    }
+
+    @ChangeSet(order = "170", id = "170-add_bellsoft_11_0_4", author = "morgion")
+    def migrate170(implicit db: MongoDatabase) = {
+      List(
+        Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-i586.tar.gz", Linux32, Some(Liberica)),
+        Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+        Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-windows-amd64.zip", Windows, Some(Liberica)),
+        Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-macos-amd64.zip", MacOSX, Some(Liberica))
+      ).validate().insert()
+      Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3-librca", _))
+    }
+
+    @ChangeSet(order = "171", id = "171-add_bellsoft_12_0_2", author = "morgion")
+    def migrate171(implicit db: MongoDatabase) = {
+      List(
+        Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-linux-i586.tar.gz", Linux32, Some(Liberica)),
+        Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+        Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-windows-amd64.zip", Windows, Some(Liberica)),
+        Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-macos-amd64.zip", MacOSX, Some(Liberica))
+      ).validate().insert()
+      Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
+    }
   }
 }
