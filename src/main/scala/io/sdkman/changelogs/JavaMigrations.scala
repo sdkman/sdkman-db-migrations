@@ -455,9 +455,9 @@ class JavaMigrations {
   @ChangeSet(order = "169", id = "169-add_corretto_8.0.222", author = "jschalanda")
   def migrate169(implicit db: MongoDatabase) = {
     List(
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64),
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows),
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX))
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon)))
       .validate()
       .insert()
     Seq(Linux64, Windows, MacOSX).foreach(removeVersion(candidate = "java", version = "8.0.212-amzn", _))
