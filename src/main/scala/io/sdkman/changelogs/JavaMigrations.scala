@@ -455,9 +455,9 @@ class JavaMigrations {
   @ChangeSet(order = "169", id = "169-add_adoptopenjdk-hs_8_0_222", author = "jschalanda")
   def migrate169(implicit db: MongoDatabase) = {
     List(
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz", Linux64),
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u222b10.tar.gz", MacOSX),
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u222b10.zip", Windows))
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u222b10.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u222b10.zip", Windows, Some(AdoptOpenJDK)))
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.hs-adpt", _))
@@ -466,9 +466,9 @@ class JavaMigrations {
   @ChangeSet(order = "170", id = "170-add_adoptopenjdk-hs_8_0_222", author = "jschalanda")
   def migrate170(implicit db: MongoDatabase) = {
     List(
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_linux_openj9_8u222b10_openj9-0.15.1.tar.gz", Linux64),
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_mac_openj9_8u222b10_openj9-0.15.1.tar.gz", MacOSX),
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_windows_openj9_8u222b10_openj9-0.15.1.zip", Windows))
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_linux_openj9_8u222b10_openj9-0.15.1.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_mac_openj9_8u222b10_openj9-0.15.1.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_windows_openj9_8u222b10_openj9-0.15.1.zip", Windows, Some(AdoptOpenJDK)))
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.j9-adpt", _))
