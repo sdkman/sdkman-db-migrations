@@ -484,4 +484,25 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
   }
+
+  @ChangeSet(order = "172", id = "172-add-amzn_11_0_4", author="philiplourandos")
+  def migrate172(implicit db: MongoDatabase) = {
+  List(
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-windows-x64.zip", Windows, Some(Amazon)),
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "11.0.3-amzn", _))
+  } 
+  
+  @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author="philiplourandos")
+  def migrate173(implicit db: MongoDatabase) = {
+  List(
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "8.0.212-amzn", _))
+  } 
+
 }
