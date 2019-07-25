@@ -484,27 +484,25 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
   }
-  
-  @ChangeSet(order = "172", id = "172-add_adoptopenjdk-hs_8_0_222", author = "jschalanda")
-  def migrate172(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u222b10.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u222b10.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.hs-adpt", _))
-  }
 
-  @ChangeSet(order = "173", id = "173-add_adoptopenjdk-j9_8_0_222", author = "jschalanda")
+  @ChangeSet(order = "172", id = "172-add-amzn_11_0_4", author="philiplourandos")
+  def migrate172(implicit db: MongoDatabase) = {
+  List(
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-windows-x64.zip", Windows, Some(Amazon)),
+      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "11.0.3-amzn", _))
+  } 
+  
+  @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author="philiplourandos")
   def migrate173(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_linux_openj9_8u222b10_openj9-0.15.1.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_mac_openj9_8u222b10_openj9-0.15.1.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_windows_openj9_8u222b10_openj9-0.15.1.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.j9-adpt", _))
+  List(
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows, Some(Amazon)),
+      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "8.0.212-amzn", _))
   }
 
   @ChangeSet(order = "174", id = "174-add_adoptopenjdk-hs_11_0_4", author = "jschalanda")
@@ -527,5 +525,27 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3.j9-adpt", _))
+  }
+  
+  @ChangeSet(order = "176", id = "176-add_adoptopenjdk-hs_8_0_222", author = "jschalanda")
+  def migrate176(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u222b10.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u222b10.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.hs-adpt", _))
+  }
+
+  @ChangeSet(order = "177", id = "177-add_adoptopenjdk-j9_8_0_222", author = "jschalanda")
+  def migrate177(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_linux_openj9_8u222b10_openj9-0.15.1.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_mac_openj9_8u222b10_openj9-0.15.1.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "8.0.222.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10_openj9-0.15.1/OpenJDK8U-jdk_x64_windows_openj9_8u222b10_openj9-0.15.1.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.j9-adpt", _))
   }
 }
