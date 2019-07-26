@@ -549,8 +549,8 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.j9-adpt", _))
   }
   
-   @ChangeSet(order = "178", id = "178-restore_graalvm_19_0", author = "dsyer")
-  def migrate164(implicit db: MongoDatabase) = {
+  @ChangeSet(order = "178", id = "178-restore_graalvm_19_0", author = "dsyer")
+  def migrate178(implicit db: MongoDatabase) = {
      List(
       Version(
         candidate = "java",
