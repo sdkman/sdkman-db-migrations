@@ -573,4 +573,10 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "179", id = "179-update_java_default", author = "vpavic")
+  def migrate179(implicit db: MongoDatabase) = {
+    setCandidateDefault("java", "11.0.4.hs-adpt")
+  }
+
 }
