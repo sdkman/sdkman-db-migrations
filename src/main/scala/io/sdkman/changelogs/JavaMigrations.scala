@@ -430,17 +430,6 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.1-sapmchn", platform))
   }
 
-  @ChangeSet(order = "167", id = "167-add_openjdk_java_13-ea-30", author = "eddumelendez")
-  def migrate167(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "13.ea.30-open", "https://download.java.net/java/early_access/jdk13/30/GPL/openjdk-13-ea+30_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.29-open", _))
-  }
-
   @ChangeSet(order = "168", id = "168-add_openjdk_java_14-ea-6", author = "eddumelendez")
   def migrate168(implicit db: MongoDatabase): Unit = {
     List(
@@ -493,8 +482,8 @@ class JavaMigrations {
       Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "11.0.3-amzn", _))
-  } 
-  
+  }
+
   @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author="philiplourandos")
   def migrate173(implicit db: MongoDatabase) = {
   List(
@@ -526,7 +515,7 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3.j9-adpt", _))
   }
-  
+
   @ChangeSet(order = "176", id = "176-add_adoptopenjdk-hs_8_0_222", author = "jschalanda")
   def migrate176(implicit db: MongoDatabase) = {
     List(
@@ -548,4 +537,15 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212.j9-adpt", _))
   }
+
+	@ChangeSet(order = "178", id = "178-add_openjdk_java_13-ea-31", author = "eddumelendez")
+	def migrate178(implicit db: MongoDatabase): Unit = {
+		List(
+			Version("java", "13.ea.31-open", "https://download.java.net/java/early_access/jdk13/31/GPL/openjdk-13-ea+31_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+			Version("java", "13.ea.31-open", "https://download.java.net/java/early_access/jdk13/31/GPL/openjdk-13-ea+31_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+			Version("java", "13.ea.31-open", "https://download.java.net/java/early_access/jdk13/31/GPL/openjdk-13-ea+31_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+			.validate()
+			.insert()
+		Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.30-open", _))
+	}
 }
