@@ -568,17 +568,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.ea.30-open", _))
   }
 
-  @ChangeSet(order = "181", id = "181-add_openjdk_java_14-ea-10", author = "eddumelendez")
-  def migrate181(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "14.ea.10-open", "https://download.java.net/java/early_access/jdk14/10/GPL/openjdk-14-ea+10_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "14.ea.10-open", "https://download.java.net/java/early_access/jdk14/10/GPL/openjdk-14-ea+10_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "14.ea.10-open", "https://download.java.net/java/early_access/jdk14/10/GPL/openjdk-14-ea+10_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.6-open", _))
-  }
-
   @ChangeSet(order = "182", id = "182-add_graalvm_19_2_0", author = "eddumelendez")
   def migrate182(implicit db: MongoDatabase) = {
     List(
@@ -602,6 +591,17 @@ class JavaMigrations {
         vendor = Some(Graal)))
       .validate()
       .insert()
+  }
+
+  @ChangeSet(order = "183", id = "183-add_openjdk_java_14-ea-11", author = "eddumelendez")
+  def migrate183(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.11-open", "https://download.java.net/java/early_access/jdk14/11/GPL/openjdk-14-ea+11_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.11-open", "https://download.java.net/java/early_access/jdk14/11/GPL/openjdk-14-ea+11_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.11-open", "https://download.java.net/java/early_access/jdk14/11/GPL/openjdk-14-ea+11_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.10-open", _))
   }
 
 }
