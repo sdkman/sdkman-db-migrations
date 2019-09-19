@@ -629,4 +629,13 @@ class JavaMigrations {
       .insert()
   }
 
+  @ChangeSet(order = "186", id = "186-zulu_13.0.0", author = "philiplourandos")
+  def migrate186(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "13.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu13.27.9-ca-jdk13-linux_x64.tar.gz", Linux64, Some(Zulu)),
+      Version("java", "13.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu13.27.9-ca-jdk13-macosx_x64.tar.gz", MacOSX, Some(Zulu)),
+      Version("java", "13.0.0-zulu", "https://cdn.azul.com/zulu/bin/zulu13.27.9-ca-jdk13-win_x64.zip", Windows, Some(Zulu)))
+      .validate()
+      .insert()
+  }
 }
