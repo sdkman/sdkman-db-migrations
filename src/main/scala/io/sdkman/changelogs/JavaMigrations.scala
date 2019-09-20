@@ -649,4 +649,14 @@ class JavaMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "188", id = "188-add_bellsoft_13", author = "morgion")
+  def migrate188(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "13-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-i586.tar.gz", Linux32, Some(Liberica)),
+      Version("java", "13-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+      Version("java", "13-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-windows-amd64.zip", Windows, Some(Liberica)),
+      Version("java", "13-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-macos-amd64.zip", MacOSX, Some(Liberica))
+    ).validate().insert()
+  }
 }
