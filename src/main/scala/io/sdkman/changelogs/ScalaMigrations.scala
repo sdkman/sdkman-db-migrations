@@ -83,7 +83,7 @@ class ScalaMigrations {
     Version(
       candidate = "scala",
       version = "2.13.1",
-      url = "https://downloads.lightbend.com/scala/2.13.1/scala-2.13.1.tgz")
+      url = "https://downloads.lightbend.com/scala/2.13.1/scala-2.13.1.zip")
       .validate()
       .insert()
       .asCandidateDefault()
