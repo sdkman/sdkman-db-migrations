@@ -659,4 +659,57 @@ class JavaMigrations {
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.14-open", _))
   }
+
+  @ChangeSet(order = "190", id = "190-add_12.0.2.hs-adpt", author = "vpavic")
+  def migrate190(implicit db: MongoDatabase): Unit = {
+    val candidate = "java"
+    val oldVersion = "12.0.1.hs-adpt"
+    val newVersion = "12.0.2.hs-adpt"
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion(candidate, oldVersion, _))
+    List(
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10/OpenJDK12U-jdk_x64_linux_hotspot_12.0.2_10.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10.3/OpenJDK12U-jdk_x64_mac_hotspot_12.0.2_10.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10/OpenJDK12U-jdk_x64_windows_hotspot_12.0.2_10.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "191", id = "191-add_12.0.2.j9-adpt", author = "vpavic")
+  def migrate191(implicit db: MongoDatabase): Unit = {
+    val candidate = "java"
+    val oldVersion = "12.0.1.j9-adpt"
+    val newVersion = "12.0.2.j9-adpt"
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion(candidate, oldVersion, _))
+    List(
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10_openj9-0.15.1/OpenJDK12U-jdk_x64_linux_openj9_12.0.2_10_openj9-0.15.1.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10.3_openj9-0.15.1/OpenJDK12U-jdk_x64_mac_openj9_12.0.2_10.3_openj9_0.15.1.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.2%2B10_openj9-0.15.1/OpenJDK12U-jdk_x64_windows_openj9_12.0.2_10_openj9-0.15.1.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "192", id = "192-add_13.0.0.hs-adpt", author = "vpavic")
+  def migrate192(implicit db: MongoDatabase): Unit = {
+    val candidate = "java"
+    val newVersion = "13.0.0.hs-adpt"
+    List(
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_linux_hotspot_13_33.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_mac_hotspot_13_33.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_windows_hotspot_13_33.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "193", id = "193-add_13.0.0.j9-adpt", author = "vpavic")
+  def migrate193(implicit db: MongoDatabase): Unit = {
+    val candidate = "java"
+    val newVersion = "13.0.0.j9-adpt"
+    List(
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_linux_openj9_13_33_openj9-0.16.0.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_mac_openj9_13_33_openj9-0.16.0.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_windows_openj9_13_33_openj9-0.16.0.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+  }
+
 }
