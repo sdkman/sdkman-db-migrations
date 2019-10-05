@@ -649,17 +649,6 @@ class JavaMigrations {
     ).validate().insert()
   }
 
-  @ChangeSet(order = "189", id = "189-add_openjdk_java_14-ea-15", author = "eddumelendez")
-  def migrate189(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "14.ea.15-open", "https://download.java.net/java/early_access/jdk14/15/GPL/openjdk-14-ea+15_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "14.ea.15-open", "https://download.java.net/java/early_access/jdk14/15/GPL/openjdk-14-ea+15_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "14.ea.15-open", "https://download.java.net/java/early_access/jdk14/15/GPL/openjdk-14-ea+15_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.14-open", _))
-  }
-
   @ChangeSet(order = "190", id = "190-add_12.0.2.hs-adpt", author = "vpavic")
   def migrate190(implicit db: MongoDatabase): Unit = {
     val candidate = "java"
@@ -710,6 +699,17 @@ class JavaMigrations {
       Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_windows_openj9_13_33_openj9-0.16.0.zip", Windows, Some(AdoptOpenJDK)))
       .validate()
       .insert()
+  }
+
+  @ChangeSet(order = "194", id = "194-add_openjdk_java_14-ea-17", author = "eddumelendez")
+  def migrate194(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.15-open", _))
   }
 
 }
