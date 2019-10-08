@@ -62,4 +62,11 @@ class SparkMigrations {
     }
     setCandidateDefault("spark", "2.4.3")
   }
+
+  @ChangeSet(order = "008", id = "008-add_spark_2.4.4", author = "marc0der")
+  def migration008(implicit db: MongoDatabase) = {
+    Version("spark", "2.4.4", "https://archive.apache.org/dist/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz")
+      .validate()
+      .insert()
+  }
 }
