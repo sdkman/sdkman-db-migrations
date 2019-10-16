@@ -690,17 +690,6 @@ class JavaMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "194", id = "194-add_openjdk_java_14-ea-17", author = "eddumelendez")
-  def migrate194(implicit db: MongoDatabase): Unit = {
-    List(
-      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-      Version("java", "14.ea.17-open", "https://download.java.net/java/early_access/jdk14/17/GPL/openjdk-14-ea+17_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.15-open", _))
-  }
-
 	@ChangeSet(order = "195", id = "195-add_openjdk_java_13.0.1", author = "eddumelendez")
 	def migrate195(implicit db: MongoDatabase) = {
 		Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-open", _))
@@ -710,6 +699,17 @@ class JavaMigrations {
 			Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip", Windows, Some(OpenJDK)))
 			.validate()
 			.insert()
+	}
+
+	@ChangeSet(order = "196", id = "196-add_openjdk_java_14-ea-18", author = "eddumelendez")
+	def migrate196(implicit db: MongoDatabase): Unit = {
+		List(
+			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+			.validate()
+			.insert()
+		Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.17-open", _))
 	}
 
 }
