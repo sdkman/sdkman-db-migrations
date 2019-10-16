@@ -636,8 +636,7 @@ class JavaMigrations {
   def migrate159(implicit db: MongoDatabase) = {
     List(
       Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-linux_x64.tar.gz", Linux64, Some(Zulu)),
-      Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-win_x64.zip", Windows, Some(Zulu)),
-      Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-macosx_x64.zip", MacOSX, Some(Zulu))
+      Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-win_x64.zip", Windows, Some(Zulu))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "7.0.232-zulu", platform))
   }
