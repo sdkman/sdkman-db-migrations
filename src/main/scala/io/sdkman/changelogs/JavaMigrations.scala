@@ -393,9 +393,9 @@ class JavaMigrations {
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
   }
 
-  @ChangeSet(order = "172", id = "172-add-amzn_11_0_4", author="philiplourandos")
+  @ChangeSet(order = "172", id = "172-add-amzn_11_0_4", author = "philiplourandos")
   def migrate172(implicit db: MongoDatabase) = {
-  List(
+    List(
       Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
       Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-windows-x64.zip", Windows, Some(Amazon)),
       Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
@@ -403,9 +403,9 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "11.0.3-amzn", _))
   }
 
-  @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author="philiplourandos")
+  @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author = "philiplourandos")
   def migrate173(implicit db: MongoDatabase) = {
-  List(
+    List(
       Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
       Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows, Some(Amazon)),
       Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
@@ -459,7 +459,7 @@ class JavaMigrations {
 
   @ChangeSet(order = "178", id = "178-restore_graalvm_19_0", author = "dsyer")
   def migrate178(implicit db: MongoDatabase) = {
-     List(
+    List(
       Version(
         candidate = "java",
         version = "19.0.2-grl",
@@ -610,30 +610,30 @@ class JavaMigrations {
       .insert()
   }
 
-	@ChangeSet(order = "195", id = "195-add_openjdk_java_13.0.1", author = "eddumelendez")
-	def migrate195(implicit db: MongoDatabase) = {
-		Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-open", _))
-		List(
-			Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-			Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-			Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-			.validate()
-			.insert()
-	}
+  @ChangeSet(order = "195", id = "195-add_openjdk_java_13.0.1", author = "eddumelendez")
+  def migrate195(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-open", _))
+    List(
+      Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "13.0.1-open", "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+  }
 
-	@ChangeSet(order = "196", id = "196-add_openjdk_java_14-ea-18", author = "eddumelendez")
-	def migrate196(implicit db: MongoDatabase): Unit = {
-		List(
-			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
-			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
-			Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_windows-x64_bin.zip", Windows, Some(OpenJDK)))
-			.validate()
-			.insert()
-		Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.17-open", _))
-	}
+  @ChangeSet(order = "196", id = "196-add_openjdk_java_14-ea-18", author = "eddumelendez")
+  def migrate196(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.18-open", "https://download.java.net/java/early_access/jdk14/18/GPL/openjdk-14-ea+18_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.17-open", _))
+  }
 
   @ChangeSet(order = "197", id = "197-add_zulu_7_0_242", author = "jorsol")
-  def migrate159(implicit db: MongoDatabase) = {
+  def migrate197(implicit db: MongoDatabase) = {
     List(
       Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-linux_x64.tar.gz", Linux64, Some(Zulu)),
       Version("java", "7.0.242-zulu", "https://cdn.azul.com/zulu/bin/zulu7.34.0.5-ca-jdk7.0.242-win_x64.zip", Windows, Some(Zulu))
@@ -642,7 +642,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "198", id = "198-add_zulu_8_0_232", author = "jorsol")
-  def migrate160(implicit db: MongoDatabase) = {
+  def migrate198(implicit db: MongoDatabase) = {
     List(
       Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.21-ca-jdk8.0.232-linux_x64.tar.gz", Linux64, Some(Zulu)),
       Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.21-ca-jdk8.0.232-win_x64.zip", Windows, Some(Zulu)),
@@ -652,7 +652,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "199", id = "199-add_zulu_11_0_5", author = "jorsol")
-  def migrate161(implicit db: MongoDatabase) = {
+  def migrate199(implicit db: MongoDatabase) = {
     List(
       Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.13-ca-jdk11.0.5-linux_x64.tar.gz", Linux64, Some(Zulu)),
       Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.13-ca-jdk11.0.5-win_x64.zip", Windows, Some(Zulu)),
@@ -662,7 +662,7 @@ class JavaMigrations {
   }
 
   @ChangeSet(order = "200", id = "200-add_zulu_13_0_1", author = "jorsol")
-  def migrate162(implicit db: MongoDatabase) = {
+  def migrate200(implicit db: MongoDatabase) = {
     List(
       Version("java", "13.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu13.28.11-ca-jdk13.0.1-linux_x64.tar.gz", Linux64, Some(Zulu)),
       Version("java", "13.0.1-zulu", "https://cdn.azul.com/zulu/bin/zulu13.28.11-ca-jdk13.0.1-win_x64.zip", Windows, Some(Zulu)),
@@ -670,5 +670,4 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "13.0.0-zulu", platform))
   }
-
 }
