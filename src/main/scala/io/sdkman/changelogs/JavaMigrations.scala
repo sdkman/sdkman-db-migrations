@@ -670,4 +670,35 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "13.0.0-zulu", platform))
   }
+
+  @ChangeSet(order = "201", id = "201-add_graalvm_19_2_1", author = "ilopmar")
+  def migrate201(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        candidate = "java",
+        version = "19.2.1-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.2.1/graalvm-ce-linux-amd64-19.2.1.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.2.1-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.2.1/graalvm-ce-darwin-amd64-19.2.1.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.2.1-grl",
+        url = "https://github.com/oracle/graal/releases/download/vm-19.2.1/graalvm-ce-windows-amd64-19.2.1.zip",
+        platform = Windows,
+        vendor = Some(Graal)))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "202", id = "202-remove_graalvm_19_2_0", author = "ilopmar")
+  def migrate202(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.2.0-grl", platform))
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.2.0.1-grl", platform))
+  }
 }
