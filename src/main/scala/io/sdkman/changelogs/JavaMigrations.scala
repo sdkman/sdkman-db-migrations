@@ -710,6 +710,7 @@ class JavaMigrations {
       Version("java", "8.0.232-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.232.09.1/amazon-corretto-8.232.09.1-windows-x64-jdk.zip", Windows, Some(Amazon))
     ).validate().insert()
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "8.0.222-amzn", platform))
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "8.0.202-amzn", platform))
   }
 
   @ChangeSet(order = "204", id = "204-add_corretto_java11_update_5", author = "philiplourandos")
