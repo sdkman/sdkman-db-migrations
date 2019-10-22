@@ -57,28 +57,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-zulufx", _))
   }
 
-  @ChangeSet(order = "108", id = "108-add_corretto_11.0.3", author = "philiplourandos")
-  def migrate108(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-linux-x64.tar.gz", Linux64),
-      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-windows-x64.zip", Windows),
-      Version("java", "11.0.3-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.3.7.1/amazon-corretto-11.0.3.7.1-macosx-x64.tar.gz", MacOSX))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-amzn", _))
-  }
-
-  @ChangeSet(order = "109", id = "109-add_corretto_8.0.212", author = "philiplourandos")
-  def migrate109(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-linux-x64.tar.gz", Linux64),
-      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-windows-x64-jdk.zip", Windows),
-      Version("java", "8.0.212-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.212.04.1/amazon-corretto-8.212.04.1-macosx-x64.tar.gz", MacOSX))
-      .validate()
-      .insert()
-    Seq(Linux64, Windows).foreach(removeVersion(candidate = "java", version = "8.0.202-amzn", _))
-  }
-
   @ChangeSet(order = "114", id = "114-add_sapmachine_java_11.0.3", author = "jorsol")
   def migrate114(implicit db: MongoDatabase): Unit = {
     List(
@@ -393,26 +371,6 @@ class JavaMigrations {
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
   }
 
-  @ChangeSet(order = "172", id = "172-add-amzn_11_0_4", author = "philiplourandos")
-  def migrate172(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
-      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-windows-x64.zip", Windows, Some(Amazon)),
-      Version("java", "11.0.4-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.4.11.1/amazon-corretto-11.0.4.11.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
-    ).validate().insert()
-    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "11.0.3-amzn", _))
-  }
-
-  @ChangeSet(order = "173", id = "173-add-amzn_8_0_222", author = "philiplourandos")
-  def migrate173(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.3-windows-x64-jdk.zip", Windows, Some(Amazon)),
-      Version("java", "8.0.222-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.222.10.1/amazon-corretto-8.222.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon))
-    ).validate().insert()
-    Seq(Linux64, Windows, MacOSX).foreach(removeVersion("java", "8.0.212-amzn", _))
-  }
-
   @ChangeSet(order = "174", id = "174-add_adoptopenjdk-hs_11_0_4", author = "jschalanda")
   def migrate174(implicit db: MongoDatabase) = {
     List(
@@ -702,6 +660,26 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "19.2.0.1-grl", platform))
   }
 
+  @ChangeSet(order = "203", id = "203-add_corretto_java8_update_232", author = "philiplourandos")
+  def migrate203(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.232-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.232.09.1/amazon-corretto-8.232.09.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "8.0.232-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.232.09.1/amazon-corretto-8.232.09.1-macosx-x64.tar.gz", MacOSX, Some(Amazon)),
+      Version("java", "8.0.232-amzn", "https://d3pxv6yz143wms.cloudfront.net/8.232.09.1/amazon-corretto-8.232.09.1-windows-x64-jdk.zip", Windows, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "8.0.222-amzn", platform))
+  }
+
+  @ChangeSet(order = "204", id = "204-add_corretto_java11_update_5", author = "philiplourandos")
+  def migrate204(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
+      Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon)),
+      Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-windows-x64.zip", Windows, Some(Amazon))
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "11.0.4-amzn", platform))
+  }
+
   @ChangeSet(order = "205", id = "205-add_bellsoft_8_0_232", author = "bell-sw")
   def migrate205(implicit db: MongoDatabase) = {
     List(
@@ -734,4 +712,5 @@ class JavaMigrations {
     ).validate().insert()
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-librca", _))
   }
+
 }
