@@ -719,7 +719,7 @@ class JavaMigrations {
       Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-linux-x64.tar.gz", Linux64, Some(Amazon)),
       Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-macosx-x64.tar.gz", MacOSX, Some(Amazon)),
       Version("java", "11.0.5-amzn", "https://d3pxv6yz143wms.cloudfront.net/11.0.5.10.1/amazon-corretto-11.0.5.10.1-windows-x64.zip", Windows, Some(Amazon))
-    )
+    ).validate().insert()
     Seq(Linux64, MacOSX, Windows).foreach(platform => removeVersion(candidate = "java", version = "11.0.4-amzn", platform))
   }
 }
