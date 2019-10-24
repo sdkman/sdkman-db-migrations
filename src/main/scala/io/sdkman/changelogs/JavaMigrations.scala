@@ -89,62 +89,6 @@ class JavaMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.1-open", _))
   }
 
-  @ChangeSet(order = "129", id = "129-add_adoptopenjdk-hs_11_0_3", author = "eddumelendez")
-  def migrate129(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz", Linux64),
-      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.3_7.tar.gz", MacOSX),
-      Version("java", "11.0.3.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.3_7.zip", Windows))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2.hs-adpt", _))
-  }
-
-  @ChangeSet(order = "130", id = "130-add_openj9_11_0_3", author = "eddumelendez")
-  def migrate130(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.3_7_openj9-0.14.0.tar.gz", Linux64),
-      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_windows_openj9_11.0.3_7_openj9-0.14.0.zip", MacOSX),
-      Version("java", "11.0.3.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_mac_openj9_11.0.3_7_openj9-0.14.0.tar.gz", Windows))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2.j9-adpt", _))
-  }
-
-  @ChangeSet(order = "131", id = "131-add_adoptopenjdk-j9_12_0_1", author = "jaegerk")
-  def migrate131(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_linux_openj9_12.0.1_12_openj9-0.14.1.tar.gz", Linux64),
-      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_windows_openj9_12.0.1_12_openj9-0.14.1.zip", Windows),
-      Version("java", "12.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12_openj9-0.14.1/OpenJDK12U-jdk_x64_mac_openj9_12.0.1_12_openj9-0.14.1.tar.gz", MacOSX)
-    ).validate().insert()
-  }
-
-  @ChangeSet(order = "132", id = "132-add_adoptopenjdk-hs_12_0_1", author = "jaegerk")
-  def migrate132(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_linux_hotspot_12.0.1_12.tar.gz", Linux64),
-      Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_mac_hotspot_12.0.1_12.tar.gz", MacOSX)
-    ).validate().insert()
-  }
-
-  @ChangeSet(order = "134", id = "134-add_adoptopenjdk-hs-windows_12_0_1", author = "kjjaeger")
-  def migrate134(implicit db: MongoDatabase) =
-    Version("java", "12.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk12-binaries/releases/download/jdk-12.0.1%2B12/OpenJDK12U-jdk_x64_windows_hotspot_12.0.1_12.zip", Windows)
-      .validate().insert()
-
-  @ChangeSet(order = "135", id = "135-fix_broken_adopt_openjdk_j9_11_0_3", author = "marc0der")
-  def migrate135(implicit db: MongoDatabase) = {
-    val candidate = "java"
-    val version = "11.0.3.j9-adpt"
-    Seq(Windows, MacOSX).foreach(p => removeVersion(candidate, version, p))
-    List(
-      Version(candidate, version, "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_windows_openj9_11.0.3_7_openj9-0.14.0.zip", Windows),
-      Version(candidate, version, "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7_openj9-0.14.0/OpenJDK11U-jdk_x64_mac_openj9_11.0.3_7_openj9-0.14.0.tar.gz", MacOSX))
-      .validate()
-      .insert()
-  }
-
   @ChangeSet(order = "138", id = "138-add_graalvm_19_0_0", author = "ilopmar")
   def migrate138(implicit db: MongoDatabase) = {
     List(
@@ -293,28 +237,6 @@ class JavaMigrations {
       Version("java", "12.0.2-librca", "https://download.bell-sw.com/java/12.0.2/bellsoft-jdk12.0.2-macos-amd64.zip", MacOSX, Some(Liberica))
     ).validate().insert()
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.1-librca", _))
-  }
-
-  @ChangeSet(order = "174", id = "174-add_adoptopenjdk-hs_11_0_4", author = "jschalanda")
-  def migrate174(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.4.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11/OpenJDK11U-jdk_x64_linux_hotspot_11.0.4_11.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "11.0.4.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11/OpenJDK11U-jdk_x64_mac_hotspot_11.0.4_11.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "11.0.4.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11/OpenJDK11U-jdk_x64_windows_hotspot_11.0.4_11.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3.hs-adpt", _))
-  }
-
-  @ChangeSet(order = "175", id = "175-add_adoptopenjdk-j9_11_0_4", author = "jschalanda")
-  def migrate175(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.4.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11_openj9-0.15.1/OpenJDK11U-jdk_x64_linux_openj9_11.0.4_11_openj9-0.15.1.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "11.0.4.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11_openj9-0.15.1/OpenJDK11U-jdk_x64_mac_openj9_11.0.4_11_openj9-0.15.1.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "11.0.4.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.4+11_openj9-0.15.1/OpenJDK11U-jdk_x64_windows_openj9_11.0.4_11_openj9-0.15.1.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3.j9-adpt", _))
   }
 
   @ChangeSet(order = "178", id = "178-restore_graalvm_19_0", author = "dsyer")
