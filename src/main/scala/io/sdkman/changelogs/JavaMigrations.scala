@@ -358,30 +358,6 @@ class JavaMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "192", id = "192-add_13.0.0.hs-adpt", author = "vpavic")
-  def migrate192(implicit db: MongoDatabase): Unit = {
-    val candidate = "java"
-    val newVersion = "13.0.0.hs-adpt"
-    List(
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_linux_hotspot_13_33.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_mac_hotspot_13_33.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jdk_x64_windows_hotspot_13_33.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-  }
-
-  @ChangeSet(order = "193", id = "193-add_13.0.0.j9-adpt", author = "vpavic")
-  def migrate193(implicit db: MongoDatabase): Unit = {
-    val candidate = "java"
-    val newVersion = "13.0.0.j9-adpt"
-    List(
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_linux_openj9_13_33_openj9-0.16.0.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_mac_openj9_13_33_openj9-0.16.0.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version(candidate, newVersion, "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33_openj9-0.16.0/OpenJDK13U-jdk_x64_windows_openj9_13_33_openj9-0.16.0.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-  }
-
   @ChangeSet(order = "195", id = "195-add_openjdk_java_13.0.1", author = "eddumelendez")
   def migrate195(implicit db: MongoDatabase) = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-open", _))
@@ -610,4 +586,25 @@ class JavaMigrations {
       .insert()
   }
 
+  @ChangeSet(order = "216", id = "216-add_adoptopenjdk-hs_13_0_1", author = "timw")
+  def migrate209(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_linux_hotspot_13.0.1_9.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_windows_hotspot_13.0.1_9.zip", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_mac_hotspot_13.0.1_9.tar.gz", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0.hs-adpt", _))
+  }
+
+  @ChangeSet(order = "217", id = "217-add_adoptopenjdk-j9_13_0_1", author = "timw")
+  def migrate210(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_linux_openj9_13.0.1_9_openj9-0.17.0.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_mac_openj9_13.0.1_9_openj9-0.17.0.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_windows_openj9_13.0.1_9_openj9-0.17.0.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0.j9-adpt", _))
+  }
 }
