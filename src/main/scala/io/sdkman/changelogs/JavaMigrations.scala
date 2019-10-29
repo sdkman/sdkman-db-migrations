@@ -712,4 +712,24 @@ class JavaMigrations {
     Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-librca", _))
   }
 
+  @ChangeSet(order = "214", id = "214-fix_openjdk_8_0_232", author = "andrebrait")
+  def migrate214(implicit db: MongoDatabase) = {
+    Seq(Linux64, Windows).foreach(removeVersion("java", "8.0.232-open", _))
+    List(
+      Version("java", "8.0.232-open", "https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_8u232b09.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "8.0.232-open", "https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_8u232b09.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(order = "215", id = "215-fix_openjdk_11_0_5", author = "andrebrait")
+  def migrate215(implicit db: MongoDatabase) = {
+    Seq(Linux64, Windows).foreach(removeVersion("java", "11.0.5-open", _))
+    List(
+      Version("java", "11.0.5-open", "https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.5+10/OpenJDK11U-jdk_x64_linux_11.0.5_10.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "11.0.5-open", "https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.5+10/OpenJDK11U-jdk_x64_windows_11.0.5_10.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+  }
+
 }
