@@ -4,6 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "002")
+@deprecated("Please use per vendor migrations in the io.sdkman.changelogs.java package instead.")
 class JavaMigrations {
 
   @ChangeSet(order = "038", id = "038-add_zulu_10_0_2", author = "vpavic")
