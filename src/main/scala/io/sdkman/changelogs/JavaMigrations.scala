@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "002")
-@deprecated("Please use per vendor migrations in the io.sdkman.changelogs.java package instead.")
+@deprecated("Please use per vendor migrations in the io.sdkman.changelogs.java package instead.", "2019-10-29")
 class JavaMigrations {
 
   @ChangeSet(order = "038", id = "038-add_zulu_10_0_2", author = "vpavic")
@@ -584,27 +584,5 @@ class JavaMigrations {
       Version("java", "11.0.5-open", "https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.5+10/OpenJDK11U-jdk_x64_windows_11.0.5_10.zip", Windows, Some(OpenJDK)))
       .validate()
       .insert()
-  }
-
-  @ChangeSet(order = "216", id = "216-add_adoptopenjdk-hs_13_0_1", author = "timw")
-  def migrate209(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_linux_hotspot_13.0.1_9.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_windows_hotspot_13.0.1_9.zip", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "13.0.1.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9/OpenJDK13U-jdk_x64_mac_hotspot_13.0.1_9.tar.gz", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0.hs-adpt", _))
-  }
-
-  @ChangeSet(order = "217", id = "217-add_adoptopenjdk-j9_13_0_1", author = "timw")
-  def migrate210(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_linux_openj9_13.0.1_9_openj9-0.17.0.tar.gz", Linux64, Some(AdoptOpenJDK)),
-      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_mac_openj9_13.0.1_9_openj9-0.17.0.tar.gz", MacOSX, Some(AdoptOpenJDK)),
-      Version("java", "13.0.1.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.1%2B9_openj9-0.17.0/OpenJDK13U-jdk_x64_windows_openj9_13.0.1_9_openj9-0.17.0.zip", Windows, Some(AdoptOpenJDK)))
-      .validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0.j9-adpt", _))
   }
 }
