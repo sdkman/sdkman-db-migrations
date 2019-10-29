@@ -77,39 +77,6 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.0-sapmchn", platform))
   }
 
-  @ChangeSet(order = "122", id = "122-add_bellsoft_8_0_212", author = "den1ska")
-  def migrate122(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.212-librca", "https://download.bell-sw.com/java/8u212/bellsoft-jdk8u212-linux-i586.tar.gz", Linux32),
-      Version("java", "8.0.212-librca", "https://download.bell-sw.com/java/8u212/bellsoft-jdk8u212-linux-amd64.tar.gz", Linux64),
-      Version("java", "8.0.212-librca", "https://download.bell-sw.com/java/8u212/bellsoft-jdk8u212-windows-amd64.zip", Windows),
-      Version("java", "8.0.212-librca", "https://download.bell-sw.com/java/8u212/bellsoft-jdk8u212-macos-amd64.zip", MacOSX)
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.202-librca", _))
-  }
-
-  @ChangeSet(order = "123", id = "123-add_bellsoft_11_0_3", author = "den1ska")
-  def migrate123(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.3-librca", "https://download.bell-sw.com/java/11.0.3/bellsoft-jdk11.0.3-linux-i586.tar.gz", Linux32),
-      Version("java", "11.0.3-librca", "https://download.bell-sw.com/java/11.0.3/bellsoft-jdk11.0.3-linux-amd64.tar.gz", Linux64),
-      Version("java", "11.0.3-librca", "https://download.bell-sw.com/java/11.0.3/bellsoft-jdk11.0.3-windows-amd64.zip", Windows),
-      Version("java", "11.0.3-librca", "https://download.bell-sw.com/java/11.0.3/bellsoft-jdk11.0.3-macos-amd64.zip", MacOSX)
-    ).validate().insert()
-    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.2-librca", _))
-  }
-
-  @ChangeSet(order = "124", id = "124-add_bellsoft_12_0_1", author = "den1ska")
-  def migrate124(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "12.0.1-librca", "https://download.bell-sw.com/java/12.0.1/bellsoft-jdk12.0.1-linux-i586.tar.gz", Linux32),
-      Version("java", "12.0.1-librca", "https://download.bell-sw.com/java/12.0.1/bellsoft-jdk12.0.1-linux-amd64.tar.gz", Linux64),
-      Version("java", "12.0.1-librca", "https://download.bell-sw.com/java/12.0.1/bellsoft-jdk12.0.1-windows-amd64.zip", Windows),
-      Version("java", "12.0.1-librca", "https://download.bell-sw.com/java/12.0.1/bellsoft-jdk12.0.1-macos-amd64.zip", MacOSX)
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "12.0.0-librca", _))
-  }
-
   @ChangeSet(order = "125", id = "12-5update_openjdk_11_0_2", author = "eddumelendez")
   def migrate125(implicit db: MongoDatabase) = {
     List(
@@ -338,28 +305,6 @@ class JavaMigrations {
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "12.0.1-sapmchn", platform))
   }
 
-  @ChangeSet(order = "169", id = "169-add_bellsoft_8_0_222", author = "morgion")
-  def migrate169(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "8.0.222-librca", "https://download.bell-sw.com/java/8u222/bellsoft-jdk8u222-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.212-librca", _))
-  }
-
-  @ChangeSet(order = "170", id = "170-add_bellsoft_11_0_4", author = "morgion")
-  def migrate170(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "11.0.4-librca", "https://download.bell-sw.com/java/11.0.4/bellsoft-jdk11.0.4-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
-    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.3-librca", _))
-  }
-
   @ChangeSet(order = "171", id = "171-add_bellsoft_12_0_2", author = "morgion")
   def migrate171(implicit db: MongoDatabase) = {
     List(
@@ -504,16 +449,6 @@ class JavaMigrations {
         vendor = Some(Graal)))
       .validate()
       .insert()
-  }
-
-  @ChangeSet(order = "188", id = "188-add_bellsoft_13", author = "morgion")
-  def migrate188(implicit db: MongoDatabase) = {
-    List(
-      Version("java", "13.0.0-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-i586.tar.gz", Linux32, Some(Liberica)),
-      Version("java", "13.0.0-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-linux-amd64.tar.gz", Linux64, Some(Liberica)),
-      Version("java", "13.0.0-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-windows-amd64.zip", Windows, Some(Liberica)),
-      Version("java", "13.0.0-librca", "https://download.bell-sw.com/java/13/bellsoft-jdk13-macos-amd64.zip", MacOSX, Some(Liberica))
-    ).validate().insert()
   }
 
   @ChangeSet(order = "190", id = "190-add_12.0.2.hs-adpt", author = "vpavic")
@@ -741,6 +676,39 @@ class JavaMigrations {
       .validate()
       .insert()
     Seq(Linux64, Windows).foreach(removeVersion("java", "11.0.2-open", _))
+  }
+
+  @ChangeSet(order = "211", id = "211-add_bellsoft_8_0_232", author = "morgion")
+  def migrate211(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "8.0.232-librca", "https://download.bell-sw.com/java/8u232+10/bellsoft-jdk8u232+10-linux-i586.tar.gz", Linux32, Some(Liberica)),
+      Version("java", "8.0.232-librca", "https://download.bell-sw.com/java/8u232+10/bellsoft-jdk8u232+10-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+      Version("java", "8.0.232-librca", "https://download.bell-sw.com/java/8u232+10/bellsoft-jdk8u232+10-windows-amd64.zip", Windows, Some(Liberica)),
+      Version("java", "8.0.232-librca", "https://download.bell-sw.com/java/8u232+10/bellsoft-jdk8u232+10-macos-amd64.zip", MacOSX, Some(Liberica))
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "8.0.222-librca", _))
+  }
+
+  @ChangeSet(order = "212", id = "212-add_bellsoft_11_0_5", author = "morgion")
+  def migrate212(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.5-librca", "https://download.bell-sw.com/java/11.0.5+11/bellsoft-jdk11.0.5+11-linux-i586.tar.gz", Linux32, Some(Liberica)),
+      Version("java", "11.0.5-librca", "https://download.bell-sw.com/java/11.0.5+11/bellsoft-jdk11.0.5+11-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+      Version("java", "11.0.5-librca", "https://download.bell-sw.com/java/11.0.5+11/bellsoft-jdk11.0.5+11-windows-amd64.zip", Windows, Some(Liberica)),
+      Version("java", "11.0.5-librca", "https://download.bell-sw.com/java/11.0.5+11/bellsoft-jdk11.0.5+11-macos-amd64.zip", MacOSX, Some(Liberica))
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.4-librca", _))
+  }
+
+  @ChangeSet(order = "213", id = "213-add_bellsoft_13_0_1", author = "morgion")
+  def migrate213(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "13.0.1-librca", "https://download.bell-sw.com/java/13.0.1/bellsoft-jdk13.0.1-linux-i586.tar.gz", Linux32, Some(Liberica)),
+      Version("java", "13.0.1-librca", "https://download.bell-sw.com/java/13.0.1/bellsoft-jdk13.0.1-linux-amd64.tar.gz", Linux64, Some(Liberica)),
+      Version("java", "13.0.1-librca", "https://download.bell-sw.com/java/13.0.1/bellsoft-jdk13.0.1-windows-amd64.zip", Windows, Some(Liberica)),
+      Version("java", "13.0.1-librca", "https://download.bell-sw.com/java/13.0.1/bellsoft-jdk13.0.1-macos-amd64.zip", MacOSX, Some(Liberica))
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.0-librca", _))
   }
 
 }
