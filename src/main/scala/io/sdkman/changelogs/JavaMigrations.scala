@@ -392,9 +392,9 @@ class JavaMigrations {
   @ChangeSet(order = "198", id = "198-add_zulu_8_0_232", author = "jorsol")
   def migrate198(implicit db: MongoDatabase) = {
     List(
-      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.21-ca-jdk8.0.232-linux_x64.tar.gz", Linux64, Some(Zulu)),
-      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.21-ca-jdk8.0.232-win_x64.zip", Windows, Some(Zulu)),
-      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.21-ca-jdk8.0.232-macosx_x64.tar.gz", MacOSX, Some(Zulu))
+      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.23-ca-jdk8.0.232-linux_x64.tar.gz", Linux64, Some(Zulu)),
+      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.23-ca-jdk8.0.232-win_x64.zip", Windows, Some(Zulu)),
+      Version("java", "8.0.232-zulu", "https://cdn.azul.com/zulu/bin/zulu8.42.0.23-ca-jdk8.0.232-macosx_x64.tar.gz", MacOSX, Some(Zulu))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "8.0.222-zulu", platform))
   }
@@ -402,9 +402,9 @@ class JavaMigrations {
   @ChangeSet(order = "199", id = "199-add_zulu_11_0_5", author = "jorsol")
   def migrate199(implicit db: MongoDatabase) = {
     List(
-      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.13-ca-jdk11.0.5-linux_x64.tar.gz", Linux64, Some(Zulu)),
-      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.13-ca-jdk11.0.5-win_x64.zip", Windows, Some(Zulu)),
-      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.13-ca-jdk11.0.5-macosx_x64.tar.gz", MacOSX, Some(Zulu))
+      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-jdk11.0.5-linux_x64.tar.gz", Linux64, Some(Zulu)),
+      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-jdk11.0.5-win_x64.zip", Windows, Some(Zulu)),
+      Version("java", "11.0.5-zulu", "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-jdk11.0.5-macosx_x64.tar.gz", MacOSX, Some(Zulu))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.4-zulu", platform))
   }
