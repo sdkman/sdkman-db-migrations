@@ -49,4 +49,46 @@ class GraalVmMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(order = "002", id = "002-add_graalvm_19_3_0_2", author = "eddumelendez")
+  def migrate002(implicit db: MongoDatabase) =
+    List(
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r11-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-linux-amd64-19.3.0.2.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r11-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-darwin-amd64-19.3.0.2.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r11-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-windows-amd64-19.3.0.2.zip",
+        platform = Windows,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r8-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-linux-amd64-19.3.0.2.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r8-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-darwin-amd64-19.3.0.2.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)),
+      Version(
+        candidate = "java",
+        version = "19.3.0.2.r8-grl",
+        url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-windows-amd64-19.3.0.2.zip",
+        platform = Windows,
+        vendor = Some(Graal)))
+      .validate()
+      .insert()
+
 }
