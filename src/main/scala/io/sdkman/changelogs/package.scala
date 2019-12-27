@@ -27,7 +27,7 @@ package object changelogs {
   implicit val versionValidation = new Validator[Version] with UrlValidation with LazyLogging {
 
     override def validVersion(v: Version): Unit =
-      if (v.version.length > 15)
+      if (v.version.length > 16)
         throw new MongobeeChangeSetException(s"sVersion length exceeds 15 chars: ${v.version}")
 
     override def validUrl(v: Version): Unit =
