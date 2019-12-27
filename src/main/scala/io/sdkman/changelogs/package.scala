@@ -30,21 +30,10 @@ package object changelogs {
       if (v.version.length > 15)
         throw new MongobeeChangeSetException(s"sVersion length exceeds 15 chars: ${v.version}")
 
-    override def validUrl(v: Version): Unit = {
-      if (v.url.contains("download.oracle.com")) {
-        checkResourceAvailable(v.url, Some(Cookie("oraclelicense", "accept-securebackup-cookie")))
-      } else {
-        checkResourceAvailable(v.url, None)
-      }
-    }
+    override def validUrl(v: Version): Unit =
+      if (!resourceAvailable(v.url))
+        throw new MongobeeChangeSetException(s"Invalid url: ${v.url}")
 
-    private def checkResourceAvailable(url: String, cookie: Option[Cookie]) = {
-      val available = cookie.fold(resourceAvailable(url)) { c =>
-        resourceAvailable(url, Some(c))
-      }
-
-      if (!available) throw new MongobeeChangeSetException(s"Invalid url: $url")
-    }
   }
 
   implicit def listValidation[A](implicit validate: Validator[A]): Validator[List[A]] = new Validator[List[A]] {
