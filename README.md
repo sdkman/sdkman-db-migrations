@@ -136,7 +136,7 @@ be set to either `None` or a `Some`, in turn containing `AdoptOpenJDK`, `Amazon`
 
 ## Fast track
 
-It is usually worth notifying us of the PR on the [cli-dev](https://gitter.im/sdkman/cli-dev) Gitter chat in case we miss your PR.
+It is usually worth notifying us of the PR on [#cli-development](https://slack.sdkman.io) Slack chat in case we miss your PR.
 
 ## Contributors
 
