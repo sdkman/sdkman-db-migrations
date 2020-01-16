@@ -147,8 +147,8 @@ class OpenJdkMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "15.ea.4-open", _))
   }
 
-  @ChangeSet(order = "015", id = "015-add_openjdk_java_13.0.2", author = "poad")
-  def migrate015(implicit db: MongoDatabase) = {
+  @ChangeSet(order = "016", id = "016-add_openjdk_java_13.0.2", author = "poad")
+  def migrate016(implicit db: MongoDatabase) = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.1-open", _))
     List(
       Version("java", "13.0.2-open", "https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
@@ -158,13 +158,13 @@ class OpenJdkMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "016", id = "016-remove_openjdk_java_14.ea.18-open", author = "poad")
-  def migrate016(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "017", id = "017-remove_openjdk_java_14.ea.18-open", author = "poad")
+  def migrate017(implicit db: MongoDatabase): Unit = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.18-open", _))
   }
 
-  @ChangeSet(order = "017", id = "017-remove_openjdk_14.ea.20-open", author = "poad")
-  def migrate017(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "018", id = "018-remove_openjdk_14.ea.20-open", author = "poad")
+  def migrate018(implicit db: MongoDatabase): Unit = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.20-open", _))
   }
 }
