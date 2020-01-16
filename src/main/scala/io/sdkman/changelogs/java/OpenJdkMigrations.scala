@@ -146,4 +146,14 @@ class OpenJdkMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(order = "015", id = "015-remove_openjdk_java_14.ea.18-open", author = "poad")
+  def migrate015(implicit db: MongoDatabase): Unit = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.18-open", _))
+  }
+
+  @ChangeSet(order = "016", id = "016-remove_openjdk_14.ea.20-open", author = "poad")
+  def migrate016(implicit db: MongoDatabase): Unit = {
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.20-open", _))
+  }
 }
