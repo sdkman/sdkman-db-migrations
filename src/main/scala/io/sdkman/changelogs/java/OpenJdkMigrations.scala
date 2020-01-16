@@ -125,8 +125,30 @@ class OpenJdkMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "15.ea.2-open", _))
   }
 
-  @ChangeSet(order = "014", id = "014-add_openjdk_java_13.0.2", author = "poad")
-  def migrate014(implicit db: MongoDatabase) = {
+  @ChangeSet(order = "014", id = "014-add_openjdk_java_14-ea-32", author = "eddumelendez")
+  def migrate014(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.30-open", _))
+  }
+
+  @ChangeSet(order = "15", id = "015-add_openjdk_java_15-ea-6", author = "eddumelendez")
+  def migrate015(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "15.ea.6-open", "https://download.java.net/java/early_access/jdk15/6/GPL/openjdk-15-ea+6_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "15.ea.6-open", "https://download.java.net/java/early_access/jdk15/6/GPL/openjdk-15-ea+6_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "15.ea.6-open", "https://download.java.net/java/early_access/jdk15/6/GPL/openjdk-15-ea+6_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "15.ea.4-open", _))
+  }
+
+  @ChangeSet(order = "015", id = "015-add_openjdk_java_13.0.2", author = "poad")
+  def migrate015(implicit db: MongoDatabase) = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "13.0.1-open", _))
     List(
       Version("java", "13.0.2-open", "https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
@@ -136,13 +158,13 @@ class OpenJdkMigrations {
       .insert()
   }
 
-  @ChangeSet(order = "015", id = "015-remove_openjdk_java_14.ea.18-open", author = "poad")
-  def migrate015(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "016", id = "016-remove_openjdk_java_14.ea.18-open", author = "poad")
+  def migrate016(implicit db: MongoDatabase): Unit = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.18-open", _))
   }
 
-  @ChangeSet(order = "016", id = "016-remove_openjdk_14.ea.20-open", author = "poad")
-  def migrate016(implicit db: MongoDatabase): Unit = {
+  @ChangeSet(order = "017", id = "017-remove_openjdk_14.ea.20-open", author = "poad")
+  def migrate017(implicit db: MongoDatabase): Unit = {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.20-open", _))
   }
 }
