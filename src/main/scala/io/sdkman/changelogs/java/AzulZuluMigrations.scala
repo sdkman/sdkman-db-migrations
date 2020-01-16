@@ -46,7 +46,7 @@ class AzulZuluMigrations {
     List(
       Version("java", "11.0.6-zulu", "https://cdn.azul.com/zulu/bin/zulu11.37.17-ca-jdk11.0.6-linux_x64.tar.gz", Linux64, Some(Zulu)),
       Version("java", "11.0.6-zulu", "https://cdn.azul.com/zulu/bin/zulu11.37.17-ca-jdk11.0.6-win_x64.zip", Windows, Some(Zulu)),
-      VVersion("java", "11.0.6-zulu", "https://cdn.azul.com/zulu/bin/zulu11.37.17-ca-jdk11.0.6-macosx_x64.tar.gz", MacOSX, Some(Zulu))
+      Version("java", "11.0.6-zulu", "https://cdn.azul.com/zulu/bin/zulu11.37.17-ca-jdk11.0.6-macosx_x64.tar.gz", MacOSX, Some(Zulu))
     ).validate().insert()
     Seq(Linux64, Windows, MacOSX).foreach(platform => removeVersion(candidate = "java", version = "11.0.5-zulu", platform))
   }
