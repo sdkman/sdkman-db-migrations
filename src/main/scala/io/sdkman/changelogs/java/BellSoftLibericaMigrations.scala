@@ -2,6 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import io.sdkman.changelogs.{Linux64, MacOSX, Version, Windows, _}
 
 @ChangeLog(order = "020")
 class BellSoftLibericaMigrations {
