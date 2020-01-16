@@ -136,4 +136,15 @@ class OpenJdkMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "15.ea.2-open", _))
   }
 
+  @ChangeSet(order = "014", id = "014-add_openjdk_java_14-ea-32", author = "eddumelendez")
+  def migrate014(implicit db: MongoDatabase): Unit = {
+    List(
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_linux-x64_bin.tar.gz", Linux64, Some(OpenJDK)),
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_osx-x64_bin.tar.gz", MacOSX, Some(OpenJDK)),
+      Version("java", "14.ea.32-open", "https://download.java.net/java/early_access/jdk14/32/GPL/openjdk-14-ea+32_windows-x64_bin.zip", Windows, Some(OpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "14.ea.30-open", _))
+  }
+
 }
