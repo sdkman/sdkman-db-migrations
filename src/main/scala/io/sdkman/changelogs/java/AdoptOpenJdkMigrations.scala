@@ -35,4 +35,15 @@ class AdoptOpenJdkMigrations {
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.5.hs-adpt", _))
   }
 
+
+  @ChangeSet(order = "0003", id = "0009-add_adoptopenjdk-j9_11_0_6", author = "poad")
+  def migrate0003(implicit db: MongoDatabase) = {
+    List(
+      Version("java", "11.0.6.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.6%2B10_openj9-0.18.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.6_10_openj9-0.18.0.tar.gz", Linux64, Some(AdoptOpenJDK)),
+      Version("java", "11.0.6.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.6%2B10_openj9-0.18.0/OpenJDK11U-jdk_x64_mac_openj9_11.0.6_10_openj9-0.18.0.tar.gz", MacOSX, Some(AdoptOpenJDK)),
+      Version("java", "11.0.6.j9-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.6%2B10_openj9-0.18.0/OpenJDK11U-jdk_x64_windows_openj9_11.0.6_10_openj9-0.18.0.zip", Windows, Some(AdoptOpenJDK)))
+      .validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.5.j9-adpt", _))
+  }
 }
