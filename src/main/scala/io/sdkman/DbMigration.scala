@@ -12,7 +12,10 @@ object DbMigration extends App with Configuration {
 
   lazy val localMongoConn = mongobee(s"mongodb://$mongoHost:$mongoPort")
 
-  def remoteMongoConn(username: String) = mongobee(s"mongodb://$username:$mongoPassword@$mongoHost:$mongoPort/$mongoDatabase?authMechanism=SCRAM-SHA-1")
+  def remoteMongoConn(username: String) =
+    mongobee(
+      s"mongodb://$username:$mongoPassword@$mongoHost:$mongoPort/$mongoDatabase?authMechanism=SCRAM-SHA-1"
+    )
 
   private def mongobee(url: String) = new Mongobee(url)
 }
