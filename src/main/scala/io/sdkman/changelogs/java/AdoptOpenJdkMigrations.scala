@@ -72,6 +72,7 @@ class AdoptOpenJdkMigrations {
       Version("java", "11.0.6.hs-adpt", "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.6+10/OpenJDK11U-jdk_x64_windows_hotspot_11.0.6_10.zip", Windows, Some(AdoptOpenJDK)))
       .validate()
       .insert()
+    setCandidateDefault("java", "11.0.6.hs-adpt")
     Seq(Linux64, MacOSX, Windows).foreach(removeVersion("java", "11.0.5.hs-adpt", _))
   }
 
