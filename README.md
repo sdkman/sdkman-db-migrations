@@ -17,6 +17,13 @@ The build is a standard Gradle build, with migration code written in Scala. To r
 
         $ ./gradlew clean run
 
+## Scalafmt
+
+This build uses [scalafmt](https://scalameta.org/scalafmt/) for code formatting, and it is expected that all PRs are compliant.
+scalafmt will be executed automatically when the `run` task is invoked, although it can be run in isolation with:
+
+        $ ./gradlew scalafmt
+
 ## The Model
 
 The domain used for describing releases has two entities: `candidates` and `versions`. These are modelled as two distinct collections in our MongoDB datastore.
