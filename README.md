@@ -20,7 +20,7 @@ The build is a standard Gradle build, with migration code written in Scala. To r
 ## Scalafmt
 
 This build uses [scalafmt](https://scalameta.org/scalafmt/) for code formatting, and it is expected that all PRs are compliant.
-scalafmt will be executed automatically when the `run` task is invoked, although it can be run in isolation with:
+Scalafmt will be executed indirectly as a dependency of the `compileScala` task, although it may also be run directly with:
 
         $ ./gradlew scalafmt
 
