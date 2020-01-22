@@ -166,7 +166,7 @@ class AdoptOpenJdkMigrations {
       .insert()
     setCandidateDefault("java", "8.0.242.hs-adpt")
     Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "8.0.232.hs-adptt", _)
+      removeVersion("java", "8.0.232.hs-adpt", _)
     )
   }
 }
