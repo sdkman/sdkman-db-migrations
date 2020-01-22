@@ -169,4 +169,13 @@ class AdoptOpenJdkMigrations {
       removeVersion("java", "8.0.232.hs-adpt", _)
     )
   }
+
+  @ChangeSet(
+    order = "0005",
+    id = "0005-set_adoptopenjdk_11.0.5.hs_as_default",
+    author = "marc0der"
+  )
+  def migrate0005(implicit db: MongoDatabase) =
+    setCandidateDefault("java", "11.0.6.hs-adpt")
+
 }
