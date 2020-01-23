@@ -178,4 +178,39 @@ class AdoptOpenJdkMigrations {
   def migrate0005(implicit db: MongoDatabase) =
     setCandidateDefault("java", "11.0.6.hs-adpt")
 
+  @ChangeSet(
+    order = "0006",
+    id = "0006-add_adoptopenjdk-j9_8_0_242",
+    author = "poad"
+  )
+  def migrate0006(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.242.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u242-b08_openj9-0.18.1/OpenJDK8U-jdk_x64_linux_openj9_8u242b08_openj9-0.18.1.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "8.0.242.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u242-b08_openj9-0.18.1/OpenJDK8U-jdk_x64_mac_openj9_8u242b08_openj9-0.18.1.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "8.0.242.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u242-b08_openj9-0.18.1/OpenJDK8U-jdk_x64_windows_openj9_8u242b08_openj9-0.18.1.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+    setCandidateDefault("java", "8.0.242.j9-adpt")
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "8.0.232.j9-adpt", _)
+    )
+  }
 }
