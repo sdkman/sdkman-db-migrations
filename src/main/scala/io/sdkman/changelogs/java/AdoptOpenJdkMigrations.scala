@@ -208,7 +208,6 @@ class AdoptOpenJdkMigrations {
       )
     ).validate()
       .insert()
-    setCandidateDefault("java", "8.0.242.j9-adpt")
     Seq(Linux64, MacOSX, Windows).foreach(
       removeVersion("java", "8.0.232.j9-adpt", _)
     )
