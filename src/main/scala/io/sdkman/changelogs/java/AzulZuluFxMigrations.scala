@@ -67,7 +67,7 @@ class AzulZuluFxMigrations {
 
   @ChangeSet(
     order = "0003",
-    id = "0003-remove_old-zulufx-8.0.202",
+    id = "0003-remove_old_zulufx_8_0_202",
     author = "poad"
   )
   def migrate0003(implicit db: MongoDatabase) =
@@ -78,7 +78,7 @@ class AzulZuluFxMigrations {
 
   @ChangeSet(
     order = "0004",
-    id = "0004-remove_old-zulufx11.0.2",
+    id = "0004-remove_old_zulufx_11_0_2",
     author = "poad"
   )
   def migrate0004(implicit db: MongoDatabase) =
