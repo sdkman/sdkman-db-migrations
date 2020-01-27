@@ -2,7 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{AdoptOpenJDK, Linux64, MacOSX, Version, Windows, _}
+import io.sdkman.changelogs.{ZuluFX, Linux64, MacOSX, Version, Windows, _}
 
 @ChangeLog(order = "018")
 class AzulZuluFxMigrations {
