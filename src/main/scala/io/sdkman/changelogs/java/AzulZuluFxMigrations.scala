@@ -2,7 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{ZuluFX, Linux64, MacOSX, Version, Windows, _}
+import io.sdkman.changelogs.{Linux64, MacOSX, Version, Windows, _}
 
 @ChangeLog(order = "018")
 class AzulZuluFxMigrations {
@@ -30,7 +30,7 @@ class AzulZuluFxMigrations {
       ),
       Version(
         "java",
-        "8.0.232.fx--zulu",
+        "8.0.232.fx-zulu",
         "https://cdn.azul.com/zulu/bin/zulu8.42.0.23-ca-fx-jdk8.0.232-macosx_x64.tar.gz",
         MacOSX,
         Some(Zulu)
@@ -43,21 +43,21 @@ class AzulZuluFxMigrations {
     List(
       Version(
         "java",
-        "11.0.5.fx--zulu",
+        "11.0.5.fx-zulu",
         "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-fx-jdk11.0.5-linux_x64.tar.gz",
         Linux64,
         Some(Zulu)
       ),
       Version(
         "java",
-        "11.0.5.fx--zulu",
+        "11.0.5.fx-zulu",
         "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-fx-jdk11.0.5-win_x64.zip",
         Windows,
         Some(Zulu)
       ),
       Version(
         "java",
-        "11.0.5.fx--zulu",
+        "11.0.5.fx-zulu",
         "https://cdn.azul.com/zulu/bin/zulu11.35.15-ca-fx-jdk11.0.5-macosx_x64.tar.gz",
         MacOSX,
         Some(Zulu)
