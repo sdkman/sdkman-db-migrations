@@ -117,7 +117,11 @@ class BellSoftLibericaMigrations {
     )
   }
 
-  @ChangeSet(order = "0004", id = "0004-add_bellsoft_13_0_2_fx", author = "strizhik")
+  @ChangeSet(
+    order = "0004",
+    id = "0004-add_bellsoft_13_0_2_fx",
+    author = "strizhik"
+  )
   def migrate0004(implicit db: MongoDatabase) = {
     List(
       Version(
@@ -144,7 +148,11 @@ class BellSoftLibericaMigrations {
     ).validate().insert()
   }
 
-  @ChangeSet(order = "0005", id = "0005-add_bellsoft_11_0_6_fx", author = "strizhik")
+  @ChangeSet(
+    order = "0005",
+    id = "0005-add_bellsoft_11_0_6_fx",
+    author = "strizhik"
+  )
   def migrate0005(implicit db: MongoDatabase) = {
     List(
       Version(
@@ -171,7 +179,11 @@ class BellSoftLibericaMigrations {
     ).validate().insert()
   }
 
-  @ChangeSet(order = "0006", id = "0006-add_bellsoft_8_0_242_fx", author = "strizhik")
+  @ChangeSet(
+    order = "0006",
+    id = "0006-add_bellsoft_8_0_242_fx",
+    author = "strizhik"
+  )
   def migrate0006(implicit db: MongoDatabase) = {
     List(
       Version(
