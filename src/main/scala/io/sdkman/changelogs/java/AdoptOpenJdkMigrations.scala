@@ -212,4 +212,73 @@ class AdoptOpenJdkMigrations {
       removeVersion("java", "8.0.232.j9-adpt", _)
     )
   }
+  @ChangeSet(
+    order = "0007",
+    id = "0007-add_adoptopenjdk-hs_13_0_2",
+    author = "poad"
+  )
+  def migrate0007(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "13.0.2.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_linux_hotspot_13.0.2_8.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "13.0.2.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_mac_hotspot_13.0.2_8.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "13.0.2.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_windows_hotspot_13.0.2_8.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "13.0.1.hs-adpt", _)
+    )
+  }
+
+  @ChangeSet(
+    order = "0008",
+    id = "0008-add_adoptopenjdk-j9_13_0_2",
+    author = "poad"
+  )
+  def migrate0008(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "13.0.2.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8_openj9-0.18.0/OpenJDK13U-jdk_x64_linux_openj9_13.0.2_8_openj9-0.18.0.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "13.0.2.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8_openj9-0.18.0/OpenJDK13U-jdk_x64_mac_openj9_13.0.2_8_openj9-0.18.0.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "13.0.2.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8_openj9-0.18.0/OpenJDK13U-jdk_x64_windows_openj9_13.0.2_8_openj9-0.18.0.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "13.0.1.j9-adpt", _)
+    )
+  }
 }
