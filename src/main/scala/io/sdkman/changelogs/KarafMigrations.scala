@@ -10,8 +10,8 @@ class KarafMigrations {
   def migration001(implicit db: MongoDatabase) = {
     Candidate(
       candidate = "karaf",
-      name = "Apache Karaf",
-      description = "Karaf is a polymorphic applications-runtime.",
+      name = "Karaf",
+      description = "Apache Karaf is a polymorphic, lightweight, powerful, and enterprise ready applications runtime. It provides all the ecosystem and bootstrapping options you need for your applications. It runs on premise or on cloud. By polymorphic, it means that Karaf can host any kind of applications: WAR, OSGi, Spring, and much more.",
       websiteUrl = "https://karaf.apache.org/",
       distribution = "UNIVERSAL"
     ).insert()
