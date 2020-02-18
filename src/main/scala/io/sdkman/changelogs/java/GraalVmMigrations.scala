@@ -177,4 +177,62 @@ class GraalVmMigrations {
     ).validate()
       .insert()
 
+  @ChangeSet(
+    order = "004",
+    id = "004-add_graalvm_20_0_0",
+    author = "eddumelendez"
+  )
+  def migrate004(implicit db: MongoDatabase) =
+    List(
+      Version(
+        candidate = "java",
+        version = "20.0.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-linux-amd64-20.0.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.0.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-darwin-amd64-20.0.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.0.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.0.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-linux-amd64-20.0.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.0.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-darwin-amd64-20.0.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.0.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-windows-amd64-20.0.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      )
+    ).validate()
+      .insert()
+
 }
