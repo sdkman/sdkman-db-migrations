@@ -50,7 +50,7 @@ class VisualVmMigrations {
   }
 
   @ChangeSet(order = "005", id = "005-add_visualvm_2_0", author = "ramonPires")
-  def migration004(implicit db: MongoDatabase) = {
+  def migration005(implicit db: MongoDatabase) = {
     Version(
       "visualvm",
       "2.0",
