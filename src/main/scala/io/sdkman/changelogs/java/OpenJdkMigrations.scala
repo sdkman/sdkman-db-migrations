@@ -885,4 +885,15 @@ class OpenJdkMigrations {
       removeVersion("java", "15.ea.10-open", _)
     )
   }
+
+  @ChangeSet(
+    order = "029",
+    id = "029-remove_openjdk_java_15-ea-11",
+    author = "eddumelendez"
+  )
+  def migrate029(implicit db: MongoDatabase): Unit = {
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "15.ea.11-open", _)
+    )
+  }
 }
