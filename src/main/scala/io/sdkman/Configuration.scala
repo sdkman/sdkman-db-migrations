@@ -12,7 +12,8 @@ trait Configuration {
 
   lazy val mongoDatabase: String = config.getString("mongo.database")
 
-  lazy val mongoUsernameO: Option[String] = Option(config.getString("mongo.username")).filter(!_.isEmpty)
+  lazy val mongoUsernameO: Option[String] =
+    Option(config.getString("mongo.username")).filter(!_.isEmpty)
 
   lazy val mongoPassword: String = config.getString("mongo.password")
 }

@@ -17,6 +17,13 @@ The build is a standard Gradle build, with migration code written in Scala. To r
 
         $ ./gradlew clean run
 
+## Scalafmt
+
+This build uses [scalafmt](https://scalameta.org/scalafmt/) for code formatting, and it is expected that all PRs are compliant.
+Scalafmt will be executed indirectly as a dependency of the `compileScala` task, although it may also be run directly with:
+
+        $ ./gradlew scalafmt
+
 ## The Model
 
 The domain used for describing releases has two entities: `candidates` and `versions`. These are modelled as two distinct collections in our MongoDB datastore.
@@ -136,7 +143,7 @@ be set to either `None` or a `Some`, in turn containing `AdoptOpenJDK`, `Amazon`
 
 ## Fast track
 
-It is usually worth notifying us of the PR on the [cli-dev](https://gitter.im/sdkman/cli-dev) Gitter chat in case we miss your PR.
+It is usually worth notifying us of the PR on [#cli-development](https://slack.sdkman.io) Slack chat in case we miss your PR.
 
 ## Contributors
 

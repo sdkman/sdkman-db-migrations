@@ -1,6 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'scala'
-apply plugin: 'application'
+plugins {
+  id "java"
+  id "scala"
+  id "application"
+  id "cz.alenkacz.gradle.scalafmt" version "1.12.0"
+}
 
 version = '1.0.2'
 
@@ -19,3 +22,5 @@ dependencies {
   compile 'io.sdkman:sdkman-url-validator_2.12:0.2.4'
   runtime 'org.slf4j:slf4j-simple:1.7.25'
 }
+
+compileScala.dependsOn("scalafmt")
