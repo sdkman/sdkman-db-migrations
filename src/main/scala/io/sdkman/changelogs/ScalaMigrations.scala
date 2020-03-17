@@ -109,4 +109,17 @@ class ScalaMigrations {
     ).validate()
       .insert()
       .asCandidateDefault()
+  
+  @ChangeSet(
+    order = "009",
+    id = "009-add_scala_2_12_11",
+    author = "lrlucena"
+  )
+  def migration009(implicit db: MongoDatabase) =
+    Version(
+      candidate = "scala",
+      version = "2.12.11",
+      url = "https://downloads.lightbend.com/scala/2.12.11/scala-2.12.11.zip"
+    ).validate()
+      .insert()
 }
