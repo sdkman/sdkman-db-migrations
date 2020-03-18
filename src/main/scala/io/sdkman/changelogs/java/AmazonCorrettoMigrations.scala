@@ -75,7 +75,7 @@ class AmazonCorrettoMigrations {
         removeVersion(candidate = "java", version = "11.0.5-amzn", platform)
     )
   }
-  
+
   @ChangeSet(
     order = "0003",
     id = "0003-add_corretto_java11_update_6_hotfix",

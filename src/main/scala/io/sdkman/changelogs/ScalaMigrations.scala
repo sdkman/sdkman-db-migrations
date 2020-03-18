@@ -109,7 +109,7 @@ class ScalaMigrations {
     ).validate()
       .insert()
       .asCandidateDefault()
-  
+
   @ChangeSet(
     order = "009",
     id = "009-add_scala_2_12_11",
