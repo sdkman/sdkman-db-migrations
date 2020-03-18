@@ -281,4 +281,68 @@ class AdoptOpenJdkMigrations {
       removeVersion("java", "13.0.1.j9-adpt", _)
     )
   }
+
+  @ChangeSet(
+    order = "0009",
+    id = "0009-add_adoptopenjdk-hs_14_0_0",
+    author = "poad"
+  )
+  def migrate0009(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36/OpenJDK14U-jdk_x64_linux_hotspot_14_36.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.0.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36/OpenJDK14U-jdk_x64_mac_hotspot_14_36.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.0.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36/OpenJDK14U-jdk_x64_windows_hotspot_14_36.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "0010",
+    id = "0010-add_adoptopenjdk-j9_14_0_0",
+    author = "poad"
+  )
+  def migrate0010(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36_openj9-0.19.0/OpenJDK14-jdk_x64_linux_openj9_14_36_openj9-0.19.0.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.0.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36_openj9-0.19.0/OpenJDK14-jdk_x64_mac_openj9_14_36_openj9-0.19.0.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.0.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14%2B36_openj9-0.19.0/OpenJDK14-jdk_x64_windows_openj9_14_36_openj9-0.19.0.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+  }
 }
