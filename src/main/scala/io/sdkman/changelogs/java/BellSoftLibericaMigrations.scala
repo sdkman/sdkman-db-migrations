@@ -217,7 +217,6 @@ class BellSoftLibericaMigrations {
     ).validate().insert()
   }
 
-
   @ChangeSet(order = "0007", id = "0007-add_bellsoft_14_0_0", author = "poad")
   def migrate0007(implicit db: MongoDatabase) = {
     List(
@@ -246,6 +245,43 @@ class BellSoftLibericaMigrations {
         "java",
         "14.0.0-librca",
         "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+  }
+  @ChangeSet(
+    order = "0008",
+    id = "0008-add_bellsoft_14_0_0_fx",
+    author = "poad"
+  )
+  def migrate0008(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jre14+36-linux-amd64-full.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-amd64-full.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-windows-amd64-full.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-macos-amd64-full.zip",
         MacOSX,
         Some(Liberica)
       )
