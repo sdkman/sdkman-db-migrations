@@ -206,7 +206,7 @@ class AzulZuluMigrations {
 
   @ChangeSet(
     order = "007",
-    id = "007-add_zulu_14_0_",
+    id = "007-add_zulu_14_0_0",
     author = "philiplourandos"
   )
   def migrate007(implicit db: MongoDatabase) = {
