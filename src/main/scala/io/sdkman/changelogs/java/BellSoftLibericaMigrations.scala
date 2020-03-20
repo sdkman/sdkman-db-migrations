@@ -216,4 +216,39 @@ class BellSoftLibericaMigrations {
       )
     ).validate().insert()
   }
+
+
+  @ChangeSet(order = "0007", id = "0007-add_bellsoft_14_0_0", author = "poad")
+  def migrate0007(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-i586.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-amd64.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-windows-amd64.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+  }
 }
