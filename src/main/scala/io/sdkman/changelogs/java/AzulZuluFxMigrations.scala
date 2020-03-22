@@ -94,4 +94,35 @@ class AzulZuluFxMigrations {
         removeVersion(candidate = "java", version = "11.0.2-zulufx", platform)
     )
 
+  @ChangeSet(order = "0005", id = "0005-add_zulufx_11_0_6", author = "poad")
+  def migrate0005(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.6.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.37.19-ca-fx-jdk11.0.6-linux_x64.tar.gz",
+        Linux64,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "11.0.6.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.37.19-ca-fx-jdk11.0.6-win_x64.zip",
+        Windows,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "11.0.6.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.37.19-ca-fx-jdk11.0.6-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "11.0.5.fx-zulu", platform)
+    )
+  }
+
 }
