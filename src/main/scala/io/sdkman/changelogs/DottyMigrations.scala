@@ -25,7 +25,7 @@ class DottyMigrations {
 
   @ChangeSet(
     order = "002",
-    id = "002_add_dotty_0_20_0_to_0_22_0",
+    id = "002_add_dotty_0_20_0_and_0_22_0",
     author = "mingchuno"
   )
   def migration002(implicit db: MongoDatabase): Unit = {
@@ -34,11 +34,6 @@ class DottyMigrations {
         candidate = "dotty",
         version = "0.20.0",
         url = url("0.20.0")
-      ),
-      Version(
-        candidate = "dotty",
-        version = "0.21.0",
-        url = url("0.21.0")
       ),
       Version(
         candidate = "dotty",
