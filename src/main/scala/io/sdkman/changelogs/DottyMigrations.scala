@@ -46,5 +46,5 @@ class DottyMigrations {
   }
 
   private def url(version: String) =
-    s"https://github.com/lampepfl/dotty/releases/download/$version/dotty-$version.tar.gz"
+    s"https://github.com/lampepfl/dotty/releases/download/$version/dotty-$version.zip"
 }
