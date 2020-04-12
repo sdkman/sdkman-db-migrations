@@ -63,4 +63,31 @@ class SapMachineMigrations {
       )
     ).validate().insert()
   }
+
+  @ChangeSet(order = "0003", id = "0003-add_sapmchn_14_0_0", author = "poad")
+  def migrate0003(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14/sapmachine-jdk-14_linux-x64_bin.tar.gz",
+        Linux64,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "14.0.0-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14/sapmachine-jdk-14_windows-x64_bin.zip",
+        Windows,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "14.0.0-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14/sapmachine-jdk-14_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(SAP)
+      )
+    ).validate().insert()
+  }
 }
