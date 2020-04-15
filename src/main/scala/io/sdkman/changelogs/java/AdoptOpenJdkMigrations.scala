@@ -345,4 +345,40 @@ class AdoptOpenJdkMigrations {
     ).validate()
       .insert()
   }
+
+  @ChangeSet(
+    order = "0011",
+    id = "0011-add_adoptopenjdk-hs_11_0_7",
+    author = "poad"
+  )
+  def migrate0011(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.7_10.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "11.0.7.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_x64_mac_hotspot_11.0.7_10.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "11.0.7.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_x64_windows_hotspot_11.0.7_10.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "11.0.6.hs-adpt", _)
+    )
+  }
+
 }
