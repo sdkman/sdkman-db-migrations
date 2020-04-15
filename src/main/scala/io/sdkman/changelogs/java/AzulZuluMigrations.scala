@@ -196,4 +196,66 @@ class AzulZuluMigrations {
     ).validate().insert()
   }
 
+  @ChangeSet(order = "007", id = "007-add_zulu_8_0_252", author = "poad")
+  def migrate007(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.252-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu8.46.0.19-ca-jdk8.0.252-linux_x64.tar.gz",
+        Linux64,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "8.0.252-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu8.46.0.19-ca-jdk8.0.252-win_x64.zip",
+        Windows,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "8.0.252-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu8.46.0.19-ca-jdk8.0.252-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "8.0.242-zulu", platform)
+    )
+  }
+
+  @ChangeSet(order = "008", id = "008-add_zulu_11_0_7", author = "poad")
+  def migrate008(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.39.15-ca-jdk11.0.7-linux_x64.tar.gz",
+        Linux64,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "11.0.7-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.39.15-ca-jdk11.0.7-win_x64.zip",
+        Windows,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "11.0.7-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.39.15-ca-jdk11.0.7-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "11.0.6-zulu", platform)
+    )
+  }
+
 }
