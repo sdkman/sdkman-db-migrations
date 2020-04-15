@@ -103,4 +103,75 @@ class AmazonCorrettoMigrations {
       )
     ).validate().insert()
   }
+
+  @ChangeSet(
+    order = "0004",
+    id = "0004-add_corretto_java8_update_252",
+    author = "poad"
+  )
+  def migrate0004(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.252-amzn",
+        "https://corretto.aws/downloads/resources/8.252.09.1/amazon-corretto-8.252.09.1-linux-x64.tar.gz",
+        Linux64,
+        Some(Amazon)
+      ),
+      Version(
+        "java",
+        "8.0.252-amzn",
+        "https://corretto.aws/downloads/resources/8.252.09.1/amazon-corretto-8.252.09.1-macosx-x64.tar.gz",
+        MacOSX,
+        Some(Amazon)
+      ),
+      Version(
+        "java",
+        "8.0.252-amzn",
+        "https://corretto.aws/downloads/resources/8.252.09.1/amazon-corretto-8.252.09.1-windows-x64-jdk.zip",
+        Windows,
+        Some(Amazon)
+      )
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "8.0.242-amzn", platform)
+    )
+  }
+
+  @ChangeSet(
+    order = "0005",
+    id = "0005-add_corretto_java11_update_7",
+    author = "poad"
+  )
+  def migrate0005(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7-amzn",
+        "https://corretto.aws/downloads/resources/11.0.7.10.1/amazon-corretto-11.0.7.10.1-linux-x64.tar.gz",
+        Linux64,
+        Some(Amazon)
+      ),
+      Version(
+        "java",
+        "11.0.7-amzn",
+        "https://corretto.aws/downloads/resources/11.0.7.10.1/amazon-corretto-11.0.7.10.1-macosx-x64.tar.gz",
+        MacOSX,
+        Some(Amazon)
+      ),
+      Version(
+        "java",
+        "11.0.7-amzn",
+        "https://corretto.aws/downloads/resources/11.0.7.10.1/amazon-corretto-11.0.7.10.1-windows-x64-jdk.zip",
+        Windows,
+        Some(Amazon)
+      )
+    ).validate().insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "11.0.6-amzn", platform)
+    )
+  }
+
 }
