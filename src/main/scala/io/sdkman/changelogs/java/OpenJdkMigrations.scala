@@ -787,4 +787,39 @@ class OpenJdkMigrations {
       removeVersion("java", "14.0.0-open", _)
     )
   }
+
+  @ChangeSet(
+    order = "038",
+    id = "038-add_openjdk_java_15-ea-19",
+    author = "eddumelendez"
+  )
+  def migrate038(implicit db: MongoDatabase): Unit = {
+    List(
+      Version(
+        "java",
+        "15.ea.19-open",
+        "https://download.java.net/java/early_access/jdk15/19/GPL/openjdk-15-ea+19_linux-x64_bin.tar.gz",
+        Linux64,
+        Some(OpenJDK)
+      ),
+      Version(
+        "java",
+        "15.ea.19-open",
+        "https://download.java.net/java/early_access/jdk15/19/GPL/openjdk-15-ea+19_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(OpenJDK)
+      ),
+      Version(
+        "java",
+        "15.ea.19-open",
+        "https://download.java.net/java/early_access/jdk15/19/GPL/openjdk-15-ea+19_windows-x64_bin.zip",
+        Windows,
+        Some(OpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "15.ea.18-open", _)
+    )
+  }
 }
