@@ -258,4 +258,38 @@ class AzulZuluMigrations {
     )
   }
 
+  @ChangeSet(
+    order = "009",
+    id = "009-add_zulu_14.0.1",
+    author = "philiplourandos"
+  )
+  def migrate009(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu14.28.21-ca-jdk14.0.1-win_x64.zip",
+        Windows,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "14.0.1-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu14.28.21-ca-jdk14.0.1-linux_x64.tar.gz",
+        Linux64,
+        Some(Zulu)
+      ),
+      Version(
+        "java",
+        "14.0.1-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu14.28.21-ca-jdk14.0.1-macosx_x64.zip",
+        MacOSX,
+        Some(Zulu)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "14.0.0-zulu", platform)
+    )
+  }
 }
