@@ -145,9 +145,16 @@ class AzulZuluFxMigrations {
         "https://cdn.azul.com/zulu/bin/zulu8.46.0.19-ca-fx-jdk8.0.252-win_x64.zip",
         Windows,
         Some(Zulu)
+      ),
+      Version(
+        "java",
+        "8.0.252.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu8.46.0.19-ca-fx-jdk8.0.252-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
       )
     ).validate().insert()
-    Seq(Linux64, Windows).foreach(
+    Seq(Linux64, Windows, MacOSX).foreach(
       platform =>
         removeVersion(candidate = "java", version = "8.0.242.fx-zulu", platform)
     )
@@ -169,9 +176,16 @@ class AzulZuluFxMigrations {
         "https://cdn.azul.com/zulu/bin/zulu11.39.15-ca-fx-jdk11.0.7-win_x64.zip",
         Windows,
         Some(Zulu)
+      ),
+      Version(
+        "java",
+        "11.0.7.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu11.39.15-ca-fx-jdk11.0.7-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
       )
     ).validate().insert()
-    Seq(Linux64, Windows).foreach(
+    Seq(Linux64, Windows, MacOSX).foreach(
       platform =>
         removeVersion(candidate = "java", version = "11.0.6.fx-zulu", platform)
     )
@@ -193,9 +207,16 @@ class AzulZuluFxMigrations {
         "https://cdn.azul.com/zulu/bin/zulu13.31.11-ca-fx-jdk13.0.3-win_x64.zip",
         Windows,
         Some(Zulu)
+      ),
+      Version(
+        "java",
+        "13.0.3.fx-zulu",
+        "https://cdn.azul.com/zulu/bin/zulu13.31.11-ca-fx-jdk13.0.3-macosx_x64.tar.gz",
+        MacOSX,
+        Some(Zulu)
       )
     ).validate().insert()
-    Seq(Linux64, Windows).foreach(
+    Seq(Linux64, Windows, MacOSX).foreach(
       platform =>
         removeVersion(candidate = "java", version = "13.0.2.fx-zulu", platform)
     )
