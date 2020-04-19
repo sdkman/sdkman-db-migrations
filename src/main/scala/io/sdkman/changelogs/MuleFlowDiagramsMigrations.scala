@@ -21,18 +21,4 @@ class MuleFlowDiagramsMigrations {
       distribution = "UNIVERSAL"
     ).insert()
   }
-
-  @ChangeSet(
-    order = "002",
-    id = "002_add_muleflowdiagrams_0_20_0_1",
-    author = "manikmagar"
-  )
-  def migration002(implicit db: MongoDatabase) = {
-    Version(
-      "muleflowdiagrams",
-      "0.2.0.1",
-      "https://github.com/manikmagar/mule-flow-diagrams/releases/download/v0.2.0.1/muleflowdiagrams-0.2.0.1.zip"
-    ).insert()
-      .asCandidateDefault()
-  }
 }
