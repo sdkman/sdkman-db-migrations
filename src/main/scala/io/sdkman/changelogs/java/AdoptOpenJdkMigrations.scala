@@ -518,7 +518,7 @@ class AdoptOpenJdkMigrations {
     ).validate()
       .insert()
     Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "14.0.1.j9-adpt", _)
+      removeVersion("java", "14.0.0.j9-adpt", _)
     )
   }
 }
