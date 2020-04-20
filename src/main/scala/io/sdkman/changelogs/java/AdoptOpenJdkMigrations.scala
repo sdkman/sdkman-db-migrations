@@ -521,4 +521,38 @@ class AdoptOpenJdkMigrations {
       removeVersion("java", "14.0.0.j9-adpt", _)
     )
   }
+  @ChangeSet(
+    order = "0016",
+    id = "0016-add_adoptopenjdk-hs_14_0_1",
+    author = "poad"
+  )
+  def migrate0016(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.1%2B7/OpenJDK14U-jdk_x64_linux_hotspot_14.0.1_7.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.1.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.1%2B7/OpenJDK14U-jdk_x64_mac_hotspot_14.0.1_7.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "14.0.1.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk14-binaries/releases/download/jdk-14.0.1%2B7/OpenJDK14U-jdk_x64_windows_hotspot_14.0.1_7.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "14.0.0.hs-adpt", _)
+    )
+  }
 }
