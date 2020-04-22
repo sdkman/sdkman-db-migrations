@@ -16,7 +16,7 @@ class MuleFlowDiagramsMigrations {
       candidate = "muleflowdiagrams",
       name = "Mule Flow Diagrams",
       description =
-        "Mule application is a collection of multiple flows and sub-flows, spread across multiple configuration files. This Mule Flow Diagrams application lets you generate flow dependency graph and diagrams for your mule applications.",
+        "Mule Flow Diagrams is an open source tool that lets you generate flow dependency graph and diagrams for your Mule configurations.",
       websiteUrl = "https://github.com/manikmagar/mule-flow-diagrams/",
       distribution = "UNIVERSAL"
     ).insert()
