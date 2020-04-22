@@ -15,7 +15,9 @@ class BTraceMigrations {
       candidate = "btrace",
       name = "BTrace",
       description =
-        "BTrace - a safe, dynamic tracing tool for the Java platform",
+        "BTrace is a safe, dynamic tracing tool for the Java platform. BTrace can be used to dynamically trace a " +
+          "running Java program (similar to DTrace for OpenSolaris applications and OS). BTrace dynamically " +
+          "instruments the classes of the target application to inject tracing code (\"bytecode tracing\").",
       websiteUrl = "https://github.com/btraceio/btrace"
     ).insert()
   }
