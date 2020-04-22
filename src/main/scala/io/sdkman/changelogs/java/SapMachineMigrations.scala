@@ -90,4 +90,67 @@ class SapMachineMigrations {
       )
     ).validate().insert()
   }
+
+  @ChangeSet(order = "0004", id = "0004-add_sapmchn_11_0_7", author = "poad")
+  def migrate0004(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.7/sapmachine-jdk-11.0.7_linux-x64_bin.tar.gz",
+        Linux64,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "11.0.7-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.7/sapmachine-jdk-11.0.7_windows-x64_bin.zip",
+        Windows,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "11.0.7-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.7/sapmachine-jre-11.0.7_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(SAP)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "11.0.6-sapmchn", platform)
+    )
+  }
+
+  @ChangeSet(order = "0005", id = "0005-add_sapmchn_14_0_1", author = "poad")
+  def migrate0005(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.1/sapmachine-jdk-14.0.1_linux-x64_bin.tar.gz",
+        Linux64,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "14.0.1-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.1/sapmachine-jdk-14.0.1_windows-x64_bin.zip",
+        Windows,
+        Some(SAP)
+      ),
+      Version(
+        "java",
+        "14.0.1-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.1/sapmachine-jre-14.0.1_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(SAP)
+      )
+    ).validate().insert()
+    Seq(Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "14.0.0-sapmchn", platform)
+    )
+  }
+
 }
