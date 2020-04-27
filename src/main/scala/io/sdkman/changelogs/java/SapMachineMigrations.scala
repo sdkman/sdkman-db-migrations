@@ -153,4 +153,28 @@ class SapMachineMigrations {
     )
   }
 
+  @ChangeSet(
+    order = "0006",
+    id = "0006-remove_sapmchn_jre_14_0_1",
+    author = "poad"
+  )
+  def migrate0006(implicit db: MongoDatabase) = {
+    Seq(MacOSX).foreach(
+      platform =>
+        removeVersion(candidate = "java", version = "14.0.1-sapmchn", platform)
+    )
+  }
+
+  @ChangeSet(order = "0007", id = "0007-re-add_sapmchn_14_0_1", author = "poad")
+  def migrate0007(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1-sapmchn",
+        "https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.1/sapmachine-jdk-14.0.1_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(SAP)
+      )
+    ).validate().insert()
+  }
 }
