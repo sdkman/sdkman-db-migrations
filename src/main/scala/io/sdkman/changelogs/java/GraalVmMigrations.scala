@@ -235,4 +235,62 @@ class GraalVmMigrations {
     ).validate()
       .insert()
 
+  @ChangeSet(
+    order = "005",
+    id = "05-add_graalvm_20_1_0",
+    author = "eddumelendez"
+  )
+  def migrate005(implicit db: MongoDatabase) =
+    List(
+      Version(
+        candidate = "java",
+        version = "20.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-linux-amd64-20.1.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-darwin-amd64-20.1.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-windows-amd64-20.1.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.1.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-linux-amd64-20.1.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.1.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-darwin-amd64-20.1.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.1.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-windows-amd64-20.1.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      )
+    ).validate()
+      .insert()
+
 }
