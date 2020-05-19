@@ -2,7 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Graal, Linux64, MacOSX, Version, Windows}
+import io.sdkman.changelogs.{Graal, Linux64, MacOSX, Version, Windows, removeVersion}
 
 @ChangeLog(order = "021")
 class GraalVmMigrations {
@@ -240,7 +240,7 @@ class GraalVmMigrations {
     id = "05-add_graalvm_20_1_0",
     author = "eddumelendez"
   )
-  def migrate005(implicit db: MongoDatabase) =
+  def migrate005(implicit db: MongoDatabase): Unit = {
     List(
       Version(
         candidate = "java",
@@ -292,5 +292,18 @@ class GraalVmMigrations {
       )
     ).validate()
       .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      platform => {
+        removeVersion("java", "1.0.0-rc-16-grl", platform)
+        removeVersion("java", "19.0.2-grl", platform)
+        removeVersion("java", "19.1.1-grl", platform)
+        removeVersion("java", "19.2.1-grl", platform)
+        removeVersion("java", "19.3.0.r8-grl", platform)
+        removeVersion("java", "19.3.0.r11-grl", platform)
+        removeVersion("java", "19.3.0.2.r8-grl", platform)
+        removeVersion("java", "19.3.0.2.r11-grl", platform)
+      }
+    )
+  }
 
 }
