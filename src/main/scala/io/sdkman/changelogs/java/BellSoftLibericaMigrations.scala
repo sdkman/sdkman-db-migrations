@@ -216,4 +216,299 @@ class BellSoftLibericaMigrations {
       )
     ).validate().insert()
   }
+
+  @ChangeSet(order = "0007", id = "0007-add_bellsoft_14_0_0", author = "poad")
+  def migrate0007(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-i586.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-amd64.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-windows-amd64.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+  }
+  @ChangeSet(
+    order = "0008",
+    id = "0008-add_bellsoft_14_0_0_fx",
+    author = "poad"
+  )
+  def migrate0008(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jre14+36-linux-amd64-full.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-linux-amd64-full.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-windows-amd64-full.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.0.fx-librca",
+        "http://download.bell-sw.com/java/14+36/bellsoft-jdk14+36-macos-amd64-full.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+  }
+
+  @ChangeSet(order = "0009", id = "0009-add_bellsoft_8_0_252", author = "poad")
+  def migrate0009(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.252-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-linux-i586.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-linux-amd64.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-windows-amd64.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "8.0.242-librca", _)
+    )
+  }
+
+  @ChangeSet(
+    order = "0010",
+    id = "0010-add_bellsoft_11_0_7",
+    author = "poad"
+  )
+  def migrate0010(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-linux-i586.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "11.0.7-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-linux-amd64.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "11.0.7-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-windows-amd64.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "11.0.7-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "11.0.6-librca", _)
+    )
+  }
+
+  @ChangeSet(order = "0011", id = "0011-add_bellsoft_14_0_1", author = "poad")
+  def migrate0011(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-linux-i586.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.1-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-linux-amd64.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.1-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-windows-amd64.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.1-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-macos-amd64.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "14.0.0-librca", _)
+    )
+  }
+
+  @ChangeSet(
+    order = "0012",
+    id = "0012-add_bellsoft_8_0_252_fx",
+    author = "poad"
+  )
+  def migrate0012(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.252.fx-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-linux-i586-full.tar.gz",
+        Linux32,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252.fx-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-linux-amd64-full.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252.fx-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-windows-amd64-full.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "8.0.252.fx-librca",
+        "https://download.bell-sw.com/java/8u252+9/bellsoft-jdk8u252+9-macos-amd64-full.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "8.0.242.fx-librca", _)
+    )
+  }
+
+  @ChangeSet(
+    order = "0013",
+    id = "0013-add_bellsoft_11_0_7_fx",
+    author = "poad"
+  )
+  def migrate0013(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "11.0.7.fx-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-linux-amd64-full.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "11.0.7.fx-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-windows-amd64-full.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "11.0.7.fx-librca",
+        "https://download.bell-sw.com/java/11.0.7+10/bellsoft-jdk11.0.7+10-macos-amd64-full.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "11.0.6.fx-librca", _)
+    )
+  }
+
+  @ChangeSet(
+    order = "0014",
+    id = "0014-add_bellsoft_14_0_1_fx",
+    author = "poad"
+  )
+  def migrate0014(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "14.0.1.fx-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-linux-amd64-full.tar.gz",
+        Linux64,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.1.fx-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-windows-amd64-full.zip",
+        Windows,
+        Some(Liberica)
+      ),
+      Version(
+        "java",
+        "14.0.1.fx-librca",
+        "https://download.bell-sw.com/java/14.0.1+8/bellsoft-jdk14.0.1+8-macos-amd64-full.zip",
+        MacOSX,
+        Some(Liberica)
+      )
+    ).validate().insert()
+    Seq(Linux32, Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "14.0.0.fx-librca", _)
+    )
+  }
 }
