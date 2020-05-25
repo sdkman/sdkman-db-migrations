@@ -122,7 +122,7 @@ class ScalaMigrations {
       url = "https://downloads.lightbend.com/scala/2.12.11/scala-2.12.11.zip"
     ).validate()
       .insert()
-  
+
   @ChangeSet(
     order = "010",
     id = "010-add_scala_2_13_2_as_default",

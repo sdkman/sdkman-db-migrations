@@ -60,7 +60,11 @@ class VisualVmMigrations {
       .asCandidateDefault()
   }
 
-  @ChangeSet(order = "006", id = "006-add_visualvm_2_0_2", author = "eddumelendez")
+  @ChangeSet(
+    order = "006",
+    id = "006-add_visualvm_2_0_2",
+    author = "eddumelendez"
+  )
   def migration006(implicit db: MongoDatabase) = {
     Version(
       "visualvm",

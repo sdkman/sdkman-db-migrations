@@ -2,7 +2,14 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Graal, Linux64, MacOSX, Version, Windows, removeVersion}
+import io.sdkman.changelogs.{
+  Graal,
+  Linux64,
+  MacOSX,
+  Version,
+  Windows,
+  removeVersion
+}
 
 @ChangeLog(order = "021")
 class GraalVmMigrations {
