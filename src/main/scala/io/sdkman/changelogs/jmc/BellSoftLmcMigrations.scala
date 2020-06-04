@@ -2,7 +2,7 @@ package io.sdkman.changelogs.jmc
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Liberica, Linux64, MacOSX, Version, Windows}
+import io.sdkman.changelogs.{Liberica, Linux64, Version, Windows, _}
 
 @ChangeLog(order = "001")
 class BellSoftLmcMigrations {
@@ -19,17 +19,11 @@ class BellSoftLmcMigrations {
       Version(
         "jmc",
         "7.1.1-librca",
-        "https://download.bell-sw.com/java/7.1.1/bellsoft-lmc7.1.1-windows-amd64.zip",
+        "https://download.bell-sw.com/lmc/7.1.1/bellsoft-lmc7.1.1-windows-amd64.zip",
         Windows,
-        Some(Liberica)
-      ),
-      Version(
-        "jmc",
-        "7.1.1-librca",
-        "https://download.bell-sw.com/java/7.1.1/bellsoft-lmc7.1.1-macos-amd64.tar.gz",
-        MacOSX,
         Some(Liberica)
       )
     ).validate().insert()
+    setCandidateDefault("jmc", "7.1.1-librca")
   }
 }
