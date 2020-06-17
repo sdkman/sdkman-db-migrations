@@ -21,18 +21,4 @@ class DoctoolchainMigrations {
       distribution = "UNIVERSAL"
     ).insert()
   }
-  @ChangeSet(
-    order = "002",
-    id = "002_add_docToolchain_1_2_0",
-    author = "rdmueller"
-  )
-  def migration002(implicit db: MongoDatabase) = {
-    Version(
-      candidate = "doctoolchain",
-      version = "1.2.0",
-      url = "https://github.com/docToolchain/docToolchain/archive/v1.2.0.zip"
-    ).validate()
-      .insert()
-    setCandidateDefault("doctoolchain", "1.2.0")
-  }
 }
