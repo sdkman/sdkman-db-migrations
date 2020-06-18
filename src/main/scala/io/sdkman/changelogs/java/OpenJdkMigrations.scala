@@ -1190,4 +1190,39 @@ class OpenJdkMigrations {
     ).validate()
       .insert()
   }
+
+  @ChangeSet(
+    order = "050",
+    id = "050-add_openjdk_java_16-ea-2",
+    author = "eddumelendez"
+  )
+  def migrate050(implicit db: MongoDatabase): Unit = {
+    List(
+      Version(
+        "java",
+        "16.ea.2-open",
+        "https://download.java.net/java/early_access/jdk16/2/GPL/openjdk-16-ea+2_linux-x64_bin.tar.gz",
+        Linux64,
+        Some(OpenJDK)
+      ),
+      Version(
+        "java",
+        "16.ea.2-open",
+        "https://download.java.net/java/early_access/jdk16/2/GPL/openjdk-16-ea+2_osx-x64_bin.tar.gz",
+        MacOSX,
+        Some(OpenJDK)
+      ),
+      Version(
+        "java",
+        "16.ea.2-open",
+        "https://download.java.net/java/early_access/jdk16/2/GPL/openjdk-16-ea+2_windows-x64_bin.zip",
+        Windows,
+        Some(OpenJDK)
+      )
+    ).validate()
+      .insert()
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "16.ea.1-open", _)
+    )
+  }
 }
