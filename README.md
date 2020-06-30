@@ -11,6 +11,12 @@ This repo uses [mongobee](https://github.com/mongobee/mongobee) as database migr
 
         $ docker run -d --network=host --name=mongo mongo:3.2
 
+**Docker Desktop for Mac**
+
+To connect to MongoDB when using Docker Desktop for Mac you need to forward the port explicitly:
+
+        $ docker run -d -p 27017:27017 --name=mongo mongo:3.2
+
 ## The Build
 
 The build is a standard Gradle build, with migration code written in Scala. To run migrations against your local database, simply run the following:
