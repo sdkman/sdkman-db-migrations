@@ -11,15 +11,11 @@ This repo uses [mongobee](https://github.com/mongobee/mongobee) as database migr
 
         $ docker run -d --network=host --name=mongo mongo:3.2
 
-<details>
-        <summary>Docker Desktop for Mac</summary>
+**Docker Desktop for Mac**
 
-</br>
 To connect to MongoDB when using Docker Desktop for Mac you need to forward the port explicitly:
 
         $ docker run -d -p 27017:27017 --name=mongo mongo:3.2
-
-</details>
 
 ## The Build
 
