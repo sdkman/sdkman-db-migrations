@@ -564,4 +564,23 @@ class AdoptOpenJdkMigrations {
   def migrate0017(implicit db: MongoDatabase) =
     setCandidateDefault("java", "11.0.7.hs-adpt")
 
+  @ChangeSet(
+    order = "0018",
+    id = "0018-change_windows_adoptopenjdk-j9_8_0_252_to_64_bit",
+    author = "abcfy2"
+  )
+  def migrate0018(implicit db: MongoDatabase) = {
+    removeVersion("java", "8.0.252.j9-adpt", Windows)
+    List(
+      Version(
+        "java",
+        "8.0.252.j9-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09.1_openj9-0.20.0/OpenJDK8U-jdk_x64_windows_openj9_8u252b09_openj9-0.20.0.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+  }
+
 }
