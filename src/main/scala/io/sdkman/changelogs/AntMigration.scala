@@ -3,7 +3,7 @@ package io.sdkman.changelogs
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
-@ChangeLog(order = "030")
+@ChangeLog(order = "032")
 class AntMigration {
   @ChangeSet(
     order = "001",
@@ -17,7 +17,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.10-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -32,7 +31,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.11-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -47,7 +45,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.12-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -62,7 +59,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.13-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -77,12 +73,11 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.14-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
     order = "006",
-    id = "006-add_ant_1.9.14",
+    id = "006-add_ant_1.9.15",
     author = "andrebrait"
   )
   def migration006(implicit db: MongoDatabase): Unit = {
@@ -92,7 +87,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.9.15-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -107,7 +101,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -122,7 +115,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.3-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -137,7 +129,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.4-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -152,7 +143,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.5-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -167,7 +157,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.6-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
@@ -182,7 +171,6 @@ class AntMigration {
       "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.7-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
 
   @ChangeSet(
