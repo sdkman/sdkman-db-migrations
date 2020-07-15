@@ -15,76 +15,6 @@ import io.sdkman.changelogs.{
 class OpenJdkMigrations {
 
   @ChangeSet(
-    order = "054",
-    id = "054-add_openjdk_java_15-ea-30",
-    author = "eddumelendez"
-  )
-  def migrate054(implicit db: MongoDatabase): Unit = {
-    List(
-      Version(
-        "java",
-        "15.ea.30-open",
-        "https://download.java.net/java/early_access/jdk15/30/GPL/openjdk-15-ea+30_linux-x64_bin.tar.gz",
-        Linux64,
-        Some(OpenJDK)
-      ),
-      Version(
-        "java",
-        "15.ea.30-open",
-        "https://download.java.net/java/early_access/jdk15/30/GPL/openjdk-15-ea+30_osx-x64_bin.tar.gz",
-        MacOSX,
-        Some(OpenJDK)
-      ),
-      Version(
-        "java",
-        "15.ea.30-open",
-        "https://download.java.net/java/early_access/jdk15/30/GPL/openjdk-15-ea+30_windows-x64_bin.zip",
-        Windows,
-        Some(OpenJDK)
-      )
-    ).validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "15.ea.29-open", _)
-    )
-  }
-
-  @ChangeSet(
-    order = "055",
-    id = "055-add_openjdk_java_16-ea-4",
-    author = "eddumelendez"
-  )
-  def migrate055(implicit db: MongoDatabase): Unit = {
-    List(
-      Version(
-        "java",
-        "16.ea.4-open",
-        "https://download.java.net/java/early_access/jdk16/4/GPL/openjdk-16-ea+4_linux-x64_bin.tar.gz",
-        Linux64,
-        Some(OpenJDK)
-      ),
-      Version(
-        "java",
-        "16.ea.4-open",
-        "https://download.java.net/java/early_access/jdk16/4/GPL/openjdk-16-ea+4_osx-x64_bin.tar.gz",
-        MacOSX,
-        Some(OpenJDK)
-      ),
-      Version(
-        "java",
-        "16.ea.4-open",
-        "https://download.java.net/java/early_access/jdk16/4/GPL/openjdk-16-ea+4_windows-x64_bin.zip",
-        Windows,
-        Some(OpenJDK)
-      )
-    ).validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "16.ea.3-open", _)
-    )
-  }
-
-  @ChangeSet(
     order = "056",
     id = "056-add_openjdk_java_14.0.2",
     author = "eddumelendez"
@@ -109,5 +39,59 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion("java", "14.0.1-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "057",
+    id = "057-add_openjdk_java_15-ea-31",
+    author = "eddumelendez"
+  )
+  def migrate057(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-15-ea+31_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-15-ea+31_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-15-ea+31_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.ea.31-open",
+            s"https://download.java.net/java/early_access/jdk15/31/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.ea.30-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "058",
+    id = "058-add_openjdk_java_16-ea-5",
+    author = "eddumelendez"
+  )
+  def migrate058(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-16-ea+5_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-16-ea+5_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-16-ea+5_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.5-open",
+            s"https://download.java.net/java/early_access/jdk16/5/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.ea.4-open", version.platform)
       }
 }
