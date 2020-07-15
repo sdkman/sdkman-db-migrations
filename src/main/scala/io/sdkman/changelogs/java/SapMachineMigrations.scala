@@ -202,4 +202,56 @@ class SapMachineMigrations {
       )
     ).validate().insert()
   }
+  @ChangeSet(
+    order = "0010",
+    id = "0010-add_sapmchn_jdk_11.0.8",
+    author = "poad"
+  )
+  def migrate0010(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("11.0.8", "linux-x64_bin.tar.gz"),
+      MacOSX  -> ("11.0.8", "osx-x64_bin.tar.gz"),
+      Windows -> ("11.0.8", "windows-x64_bin.zip")
+    ).map {
+        case (platform, (version, suffix)) =>
+          Version(
+            "java",
+            "11.0.8-sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
+            platform,
+            Some(SAP)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "11.0.7-sapmchn", version.platform)
+      }
+  @ChangeSet(
+    order = "0011",
+    id = "0011-add_sapmchn_jdk_14.0.2",
+    author = "poad"
+  )
+  def migrate0011(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("14.0.2", "linux-x64_bin.tar.gz"),
+      MacOSX  -> ("14.0.2", "osx-x64_bin.tar.gz"),
+      Windows -> ("14.0.2", "windows-x64_bin.zip")
+    ).map {
+        case (platform, (version, suffix)) =>
+          Version(
+            "java",
+            "14.0.2-sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
+            platform,
+            Some(SAP)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "14.0.1-sapmchn", version.platform)
+      }
 }
