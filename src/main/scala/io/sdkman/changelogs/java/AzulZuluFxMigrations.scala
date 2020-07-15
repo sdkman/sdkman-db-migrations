@@ -221,4 +221,11 @@ class AzulZuluFxMigrations {
         removeVersion(candidate = "java", version = "13.0.2.fx-zulu", platform)
     )
   }
+  @ChangeSet(order = "0009", id = "0009-remove_11.0.2-zulufx", author = "poad")
+  def migrate0009(implicit db: MongoDatabase) = {
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "11.0.2-zulufx", _)
+    )
+  }
+
 }

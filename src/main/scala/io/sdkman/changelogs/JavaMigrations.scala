@@ -120,32 +120,32 @@ class JavaMigrations {
     )
   }
 
-  @ChangeSet(order = "091", id = "091-add_zulufx_11_0_2", author = "vpavic")
-  def migrate091(implicit db: MongoDatabase) = {
-    List(
-      Version(
-        "java",
-        "11.0.2-zulufx",
-        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-linux_x64.tar.gz",
-        Linux64
-      ),
-      Version(
-        "java",
-        "11.0.2-zulufx",
-        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-win_x64.zip",
-        Windows
-      ),
-      Version(
-        "java",
-        "11.0.2-zulufx",
-        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-macosx_x64.tar.gz",
-        MacOSX
-      )
-    ).validate().insert()
-    Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "11.0.1-zulufx", _)
-    )
-  }
+//  @ChangeSet(order = "091", id = "091-add_zulufx_11_0_2", author = "vpavic")
+//  def migrate091(implicit db: MongoDatabase) = {
+//    List(
+//      Version(
+//        "java",
+//        "11.0.2-zulufx",
+//        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-linux_x64.tar.gz",
+//        Linux64
+//      ),
+//      Version(
+//        "java",
+//        "11.0.2-zulufx",
+//        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-win_x64.zip",
+//        Windows
+//      ),
+//      Version(
+//        "java",
+//        "11.0.2-zulufx",
+//        "https://cdn.azul.com/zulu/bin/zulu11.29.3-ca-fx-jdk11.0.2-macosx_x64.tar.gz",
+//        MacOSX
+//      )
+//    ).validate().insert()
+//    Seq(Linux64, MacOSX, Windows).foreach(
+//      removeVersion("java", "11.0.1-zulufx", _)
+//    )
+//  }
 
   @ChangeSet(
     order = "114",
