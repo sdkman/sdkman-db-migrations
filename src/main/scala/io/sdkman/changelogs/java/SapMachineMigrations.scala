@@ -213,14 +213,16 @@ class SapMachineMigrations {
       MacOSX  -> "osx-x64_bin.tar.gz",
       Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, binary) =>
+        case (platform, binary) => {
+          val version = "11.0.8"
           Version(
             "java",
-            "11.0.8-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.8/sapmachine-jdk-11.0.8_$binary",
+            s"$version-sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$binary",
             platform,
             Some(SAP)
           )
+        }
       }
       .toList
       .validate()
@@ -239,14 +241,16 @@ class SapMachineMigrations {
       MacOSX  -> "osx-x64_bin.tar.gz",
       Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, binary) =>
+        case (platform, binary) => {
+          val version = "14.0.2"
           Version(
             "java",
-            "14.0.2-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.2/sapmachine-jdk-14.0.2_$binary",
+            s"$version-sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$binary",
             platform,
             Some(SAP)
           )
+        }
       }
       .toList
       .validate()
