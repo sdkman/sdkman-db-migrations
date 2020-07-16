@@ -209,15 +209,15 @@ class SapMachineMigrations {
   )
   def migrate0010(implicit db: MongoDatabase) =
     Map(
-      Linux64 -> ("11.0.8", "linux-x64_bin.tar.gz"),
-      MacOSX  -> ("11.0.8", "osx-x64_bin.tar.gz"),
-      Windows -> ("11.0.8", "windows-x64_bin.zip")
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, (version, suffix)) =>
+        case (platform, binary) =>
           Version(
             "java",
             "11.0.8-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.8/sapmachine-jdk-11.0.8_$binary",
             platform,
             Some(SAP)
           )
@@ -235,15 +235,15 @@ class SapMachineMigrations {
   )
   def migrate0011(implicit db: MongoDatabase) =
     Map(
-      Linux64 -> ("14.0.2", "linux-x64_bin.tar.gz"),
-      MacOSX  -> ("14.0.2", "osx-x64_bin.tar.gz"),
-      Windows -> ("14.0.2", "windows-x64_bin.zip")
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, (version, suffix)) =>
+        case (platform, binary) =>
           Version(
             "java",
             "14.0.2-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-14.0.2/sapmachine-jdk-14.0.2_$binary",
             platform,
             Some(SAP)
           )
