@@ -209,18 +209,12 @@ class SapMachineMigrations {
   )
   def migrate0010(implicit db: MongoDatabase) =
     Map(
-      Linux64 -> ("11.0.8", "linux-x64_bin.tar.gz"),
-      MacOSX  -> ("11.0.8", "osx-x64_bin.tar.gz"),
-      Windows -> ("11.0.8", "windows-x64_bin.zip")
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, (version, suffix)) =>
-          Version(
-            "java",
-            "11.0.8-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
-            platform,
-            Some(SAP)
-          )
+        case (platform, suffix) =>
+          toVersion(platform, suffix, "11.0.8")
       }
       .toList
       .validate()
@@ -235,18 +229,12 @@ class SapMachineMigrations {
   )
   def migrate0011(implicit db: MongoDatabase) =
     Map(
-      Linux64 -> ("14.0.2", "linux-x64_bin.tar.gz"),
-      MacOSX  -> ("14.0.2", "osx-x64_bin.tar.gz"),
-      Windows -> ("14.0.2", "windows-x64_bin.zip")
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, (version, suffix)) =>
-          Version(
-            "java",
-            "14.0.2-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
-            platform,
-            Some(SAP)
-          )
+        case (platform, suffix) =>
+          toVersion(platform, suffix, "14.0.2")
       }
       .toList
       .validate()
@@ -254,4 +242,13 @@ class SapMachineMigrations {
       .foreach { version =>
         removeVersion("java", "14.0.1-sapmchn", version.platform)
       }
+
+  private def toVersion(platform: Platform, suffix: String, version: String) =
+    Version(
+      "java",
+      s"$version-sapmchn",
+      s"https://github.com/SAP/SapMachine/releases/download/sapmachine-$version/sapmachine-jdk-${version}_$suffix",
+      platform,
+      Some(SAP)
+    )
 }
