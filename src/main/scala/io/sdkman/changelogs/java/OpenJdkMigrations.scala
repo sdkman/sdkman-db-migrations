@@ -15,33 +15,6 @@ import io.sdkman.changelogs.{
 class OpenJdkMigrations {
 
   @ChangeSet(
-    order = "056",
-    id = "056-add_openjdk_java_14.0.2",
-    author = "eddumelendez"
-  )
-  def migrate056(implicit db: MongoDatabase): Unit =
-    Map(
-      Linux64 -> "openjdk-14.0.2_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-14.0.2_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-14.0.2_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "14.0.2-open",
-            s"https://download.java.net/java/GA/jdk14.0.2/205943a0976c4ed48cb16f1043c5c647/11/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "14.0.1-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "059",
     id = "059-add_openjdk_java_15-ea-32",
     author = "eddumelendez"
