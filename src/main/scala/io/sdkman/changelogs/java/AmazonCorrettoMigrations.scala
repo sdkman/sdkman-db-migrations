@@ -183,7 +183,8 @@ class AmazonCorrettoMigrations {
     Map(
       Linux64 -> ("8.262.10.1", "linux-x64.tar.gz"),
       MacOSX  -> ("8.262.10.1", "macosx-x64.tar.gz"),
-      Windows -> ("8.262.10.1", "windows-x64-jdk.zip")
+      Windows -> ("8.262.10.1", "windows-x64-jdk.zip"),
+      LinuxARM64 -> ("8.262.10.1", "linux-aarch64.tar.gz")
     ).map {
         case (platform, (version, suffix)) =>
           Version(
@@ -210,7 +211,8 @@ class AmazonCorrettoMigrations {
     Map(
       Linux64 -> ("11.0.8.10.1", "linux-x64.tar.gz"),
       MacOSX  -> ("11.0.8.10.1", "macosx-x64.tar.gz"),
-      Windows -> ("11.0.8.10.1", "windows-x64-jdk.zip")
+      Windows -> ("11.0.8.10.1", "windows-x64-jdk.zip"),
+      LinuxARM64 -> ("11.0.8.10.1", "linux-aarch64.tar.gz")
     ).map {
         case (platform, (version, suffix)) =>
           Version(
