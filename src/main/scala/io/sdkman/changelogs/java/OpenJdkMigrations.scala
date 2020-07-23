@@ -15,33 +15,6 @@ import io.sdkman.changelogs.{
 class OpenJdkMigrations {
 
   @ChangeSet(
-    order = "059",
-    id = "059-add_openjdk_java_15-ea-32",
-    author = "eddumelendez"
-  )
-  def migrate059(implicit db: MongoDatabase): Unit =
-    Map(
-      Linux64 -> "openjdk-15-ea+32_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-15-ea+32_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-15-ea+32_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "15.ea.32-open",
-            s"https://download.java.net/java/early_access/jdk15/32/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "15.ea.31-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "060",
     id = "060-add_openjdk_java_16-ea-6",
     author = "eddumelendez"
@@ -104,4 +77,31 @@ class OpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "063",
+    id = "063-add_openjdk_java_15-ea-33",
+    author = "eddumelendez"
+  )
+  def migrate063(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-15-ea+33_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-15-ea+33_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-15-ea+33_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.ea.33-open",
+            s"https://download.java.net/java/early_access/jdk15/33/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.ea.32-open", version.platform)
+      }
 }
