@@ -45,6 +45,22 @@ class DottyMigrations {
     setCandidateDefault("dotty", "0.22.0")
   }
 
+  @ChangeSet(
+    order = "003",
+    id = "003_add_dotty_0_24_0",
+    author = "steinybot"
+  )
+  def migration003(implicit db: MongoDatabase): Unit = {
+    val version = "0.24.0"
+    Version(
+      candidate = "dotty",
+      version = version,
+      url = url(version)
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
   private def url(version: String) =
     s"https://github.com/lampepfl/dotty/releases/download/$version/dotty-$version.zip"
 }

@@ -101,6 +101,34 @@ class SparkMigrations {
       "https://archive.apache.org/dist/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz"
     ).validate()
       .insert()
+  }
+
+  @ChangeSet(
+    order = "009",
+    id = "009-add_spark_2.4.5",
+    author = "flvndh"
+  )
+  def migration009(implicit db: MongoDatabase) = {
+    Version(
+      "spark",
+      "2.4.5",
+      "https://archive.apache.org/dist/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz"
+    ).validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "010",
+    id = "010-add_spark_2.4.6",
+    author = "flvndh"
+  )
+  def migration010(implicit db: MongoDatabase) = {
+    Version(
+      "spark",
+      "2.4.6",
+      "https://archive.apache.org/dist/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz"
+    ).validate()
+      .insert()
       .asCandidateDefault()
   }
 }
