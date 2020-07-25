@@ -773,8 +773,8 @@ class AdoptOpenJdkMigrations {
       ),
       Version(
         "java",
-        "11.0.7.hs-adpt",
-        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.7%2B10/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.7_10.tar.gz",
+        "11.0.8.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.8_10.tar.gz",
         LinuxARM64,
         Some(AdoptOpenJDK)
       )
