@@ -243,7 +243,8 @@ class AmazonCorrettoMigrations {
          Some(Amazon)
        ),
        Version(
-         "java", "11.0.8-amzn",
+         "java", 
+         "11.0.8-amzn",
          "https://corretto.aws/downloads/resources/11.0.8.10.1/amazon-corretto-11.0.8.10.1-linux-aarch64.tar.gz",
          LinuxARM64,
          Some(Amazon)
