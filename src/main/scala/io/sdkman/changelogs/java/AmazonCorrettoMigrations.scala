@@ -183,8 +183,7 @@ class AmazonCorrettoMigrations {
     Map(
       Linux64 -> ("8.262.10.1", "linux-x64.tar.gz"),
       MacOSX  -> ("8.262.10.1", "macosx-x64.tar.gz"),
-      Windows -> ("8.262.10.1", "windows-x64-jdk.zip"),
-      LinuxARM64 -> ("8.262.10.1", "linux-aarch64.tar.gz")
+      Windows -> ("8.262.10.1", "windows-x64-jdk.zip")
     ).map {
         case (platform, (version, suffix)) =>
           Version(
@@ -211,8 +210,7 @@ class AmazonCorrettoMigrations {
     Map(
       Linux64 -> ("11.0.8.10.1", "linux-x64.tar.gz"),
       MacOSX  -> ("11.0.8.10.1", "macosx-x64.tar.gz"),
-      Windows -> ("11.0.8.10.1", "windows-x64-jdk.zip"),
-      LinuxARM64 -> ("11.0.8.10.1", "linux-aarch64.tar.gz")
+      Windows -> ("11.0.8.10.1", "windows-x64-jdk.zip")
     ).map {
         case (platform, (version, suffix)) =>
           Version(
@@ -229,4 +227,29 @@ class AmazonCorrettoMigrations {
       .foreach { version =>
         removeVersion("java", "11.0.7-amzn", version.platform)
       }
+
+  @ChangeSet(
+     order = "0008",
+     id = "0008-add_corretto-8-11-linuxarm64",
+     author = "pnavais"
+  )
+  def migrate0008(implicit db: MongoDatabase) = {
+     List(
+       Version(
+         "java",
+         "8.0.262-amzn",
+         "https://corretto.aws/downloads/resources/8.262.10.1/amazon-corretto-8.262.10.1-linux-aarch64.tar.gz",
+         LinuxARM64,
+         Some(Amazon)
+       ),
+       Version(
+         "java", "11.0.8-amzn",
+         "https://corretto.aws/downloads/resources/11.0.8.10.1/amazon-corretto-11.0.8.10.1-linux-aarch64.tar.gz",
+         LinuxARM64,
+         Some(Amazon)
+       )
+     ).validate()
+       .insert()
+  }
+  
 }
