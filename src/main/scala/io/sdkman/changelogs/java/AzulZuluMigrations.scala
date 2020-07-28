@@ -457,4 +457,42 @@ class AzulZuluMigrations {
       .foreach { version =>
         removeVersion("java", "13.0.3-zulu", version.platform)
       }
+  @ChangeSet(
+    order = "016",
+    id = "016-remove_zulu_8_0_262-b17",
+    author = "poad"
+  )
+  def migrate016(implicit db: MongoDatabase): Unit =
+    Seq(
+      Linux64,
+      MacOSX,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "8.0.262-zulu", platform)
+    }
+
+  @ChangeSet(
+    order = "017",
+    id = "0017-readd_zulu_8_0_262-b19",
+    author = "poad"
+  )
+  def migrate017(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("zulu8.48.0.51-ca-jdk8.0.262-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu8.48.0.51-ca-jdk8.0.262-macosx_x64.tar.gz"),
+      Windows -> ("zulu8.48.0.51-ca-jdk8.0.262-win_x64.zip")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.262-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
