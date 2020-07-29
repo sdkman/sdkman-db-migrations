@@ -210,4 +210,73 @@ class BellSoftLibericaMigrations {
           )
       )
   }
+  @ChangeSet(
+    order = "0021",
+    id = "0021-add_bellsoft_8_0_265",
+    author = "poad"
+  )
+  def migrate0021(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      Linux32 -> "bellsoft-jdk8u265+1-linux-i586.tar.gz",
+      Linux64 -> "bellsoft-jdk8u265+1-linux-amd64.tar.gz",
+      Windows -> "bellsoft-jdk8u265+1-windows-amd64.zip",
+      MacOSX  -> "bellsoft-jdk8u265+1-macos-amd64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265-librca",
+            s"https://download.bell-sw.com/java/8u265+1/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "8.0.262-librca",
+            version.platform
+          )
+      )
+  }
+  @ChangeSet(
+    order = "0022",
+    id = "0022-add_bellsoft_8_0_265_fx",
+    author = "poad"
+  )
+  def migrate0022(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      Linux32 -> "bellsoft-jdk8u265+1-linux-i586-full.tar.gz",
+      Linux64 -> "bellsoft-jdk8u265+1-linux-amd64-full.tar.gz",
+      Windows -> "bellsoft-jdk8u265+1-windows-amd64-full.zip",
+      MacOSX  -> "bellsoft-jdk8u265+1-macos-amd64-full.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265.fx-librca",
+            s"https://download.bell-sw.com/java/8u265+1$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "8.0.262.fx-librca",
+            version.platform
+          )
+      )
+  }
+
 }
