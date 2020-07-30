@@ -731,21 +731,21 @@ class AdoptOpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "0025",
-    id = "0025-add_adoptopenjdk-j9_8_0_262",
-    author = "poad"
+    order = "0026",
+    id = "0026-add_adoptopenjdk-j9_8_0_265",
+    author = "eddumelendez"
   )
-  def migrate0025(implicit db: MongoDatabase) =
+  def migrate0026(implicit db: MongoDatabase) =
     Map(
-      Linux64 -> "OpenJDK8U-jdk_x64_linux_openj9_8u262b10_openj9-0.21.0.tar.gz",
-      MacOSX  -> "OpenJDK8U-jdk_x64_mac_openj9_8u262b10_openj9-0.21.0.tar.gz",
-      Windows -> "OpenJDK8U-jdk_x64_windows_openj9_8u262b10_openj9-0.21.0.zip"
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_openj9_8u265b01_openj9-0.21.0.tar.gz",
+      MacOSX  -> "OpenJDK8U-jdk_x64_mac_openj9_8u265b01_openj9-0.21.0.tar.gz",
+      Windows -> "OpenJDK8U-jdk_x64_windows_openj9_8u265b01_openj9-0.21.0.zip"
     ).map {
         case (platform, binary) =>
           Version(
             "java",
-            "8.0.262.j9-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u262-b10_openj9-0.21.0/$binary",
+            "8.0.265.j9-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u265-b01_openj9-0.21.0/$binary",
             platform,
             Some(AdoptOpenJDK)
           )
@@ -754,6 +754,6 @@ class AdoptOpenJdkMigrations {
       .validate()
       .insert()
       .foreach { version =>
-        removeVersion("java", "8.0.252.j9-adpt", version.platform)
+        removeVersion("java", "8.0.262.j9-adpt", version.platform)
       }
 }
