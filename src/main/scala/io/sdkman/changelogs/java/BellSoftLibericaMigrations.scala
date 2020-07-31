@@ -8,41 +8,6 @@ import io.sdkman.changelogs.{Linux64, MacOSX, Version, Windows, _}
 class BellSoftLibericaMigrations {
 
   @ChangeSet(
-    order = "0015",
-    id = "0015-add_bellsoft_8_0_262",
-    author = "strizhik"
-  )
-  def migrate0015(implicit db: MongoDatabase): Unit = {
-
-    Map(
-      Linux32 -> "bellsoft-jdk8u262+10-linux-i586.tar.gz",
-      Linux64 -> "bellsoft-jdk8u262+10-linux-amd64.tar.gz",
-      Windows -> "bellsoft-jdk8u262+10-windows-amd64.zip",
-      MacOSX  -> "bellsoft-jdk8u262+10-macos-amd64.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "8.0.262-librca",
-            s"https://download.bell-sw.com/java/8u262+10/$binary",
-            platform,
-            Some(Liberica)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach(
-        version =>
-          removeVersion(
-            "java",
-            "8.0.252-librca",
-            version.platform
-          )
-      )
-  }
-
-  @ChangeSet(
     order = "0016",
     id = "0016-add_bellsoft_11_0_8",
     author = "strizhik"
@@ -105,41 +70,6 @@ class BellSoftLibericaMigrations {
           removeVersion(
             "java",
             "14.0.1-librca",
-            version.platform
-          )
-      )
-  }
-
-  @ChangeSet(
-    order = "0018",
-    id = "0018-add_bellsoft_8_0_262_fx",
-    author = "strizhik"
-  )
-  def migrate0018(implicit db: MongoDatabase): Unit = {
-
-    Map(
-      Linux32 -> "bellsoft-jdk8u262+10-linux-i586-full.tar.gz",
-      Linux64 -> "bellsoft-jdk8u262+10-linux-amd64-full.tar.gz",
-      Windows -> "bellsoft-jdk8u262+10-windows-amd64-full.zip",
-      MacOSX  -> "bellsoft-jdk8u262+10-macos-amd64-full.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "8.0.262.fx-librca",
-            s"https://download.bell-sw.com/java/8u262+10/$binary",
-            platform,
-            Some(Liberica)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach(
-        version =>
-          removeVersion(
-            "java",
-            "8.0.252.fx-librca",
             version.platform
           )
       )
@@ -210,4 +140,75 @@ class BellSoftLibericaMigrations {
           )
       )
   }
+
+  @ChangeSet(
+    order = "0021",
+    id = "0021-add_bellsoft_8_0_265",
+    author = "strizhik"
+  )
+  def migrate0021(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      Linux32 -> "bellsoft-jdk8u265+1-linux-i586.tar.gz",
+      Linux64 -> "bellsoft-jdk8u265+1-linux-amd64.tar.gz",
+      Windows -> "bellsoft-jdk8u265+1-windows-amd64.zip",
+      MacOSX  -> "bellsoft-jdk8u265+1-macos-amd64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265-librca",
+            s"https://download.bell-sw.com/java/8u265+1/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "8.0.262-librca",
+            version.platform
+          )
+      )
+  }
+
+  @ChangeSet(
+    order = "0022",
+    id = "0022-add_bellsoft_8_0_265_fx",
+    author = "strizhik"
+  )
+  def migrate0022(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      Linux32 -> "bellsoft-jdk8u265+1-linux-i586-full.tar.gz",
+      Linux64 -> "bellsoft-jdk8u265+1-linux-amd64-full.tar.gz",
+      Windows -> "bellsoft-jdk8u265+1-windows-amd64-full.zip",
+      MacOSX  -> "bellsoft-jdk8u265+1-macos-amd64-full.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265.fx-librca",
+            s"https://download.bell-sw.com/java/8u265+1/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "8.0.262.fx-librca",
+            version.platform
+          )
+      )
+  }
+
 }
