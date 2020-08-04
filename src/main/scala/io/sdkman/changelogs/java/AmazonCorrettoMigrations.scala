@@ -254,4 +254,30 @@ class AmazonCorrettoMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.262-amzn", version.platform)
       }
+
+  @ChangeSet(
+    order = "0009",
+    id = "0009-add_corretto-8-11-linuxarm64",
+    author = "pnavais"
+  )
+  def migrate0009(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "java",
+        "8.0.262-amzn",
+        "https://corretto.aws/downloads/resources/8.262.10.1/amazon-corretto-8.262.10.1-linux-aarch64.tar.gz",
+        LinuxARM64,
+        Some(Amazon)
+      ),
+      Version(
+        "java",
+        "11.0.8-amzn",
+        "https://corretto.aws/downloads/resources/11.0.8.10.1/amazon-corretto-11.0.8.10.1-linux-aarch64.tar.gz",
+        LinuxARM64,
+        Some(Amazon)
+      )
+    ).validate()
+      .insert()
+  }
+
 }
