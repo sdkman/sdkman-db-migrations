@@ -4,6 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import io.sdkman.changelogs.{
   Linux64,
+  LinuxARM64,
   MacOSX,
   OpenJDK,
   Version,
@@ -53,33 +54,6 @@ class OpenJdkMigrations {
       .insert()
 
   @ChangeSet(
-    order = "065",
-    id = "065-add_openjdk_java_15-ea-34",
-    author = "eddumelendez"
-  )
-  def migrate065(implicit db: MongoDatabase): Unit =
-    Map(
-      Linux64 -> "openjdk-15-ea+34_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-15-ea+34_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-15-ea+34_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "15.ea.34-open",
-            s"https://download.java.net/java/early_access/jdk15/34/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "15.ea.33-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "066",
     id = "066-add_openjdk_java_16-ea-8",
     author = "eddumelendez"
@@ -104,5 +78,33 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion("java", "16.ea.7-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "067",
+    id = "067-add_openjdk_java_15-ea-35",
+    author = "eddumelendez"
+  )
+  def migrate067(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-15_linux-aarch64_bin.tar.gz",
+      Linux64 -> "openjdk-15-ea+35_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-15-ea+35_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-15-ea+35_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.ea.35-open",
+            s"https://download.java.net/java/GA/jdk15/779bf45e88a44cbd9ea6621d33e33db1/35/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.ea.34-open", version.platform)
       }
 }
