@@ -89,9 +89,9 @@ class OpenJdkMigrations {
   def migrate068(implicit db: MongoDatabase): Unit =
     Map(
       LinuxARM64 -> "openjdk-16-ea+9_linux-aarch64_bin.tar.gz",
-      Linux64 -> "openjdk-16-ea+9_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-16-ea+9_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-16-ea+9_windows-x64_bin.zip"
+      Linux64    -> "openjdk-16-ea+9_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-16-ea+9_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-16-ea+9_windows-x64_bin.zip"
     ).map {
         case (platform, binary) =>
           Version(
