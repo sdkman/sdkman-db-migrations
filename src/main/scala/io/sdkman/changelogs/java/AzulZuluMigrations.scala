@@ -494,5 +494,30 @@ class AzulZuluMigrations {
       .toList
       .validate()
       .insert()
-
+  @ChangeSet(
+    order = "018",
+    id = "0018-readd_zulu_8_0_265-b11",
+    author = "poad"
+  )
+  def migrate018(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("zulu8.48.0.53-ca-jdk8.0.265-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu8.48.0.53-ca-jdk8.0.265-macosx_x64.tar.gz"),
+      Windows -> ("zulu8.48.0.53-ca-jdk8.0.265-win_x64.zip")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.262-zulu", version.platform)
+      }
 }

@@ -14,28 +14,6 @@ import io.sdkman.changelogs.{
 @ChangeLog(order = "018")
 class AzulZuluFxMigrations {
 
-  @ChangeSet(order = "0009", id = "0009-add_zulufx_8.0.262", author = "poad")
-  def migrate0009(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> ("zulu8.48.0.51-ca-fx-jdk8.0.262-linux_x64.tar.gz"),
-      MacOSX  -> ("zulu8.48.0.51-ca-fx-jdk8.0.262-macosx_x64.tar.gz"),
-      Windows -> ("zulu8.48.0.51-ca-fx-jdk8.0.262-win_x64.zip")
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "8.0.262.fx-zulu",
-            s"https://cdn.azul.com/zulu/bin/$binary",
-            platform,
-            Some(Zulu)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "8.0.252.fx-zulu", version.platform)
-      }
   @ChangeSet(order = "0010", id = "0010-add_zulufx_11.0.8", author = "poad")
   def migrate0010(implicit db: MongoDatabase) =
     Map(
@@ -102,4 +80,27 @@ class AzulZuluFxMigrations {
       .foreach { version =>
         removeVersion("java", "13.0.3.fx-zulu", version.platform)
       }
+  @ChangeSet(order = "0013", id = "0013-add_zulufx_8.0.265", author = "poad")
+  def migrate0013(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("zulu8.48.0.53-ca-fx-jdk8.0.265-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu8.48.0.53-ca-fx-jdk8.0.265-macosx_x64.tar.gz"),
+      Windows -> ("zulu8.48.0.53-ca-fx-jdk8.0.265-win_x64.zip")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.265.fx-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.262.fx-zulu", version.platform)
+      }
+
 }
