@@ -280,4 +280,14 @@ class AmazonCorrettoMigrations {
       .insert()
   }
 
+  @ChangeSet(
+    order = "0010",
+    id = "0010-remove_corretto_java8_update_202",
+    author = "eddumelendez"
+  )
+  def migrate0010(implicit db: MongoDatabase): Unit = {
+    Seq(Linux64, MacOSX, Windows).foreach(
+      removeVersion("java", "8.0.202-amzn", _)
+    )
+  }
 }
