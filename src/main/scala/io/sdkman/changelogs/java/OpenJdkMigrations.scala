@@ -54,34 +54,6 @@ class OpenJdkMigrations {
       .insert()
 
   @ChangeSet(
-    order = "067",
-    id = "067-add_openjdk_java_15-ea-35",
-    author = "eddumelendez"
-  )
-  def migrate067(implicit db: MongoDatabase): Unit =
-    Map(
-      LinuxARM64 -> "openjdk-15_linux-aarch64_bin.tar.gz",
-      Linux64    -> "openjdk-15_linux-x64_bin.tar.gz",
-      MacOSX     -> "openjdk-15_osx-x64_bin.tar.gz",
-      Windows    -> "openjdk-15_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "15.ea.35-open",
-            s"https://download.java.net/java/GA/jdk15/779bf45e88a44cbd9ea6621d33e33db1/35/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "15.ea.34-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "068",
     id = "068-add_openjdk_java_16-ea-9",
     author = "eddumelendez"
@@ -159,5 +131,33 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion(version.candidate, "11.0.7-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "071",
+    id = "071-add_openjdk_java_15-ea-36",
+    author = "eddumelendez"
+  )
+  def migrate071(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-15_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-15_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-15_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-15_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.ea.36-open",
+            s"https://download.java.net/java/GA/jdk15/779bf45e88a44cbd9ea6621d33e33db1/36/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.ea.35-open", version.platform)
       }
 }
