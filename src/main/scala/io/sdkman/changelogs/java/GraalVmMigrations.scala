@@ -313,4 +313,63 @@ class GraalVmMigrations {
     )
   }
 
+  @ChangeSet(
+    order = "006",
+    id = "06-add_graalvm_20_2_0",
+    author = "eddumelendez"
+  )
+  def migrate006(implicit db: MongoDatabase): Unit = {
+    List(
+      Version(
+        candidate = "java",
+        version = "20.2.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.2.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-darwin-amd64-20.2.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.2.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-windows-amd64-20.2.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.2.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-linux-amd64-20.2.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.2.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-darwin-amd64-20.2.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.2.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-windows-amd64-20.2.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      )
+    ).validate()
+      .insert()
+  }
+
 }
