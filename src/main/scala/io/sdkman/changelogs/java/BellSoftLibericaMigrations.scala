@@ -211,4 +211,31 @@ class BellSoftLibericaMigrations {
       )
   }
 
+  @ChangeSet(
+    order = "0023",
+    id = "0023-add_linuxarm64_bellsoft_8_11_14",
+    author = "dvdkruk"
+  )
+  def migrate0023(implicit db: MongoDatabase): Unit = {
+    Map(
+      "8.0.265-librca"   -> "8u265+1/bellsoft-jdk8u265+1-linux-aarch64.tar.gz",
+      "11.0.8.librca"    -> "11.0.8+10/bellsoft-jdk11.0.8+10-linux-aarch64.tar.gz",
+      "11.0.8.fx-librca" -> "11.0.8+10/bellsoft-jdk11.0.8+10-linux-aarch64-full.tar.gz",
+      "14.0.2.librca"    -> "14.0.2+13/bellsoft-jdk14.0.2+13-linux-aarch64.tar.gz",
+      "14.0.2.fx-librca" -> "14.0.2+13/bellsoft-jdk14.0.2+13-linux-aarch64-full.tar.gz"
+    ).map {
+        case (version, binary) =>
+          Version(
+            "java",
+            version,
+            s"https://download.bell-sw.com/java/$binary",
+            LinuxARM64,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
+
 }
