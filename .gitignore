@@ -94,7 +94,7 @@ modules.xml
 ### Metals ###
 .metals/
 
-### Metals ###
+### VSCode ###
 .vscode/
 
 ### Scala ###
