@@ -238,4 +238,30 @@ class BellSoftLibericaMigrations {
       .insert()
   }
 
+  @ChangeSet(
+    order = "0024",
+    id = "0024-correcting_linuxarm64_bellsoft_labels-11-14",
+    author = "dvdkruk"
+  )
+  def migrate0024(implicit db: MongoDatabase): Unit = {
+    Map(
+      "11.0.8-librca" -> "11.0.8+10/bellsoft-jdk11.0.8+10-linux-aarch64.tar.gz",
+      "14.0.2-librca" -> "14.0.2+13/bellsoft-jdk14.0.2+13-linux-aarch64.tar.gz"
+    ).map {
+        case (version, binary) =>
+          Version(
+            "java",
+            version,
+            s"https://download.bell-sw.com/java/$binary",
+            LinuxARM64,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+    removeVersion("java", "11.0.8.librca", LinuxARM64)
+    removeVersion("java", "14.0.2.librca", LinuxARM64)
+  }
+
 }
