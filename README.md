@@ -9,13 +9,13 @@ This enables the users of SDKMAN to contribute new Installation Candidates and r
 
 This repo uses [mongobee](https://github.com/mongobee/mongobee) as database migration framework. In order to contribute a PR, it is required to have a local installation of MongoDB on your machine. Alternatively run it up with Docker (works on Linux):
 
-        $ docker run -d --network=host --name=mongo mongo:3.2
+        $ docker run -d --network=host --name=mongo mongo:4.0
 
 **Docker Desktop for Mac**
 
 To connect to MongoDB when using Docker Desktop for Mac you need to forward the port explicitly:
 
-        $ docker run -d -p 27017:27017 --name=mongo mongo:3.2
+        $ docker run -d -p 27017:27017 --name=mongo mongo:4.0
 
 ## The Build
 
