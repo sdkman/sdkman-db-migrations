@@ -113,6 +113,10 @@ package object changelogs {
   case object Liberica extends Vendor {
     override def id = "librca"
   }
+  
+  case object Mandrel extends Vendor {
+    override def id = "mandrel"
+  }
 
   case object OpenJDK extends Vendor {
     override def id = "open"
