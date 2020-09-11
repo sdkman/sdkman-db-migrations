@@ -9,6 +9,7 @@ import io.sdkman.changelogs.{
   OpenJDK,
   Version,
   Windows,
+  WindowsARM64,
   removeVersion
 }
 
@@ -160,4 +161,20 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "16.ea.14-open", version.platform)
       }
+
+  @ChangeSet(
+    order = "076",
+    id = "076-add_windowsarm64_openjdk_java_16-ea-10",
+    author = "eddumelendez"
+  )
+  def migration076(implicit db: MongoDatabase) = {
+    Version(
+      "java",
+      "16.ea.10-open",
+      "https://github.com/microsoft/openjdk-aarch64/releases/download/16-ea+10/jdk-16-ea+10-windows-aarch64.zip",
+      WindowsARM64,
+      Some(OpenJDK)
+    ).validate()
+      .insert()
+  }
 }

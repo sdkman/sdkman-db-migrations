@@ -166,6 +166,10 @@ package object changelogs {
     override val id = "LINUX_ARM32"
   }
 
+  case object WindowsARM64 extends Platform {
+    override val id = "WINDOWS_ARM64"
+  }
+
   case class Candidate(
       candidate: String,
       name: String,
