@@ -58,6 +58,21 @@ class DottyMigrations {
       url = url(version)
     ).validate()
       .insert()
+  }
+
+  @ChangeSet(
+    order = "004",
+    id = "004_add_dotty_0_27_0_RC1",
+    author = "regadas"
+  )
+  def migration004(implicit db: MongoDatabase): Unit = {
+    val version = "0.27.0-RC1"
+    Version(
+      candidate = "dotty",
+      version = version,
+      url = url(version)
+    ).validate()
+      .insert()
       .asCandidateDefault()
   }
 
