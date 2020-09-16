@@ -102,5 +102,24 @@ class AzulZuluFxMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.262.fx-zulu", version.platform)
       }
+  @ChangeSet(order = "0014", id = "0014-15.0.0", author = "poad")
+  def migrate0014(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("zulu15.27.17-ca-fx-jdk15.0.0-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu15.27.17-ca-fx-jdk15.0.0-macosx_x64.tar.gz"),
+      Windows -> ("zulu15.27.17-ca-fx-jdk15.0.0-win_x64.zip")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0.fx-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 
 }
