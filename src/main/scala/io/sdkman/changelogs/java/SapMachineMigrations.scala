@@ -54,6 +54,7 @@ class SapMachineMigrations {
       .foreach { version =>
         removeVersion("java", "11.0.7-sapmchn", version.platform)
       }
+
   @ChangeSet(
     order = "0011",
     id = "0011-add_sapmchn_jdk_14.0.2",
@@ -83,4 +84,22 @@ class SapMachineMigrations {
       platform,
       Some(SAP)
     )
+
+  @ChangeSet(
+    order = "0012",
+    id = "0012-add_sapmchn_jdk_15",
+    author = "poad"
+  )
+  def migrate0012(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
+    ).map {
+        case (platform, suffix) =>
+          toVersion(platform, suffix, "15")
+      }
+      .toList
+      .validate()
+      .insert()
 }
