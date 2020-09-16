@@ -160,4 +160,32 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "16.ea.14-open", version.platform)
       }
+
+  @ChangeSet(
+    order = "075",
+    id = "075-add_openjdk_java_15",
+    author = "poad"
+  )
+  def migrate075(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-15_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-15_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-15_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-15_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15-open",
+            s"https://download.java.net/java/GA/jdk15/779bf45e88a44cbd9ea6621d33e33db1/36/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.ea.36-open", version.platform)
+      }
 }
