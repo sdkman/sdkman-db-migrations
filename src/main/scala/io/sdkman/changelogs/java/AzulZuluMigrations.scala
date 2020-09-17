@@ -4,6 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import io.sdkman.changelogs.{
   Linux64,
+  LinuxARM64,
   MacOSX,
   Version,
   Windows,
@@ -520,4 +521,28 @@ class AzulZuluMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.262-zulu", version.platform)
       }
+  @ChangeSet(
+    order = "019",
+    id = "0019-add_zulu_15_0_0",
+    author = "poad"
+  )
+  def migrate019(implicit db: MongoDatabase) =
+    Map(
+      Linux64    -> ("zulu/bin/zulu15.27.17-ca-jdk15.0.0-linux_x64.tar.gz"),
+      MacOSX     -> ("zulu/bin/zulu15.27.17-ca-jdk15.0.0-macosx_x64.tar.gz"),
+      Windows    -> ("zulu/bin/zulu15.27.17-ca-jdk15.0.0-win_x64.zip"),
+      LinuxARM64 -> ("zulu-embedded/bin/zulu15.27.17-ca-jdk15.0.0-linux_aarch64.tar.gz")
+    ).map {
+        case (platform, path) =>
+          Version(
+            "java",
+            "15.0.0-zulu",
+            s"https://cdn.azul.com/$path",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
