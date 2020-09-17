@@ -806,4 +806,29 @@ class AdoptOpenJdkMigrations {
       )
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "0029",
+    id = "0029-add_adoptopenjdk-hs_15_0_0",
+    author = "poad"
+  )
+  def migrate0029(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "OpenJDK15U-jdk_aarch64_linux_hotspot_15_36.tar.gz",
+      Linux64    -> "OpenJDK15U-jdk_x64_linux_hotspot_15_36.tar.gz",
+      MacOSX     -> "OpenJDK15U-jdk_x64_mac_hotspot_15_36.tar.gz",
+      Windows    -> "OpenJDK15U-jdk_x64_windows_hotspot_15_36.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0.hs-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
