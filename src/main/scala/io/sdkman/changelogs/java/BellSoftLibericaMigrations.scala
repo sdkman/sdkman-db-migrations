@@ -263,5 +263,59 @@ class BellSoftLibericaMigrations {
     removeVersion("java", "11.0.8.librca", LinuxARM64)
     removeVersion("java", "14.0.2.librca", LinuxARM64)
   }
+  @ChangeSet(
+    order = "0025",
+    id = "0025-add_bellsoft_15_0_0",
+    author = "poad"
+  )
+  def migrate0025(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      LinuxARM64 -> "bellsoft-jdk15+36-linux-aarch64.tar.gz",
+      Linux32    -> "bellsoft-jdk15+36-linux-i586.tar.gz",
+      Linux64    -> "bellsoft-jdk15+36-linux-amd64.tar.gz",
+      Windows    -> "bellsoft-jdk15+36-windows-amd64.zip",
+      MacOSX     -> "bellsoft-jdk15+36-macos-amd64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0-librca",
+            s"https://download.bell-sw.com/java/15+36/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "0026",
+    id = "0026-add_bellsoft_15_0_0_fx",
+    author = "poad"
+  )
+  def migrate0026(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      LinuxARM64 -> "bellsoft-jdk15+36-linux-aarch64-full.tar.gz",
+      Linux64    -> "bellsoft-jdk15+36-linux-amd64-full.tar.gz",
+      Windows    -> "bellsoft-jdk15+36-windows-amd64-full.zip",
+      MacOSX     -> "bellsoft-jdk15+36-macos-amd64-full.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0-fx-librca",
+            s"https://download.bell-sw.com/java/15+36/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
 
 }
