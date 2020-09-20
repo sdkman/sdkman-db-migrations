@@ -188,4 +188,33 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "16.ea.15-open", version.platform)
       }
+  
+  
+
+  @ChangeSet(
+    order = "077",
+    id = "077-add_openjdk_java_16-loom-6",
+    author = "soberich"
+  )
+  def migrate077(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64    -> "openjdk-16-loom+6-105_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-16-loom+6-105_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-16-loom+6-105_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.0.6-loom", //has to be "1.2.3" e.i. numeric in order to Gradle auto detection work https://docs.gradle.org/nightly/userguide/toolchains.html#sec:auto_detection 
+            s"https://download.java.net/java/early_access/loom/6/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.0.6-loom", version.platform)
+      }
 }
