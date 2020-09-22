@@ -18,7 +18,7 @@ class BallerinaMigrations {
       candidate = CandidateName,
       name = "Ballerina",
       description =
-        "Opensourceprogramminglanguageandplatformforcloud-eraapplicationprogrammerstoeasilywritesoftwarethatjustworks.",
+        "Open source programming language and platform for cloud-era application programmers to easily write software that just works.",
       websiteUrl = "https://ballerina.io/"
     ).insert()
 
