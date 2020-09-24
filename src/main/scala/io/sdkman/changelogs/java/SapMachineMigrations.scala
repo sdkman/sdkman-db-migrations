@@ -87,7 +87,7 @@ class SapMachineMigrations {
 
   @ChangeSet(
     order = "0012",
-    id = "0012-add_sapmchn_jdk_15",
+    id = "0012-add_sapmchn_jdk_15.0.0",
     author = "poad"
   )
   def migrate0012(implicit db: MongoDatabase) =
@@ -96,8 +96,14 @@ class SapMachineMigrations {
       MacOSX  -> "osx-x64_bin.tar.gz",
       Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, suffix) =>
-          toVersion(platform, suffix, "15")
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0.sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_${binary}",
+            platform,
+            Some(AdoptOpenJDK)
+          )
       }
       .toList
       .validate()
