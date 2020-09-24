@@ -317,6 +317,7 @@ class BellSoftLibericaMigrations {
       .validate()
       .insert()
   }
+
   @ChangeSet(
     order = "0027",
     id = "0027-remove_bellsoft_15_0_0_fx_temp",
