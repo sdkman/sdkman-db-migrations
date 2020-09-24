@@ -831,4 +831,27 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+  @ChangeSet(
+    order = "0030",
+    id = "0030-add_adoptopenjdk-j9_15_0_0",
+    author = "poad"
+  )
+  def migrate0030(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "OpenJDK15U-jdk_x64_linux_openj9_15_36_openj9-0.22.0.tar.gz",
+      MacOSX  -> "OpenJDK15U-jdk_x64_mac_openj9_15_36_openj9-0.22.0.tar.gz",
+      Windows -> "OpenJDK15U-jdk_x64_windows_openj9_15_36_openj9-0.22.0.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0.j9-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15%2B36_openj9-0.22.0/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
