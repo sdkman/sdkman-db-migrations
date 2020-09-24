@@ -317,5 +317,47 @@ class BellSoftLibericaMigrations {
       .validate()
       .insert()
   }
+  @ChangeSet(
+    order = "0027",
+    id = "0027-remove_bellsoft_15_0_0_fx_temp",
+    author = "poad"
+  )
+  def migrate0027(implicit db: MongoDatabase): Unit = {
+    Seq(LinuxARM64, Linux64, Windows, MacOSX).foreach(
+      platform =>
+        removeVersion(
+          candidate = "java",
+          version = "15.0.0-fx-librca",
+          platform
+        )
+    )
+  }
+
+  @ChangeSet(
+    order = "0028",
+    id = "0028-readd_bellsoft_15_0_0_fx",
+    author = "poad"
+  )
+  def migrate0028(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      LinuxARM64 -> "bellsoft-jdk15+36-linux-aarch64-full.tar.gz",
+      Linux64    -> "bellsoft-jdk15+36-linux-amd64-full.tar.gz",
+      Windows    -> "bellsoft-jdk15+36-windows-amd64-full.zip",
+      MacOSX     -> "bellsoft-jdk15+36-macos-amd64-full.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.0.fx-librca",
+            s"https://download.bell-sw.com/java/15+36/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
 
 }
