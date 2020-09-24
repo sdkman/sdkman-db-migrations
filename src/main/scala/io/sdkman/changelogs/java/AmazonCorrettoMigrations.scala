@@ -290,6 +290,7 @@ class AmazonCorrettoMigrations {
       removeVersion("java", "8.0.202-amzn", _)
     )
   }
+
   @ChangeSet(
     order = "0011",
     id = "0011-add_corretto_java15.0.0",
