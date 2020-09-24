@@ -16,7 +16,7 @@ class SbtMigrations {
     author = "eed3si9n"
   )
   def migration002(implicit db: MongoDatabase) =
-    (((15 to 18).toList map { "0.13." + _ }) :::
+    (((17 to 18).toList map { "0.13." + _ }) :::
       ((0 to 4).toList map { "1.0." + _ }) :::
       ((0 to 6).toList diff List(3) map { "1.1." + _ }) :::
       ((0 to 8).toList diff List(2) map { "1.2." + _ }) :::
