@@ -831,6 +831,7 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
   @ChangeSet(
     order = "0030",
     id = "0030-add_adoptopenjdk-j9_15_0_0",
