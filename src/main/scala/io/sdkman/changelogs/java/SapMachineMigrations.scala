@@ -86,11 +86,11 @@ class SapMachineMigrations {
     )
 
   @ChangeSet(
-    order = "0013",
-    id = "0013-remove-adoptopenjdk",
+    order = "0015",
+    id = "0015-remove-adoptopenjdk",
     author = "eddumelendez"
   )
-  def migrate0013(implicit db: MongoDatabase) =
+  def migrate0015(implicit db: MongoDatabase) =
     Seq(Linux64, Windows, MacOSX).foreach(
       platform =>
         removeVersion(
@@ -101,11 +101,11 @@ class SapMachineMigrations {
     )
 
   @ChangeSet(
-    order = "0014",
-    id = "0014-add_sapmchn_jdk_15.0.0",
+    order = "0016",
+    id = "0016-add_sapmchn_jdk_15.0.0",
     author = "poad"
   )
-  def migrate0014(implicit db: MongoDatabase) =
+  def migrate0016(implicit db: MongoDatabase) =
     Map(
       Linux64 -> "linux-x64_bin.tar.gz",
       MacOSX  -> "osx-x64_bin.tar.gz",
@@ -114,7 +114,7 @@ class SapMachineMigrations {
         case (platform, binary) =>
           Version(
             "java",
-            "15.0.0.sapmchn",
+            "15.0.0-sapmchn",
             s"https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_${binary}",
             platform,
             Some(SAP)
