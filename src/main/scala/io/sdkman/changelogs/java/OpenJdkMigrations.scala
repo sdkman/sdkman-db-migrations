@@ -191,7 +191,7 @@ class OpenJdkMigrations {
 
   @ChangeSet(
     order = "078",
-    id = "077-add_openjdk_java_16-loom-6",
+    id = "078-add_openjdk_java_16-loom-6",
     author = "soberich"
   )
   def migrate077(implicit db: MongoDatabase): Unit =
