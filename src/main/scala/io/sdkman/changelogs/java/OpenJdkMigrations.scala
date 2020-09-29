@@ -212,7 +212,4 @@ class OpenJdkMigrations {
       .toList
       .validate()
       .insert()
-      .foreach { version =>
-        removeVersion("java", "16.0.6.lm-open", version.platform)
-      }
 }
