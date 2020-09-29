@@ -194,7 +194,7 @@ class OpenJdkMigrations {
     id = "078-add_openjdk_java_16-loom-6",
     author = "soberich"
   )
-  def migrate077(implicit db: MongoDatabase): Unit =
+  def migrate078(implicit db: MongoDatabase): Unit =
     Map(
       Linux64    -> "openjdk-16-loom+6-105_linux-x64_bin.tar.gz",
       MacOSX     -> "openjdk-16-loom+6-105_osx-x64_bin.tar.gz",
