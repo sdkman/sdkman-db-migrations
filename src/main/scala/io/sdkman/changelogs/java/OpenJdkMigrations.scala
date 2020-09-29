@@ -203,7 +203,7 @@ class OpenJdkMigrations {
         case (platform, binary) =>
           Version(
             "java",
-            "16.0.6.lm-open", //has to be "1.2.3" e.i. numeric in order to Gradle auto detection work https://docs.gradle.org/nightly/userguide/toolchains.html#sec:auto_detection 
+            "16.ea.6.lm-open",
             s"https://download.java.net/java/early_access/loom/6/$binary",
             platform,
             Some(OpenJDK)
