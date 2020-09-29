@@ -190,7 +190,7 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "077",
+    order = "078",
     id = "077-add_openjdk_java_16-loom-6",
     author = "soberich"
   )
