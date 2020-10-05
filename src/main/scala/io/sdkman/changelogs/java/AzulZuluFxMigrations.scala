@@ -122,4 +122,70 @@ class AzulZuluFxMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(
+    order = "0015",
+    id = "0015-remove_zulufx_13.0.4",
+    author = "helpermethod"
+  )
+  def migrate0015(implicit db: MongoDatabase) =
+    Seq(Linux64, Windows, MacOSX)
+      .foreach(
+        platform =>
+          (1 to 2).foreach { _ =>
+            removeVersion(
+              candidate = "java",
+              version = "13.0.4.fx-zulu",
+              platform
+            )
+          }
+      )
+
+  @ChangeSet(
+    order = "0016",
+    id = "0016-add_zulufx_13.0.4",
+    author = "helpermethod"
+  )
+  def migrate0016(implicit db: MongoDatabase) = {
+    Map(
+      Linux64 -> ("zulu13.33.25-ca-fx-jdk13.0.4-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu13.33.25-ca-fx-jdk13.0.4-macosx_x64.zip"),
+      Windows -> ("zulu13.33.25-ca-fx-jdk13.0.4-win_x64.zip")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "13.0.4.fx-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "0017",
+    id = "0017-add_zulufx_14.0.2",
+    author = "helpermethod"
+  )
+  def migrate0017(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> ("zulu14.29.23-ca-fx-jdk14.0.2-linux_x64.tar.gz"),
+      MacOSX  -> ("zulu14.29.23-ca-fx-jdk14.0.2-macosx_x64.tar.gz"),
+      Windows -> ("zulu14.29.23-ca-fx-jdk14.0.2-win_x64.tar.gz")
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "14.0.2.fx-zulu",
+            s"https://cdn.azul.com/zulu/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
