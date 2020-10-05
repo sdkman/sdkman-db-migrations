@@ -127,19 +127,25 @@ class AzulZuluFxMigrations {
     id = "0015-remove_zulufx_13.0.4",
     author = "helpermethod"
   )
-  def migrate0015(implicit db: MongoDatabase) = {
-    Seq(Linux64, MacOSX, Windows)
-      .foreach {
-        removeVersion("java", "13.0.4.fx-zulu", _)
-      }
-  }
+  def migrate0015(implicit db: MongoDatabase) =
+    Seq(Linux64, Windows, MacOSX)
+      .foreach(
+        platform =>
+          (1 to 2).foreach { _ =>
+            removeVersion(
+              candidate = "java",
+              version = "13.0.4.fx-zulu",
+              platform
+            )
+          }
+      )
 
   @ChangeSet(
     order = "0016",
     id = "0016-add_zulufx_13.0.4",
     author = "helpermethod"
   )
-  def migrate0016(implicit db: MongoDatabase) =
+  def migrate0016(implicit db: MongoDatabase) = {
     Map(
       Linux64 -> ("zulu13.33.25-ca-fx-jdk13.0.4-linux_x64.tar.gz"),
       MacOSX  -> ("zulu13.33.25-ca-fx-jdk13.0.4-macosx_x64.zip"),
@@ -157,6 +163,7 @@ class AzulZuluFxMigrations {
       .toList
       .validate()
       .insert()
+  }
 
   @ChangeSet(
     order = "0017",
