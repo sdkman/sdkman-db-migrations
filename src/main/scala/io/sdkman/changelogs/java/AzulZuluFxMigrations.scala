@@ -181,7 +181,4 @@ class AzulZuluFxMigrations {
       .toList
       .validate()
       .insert()
-      .foreach { version =>
-        removeVersion("java", "13.0.3.fx-zulu", version.platform)
-      }
 }
