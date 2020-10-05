@@ -166,7 +166,8 @@ class AzulZuluFxMigrations {
   def migrate0017(implicit db: MongoDatabase) =
     Map(
       Linux64 -> ("zulu14.29.23-ca-fx-jdk14.0.2-linux_x64.tar.gz"),
-      MacOSX  -> ("zulu14.29.23-ca-fx-jdk14.0.2-macosx_x64.tar.gz")
+      MacOSX  -> ("zulu14.29.23-ca-fx-jdk14.0.2-macosx_x64.tar.gz"),
+      Windows -> ("zulu14.29.23-ca-fx-jdk14.0.2-win_x64.tar.gz")
     ).map {
         case (platform, binary) =>
           Version(
