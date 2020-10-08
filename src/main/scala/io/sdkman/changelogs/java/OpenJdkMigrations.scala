@@ -210,6 +210,6 @@ class OpenJdkMigrations {
       .validate()
       .insert()
       .foreach { version =>
-        removeVersion("java", "16.ea.19-open", version.platform)
+        removeVersion("java", "16.ea.18-open", version.platform)
       }
 }
