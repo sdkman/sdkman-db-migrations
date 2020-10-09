@@ -129,7 +129,6 @@ class SparkMigrations {
       "https://archive.apache.org/dist/spark/spark-2.4.6/spark-2.4.6-bin-hadoop2.7.tgz"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
   
   @ChangeSet(
@@ -144,7 +143,6 @@ class SparkMigrations {
       "https://archive.apache.org/dist/spark/spark-2.4.7/spark-2.4.7-bin-hadoop2.7.tgz"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
   
   @ChangeSet(
@@ -159,7 +157,6 @@ class SparkMigrations {
       "https://archive.apache.org/dist/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz"
     ).validate()
       .insert()
-      .asCandidateDefault()
   }
   
   @ChangeSet(
