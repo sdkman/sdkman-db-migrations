@@ -130,7 +130,7 @@ class SparkMigrations {
     ).validate()
       .insert()
   }
-  
+
   @ChangeSet(
     order = "011",
     id = "011-add_spark_2.4.7",
@@ -144,7 +144,7 @@ class SparkMigrations {
     ).validate()
       .insert()
   }
-  
+
   @ChangeSet(
     order = "012",
     id = "012-add_spark_3.0.0",
@@ -158,7 +158,7 @@ class SparkMigrations {
     ).validate()
       .insert()
   }
-  
+
   @ChangeSet(
     order = "013",
     id = "013-add_spark_3.0.1",
@@ -173,5 +173,5 @@ class SparkMigrations {
       .insert()
       .asCandidateDefault()
   }
-  
+
 }
