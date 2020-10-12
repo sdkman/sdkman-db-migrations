@@ -2,9 +2,9 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Dragonwell, Linux64, Version}
+import io.sdkman.changelogs.{Alibaba, Linux64, Version}
 
-@ChangeLog(order = "038")
+@ChangeLog(order = "039")
 class AlibabaDragonwellMigrations {
 
   @ChangeSet(
@@ -19,10 +19,10 @@ class AlibabaDragonwellMigrations {
         case (platform, binary) =>
           Version(
             "java",
-            "8u262-dwell",
+            "8u262-albba",
             s"https://github.com/alibaba/dragonwell8/releases/download/dragonwell-8.4.4_jdk8u262-ga/$binary",
             platform,
-            Some(Dragonwell)
+            Some(Alibaba)
           )
       }
       .toList
@@ -41,10 +41,10 @@ class AlibabaDragonwellMigrations {
         case (platform, binary) =>
           Version(
             "java",
-            "11.0.8-dwell",
+            "11.0.8-albba",
             s"https://github.com/alibaba/dragonwell11/releases/download/dragonwell-11.0.8.3_jdk-11.0.8-ga/$binary",
             platform,
-            Some(Dragonwell)
+            Some(Alibaba)
           )
       }
       .toList
