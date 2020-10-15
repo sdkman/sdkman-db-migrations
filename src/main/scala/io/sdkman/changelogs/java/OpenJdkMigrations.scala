@@ -212,4 +212,28 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "16.ea.18-open", version.platform)
       }
+
+  @ChangeSet(
+    order = "081",
+    id = "081-add_openjdk_java_16-pma-6",
+    author = "eddumelendez"
+  )
+  def migrate081(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-16-panama+2-193_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-16-panama+2-193_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-16-panama+2-193_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.2.pma-open",
+            s"https://download.java.net/java/early_access/panama/2/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
