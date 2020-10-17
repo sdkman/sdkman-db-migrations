@@ -186,34 +186,6 @@ class OpenJdkMigrations {
       .insert()
 
   @ChangeSet(
-    order = "080",
-    id = "080-add_openjdk_java_16-ea-19",
-    author = "mnedic"
-  )
-  def migrate080(implicit db: MongoDatabase): Unit =
-    Map(
-      LinuxARM64 -> "openjdk-16-ea+19_linux-aarch64_bin.tar.gz",
-      Linux64    -> "openjdk-16-ea+19_linux-x64_bin.tar.gz",
-      MacOSX     -> "openjdk-16-ea+19_osx-x64_bin.tar.gz",
-      Windows    -> "openjdk-16-ea+19_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "16.ea.19-open",
-            s"https://download.java.net/java/early_access/jdk16/19/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "16.ea.18-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "081",
     id = "081-add_openjdk_java_16-pma-6",
     author = "eddumelendez"
@@ -236,4 +208,32 @@ class OpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "082",
+    id = "082-add_openjdk_java_16-ea-20",
+    author = "eddumelendez"
+  )
+  def migrate082(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-16-ea+20_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-16-ea+20_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-16-ea+20_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-16-ea+20_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.20-open",
+            s"https://download.java.net/java/early_access/jdk16/20/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.ea.19-open", version.platform)
+      }
 }
