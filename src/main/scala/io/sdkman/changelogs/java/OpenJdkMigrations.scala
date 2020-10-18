@@ -259,5 +259,8 @@ class OpenJdkMigrations {
       .toList
       .validate()
       .insert()
+      .foreach { version =>
+        removeVersion("java", "11.0.8-open", version.platform)
+      }
 
 }
