@@ -236,4 +236,31 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "16.ea.19-open", version.platform)
       }
+
+  @ChangeSet(
+    order = "083",
+    id = "083-add_openjdk_java_11_linux_windows",
+    author = "eddumelendez"
+  )
+  def migrate083(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-11.0.2_linux-x64_bin.tar.gz",
+      Windows -> "openjdk-11.0.2_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.2-open",
+            s"https://download.java.net/java/GA/jdk11/9/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "11.0.8-open", version.platform)
+      }
+
 }
