@@ -262,5 +262,32 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "11.0.8-open", version.platform)
       }
+  @ChangeSet(
+    order = "084",
+    id = "084-add_openjdk_java_15.0.1",
+    author = "poad"
+  )
+  def migrate084(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-15.0.1_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-15.0.1_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-15.0.1_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-15.0.1_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.1-open",
+            s"https://download.java.net/java/GA/jdk15.0.1/51f4f36ad4ef43e39d0dfdbaf6549e32/9/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15-open", version.platform)
+      }
 
 }
