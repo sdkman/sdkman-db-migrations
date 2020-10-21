@@ -315,4 +315,32 @@ class AmazonCorrettoMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "0013",
+    id = "0013-add_corretto_java8_update_272",
+    author = "eddumelendez"
+  )
+  def migrate0013(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> ("8.272.10.1", "linux-aarch64.tar.gz"),
+      Linux64    -> ("8.272.10.1", "linux-x64.tar.gz"),
+      MacOSX     -> ("8.272.10.1", "macosx-x64.tar.gz"),
+      Windows    -> ("8.272.10.1", "windows-x64-jdk.zip")
+    ).map {
+        case (platform, (version, suffix)) =>
+          Version(
+            "java",
+            "8.0.272-amzn",
+            s"https://corretto.aws/downloads/resources/$version/amazon-corretto-$version-$suffix",
+            platform,
+            Some(Amazon)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.265-amzn", version.platform)
+      }
 }
