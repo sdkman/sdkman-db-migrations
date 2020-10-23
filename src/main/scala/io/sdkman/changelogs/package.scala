@@ -106,6 +106,10 @@ package object changelogs {
     override def id = "amzn"
   }
 
+  case object Alibaba extends Vendor {
+    override def id = "albba"
+  }
+
   case object Graal extends Vendor {
     override def id = "grl"
   }
