@@ -289,7 +289,7 @@ class OpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "15-open", version.platform)
       }
-    @ChangeSet(
+  @ChangeSet(
     order = "085",
     id = "085-add_openjdk_java_16-ea+21",
     author = "TohidHeshmati"
