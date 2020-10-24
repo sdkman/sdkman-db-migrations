@@ -500,41 +500,7 @@ class BellSoftLibericaMigrations {
           )
       )
   }
-  @ChangeSet(
-    order = "0033",
-    id = "0033-add_bellsoft_15_0_1",
-    author = "poad"
-  )
-  def migrate0033(implicit db: MongoDatabase): Unit = {
 
-    Map(
-      LinuxARM64 -> "bellsoft-jdk15.0.1+9-linux-aarch64.tar.gz",
-      Linux32    -> "bellsoft-jdk15.0.1+9-linux-i586.tar.gz",
-      Linux64    -> "bellsoft-jdk15.0.1+9-linux-amd64.tar.gz",
-      Windows    -> "bellsoft-jdk15.0.1+9-windows-amd64.zip",
-      MacOSX     -> "bellsoft-jdk15.0.1+9-macos-amd64.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "115.0.1-librca",
-            s"https://download.bell-sw.com/java/15.0.1+9/$binary",
-            platform,
-            Some(Liberica)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach(
-        version =>
-          removeVersion(
-            "java",
-            "15.0.0-librca",
-            version.platform
-          )
-      )
-  }
   @ChangeSet(
     order = "0034",
     id = "0034-add_bellsoft_15_0_1.fx",
@@ -565,6 +531,41 @@ class BellSoftLibericaMigrations {
           removeVersion(
             "java",
             "15.0.0.fx-librca",
+            version.platform
+          )
+      )
+  }
+
+  @ChangeSet(
+    order = "0035",
+    id = "0035-add_bellsoft_15_0_1",
+    author = "poad"
+  )
+  def migrate0035(implicit db: MongoDatabase): Unit = {
+    Map(
+      LinuxARM64 -> "bellsoft-jdk15.0.1+9-linux-aarch64.tar.gz",
+      Linux32    -> "bellsoft-jdk15.0.1+9-linux-i586.tar.gz",
+      Linux64    -> "bellsoft-jdk15.0.1+9-linux-amd64.tar.gz",
+      Windows    -> "bellsoft-jdk15.0.1+9-windows-amd64.zip",
+      MacOSX     -> "bellsoft-jdk15.0.1+9-macos-amd64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "15.0.1-librca",
+            s"https://download.bell-sw.com/java/15.0.1+9/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "115.0.1-librca",
             version.platform
           )
       )
