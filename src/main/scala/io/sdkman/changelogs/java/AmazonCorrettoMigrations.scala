@@ -61,33 +61,6 @@ class AmazonCorrettoMigrations {
       }
 
   @ChangeSet(
-    order = "0013",
-    id = "0013-add_corretto_java8_update_272",
-    author = "eddumelendez"
-  )
-  def migrate0013(implicit db: MongoDatabase) =
-    Map(
-      LinuxARM64 -> ("8.272.10.1", "linux-aarch64.tar.gz"),
-      Linux64    -> ("8.272.10.1", "linux-x64.tar.gz"),
-      MacOSX     -> ("8.272.10.1", "macosx-x64.tar.gz"),
-      Windows    -> ("8.272.10.1", "windows-x64-jdk.zip")
-    ).map {
-        case (platform, (version, suffix)) =>
-          Version(
-            "java",
-            "8.0.272-amzn",
-            s"https://corretto.aws/downloads/resources/$version/amazon-corretto-$version-$suffix",
-            platform,
-            Some(Amazon)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "8.0.265-amzn", version.platform)
-      }
-  @ChangeSet(
     order = "0014",
     id = "0014-add_corretto_java11_update_9",
     author = "eddumelendez"
@@ -111,4 +84,45 @@ class AmazonCorrettoMigrations {
       .foreach { version =>
         removeVersion("java", "11.0.9-amzn", version.platform)
       }
+
+  @ChangeSet(
+    order = "0015",
+    id = "0015-remove_corretto_java8_update_272",
+    author = "eddumelendez"
+  )
+  def migrate0015(implicit db: MongoDatabase) =
+    Seq(
+      LinuxARM64,
+      Linux64,
+      MacOSX,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "8.0.272-amzn", platform)
+    }
+
+  @ChangeSet(
+    order = "0016",
+    id = "0016-add_corretto_java8_update_272",
+    author = "eddumelendez"
+  )
+  def migrate0016(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> ("8.272.10.3", "linux-aarch64.tar.gz"),
+      Linux64    -> ("8.272.10.3", "linux-x64.tar.gz"),
+      MacOSX     -> ("8.272.10.3", "macosx-x64.tar.gz"),
+      Windows    -> ("8.272.10.3", "windows-x64-jdk.zip")
+    ).map {
+        case (platform, (version, suffix)) =>
+          Version(
+            "java",
+            "8.0.272-amzn",
+            s"https://corretto.aws/downloads/resources/$version/amazon-corretto-$version-$suffix",
+            platform,
+            Some(Amazon)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
