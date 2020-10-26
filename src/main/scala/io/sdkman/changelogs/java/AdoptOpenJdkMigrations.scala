@@ -950,8 +950,8 @@ class AdoptOpenJdkMigrations {
   )
   def migrate0037(implicit db: MongoDatabase) =
     Map(
-      Linux64    -> "OpenJDK8U-jdk_x64_linux_8u272b10.tar.gz",
-      Windows    -> "OpenJDK8U-jdk_x64_windows_8u272b10.zip"
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_8u272b10.tar.gz",
+      Windows -> "OpenJDK8U-jdk_x64_windows_8u272b10.zip"
     ).map {
         case (platform, binary) =>
           Version(
