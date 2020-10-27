@@ -35,27 +35,6 @@ class SapMachineMigrations {
   }
 
   @ChangeSet(
-    order = "0010",
-    id = "0010-add_sapmchn_jdk_11.0.8",
-    author = "poad"
-  )
-  def migrate0010(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> "linux-x64_bin.tar.gz",
-      MacOSX  -> "osx-x64_bin.tar.gz",
-      Windows -> "windows-x64_bin.zip"
-    ).map {
-        case (platform, suffix) =>
-          toVersion(platform, suffix, "11.0.8")
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "11.0.7-sapmchn", version.platform)
-      }
-
-  @ChangeSet(
     order = "0011",
     id = "0011-add_sapmchn_jdk_14.0.2",
     author = "poad"
@@ -86,42 +65,42 @@ class SapMachineMigrations {
     )
 
   @ChangeSet(
-    order = "0015",
-    id = "0015-remove-adoptopenjdk",
-    author = "eddumelendez"
-  )
-  def migrate0015(implicit db: MongoDatabase) =
-    Seq(Linux64, Windows, MacOSX).foreach(
-      platform =>
-        removeVersion(
-          candidate = "java",
-          version = "15.0.0.sapmchn",
-          platform
-        )
-    )
-
-  @ChangeSet(
-    order = "0016",
-    id = "0016-add_sapmchn_jdk_15.0.0",
+    order = "0017",
+    id = "0017-add_sapmchn_jdk_11.0.9",
     author = "poad"
   )
-  def migrate0016(implicit db: MongoDatabase) =
+  def migrate0017(implicit db: MongoDatabase) =
     Map(
       Linux64 -> "linux-x64_bin.tar.gz",
-      MacOSX  -> "osx-x64_bin.tar.gz",
       Windows -> "windows-x64_bin.zip"
     ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "15.0.0-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-15/sapmachine-jdk-15_${binary}",
-            platform,
-            Some(SAP)
-          )
+        case (platform, suffix) =>
+          toVersion(platform, suffix, "11.0.9")
       }
       .toList
       .validate()
       .insert()
+      .foreach { version =>
+        removeVersion("java", "11.0.8-sapmchn", version.platform)
+      }
 
+  @ChangeSet(
+    order = "0018",
+    id = "0018-add_sapmchn_jdk_15.0.1",
+    author = "poad"
+  )
+  def migrate0018(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "linux-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          toVersion(platform, binary, "11.0.9")
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.0.0-sapmchn", version.platform)
+      }
 }
