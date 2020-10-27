@@ -997,4 +997,78 @@ class AdoptOpenJdkMigrations {
   )
   def migrate0039(implicit db: MongoDatabase) =
     setCandidateDefault("java", "11.0.9.hs-adpt")
+
+  @ChangeSet(
+    order = "0040",
+    id = "0040-remove_adoptopenjdk-mac-j9_11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0040(implicit db: MongoDatabase) =
+    Seq(
+      MacOSX
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9.j9-adpt", platform)
+    }
+
+  @ChangeSet(
+    order = "0041",
+    id = "0041-update_adoptopenjdk-mac-j9_11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0041(implicit db: MongoDatabase) =
+    Map(
+      MacOSX -> "OpenJDK11U-jdk_x64_mac_openj9_11.0.9_11_openj9-0.23.0.tar.gz"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.9.j9-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11.1_openj9-0.23.0/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
+  @ChangeSet(
+    order = "0042",
+    id = "0042-remove_adoptopenjdk-mac-j9_11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0042(implicit db: MongoDatabase) =
+    Seq(
+      LinuxARM64,
+      Linux64,
+      MacOSX,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9.hs-adpt", platform)
+    }
+
+  @ChangeSet(
+    order = "0043",
+    id = "0043-add_adoptopenjdk-hs_11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0043(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.9_11.tar.gz",
+      Linux64    -> "OpenJDK11U-jdk_x64_linux_hotspot_11.0.9_11.tar.gz",
+      MacOSX     -> "OpenJDK11U-jdk_x64_mac_hotspot_11.0.9_11.tar.gz",
+      Windows    -> "OpenJDK11U-jdk_x64_windows_hotspot_11.0.9_11.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.9.hs-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11.1/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
