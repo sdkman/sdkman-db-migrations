@@ -989,4 +989,12 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "0039",
+    id = "0039-set_adoptopenjdk_11.0.9.hs_as_default",
+    author = "poad"
+  )
+  def migrate0039(implicit db: MongoDatabase) =
+    setCandidateDefault("java", "11.0.9.hs-adpt")
 }
