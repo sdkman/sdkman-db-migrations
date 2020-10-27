@@ -570,13 +570,13 @@ class BellSoftLibericaMigrations {
           )
       )
   }
+
   @ChangeSet(
     order = "0036",
     id = "0036-remove_bellsoft_11_0_9+10",
     author = "poad"
   )
   def migrate0036(implicit db: MongoDatabase): Unit = {
-
     Seq(LinuxARM64, Linux32, Linux64, Windows, MacOSX)
       .foreach(
         platform =>
@@ -587,13 +587,13 @@ class BellSoftLibericaMigrations {
           )
       )
   }
+
   @ChangeSet(
     order = "0037",
     id = "0037-add_bellsoft_11_0_9+12",
     author = "poad"
   )
   def migrate0037(implicit db: MongoDatabase): Unit = {
-
     Map(
       LinuxARM64 -> "bellsoft-jdk11.0.9+12-linux-aarch64.tar.gz",
       Linux32    -> "bellsoft-jdk11.0.9+12-linux-i586.tar.gz",
@@ -621,7 +621,6 @@ class BellSoftLibericaMigrations {
     author = "poad"
   )
   def migrate0038(implicit db: MongoDatabase): Unit = {
-
     Seq(LinuxARM64, Linux32, Linux64, Windows, MacOSX)
       .foreach(
         platform =>
@@ -632,13 +631,13 @@ class BellSoftLibericaMigrations {
           )
       )
   }
+
   @ChangeSet(
     order = "0039",
     id = "0039-add_bellsoft_11_0_9+12.fx",
     author = "poad"
   )
   def migrate0039(implicit db: MongoDatabase): Unit = {
-
     Map(
       LinuxARM64 -> "bellsoft-jdk11.0.9+12-linux-aarch64-full.tar.gz",
       Linux64    -> "bellsoft-jdk11.0.9+12-linux-amd64-full.tar.gz",
