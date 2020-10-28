@@ -1004,11 +1004,7 @@ class AdoptOpenJdkMigrations {
     author = "eddumelendez"
   )
   def migrate0040(implicit db: MongoDatabase) =
-    Seq(
-      MacOSX
-    ).foreach { platform =>
-      removeVersion("java", "11.0.9.j9-adpt", platform)
-    }
+    removeVersion("java", "11.0.9.j9-adpt", MacOSX)
 
   @ChangeSet(
     order = "0041",
