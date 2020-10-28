@@ -6,7 +6,11 @@ import com.mongodb.client.model.Indexes.{ascending, compoundIndex}
 
 @ChangeLog(order = "038")
 class IndexMigrations {
-  @ChangeSet(order = "001", id = "001-create-compound-index", author = "helpermethod")
+  @ChangeSet(
+    order = "001",
+    id = "001-create-compound-index",
+    author = "helpermethod"
+  )
   def migration001(implicit db: MongoDatabase) =
     db.getCollection("versions")
       .createIndex(
