@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Indexes.{ascending, compoundIndex}
 
-@ChangeLog(order = "038")
+@ChangeLog(order = "039")
 class IndexMigrations {
   @ChangeSet(
     order = "001",
