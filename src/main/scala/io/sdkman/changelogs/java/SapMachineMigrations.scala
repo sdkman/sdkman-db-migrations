@@ -103,4 +103,42 @@ class SapMachineMigrations {
       .foreach { version =>
         removeVersion("java", "15.0.0-sapmchn", version.platform)
       }
+
+  @ChangeSet(
+    order = "0019",
+    id = "0019-add_sapmchn_jdk_11.0.9_mac",
+    author = "poad"
+  )
+  def migrate0019(implicit db: MongoDatabase) =
+    Map(
+      MacOSX -> "osx-x64_bin.tar.gz"
+    ).map {
+        case (platform, suffix) =>
+          toVersion(platform, suffix, "11.0.9")
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "11.0.8-sapmchn", version.platform)
+      }
+
+  @ChangeSet(
+    order = "0020",
+    id = "0020-add_sapmchn_jdk_15.0.1_mac",
+    author = "poad"
+  )
+  def migrate0020(implicit db: MongoDatabase) =
+    Map(
+      MacOSX -> "osx-x64_bin.tar.gz"
+    ).map {
+        case (platform, binary) =>
+          toVersion(platform, binary, "11.0.9")
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "15.0.0-sapmchn", version.platform)
+      }
 }
