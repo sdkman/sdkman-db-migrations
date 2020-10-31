@@ -85,26 +85,6 @@ class SapMachineMigrations {
       }
 
   @ChangeSet(
-    order = "0018",
-    id = "0018-add_sapmchn_jdk_15.0.1",
-    author = "poad"
-  )
-  def migrate0018(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> "linux-x64_bin.tar.gz",
-      Windows -> "windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          toVersion(platform, binary, "11.0.9")
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "15.0.0-sapmchn", version.platform)
-      }
-
-  @ChangeSet(
     order = "0019",
     id = "0019-add_sapmchn_jdk_11.0.9_mac",
     author = "poad"
@@ -124,21 +104,20 @@ class SapMachineMigrations {
       }
 
   @ChangeSet(
-    order = "0020",
-    id = "0020-add_sapmchn_jdk_15.0.1_mac",
-    author = "poad"
+    order = "0021",
+    id = "0021-add_sapmchn_jdk_15.0.1",
+    author = "eddumelendez"
   )
-  def migrate0020(implicit db: MongoDatabase) =
+  def migrate0021(implicit db: MongoDatabase) =
     Map(
-      MacOSX -> "osx-x64_bin.tar.gz"
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
         case (platform, binary) =>
-          toVersion(platform, binary, "11.0.9")
+          toVersion(platform, binary, "15.0.1")
       }
       .toList
       .validate()
       .insert()
-      .foreach { version =>
-        removeVersion("java", "15.0.0-sapmchn", version.platform)
-      }
 }
