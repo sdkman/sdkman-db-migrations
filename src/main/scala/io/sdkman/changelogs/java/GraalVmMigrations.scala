@@ -4,6 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import io.sdkman.changelogs.{
   Graal,
+  LinuxARM64,
   Linux64,
   MacOSX,
   Version,
@@ -369,6 +370,57 @@ class GraalVmMigrations {
         vendor = Some(Graal)
       )
     ).validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "007",
+    id = "007-add_graalvm_r8_19_3_4",
+    author = "eddumelendez"
+  )
+  def migrate007(implicit db: MongoDatabase): Unit = {
+    Map(
+      Linux64 -> "graalvm-ce-java8-linux-amd64-19.3.4.tar.gz",
+      MacOSX  -> "graalvm-ce-java8-darwin-amd64-19.3.4.tar.gz",
+      Windows -> "graalvm-ce-java8-windows-amd64-19.3.4.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "19.3.4.r8-grl",
+            s"https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/$binary",
+            platform,
+            Some(Graal)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "008",
+    id = "008-add_graalvm_r11_19_3_4",
+    author = "eddumelendez"
+  )
+  def migrate008(implicit db: MongoDatabase): Unit = {
+    Map(
+      LinuxARM64 -> "graalvm-ce-java11-linux-aarch64-19.3.4.tar.gz",
+      Linux64    -> "graalvm-ce-java11-linux-amd64-19.3.4.tar.gz",
+      MacOSX     -> "graalvm-ce-java11-darwin-amd64-19.3.4.tar.gz",
+      Windows    -> "graalvm-ce-java11-windows-amd64-19.3.4.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "19.3.4.r11-grl",
+            s"https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/$binary",
+            platform,
+            Some(Graal)
+          )
+      }
+      .toList
+      .validate()
       .insert()
   }
 
