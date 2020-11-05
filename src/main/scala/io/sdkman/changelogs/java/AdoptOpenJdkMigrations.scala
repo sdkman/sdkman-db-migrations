@@ -1068,7 +1068,7 @@ class AdoptOpenJdkMigrations {
       .validate()
       .insert()
   
-    @ChangeSet(
+  @ChangeSet(
     order = "0044",
     id = "0044-add_adoptopenjdk-8u202-b08",
     author = "mattluce"
