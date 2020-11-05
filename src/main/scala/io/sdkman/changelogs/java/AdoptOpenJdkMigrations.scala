@@ -1067,4 +1067,27 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "0044",
+    id = "0044-add_adoptopenjdk-8u202-b08",
+    author = "mattluce"
+  )
+  def migrate0044(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_hotspot_8u202b08.tar.gz",
+      Windows -> "OpenJDK8U-jdk_x64_windows_hotspot_8u202b08.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.202.open-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
 }
