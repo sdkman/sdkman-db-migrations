@@ -135,4 +135,45 @@ class AmazonCorrettoMigrations {
       .foreach { version =>
         removeVersion("java", "15.0.0-amzn", version.platform)
       }
+
+  @ChangeSet(
+    order = "0020",
+    id = "0020-remove_corretto_11.0.9.11.1",
+    author = "eddumelendez"
+  )
+  def migrate0020(implicit db: MongoDatabase) =
+    Seq(
+      LinuxARM64,
+      Linux64,
+      MacOSX,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9-amzn", platform)
+    }
+
+  @ChangeSet(
+    order = "0021",
+    id = "0021-add_corretto_11.0.9.12.1",
+    author = "eddumelendez"
+  )
+  def migrate0021(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "linux-aarch64.tar.gz",
+      Linux64    -> "linux-x64.tar.gz",
+      MacOSX     -> "macosx-x64.tar.gz",
+      Windows    -> "windows-x64-jdk.zip"
+    ).map {
+        case (platform, suffix) =>
+          Version(
+            "java",
+            "11.0.9-amzn",
+            s"https://corretto.aws/downloads/resources/11.0.9.12.1/amazon-corretto-11.0.9.12.1-$suffix",
+            platform,
+            Some(Amazon)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
