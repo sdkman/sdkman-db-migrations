@@ -142,7 +142,7 @@ class BellSoftLibericaMigrations {
         version =>
           removeVersion(
             "java",
-            "8.0.272,fx-librca",
+            "8.0.272.fx-librca",
             version.platform
           )
       )
