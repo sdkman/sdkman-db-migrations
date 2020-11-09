@@ -101,16 +101,16 @@ class SapMachineMigrations {
   def migrate0023(implicit db: MongoDatabase) =
     Map(
       Linux64 -> "linux-x64_bin.tar.gz",
-      Windows -> "windows-x64_bin.zip",
-      MacOSX  -> "osx-x64_bin.tar.gz"
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
     ).map {
         case (platform, binary) =>
           Version(
             "java",
-            "11.0.9.1-sapmchn",
+            "11.0.9-sapmchn",
             s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.9/sapmachine-jdk-11.0.9_$binary",
             platform,
-            Some(AdoptOpenJDK)
+            Some(SAP)
           )
       }
       .toList
