@@ -65,45 +65,6 @@ class SapMachineMigrations {
     )
 
   @ChangeSet(
-    order = "0017",
-    id = "0017-add_sapmchn_jdk_11.0.9",
-    author = "poad"
-  )
-  def migrate0017(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> "linux-x64_bin.tar.gz",
-      Windows -> "windows-x64_bin.zip"
-    ).map {
-        case (platform, suffix) =>
-          toVersion(platform, suffix, "11.0.9")
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "11.0.8-sapmchn", version.platform)
-      }
-
-  @ChangeSet(
-    order = "0019",
-    id = "0019-add_sapmchn_jdk_11.0.9_mac",
-    author = "poad"
-  )
-  def migrate0019(implicit db: MongoDatabase) =
-    Map(
-      MacOSX -> "osx-x64_bin.tar.gz"
-    ).map {
-        case (platform, suffix) =>
-          toVersion(platform, suffix, "11.0.9")
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "11.0.8-sapmchn", version.platform)
-      }
-
-  @ChangeSet(
     order = "0021",
     id = "0021-add_sapmchn_jdk_15.0.1",
     author = "eddumelendez"
@@ -116,6 +77,41 @@ class SapMachineMigrations {
     ).map {
         case (platform, binary) =>
           toVersion(platform, binary, "15.0.1")
+      }
+      .toList
+      .validate()
+      .insert()
+
+  @ChangeSet(
+    order = "0022",
+    id = "0022-remove_sapmchn_jdk_11.0.9.0",
+    author = "poad"
+  )
+  def migrate0022(implicit db: MongoDatabase) =
+    Set(Linux64, Windows, MacOSX)
+      .foreach { platform =>
+        removeVersion("java", "11.0.9-sapmchn", platform)
+      }
+
+  @ChangeSet(
+    order = "0023",
+    id = "0023-add_sapmchn_jdk_11.0.9_1",
+    author = "poad"
+  )
+  def migrate0023(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "linux-x64_bin.tar.gz",
+      MacOSX  -> "osx-x64_bin.tar.gz",
+      Windows -> "windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.9-sapmchn",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.9.1/sapmachine-jdk-11.0.9.1_$binary",
+            platform,
+            Some(SAP)
+          )
       }
       .toList
       .validate()
