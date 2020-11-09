@@ -209,11 +209,11 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "087",
-    id = "087-remove-java.net-openjdk-11-8-binaries",
+    order = "088",
+    id = "088-remove-java.net-openjdk-11-8-binaries",
     author = "andrebrait"
   )
-  def migrate087(implicit db: MongoDatabase): Unit =
+  def migrate088(implicit db: MongoDatabase): Unit =
     List(Linux64, Windows)
       .foreach { platform =>
         removeVersion("java", "8.0.265-open", platform)
