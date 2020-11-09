@@ -108,7 +108,7 @@ class SapMachineMigrations {
           Version(
             "java",
             "11.0.9-sapmchn",
-            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.9/sapmachine-jdk-11.0.9_$binary",
+            s"https://github.com/SAP/SapMachine/releases/download/sapmachine-11.0.9.1/sapmachine-jdk-11.0.9.1_$binary",
             platform,
             Some(SAP)
           )
