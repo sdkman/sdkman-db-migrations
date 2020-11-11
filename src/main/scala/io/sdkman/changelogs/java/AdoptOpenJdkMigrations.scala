@@ -804,34 +804,6 @@ class AdoptOpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "0032",
-    id = "0032-add_adoptopenjdk-hs_8_0_272",
-    author = "eddumelendez"
-  )
-  def migrate0032(implicit db: MongoDatabase) =
-    Map(
-      LinuxARM64 -> "OpenJDK8U-jdk_aarch64_linux_hotspot_8u272b10.tar.gz",
-      Linux64    -> "OpenJDK8U-jdk_x64_linux_hotspot_8u272b10.tar.gz",
-      MacOSX     -> "OpenJDK8U-jdk_x64_mac_hotspot_8u272b10.tar.gz",
-      Windows    -> "OpenJDK8U-jdk_x64_windows_hotspot_8u272b10.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "8.0.272.hs-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u272-b10/$binary",
-            platform,
-            Some(AdoptOpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "8.0.265.hs-adpt", version.platform)
-      }
-
-  @ChangeSet(
     order = "0033",
     id = "0033-add_adoptopenjdk-hs_11_0_9",
     author = "poad"
@@ -944,29 +916,6 @@ class AdoptOpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "0037",
-    id = "0037-add_adoptopenjdk-8u272",
-    author = "eddumelendez"
-  )
-  def migrate0037(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> "OpenJDK8U-jdk_x64_linux_8u272b10.tar.gz",
-      Windows -> "OpenJDK8U-jdk_x64_windows_8u272b10.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "8.0.272.open-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u272-b10/$binary",
-            platform,
-            Some(AdoptOpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-
-  @ChangeSet(
     order = "0038",
     id = "0038-add_adoptopenjdk-11.0.9",
     author = "eddumelendez"
@@ -1029,37 +978,20 @@ class AdoptOpenJdkMigrations {
       .insert()
 
   @ChangeSet(
-    order = "0042",
-    id = "0042-remove_adoptopenjdk-mac-j9_11_0_9",
+    order = "0044",
+    id = "0044-add_adoptopenjdk-open-8u275",
     author = "eddumelendez"
   )
-  def migrate0042(implicit db: MongoDatabase) =
-    Seq(
-      LinuxARM64,
-      Linux64,
-      MacOSX,
-      Windows
-    ).foreach { platform =>
-      removeVersion("java", "11.0.9.hs-adpt", platform)
-    }
-
-  @ChangeSet(
-    order = "0043",
-    id = "0043-add_adoptopenjdk-hs_11_0_9",
-    author = "eddumelendez"
-  )
-  def migrate0043(implicit db: MongoDatabase) =
+  def migrate0044(implicit db: MongoDatabase) =
     Map(
-      LinuxARM64 -> "OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.9_11.tar.gz",
-      Linux64    -> "OpenJDK11U-jdk_x64_linux_hotspot_11.0.9_11.tar.gz",
-      MacOSX     -> "OpenJDK11U-jdk_x64_mac_hotspot_11.0.9_11.tar.gz",
-      Windows    -> "OpenJDK11U-jdk_x64_windows_hotspot_11.0.9_11.zip"
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_8u275b01.tar.gz",
+      Windows -> "OpenJDK8U-jre_x64_windows_8u275b01.zip"
     ).map {
         case (platform, binary) =>
           Version(
             "java",
-            "11.0.9.hs-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11.1/$binary",
+            "8.0.275.open-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk8-upstream-binaries/releases/download/jdk8u275-b01/$binary",
             platform,
             Some(AdoptOpenJDK)
           )
@@ -1067,4 +999,72 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.272.open-adpt", version.platform)
+      }
+
+  @ChangeSet(
+    order = "0045",
+    id = "0045-remove_adoptopenjdk-open-11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0045(implicit db: MongoDatabase) =
+    Seq(
+      LinuxARM64,
+      Linux64,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9.open-adpt", platform)
+    }
+
+  @ChangeSet(
+    order = "0046",
+    id = "0046-add_adoptopenjdk-open_11_0_9.1",
+    author = "eddumelendez"
+  )
+  def migrate0046(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "OpenJDK11U-jdk_aarch64_linux_11.0.9.1_1.tar.gz",
+      Linux64    -> "OpenJDK11U-jdk_x64_linux_11.0.9.1_1.tar.gz",
+      Windows    -> "OpenJDK11U-jdk_x64_windows_11.0.9.1_1.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.9.open-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.9.1%2B1/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
+  @ChangeSet(
+    order = "0047",
+    id = "0047-add_adoptopenjdk-hs_8_0_275",
+    author = "eddumelendez"
+  )
+  def migrate0047(implicit db: MongoDatabase) =
+    Map(
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_hotspot_8u275b01.tar.gz",
+      MacOSX  -> "OpenJDK8U-jdk_x64_mac_hotspot_8u275b01.tar.gz",
+      Windows -> "OpenJDK8U-jdk_x64_windows_hotspot_8u275b01.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.272.hs-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u275-b01/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.265.hs-adpt", version.platform)
+      }
 }
