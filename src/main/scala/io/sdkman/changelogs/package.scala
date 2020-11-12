@@ -130,6 +130,10 @@ package object changelogs {
     override def id = "sapmchn"
   }
 
+  case object TravaOpenJdk extends Vendor {
+    override def id = "trava"
+  }
+
   case object Zulu extends Vendor {
     override def id = "zulu"
   }
