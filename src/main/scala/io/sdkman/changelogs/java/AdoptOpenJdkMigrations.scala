@@ -804,34 +804,6 @@ class AdoptOpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "0033",
-    id = "0033-add_adoptopenjdk-hs_11_0_9",
-    author = "poad"
-  )
-  def migrate0033(implicit db: MongoDatabase) =
-    Map(
-      Linux64    -> "OpenJDK11U-jdk_x64_linux_hotspot_11.0.9_11.tar.gz",
-      Windows    -> "OpenJDK11U-jdk_x64_windows_hotspot_11.0.9_11.zip",
-      MacOSX     -> "OpenJDK11U-jdk_x64_mac_hotspot_11.0.9_11.tar.gz",
-      LinuxARM64 -> "OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.9_11.tar.gz"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "11.0.9.hs-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11/$binary",
-            platform,
-            Some(AdoptOpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "11.0.8.hs-adpt", version.platform)
-      }
-
-  @ChangeSet(
     order = "0034",
     id = "0034-add_adoptopenjdk-j9_11_0_9",
     author = "poad"
@@ -1067,4 +1039,45 @@ class AdoptOpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.265.hs-adpt", version.platform)
       }
+
+  @ChangeSet(
+    order = "0048",
+    id = "0048-remove_adoptopenjdk-hs_11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate0048(implicit db: MongoDatabase) =
+    Seq(
+      LinuxARM64,
+      Linux64,
+      Windows,
+      MacOSX
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9.hs-adpt", platform)
+    }
+
+  @ChangeSet(
+    order = "0049",
+    id = "0049-add_adoptopenjdk-hs_11.0.9.1_1",
+    author = "eddumelendez"
+  )
+  def migrate0049(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.9.1_1.tar.gz",
+      Linux64    -> "OpenJDK11U-jdk_x64_linux_hotspot_11.0.9.1_1.tar.gz",
+      Windows    -> "OpenJDK11U-jdk_x64_windows_hotspot_11.0.9.1_1.zip",
+      MacOSX     -> "OpenJDK11U-jdk_x64_mac_hotspot_11.0.9.1_1.tar.gz"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "11.0.9.hs-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9.1%2B1/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
