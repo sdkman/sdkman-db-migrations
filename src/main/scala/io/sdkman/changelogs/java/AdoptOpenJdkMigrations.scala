@@ -1079,4 +1079,32 @@ class AdoptOpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.272.hs-adpt", version.platform)
       }
+
+  @ChangeSet(
+    order = "0051",
+    id = "0051-add_adoptopenjdk-j9_8_0_275",
+    author = "abcfy2"
+  )
+  def migrate0051(implicit db: MongoDatabase) =
+    Map(
+      LinuxARM64 -> "OpenJDK8U-jdk_aarch64_linux_openj9_8u275b01_openj9-0.23.0.tar.gz",
+      Linux64    -> "OpenJDK8U-jdk_x64_linux_openj9_8u275b01_openj9-0.23.0.tar.gz",
+      MacOSX     -> "OpenJDK8U-jdk_x64_mac_openj9_8u275b01_openj9-0.23.0.tar.gz",
+      Windows    -> "OpenJDK8U-jdk_x64_windows_openj9_8u275b01_openj9-0.23.0.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "8.0.275.j9-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u275-b01_openj9-0.23.0/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "8.0.272.j9-adpt", version.platform)
+      }
 }
