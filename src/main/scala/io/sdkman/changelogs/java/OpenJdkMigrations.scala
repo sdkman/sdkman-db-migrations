@@ -80,30 +80,6 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "078",
-    id = "078-add_openjdk_java_16-loom-6",
-    author = "soberich"
-  )
-  def migrate078(implicit db: MongoDatabase): Unit =
-    Map(
-      Linux64 -> "openjdk-16-loom+6-105_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-16-loom+6-105_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-16-loom+6-105_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "16.ea.6.lm-open",
-            s"https://download.java.net/java/early_access/loom/6/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-
-  @ChangeSet(
     order = "081",
     id = "081-add_openjdk_java_16-pma-6",
     author = "eddumelendez"
@@ -206,6 +182,33 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion("java", "16.ea.23-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "090",
+    id = "090-add_openjdk_java_16-loom-7",
+    author = "soberich"
+  )
+  def migrate078(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-16-loom+7-285_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-16-loom+7-285_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-16-loom+7-285_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.7.lm-open",
+            s"https://download.java.net/java/early_access/loom/7/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.ea.6.lm-open", version.platform)
       }
 
 }
