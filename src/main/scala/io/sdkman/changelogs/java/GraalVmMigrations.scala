@@ -451,7 +451,7 @@ class GraalVmMigrations {
         candidate = "java",
         version = "20.3.0.r11-grl",
         url =
-          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-darwin-amd64-20.3.0-signed.tar.gz",
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-darwin-amd64-20.3.0.tar.gz",
         platform = MacOSX,
         vendor = Some(Graal)
       ),
@@ -459,7 +459,7 @@ class GraalVmMigrations {
         candidate = "java",
         version = "20.3.0.r11-grl",
         url =
-          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0-signed.zip",
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0.zip",
         platform = Windows,
         vendor = Some(Graal)
       ),
@@ -475,7 +475,7 @@ class GraalVmMigrations {
         candidate = "java",
         version = "20.3.0.r8-grl",
         url =
-          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-darwin-amd64-20.3.0-signed.tar.gz",
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-darwin-amd64-20.3.0.tar.gz",
         platform = MacOSX,
         vendor = Some(Graal)
       ),
@@ -483,7 +483,7 @@ class GraalVmMigrations {
         candidate = "java",
         version = "20.3.0.r8-grl",
         url =
-          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-windows-amd64-20.3.0-signed.zip",
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-windows-amd64-20.3.0.zip",
         platform = Windows,
         vendor = Some(Graal)
       )
