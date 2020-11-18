@@ -65,15 +65,15 @@ class TomcatMigration {
   }
 
   @ChangeSet(
-    order = "005",
-    id = "005-add_tomcat_10.0.0-M9",
-    author = "larsmoil"
+    order = "006",
+    id = "006-add_tomcat_10.0.0-M10",
+    author = "eddumelendez"
   )
-  def migration005(implicit db: MongoDatabase) = {
+  def migration006(implicit db: MongoDatabase) = {
     Version(
       "tomcat",
-      "10.0.0-M9",
-      "https://downloads.apache.org/tomcat/tomcat-10/v10.0.0-M9/bin/apache-tomcat-10.0.0-M9.zip"
+      "10.0.0-M10",
+      "https://downloads.apache.org/tomcat/tomcat-10/v10.0.0-M10/bin/apache-tomcat-10.0.0-M10.zip"
     ).validate()
       .insert()
   }
