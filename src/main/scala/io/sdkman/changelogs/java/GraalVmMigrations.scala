@@ -424,4 +424,71 @@ class GraalVmMigrations {
       .insert()
   }
 
+  @ChangeSet(
+    order = "009",
+    id = "009-add_graalvm_20_3_0",
+    author = "eddumelendez"
+  )
+  def migrate009(implicit db: MongoDatabase): Unit = {
+    List(
+      Version(
+        candidate = "java",
+        version = "20.3.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-linux-aarch64-20.3.0.tar.gz",
+        platform = LinuxARM64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-linux-amd64-20.3.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-darwin-amd64-20.3.0-signed.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0-signed.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-linux-amd64-20.3.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-darwin-amd64-20.3.0-signed.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "20.3.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-windows-amd64-20.3.0-signed.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      )
+    ).validate()
+      .insert()
+  }
+
 }
