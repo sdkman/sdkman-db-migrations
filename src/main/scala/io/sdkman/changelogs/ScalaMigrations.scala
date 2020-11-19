@@ -178,4 +178,18 @@ class ScalaMigrations {
     ).validate()
       .insert()
 
+  @ChangeSet(
+    order = "014",
+    id = "014_add_scala_2_13_4_as_default",
+    author = "balmungsan"
+  )
+  def migration014(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "2.13.4",
+      url = "https://downloads.lightbend.com/scala/2.13.4/scala-2.13.4.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+
 }
