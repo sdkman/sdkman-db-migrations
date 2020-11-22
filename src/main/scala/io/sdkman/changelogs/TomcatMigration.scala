@@ -22,59 +22,28 @@ class TomcatMigration {
   }
 
   @ChangeSet(
-    order = "002",
-    id = "002-add_tomcat_7.0.106",
-    author = "larsmoil"
+    order = "007",
+    id = "007-add_correct_tomcat_urls",
+    author = "marc0der"
   )
-  def migration002(implicit db: MongoDatabase) = {
-    Version(
-      "tomcat",
-      "7.0.106",
-      "https://downloads.apache.org/tomcat/tomcat-7/v7.0.106/bin/apache-tomcat-7.0.106.zip"
-    ).validate()
+  def migration007(implicit db: MongoDatabase) = {
+    removeAllVersions("tomcat")
+    List(
+      "7"  -> "7.0.106",
+      "8"  -> "8.5.60",
+      "9"  -> "9.0.40",
+      "10" -> "10.0.0-M10"
+    ).map {
+        case (series: String, version: String) =>
+          Version(
+            candidate = "tomcat",
+            version = version,
+            url =
+              s"https://archive.apache.org/dist/tomcat/tomcat-$series/v$version/bin/apache-tomcat-$version.zip"
+          )
+      }
+      .validate()
       .insert()
-  }
-
-  @ChangeSet(
-    order = "003",
-    id = "003-add_tomcat_8.5.59",
-    author = "larsmoil"
-  )
-  def migration003(implicit db: MongoDatabase) = {
-    Version(
-      "tomcat",
-      "8.5.59",
-      "https://apache.uib.no/tomcat/tomcat-8/v8.5.59/bin/apache-tomcat-8.5.59.zip"
-    ).validate()
-      .insert()
-  }
-
-  @ChangeSet(
-    order = "004",
-    id = "004-add_tomcat_9.0.39",
-    author = "larsmoil"
-  )
-  def migration004(implicit db: MongoDatabase) = {
-    Version(
-      "tomcat",
-      "9.0.39",
-      "https://apache.uib.no/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(
-    order = "006",
-    id = "006-add_tomcat_10.0.0-M10",
-    author = "eddumelendez"
-  )
-  def migration006(implicit db: MongoDatabase) = {
-    Version(
-      "tomcat",
-      "10.0.0-M10",
-      "https://downloads.apache.org/tomcat/tomcat-10/v10.0.0-M10/bin/apache-tomcat-10.0.0-M10.zip"
-    ).validate()
-      .insert()
+    setCandidateDefault("tomcat", "9.0.40")
   }
 }
