@@ -46,4 +46,19 @@ class TomcatMigration {
       .insert()
     setCandidateDefault("tomcat", "9.0.40")
   }
+
+  @ChangeSet(
+    order = "007",
+    id = "007-add_tomcat_8.5.60",
+    author = "eddumelendez"
+  )
+  def migration008(implicit db: MongoDatabase) = {
+    Version(
+      "tomcat",
+      "8.5.60",
+      "https://downloads.apache.org/tomcat/tomcat-8/v8.5.60/bin/apache-tomcat-8.5.60.zip"
+    ).validate()
+      .insert()
+  }
+
 }
