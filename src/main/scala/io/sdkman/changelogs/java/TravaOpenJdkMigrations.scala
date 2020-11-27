@@ -2,7 +2,14 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{TravaOpenJdk, Linux64, MacOSX, Version, Windows}
+import io.sdkman.changelogs.{
+  Linux64,
+  MacOSX,
+  TravaOpenJdk,
+  Version,
+  Windows,
+  removeVersion
+}
 
 @ChangeLog(order = "040")
 class TravaOpenJdkMigrations {
@@ -32,30 +39,44 @@ class TravaOpenJdkMigrations {
   }
 
   @ChangeSet(
-    order = "002",
-    id = "002-add_TravaOpenJdk-11_0_9",
+    order = "003",
+    id = "003-remove_TravaOpenJdk-11_0_9",
+    author = "eddumelendez"
+  )
+  def migrate003(implicit db: MongoDatabase): Unit =
+    Seq(
+      Linux64,
+      MacOSX,
+      Windows
+    ).foreach { platform =>
+      removeVersion("java", "11.0.9-trava", platform)
+    }
+
+  @ChangeSet(
+    order = "004",
+    id = "004-add_TravaOpenJdk-11_0_9",
     author = "brunoRoemers"
   )
-  def migrate002(implicit db: MongoDatabase): Unit = {
+  def migrate004(implicit db: MongoDatabase): Unit = {
     List(
       Version(
         "java",
         "11.0.9-trava",
-        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B1/java11-openjdk-dcevm-linux.tar.gz",
+        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B2/java11-openjdk-dcevm-linux.tar.gz",
         Linux64,
         Some(TravaOpenJdk)
       ),
       Version(
         "java",
         "11.0.9-trava",
-        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B1/java11-openjdk-dcevm-osx.tar.gz",
+        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B2/java11-openjdk-dcevm-osx.tar.gz",
         MacOSX,
         Some(TravaOpenJdk)
       ),
       Version(
         "java",
         "11.0.9-trava",
-        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B1/java11-openjdk-dcevm-windows.zip",
+        "https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.9%2B2/java11-openjdk-dcevm-windows.zip",
         Windows,
         Some(TravaOpenJdk)
       )
