@@ -184,22 +184,22 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "091",
-    id = "091-add_openjdk_java_16-ea+25",
+    order = "092",
+    id = "092-add_openjdk_java_16-ea+26",
     author = "eddumelendez"
   )
-  def migrate091(implicit db: MongoDatabase): Unit =
+  def migrate092(implicit db: MongoDatabase): Unit =
     Map(
-      LinuxARM64 -> "openjdk-16-ea+25_linux-aarch64_bin.tar.gz",
-      Linux64    -> "openjdk-16-ea+25_linux-x64_bin.tar.gz",
-      MacOSX     -> "openjdk-16-ea+25_osx-x64_bin.tar.gz",
-      Windows    -> "openjdk-16-ea+25_windows-x64_bin.zip"
+      LinuxARM64 -> "openjdk-16-ea+26_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-16-ea+26_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-16-ea+26_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-16-ea+26_windows-x64_bin.zip"
     ).map {
         case (platform, binary) =>
           Version(
             "java",
-            "16.ea.25-open",
-            s"https://download.java.net/java/early_access/jdk16/25/GPL/$binary",
+            "16.ea.26-open",
+            s"https://download.java.net/java/early_access/jdk16/26/GPL/$binary",
             platform,
             Some(OpenJDK)
           )
@@ -208,7 +208,7 @@ class OpenJdkMigrations {
       .validate()
       .insert()
       .foreach { version =>
-        removeVersion("java", "16.ea.24-open", version.platform)
+        removeVersion("java", "16.ea.25-open", version.platform)
       }
 
 }
