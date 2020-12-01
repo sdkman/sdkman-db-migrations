@@ -42,4 +42,22 @@ class MandrelMigrations {
       )
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "003",
+    id = "003-add_mandrel_20_1_0_3",
+    author = "zakkak"
+  )
+  def migrate003(implicit db: MongoDatabase): Unit =
+    List(
+      Version(
+        candidate = "java",
+        version = "20.1.0.3-mandrel",
+        url =
+          "https://github.com/graalvm/mandrel/releases/download/mandrel-20.1.0.3.Final/mandrel-java11-linux-amd64-20.1.0.3.Final.tar.gz",
+        platform = Linux64,
+        vendor = Some(Mandrel)
+      )
+    ).validate()
+      .insert()
 }
