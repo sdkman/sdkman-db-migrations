@@ -160,34 +160,6 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "094",
-    id = "094-add_openjdk_java_16-ea+27",
-    author = "eddumelendez"
-  )
-  def migrate094(implicit db: MongoDatabase): Unit =
-    Map(
-      LinuxARM64 -> "openjdk-16-ea+27_linux-aarch64_bin.tar.gz",
-      Linux64    -> "openjdk-16-ea+27_linux-x64_bin.tar.gz",
-      MacOSX     -> "openjdk-16-ea+27_osx-x64_bin.tar.gz",
-      Windows    -> "openjdk-16-ea+27_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "16.ea.27-open",
-            s"https://download.java.net/java/early_access/jdk16/27/GPL/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "16.ea.26-open", version.platform)
-      }
-
-  @ChangeSet(
     order = "095",
     id = "095-add_openjdk_java_16-pma-3",
     author = "eddumelendez"
@@ -212,6 +184,34 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion("java", "16.ea.2.pma-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "096",
+    id = "096-add_openjdk_java_16-ea+28",
+    author = "eddumelendez"
+  )
+  def migrate096(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-16-ea+28_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-16-ea+28_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-16-ea+28_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-16-ea+28_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.28-open",
+            s"https://download.java.net/java/early_access/jdk16/28/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.ea.27-open", version.platform)
       }
 
 }
