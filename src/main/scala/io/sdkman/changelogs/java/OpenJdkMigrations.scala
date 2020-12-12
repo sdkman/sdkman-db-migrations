@@ -80,30 +80,6 @@ class OpenJdkMigrations {
       }
 
   @ChangeSet(
-    order = "081",
-    id = "081-add_openjdk_java_16-pma-6",
-    author = "eddumelendez"
-  )
-  def migrate081(implicit db: MongoDatabase): Unit =
-    Map(
-      Linux64 -> "openjdk-16-panama+2-193_linux-x64_bin.tar.gz",
-      MacOSX  -> "openjdk-16-panama+2-193_osx-x64_bin.tar.gz",
-      Windows -> "openjdk-16-panama+2-193_windows-x64_bin.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "16.ea.2.pma-open",
-            s"https://download.java.net/java/early_access/panama/2/$binary",
-            platform,
-            Some(OpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-
-  @ChangeSet(
     order = "083",
     id = "083-add_openjdk_java_11_linux_windows",
     author = "eddumelendez"
@@ -209,6 +185,33 @@ class OpenJdkMigrations {
       .insert()
       .foreach { version =>
         removeVersion("java", "16.ea.26-open", version.platform)
+      }
+
+  @ChangeSet(
+    order = "095",
+    id = "095-add_openjdk_java_16-pma-3",
+    author = "eddumelendez"
+  )
+  def migrate095(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "openjdk-16-panama+3-385_linux-x64_bin.tar.gz",
+      MacOSX  -> "openjdk-16-panama+3-385_osx-x64_bin.tar.gz",
+      Windows -> "openjdk-16-panama+3-385_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.ea.3.pma-open",
+            s"https://download.java.net/java/early_access/panama/3/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach { version =>
+        removeVersion("java", "16.ea.2.pma-open", version.platform)
       }
 
 }
