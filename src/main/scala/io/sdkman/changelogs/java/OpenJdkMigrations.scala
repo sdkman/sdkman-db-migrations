@@ -214,4 +214,29 @@ class OpenJdkMigrations {
         removeVersion("java", "16.ea.27-open", version.platform)
       }
 
+  @ChangeSet(
+    order = "097",
+    id = "097-add_openjdk_java_17-ea+1",
+    author = "mdeinum"
+  )
+  def migrate097(implicit db: MongoDatabase): Unit =
+    Map(
+      LinuxARM64 -> "openjdk-17-ea+1_linux-aarch64_bin.tar.gz",
+      Linux64    -> "openjdk-17-ea+1_linux-x64_bin.tar.gz",
+      MacOSX     -> "openjdk-17-ea+1_osx-x64_bin.tar.gz",
+      Windows    -> "openjdk-17-ea+1_windows-x64_bin.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "17.ea.1-open",
+            s"https://download.java.net/java/early_access/jdk17/1/GPL/$binary",
+            platform,
+            Some(OpenJDK)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
