@@ -8,6 +8,7 @@ import io.sdkman.changelogs.{
   Version,
   Windows,
   Zulu,
+  hideVersion,
   removeVersion
 }
 
@@ -148,4 +149,12 @@ class AzulZuluFxMigrations {
       .foreach { version =>
         removeVersion("java", "11.0.8.fx-zulu", version.platform)
       }
+
+  @ChangeSet(
+    order = "022",
+    id = "022-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate022(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "8.0.272.fx-zulu")
 }

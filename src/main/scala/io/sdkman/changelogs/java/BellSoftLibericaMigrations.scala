@@ -235,4 +235,12 @@ class BellSoftLibericaMigrations {
       .insert()
   }
 
+  @ChangeSet(
+    order = "045",
+    id = "045-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate045(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "8.0.265.fx-librca")
+
 }

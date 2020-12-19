@@ -9,6 +9,7 @@ import io.sdkman.changelogs.{
   Version,
   Windows,
   Zulu,
+  hideVersion,
   removeVersion
 }
 
@@ -180,4 +181,13 @@ class AzulZuluMigrations {
       .foreach { version =>
         removeVersion("java", "7.0.262-zulu", version.platform)
       }
+
+  @ChangeSet(
+    order = "025",
+    id = "025-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate025(implicit db: MongoDatabase): Unit =
+    Seq("7.0.181-zulu", "8.0.202-zulu", "8.0.272-zulu")
+      .foreach(version => hideVersion("java", version))
 }

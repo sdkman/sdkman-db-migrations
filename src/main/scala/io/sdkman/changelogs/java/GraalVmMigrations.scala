@@ -4,11 +4,12 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import io.sdkman.changelogs.{
   Graal,
-  LinuxARM64,
   Linux64,
+  LinuxARM64,
   MacOSX,
   Version,
   Windows,
+  hideVersion,
   removeVersion
 }
 
@@ -490,5 +491,24 @@ class GraalVmMigrations {
     ).validate()
       .insert()
   }
+
+  @ChangeSet(
+    order = "010",
+    id = "010-hide-graalvm-versions",
+    author = "eddumelendez"
+  )
+  def migrate010(implicit db: MongoDatabase): Unit =
+    Seq(
+      "19.3.1.r8-grl",
+      "19.3.1.r11-grl",
+      "19.3.4.r8-grl",
+      "19.3.4.r11-grl",
+      "20.0.0.r8-grl",
+      "20.0.0.r11-grl",
+      "20.1.0.r8-grl",
+      "20.1.0.r11-grl",
+      "20.2.0.r8-grl",
+      "20.2.0.r11-grl"
+    ).foreach(version => hideVersion("java", version))
 
 }
