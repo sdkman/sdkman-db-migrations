@@ -1107,4 +1107,12 @@ class AdoptOpenJdkMigrations {
       .foreach { version =>
         removeVersion("java", "8.0.272.j9-adpt", version.platform)
       }
+
+  @ChangeSet(
+    order = "052",
+    id = "052-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate052(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "8.0.272.hs-adpt")
 }

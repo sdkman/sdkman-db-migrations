@@ -255,6 +255,21 @@ package object changelogs {
           .append("platform", platform.id)
       )
 
+  def hideVersion(
+      candidate: String,
+      version: String
+  )(
+      implicit db: MongoDatabase
+  ): Unit =
+    db.getCollection(VersionsCollection)
+      .updateMany(
+        Filters.and(
+          Filters.eq("candidate", candidate),
+          Filters.eq("version", version)
+        ),
+        Updates.set("visible", false)
+      )
+
   def removeAllVersions(candidate: String)(implicit db: MongoDatabase): Unit =
     db.getCollection(VersionsCollection)
       .deleteMany(new Document("candidate", candidate))

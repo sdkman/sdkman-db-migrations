@@ -9,6 +9,7 @@ import io.sdkman.changelogs.{
   OpenJDK,
   Version,
   Windows,
+  hideVersion,
   removeVersion
 }
 
@@ -239,4 +240,12 @@ class OpenJdkMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(
+    order = "098",
+    id = "098-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate098(implicit db: MongoDatabase): Unit =
+    Seq("16.ea.28-open", "17.ea.1-open")
+      .foreach(version => hideVersion("java", version))
 }
