@@ -704,6 +704,30 @@ class AdoptOpenJdkMigrations {
       }
 
   @ChangeSet(
+    order = "0027",
+    id = "0027-add_adoptopenjdk-8-11-linuxarm",
+    author = "delight"
+  )
+  def migrate0027(implicit db: MongoDatabase) =
+    List(
+      Version(
+        "java",
+        "8.0.275.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u275-b01/OpenJDK8U-jdk_arm_linux_hotspot_8u275b01.tar.gz",
+        LinuxARM32,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "11.0.9.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9.1%2B1/OpenJDK11U-jdk_arm_linux_hotspot_11.0.9.1_1.tar.gz",
+        LinuxARM32,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+
+  @ChangeSet(
     order = "0028",
     id = "0028-add_adoptopenjdk-8-11-linuxarm64",
     author = "dvdkruk"
