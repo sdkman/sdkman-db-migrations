@@ -110,6 +110,10 @@ package object changelogs {
     override def id = "albba"
   }
 
+  case object EclipseTemurin extends Vendor {
+    override def id = "tem"
+  }
+
   case object Graal extends Vendor {
     override def id = "grl"
   }
