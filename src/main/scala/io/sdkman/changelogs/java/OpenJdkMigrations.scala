@@ -241,11 +241,11 @@ class OpenJdkMigrations {
       .insert()
 
   @ChangeSet(
-    order = "100",
-    id = "100-hide-java-versions",
+    order = "101",
+    id = "101-hide-java-versions",
     author = "eddumelendez"
   )
   def migrate100(implicit db: MongoDatabase): Unit =
-    Seq("16.ea.30-open", "17.ea.3-open")
+    Seq("16.ea.31-open", "17.ea.4-open")
       .foreach(version => hideVersion("java", version))
 }
