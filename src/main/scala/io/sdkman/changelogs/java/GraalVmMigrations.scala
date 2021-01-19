@@ -511,4 +511,12 @@ class GraalVmMigrations {
       "20.2.0.r11-grl"
     ).foreach(version => hideVersion("java", version))
 
+  @ChangeSet(
+    order = "011",
+    id = "011-hide-graalvm-versions",
+    author = "eddumelendez"
+  )
+  def migrate011(implicit db: MongoDatabase): Unit =
+    Seq("20.3.0.r8-grl", "20.3.0.r11-grl")
+      .foreach(version => hideVersion("java", version))
 }
