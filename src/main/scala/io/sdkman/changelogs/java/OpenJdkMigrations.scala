@@ -257,4 +257,12 @@ class OpenJdkMigrations {
   def migrate102(implicit db: MongoDatabase): Unit =
     hideVersion("java", "16.ea.9.lm-open")
 
+  @ChangeSet(
+    order = "103",
+    id = "103-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate103(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "15.0.1-open")
+
 }
