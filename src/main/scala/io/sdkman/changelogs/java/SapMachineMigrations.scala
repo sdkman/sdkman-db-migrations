@@ -116,4 +116,12 @@ class SapMachineMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "024",
+    id = "024-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate024(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "11.0.9-sapmchn")
 }
