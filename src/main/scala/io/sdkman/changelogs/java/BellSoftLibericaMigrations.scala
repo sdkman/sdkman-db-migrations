@@ -243,4 +243,19 @@ class BellSoftLibericaMigrations {
   def migrate045(implicit db: MongoDatabase): Unit =
     hideVersion("java", "8.0.265.fx-librca")
 
+  @ChangeSet(
+    order = "046",
+    id = "046-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate046(implicit db: MongoDatabase): Unit =
+    Seq(
+      "8.0.275-librca",
+      "8.0.275.fx-librca",
+      "11.0.9-librca",
+      "11.0.9.fx-librca",
+      "15.0.1-librca",
+      "15.0.1.fx-librca"
+    ).foreach(version => hideVersion("java", version))
+
 }
