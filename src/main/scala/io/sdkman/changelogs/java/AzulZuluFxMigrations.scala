@@ -157,4 +157,16 @@ class AzulZuluFxMigrations {
   )
   def migrate022(implicit db: MongoDatabase): Unit =
     hideVersion("java", "8.0.272.fx-zulu")
+
+  @ChangeSet(
+    order = "023",
+    id = "023-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate023(implicit db: MongoDatabase): Unit =
+    Seq(
+      "8.0.275.fx-zulu",
+      "13.0.5.fx-zulu",
+      "14.0.2.fx-zulu"
+    ).foreach(version => hideVersion("java", version))
 }

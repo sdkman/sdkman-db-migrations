@@ -1115,4 +1115,25 @@ class AdoptOpenJdkMigrations {
   )
   def migrate052(implicit db: MongoDatabase): Unit =
     hideVersion("java", "8.0.272.hs-adpt")
+
+  @ChangeSet(
+    order = "053",
+    id = "053-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate053(implicit db: MongoDatabase): Unit =
+    Seq(
+      "8.0.275.hs-adpt",
+      "8.0.275.j9-adpt",
+      "11.0.9.hs-adpt",
+      "11.0.9.j9-adpt",
+      "12.0.2.hs-adpt",
+      "12.0.2.j9-adpt",
+      "13.0.2.hs-adpt",
+      "13.0.2.j9-adpt",
+      "14.0.2.hs-adpt",
+      "14.0.2.j9-adpt",
+      "15.0.1.hs-adpt",
+      "15.0.1.j9-adpt"
+    ).foreach(version => hideVersion("java", version))
 }

@@ -190,4 +190,19 @@ class AzulZuluMigrations {
   def migrate025(implicit db: MongoDatabase): Unit =
     Seq("7.0.181-zulu", "8.0.202-zulu", "8.0.272-zulu")
       .foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "026",
+    id = "026-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate026(implicit db: MongoDatabase): Unit =
+    Seq(
+      "8.0.275-zulu",
+      "9.0.7-zulu",
+      "10.0.2-zulu",
+      "12.0.2-zulu",
+      "13.0.5-zulu",
+      "14.0.2-zulu"
+    ).foreach(version => hideVersion("java", version))
 }

@@ -187,4 +187,13 @@ class AmazonCorrettoMigrations {
   def migrate023(implicit db: MongoDatabase): Unit =
     Seq("8.0.275-amzn", "11.0.9-amzn")
       .foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "024",
+    id = "024-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate024(implicit db: MongoDatabase): Unit =
+    Seq("15.0.1-amzn", "15.0.1.9.1-amzn")
+      .foreach(version => hideVersion("java", version))
 }
