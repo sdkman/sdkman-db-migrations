@@ -1136,4 +1136,13 @@ class AdoptOpenJdkMigrations {
       "15.0.1.hs-adpt",
       "15.0.1.j9-adpt"
     ).foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "054",
+    id = "054-update-default-candidate",
+    author = "vpavic"
+  )
+  def migrate054(implicit db: MongoDatabase): Unit =
+    setCandidateDefault("java", "11.0.10.hs-adpt")
+
 }
