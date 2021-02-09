@@ -60,4 +60,48 @@ class MandrelMigrations {
       )
     ).validate()
       .insert()
+    @ChangeSet(
+    order = "003",
+    id = "003-add_mandrel_20_1_0_3",
+    author = "zakkak"
+  )
+  
+  def migrate004(implicit db: MongoDatabase): Unit =
+    List(
+      Version(
+        candidate = "java",
+        version = "20.1.0.4-mandrel",
+        url =
+          "https://github.com/graalvm/mandrel/releases/download/mandrel-20.1.0.4.Final/mandrel-java11-linux-amd64-20.1.0.4.Final.tar.gz",
+        platform = Linux64,
+        vendor = Some(Mandrel)
+      )
+    ).validate()
+      .insert()
+  
+  def migrate005(implicit db: MongoDatabase): Unit =
+    List(
+      Version(
+        candidate = "java",
+        version = "20.3.1.2-mandrel",
+        url =
+          "https://github.com/graalvm/mandrel/releases/download/mandrel-20.3.1.2.Final/mandrel-java11-linux-amd64-20.3.1.2.Final.tar.gz",
+        platform = Linux64,
+        vendor = Some(Mandrel)
+      )
+    ).validate()
+      .insert()
+  
+  def migrate006(implicit db: MongoDatabase): Unit =
+    List(
+      Version(
+        candidate = "java",
+        version = "21.0.0.0-mandrel",
+        url =
+          "https://github.com/graalvm/mandrel/releases/download/mandrel-21.0.0.0.Final/mandrel-java11-linux-amd64-21.0.0.0.Final.tar.gz",
+        platform = Linux64,
+        vendor = Some(Mandrel)
+      )
+    ).validate()
+      .insert()
 }
