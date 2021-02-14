@@ -2,7 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Linux64, Mandrel, Version}
+import io.sdkman.changelogs.{Linux64, Windows, Mandrel, Version}
 
 @ChangeLog(order = "035")
 class MandrelMigrations {
@@ -60,4 +60,39 @@ class MandrelMigrations {
       )
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "004",
+    id = "004-add_mandrel-20_1_0_4-20_3_1_2-21_0_0_0",
+    author = "zakkak"
+  )
+  def migrate004(implicit db: MongoDatabase): Unit =
+    Map(
+      "20.1.0.4" -> List((Linux64, "linux-amd64", "tar.gz")),
+      "20.3.1.2" -> List(
+        (Linux64, "linux-amd64", "tar.gz"),
+        (Windows, "windows-amd64", "zip")
+      ),
+      "21.0.0.0" -> List(
+        (Linux64, "linux-amd64", "tar.gz"),
+        (Windows, "windows-amd64", "zip")
+      )
+    ).flatMap {
+        case (version, platforms) =>
+          platforms.map {
+            case (platform, mandrelPlatform, suffix) =>
+              Version(
+                candidate = "java",
+                version = s"$version-mandrel",
+                url =
+                  s"https://github.com/graalvm/mandrel/releases/download/mandrel-$version.Final/mandrel-java11-$mandrelPlatform-$version.Final.$suffix",
+                platform = platform,
+                vendor = Some(Mandrel)
+              )
+          }
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
