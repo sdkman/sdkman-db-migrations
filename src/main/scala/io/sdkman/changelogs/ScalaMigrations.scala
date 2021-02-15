@@ -219,4 +219,17 @@ class ScalaMigrations {
         "https://github.com/lampepfl/dotty/releases/download/3.0.0-M3/scala3-3.0.0-M3.zip"
     ).validate()
       .insert()
+  
+  @ChangeSet(
+    order = "017",
+    id = "017-add_scala_2_12_13",
+    author = "lrlucena"
+  )
+  def migration017(implicit db: MongoDatabase) =
+    Version(
+      candidate = "scala",
+      version = "2.12.13",
+      url = "https://downloads.lightbend.com/scala/2.12.13/scala-2.12.13.zip"
+    ).validate()
+      .insert()
 }
