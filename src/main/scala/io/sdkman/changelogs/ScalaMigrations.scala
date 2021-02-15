@@ -225,7 +225,7 @@ class ScalaMigrations {
     id = "017-add_scala_2_12_13",
     author = "lrlucena"
   )
-  def migration017(implicit db: MongoDatabase) =
+  def migration017(implicit db: MongoDatabase): Unit =
     Version(
       candidate = "scala",
       version = "2.12.13",
