@@ -236,7 +236,7 @@ class ScalaMigrations {
   @ChangeSet(
     order = "018",
     id = "018_add_scala3_3_0_0_RC1",
-    author = "anaumidis"
+    author = "lrlucena"
   )
   def migration018(implicit db: MongoDatabase): Unit =
     Version(
