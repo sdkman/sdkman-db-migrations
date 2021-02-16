@@ -173,8 +173,8 @@ class ScalaMigrations {
     Version(
       candidate = "scala",
       version = "3.0.0-M1",
-      url =
-        "https://github.com/lampepfl/dotty/releases/download/3.0.0-M1/scala3-3.0.0-M1.zip"
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-M1/scala3-3.0.0-M1.zip"
     ).validate()
       .insert()
 
@@ -201,8 +201,8 @@ class ScalaMigrations {
     Version(
       candidate = "scala",
       version = "3.0.0-M2",
-      url =
-        "https://github.com/lampepfl/dotty/releases/download/3.0.0-M2/scala3-3.0.0-M2.zip"
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-M2/scala3-3.0.0-M2.zip"
     ).validate()
       .insert()
 
@@ -215,11 +215,11 @@ class ScalaMigrations {
     Version(
       candidate = "scala",
       version = "3.0.0-M3",
-      url =
-        "https://github.com/lampepfl/dotty/releases/download/3.0.0-M3/scala3-3.0.0-M3.zip"
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-M3/scala3-3.0.0-M3.zip"
     ).validate()
       .insert()
-  
+
   @ChangeSet(
     order = "017",
     id = "017_add_scala_2_12_13",
