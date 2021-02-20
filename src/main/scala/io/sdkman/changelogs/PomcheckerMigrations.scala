@@ -8,7 +8,7 @@ class PomcheckerMigrations {
 
   @ChangeSet(
     order = "001",
-    id = "001_add_layrry_candidate",
+    id = "001_add_pomchecker_candidate",
     author = "aalmiray"
   )
   def migration001(implicit db: MongoDatabase) =
