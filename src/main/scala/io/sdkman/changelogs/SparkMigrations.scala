@@ -173,7 +173,7 @@ class SparkMigrations {
       .insert()
       .asCandidateDefault()
   }
-  
+
   @ChangeSet(
     order = "014",
     id = "014-add_spark_3.0.2",
