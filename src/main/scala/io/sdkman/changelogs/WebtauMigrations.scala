@@ -15,7 +15,12 @@ class WebtauMigrations {
       candidate = "webtau",
       name = "webtau",
       description =
-        "webtau - web test automation. test across REST-API/Graph QL/Browser/Database/CLI/Business-Logic",
+        "Webtau (short for web test automation) is a testing API, command line tool and a framework to write " +
+          "unit, integration and end-to-end tests. " +
+          "Tests can span multiple application layers like REST-API, Graph QL, Browser, Database and CLI. " +
+          "Consistent set of matchers and testing concepts work across all testing layers. " +
+          "Use REPL mode to speed-up tests development. " +
+          "Leverage rich reporting to significantly cut down failure investigation time.",
       websiteUrl = "https://github.com/testingisdocumenting/webtau"
     ).insert()
 }
