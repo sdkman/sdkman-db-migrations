@@ -24,40 +24,61 @@ class FlinkMigrations {
 
   @ChangeSet(
     order = "002",
-    id = "002-add_flink_1.9.3_2.12",
+    id = "002-add_flink_1.8_2.12",
     author = "ChethanUK"
   )
   def migration002(implicit db: MongoDatabase) = {
-    flinkVersion("1.9.3", "2.12")
+    flinkListVersion(majorVersion = "1.7", minorVersions = (0 to 2).toList)
+    flinkListVersion(majorVersion = "1.8", minorVersions = (0 to 3).toList)
       .insert()
   }
 
   @ChangeSet(
     order = "003",
-    id = "002-add_flink_1.10.3_2.12",
+    id = "003-add_flink_1.9_2.12",
     author = "ChethanUK"
   )
   def migration003(implicit db: MongoDatabase) = {
-    flinkVersion("1.10.3", "2.12")
+    flinkListVersion(majorVersion = "1.9", minorVersions = (0 to 3).toList)
       .insert()
   }
 
   @ChangeSet(
     order = "004",
-    id = "004-add_flink_1.11.3_2.12",
+    id = "004-add_flink_1.10_2.12",
     author = "ChethanUK"
   )
   def migration004(implicit db: MongoDatabase) = {
-    flinkVersion("1.11.3", "2.12")
+    flinkListVersion(majorVersion = "1.10", minorVersions = (0 to 3).toList)
       .insert()
   }
 
   @ChangeSet(
     order = "005",
-    id = "004-add_flink_1.12.2_2.12",
+    id = "005-add_flink_1.11_2.12",
     author = "ChethanUK"
   )
   def migration005(implicit db: MongoDatabase) = {
+    flinkListVersion(majorVersion = "1.11", minorVersions = (0 to 3).toList)
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "006",
+    id = "006-add_flink_1.12_2.12",
+    author = "ChethanUK"
+  )
+  def migration006(implicit db: MongoDatabase) = {
+    flinkListVersion(majorVersion = "1.12", minorVersions = (0 to 1).toList)
+      .insert()
+  }
+
+  @ChangeSet(
+    order = "007",
+    id = "007-add_flink_1.12_2.12",
+    author = "ChethanUK"
+  )
+  def migration007(implicit db: MongoDatabase) = {
     flinkVersion("1.12.2", "2.12")
       .insert()
       .asCandidateDefault()
@@ -75,5 +96,16 @@ class FlinkMigrations {
       candidate = candidate,
       version = flinkVersion,
       url = url(flinkVersion, scalaVersion)
-    ).validate()
+    )
+
+  private def flinkListVersion(
+      majorVersion: String,
+      minorVersions: List[Int],
+      scalaVersion: String = "2.12"
+  ) = {
+    ((minorVersions map { s"$majorVersion." + _ }) map { v =>
+      flinkVersion(v, scalaVersion)
+    }).validate()
+  }
+
 }
