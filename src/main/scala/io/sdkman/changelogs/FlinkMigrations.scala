@@ -80,6 +80,6 @@ class FlinkMigrations {
     id = "003-set_default_version_1_12_2",
     author = "marc0der"
   )
-  def migration002(implicit db: MongoDatabase) =
+  def migration003(implicit db: MongoDatabase) =
     setCandidateDefault("flink", "1.12.2")
 }
