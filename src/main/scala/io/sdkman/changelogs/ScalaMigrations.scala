@@ -246,4 +246,18 @@ class ScalaMigrations {
     ).validate()
       .insert()
       .asCandidateDefault()
+
+  @ChangeSet(
+    order = "019",
+    id = "019_add_scala3_3_0_0_RC1",
+    author = "anaumidis"
+  )
+  def migration019(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0-RC1",
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-RC1/scala3-3.0.0-RC1.zip"
+    ).validate()
+      .insert()
 }
