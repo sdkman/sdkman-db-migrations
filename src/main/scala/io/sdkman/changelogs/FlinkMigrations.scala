@@ -75,4 +75,11 @@ class FlinkMigrations {
   private def url(version: String, scala: String) =
     s"https://archive.apache.org/dist/flink/flink-$version/flink-$version-bin-scala_$scala.tgz"
 
+  @ChangeSet(
+    order = "003",
+    id = "003-set_default_version_1_12_2",
+    author = "marc0der"
+  )
+  def migration002(implicit db: MongoDatabase) =
+    setCandidateDefault("flink", "1.12.2")
 }
