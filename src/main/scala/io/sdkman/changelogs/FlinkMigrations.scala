@@ -75,7 +75,7 @@ class FlinkMigrations {
 
   @ChangeSet(
     order = "007",
-    id = "007-add_flink_1.12_2.12",
+    id = "007-add_flink_1.12.2_2.12_as_default",
     author = "ChethanUK"
   )
   def migration007(implicit db: MongoDatabase) = {
