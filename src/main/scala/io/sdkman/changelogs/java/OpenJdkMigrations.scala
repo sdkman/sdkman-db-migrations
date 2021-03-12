@@ -269,4 +269,17 @@ class OpenJdkMigrations {
       "16.ea.35-open"
     ).foreach(version => hideVersion("java", version))
 
+  @ChangeSet(
+    order = "106",
+    id = "106-hide-ea-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate106(implicit db: MongoDatabase): Unit =
+    Seq(
+      "17.ea.9-open",
+      "17.ea.10-open",
+      "17.ea.11-open",
+      "17.ea.12-open"
+    ).foreach(version => hideVersion("java", version))
+
 }
