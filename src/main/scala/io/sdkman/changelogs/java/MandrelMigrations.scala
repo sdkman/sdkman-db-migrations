@@ -2,7 +2,14 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{Linux64, Windows, Mandrel, Version}
+import io.sdkman.changelogs.{
+  Linux64,
+  Windows,
+  Mandrel,
+  Version,
+  removeVersion,
+  hideVersion
+}
 
 @ChangeLog(order = "035")
 class MandrelMigrations {
@@ -94,5 +101,45 @@ class MandrelMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "005",
+    id = "005-replace_mandrel-20_3_1_2-21_0_0_0-rm_mandrel-20_2_0_0-20_1_0_3",
+    author = "zakkak"
+  )
+  def migrate005(implicit db: MongoDatabase): Unit = {
+    hideVersion("java", "20.2.0.0-mandrel")
+    hideVersion("java", "20.1.0.3-mandrel")
+    removeVersion("java", "20.3.1.2-mandrel", Linux64)
+    removeVersion("java", "20.3.1.2-mandrel", Windows)
+    removeVersion("java", "21.0.0.0-mandrel", Linux64)
+    removeVersion("java", "21.0.0.0-mandrel", Windows)
+    Map(
+      "20.3.1.2" -> List(
+        (Linux64, "linux-amd64", "tar.gz"),
+        (Windows, "windows-amd64", "zip")
+      ),
+      "21.0.0.0" -> List(
+        (Linux64, "linux-amd64", "tar.gz"),
+        (Windows, "windows-amd64", "zip")
+      )
+    ).flatMap {
+        case (version, platforms) =>
+          platforms.map {
+            case (platform, mandrelPlatform, suffix) =>
+              Version(
+                candidate = "java",
+                version = s"$version-mandrel",
+                url =
+                  s"https://github.com/graalvm/mandrel/releases/download/mandrel-$version-Final/mandrel-java11-$mandrelPlatform-$version-Final.$suffix",
+                platform = platform,
+                vendor = Some(Mandrel)
+              )
+          }
+      }
+      .toList
+      .validate()
+      .insert()
+  }
 
 }
