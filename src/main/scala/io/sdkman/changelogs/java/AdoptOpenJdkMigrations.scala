@@ -2,6 +2,8 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import com.mongodb.client.model.{Filters, Updates}
+import com.mongodb.client.model.Filters._
 import io.sdkman.changelogs.{AdoptOpenJDK, Linux64, MacOSX, Version, Windows, _}
 
 @ChangeLog(order = "016")
@@ -1145,4 +1147,29 @@ class AdoptOpenJdkMigrations {
   def migrate054(implicit db: MongoDatabase): Unit =
     setCandidateDefault("java", "11.0.10.hs-adpt")
 
+  @ChangeSet(
+    order = "055",
+    id = "055-fix_adoptopenjdk-hs_8_0_272",
+    author = "helpermethod"
+  )
+  def migrate055(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "OpenJDK8U-jdk_x64_linux_hotspot_8u272b10.tar.gz",
+      MacOSX  -> "OpenJDK8U-jdk_x64_mac_hotspot_8u272b10.tar.gz",
+      Windows -> "OpenJDK8U-jdk_x64_windows_hotspot_8u272b10.zip"
+    ).foreach {
+      case (platform, binary) =>
+        db.getCollection(VersionsCollection)
+          .updateOne(
+            Filters.and(
+              Filters.eq("candidate", "java"),
+              Filters.eq("version", "8.0.272.hs-adpt"),
+              Filters.eq("platform", platform)
+            ),
+            Updates.set(
+              "url",
+              s"https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u272-b10/$binary"
+            )
+          )
+    }
 }
