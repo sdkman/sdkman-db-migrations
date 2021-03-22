@@ -1182,4 +1182,16 @@ class AdoptOpenJdkMigrations {
       .toList
       .validate()
       .insert()
+
+  @ChangeSet(
+    order = "057",
+    id = "057-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate057(implicit db: MongoDatabase): Unit =
+    Seq(
+      "15.0.2.j9-adpt",
+      "15.0.2.hs-adpt",
+      "8.0.272.hs-adpt"
+    ).foreach(version => hideVersion("java", version))
 }

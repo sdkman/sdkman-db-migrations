@@ -205,4 +205,12 @@ class AzulZuluMigrations {
       "13.0.5-zulu",
       "14.0.2-zulu"
     ).foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "027",
+    id = "027-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate027(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "15.0.2-zulu")
 }
