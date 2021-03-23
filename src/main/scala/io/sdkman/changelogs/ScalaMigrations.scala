@@ -263,98 +263,31 @@ class ScalaMigrations {
 
   @ChangeSet(
     order = "020",
-    id = "020_add_scala_2.10.1",
+    id = "020_add_scala_2.10.x",
     author = "eliso"
   )
-  def migration020(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.1",
-      url = "https://downloads.lightbend.com/scala/2.10.1/scala-2.10.1.zip"
-    ).validate()
-List("2.10.1", "2.10.2", "2.10.3", .....).map { version =>
-  Version(
-      candidate = "scala",
-      version = version,
-      url = "https://downloads.lightbend.com/scala/${version}/scala-${version}.zip"
-  )
-}.validate().insert()
+  def migration020(implicit db: MongoDatabase): Unit = {
+    val partialUrl = "https://downloads.lightbend.com/scala"
+    val versions = List(
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4",
+      "2.10.5",
+      "2.10.6",
+      "2.10.7"
+    )
 
-  @ChangeSet(
-    order = "021",
-    id = "021_add_scala_2.10.2",
-    author = "eliso"
-  )
-  def migration021(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.2",
-      url = "https://downloads.lightbend.com/scala/2.10.2/scala-2.10.2.zip"
-    ).validate()
-      .insert()
-
-  @ChangeSet(
-    order = "022",
-    id = "022_add_scala_2.10.3",
-    author = "eliso"
-  )
-  def migration022(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.3",
-      url = "https://downloads.lightbend.com/scala/2.10.3/scala-2.10.3.zip"
-    ).validate()
-      .insert()
-
-  @ChangeSet(
-    order = "023",
-    id = "023_add_scala_2.10.4",
-    author = "eliso"
-  )
-  def migration023(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.4",
-      url = "https://downloads.lightbend.com/scala/2.10.4/scala-2.10.4.zip"
-    ).validate()
-      .insert()
-
-  @ChangeSet(
-    order = "024",
-    id = "024_add_scala_2.10.5",
-    author = "eliso"
-  )
-  def migration024(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.5",
-      url = "https://downloads.lightbend.com/scala/2.10.5/scala-2.10.5.zip"
-    ).validate()
-      .insert()
-
-  @ChangeSet(
-    order = "025",
-    id = "025_add_scala_2.10.6",
-    author = "eliso"
-  )
-  def migration025(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.6",
-      url = "https://downloads.lightbend.com/scala/2.10.6/scala-2.10.6.zip"
-    ).validate()
-      .insert()
-
-  @ChangeSet(
-    order = "026",
-    id = "026_add_scala_2.10.7",
-    author = "eliso"
-  )
-  def migration026(implicit db: MongoDatabase): Unit =
-    Version(
-      candidate = "scala",
-      version = "2.10.7",
-      url = "https://downloads.lightbend.com/scala/2.10.7/scala-2.10.7.zip"
-    ).validate()
-      .insert()
+    versions.foreach { version =>
+      {
+        val completeUrl = s"$partialUrl/$version/scala-$version.zip"
+        Version(
+          candidate = "scala",
+          version = version,
+          url = completeUrl
+        ).validate()
+          .insert()
+      }
+    }
+  }
 }
