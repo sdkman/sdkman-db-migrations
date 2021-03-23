@@ -272,7 +272,13 @@ class ScalaMigrations {
       version = "2.10.1",
       url = "https://downloads.lightbend.com/scala/2.10.1/scala-2.10.1.zip"
     ).validate()
-      .insert()
+List("2.10.1", "2.10.2", "2.10.3", .....).map { version =>
+  Version(
+      candidate = "scala",
+      version = version,
+      url = "https://downloads.lightbend.com/scala/${version}/scala-${version}.zip"
+  )
+}.validate().insert()
 
   @ChangeSet(
     order = "021",
