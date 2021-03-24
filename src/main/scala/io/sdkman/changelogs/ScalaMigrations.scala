@@ -260,4 +260,34 @@ class ScalaMigrations {
         "3.0.0-RC1/scala3-3.0.0-RC1.zip"
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "020",
+    id = "020_add_scala_2.10.x",
+    author = "eliso"
+  )
+  def migration020(implicit db: MongoDatabase): Unit = {
+    val partialUrl = "https://downloads.lightbend.com/scala"
+    val versions = List(
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4",
+      "2.10.5",
+      "2.10.6",
+      "2.10.7"
+    )
+
+    versions.foreach { version =>
+      {
+        val completeUrl = s"$partialUrl/$version/scala-$version.zip"
+        Version(
+          candidate = "scala",
+          version = version,
+          url = completeUrl
+        ).validate()
+          .insert()
+      }
+    }
+  }
 }
