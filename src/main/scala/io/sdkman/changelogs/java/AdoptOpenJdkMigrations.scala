@@ -1194,4 +1194,36 @@ class AdoptOpenJdkMigrations {
       "15.0.2.hs-adpt",
       "8.0.272.hs-adpt"
     ).foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "058",
+    id = "058-add-adpt-222",
+    author = "henri-tremblay"
+  )
+  def migrate058(implicit db: MongoDatabase): Unit =
+    List(
+      Version(
+        "java",
+        "8.0.222.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_linux_hotspot_8u222b10.tar.gz",
+        Linux64,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "8.0.222.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_mac_hotspot_8u222b10.tar.gz",
+        MacOSX,
+        Some(AdoptOpenJDK)
+      ),
+      Version(
+        "java",
+        "8.0.222.hs-adpt",
+        "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u222-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u222b10.zip",
+        Windows,
+        Some(AdoptOpenJDK)
+      )
+    ).validate()
+      .insert()
+
 }
