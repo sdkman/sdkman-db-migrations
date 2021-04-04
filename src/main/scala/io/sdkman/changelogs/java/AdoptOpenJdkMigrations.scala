@@ -1225,5 +1225,6 @@ class AdoptOpenJdkMigrations {
       )
     ).validate()
       .insert()
+      .foreach(version => hideVersion("java", version.version))
 
 }
