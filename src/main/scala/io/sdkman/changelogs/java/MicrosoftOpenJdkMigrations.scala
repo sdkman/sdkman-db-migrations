@@ -2,13 +2,7 @@ package io.sdkman.changelogs.java
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.changelogs.{
-  Linux64,
-  MacOSX,
-  Microsoft,
-  Version,
-  Windows
-}
+import io.sdkman.changelogs.{Linux64, MacOSX, Microsoft, Version, Windows}
 
 @ChangeLog(order = "047")
 class MicrosoftOpenJdkMigrations {
