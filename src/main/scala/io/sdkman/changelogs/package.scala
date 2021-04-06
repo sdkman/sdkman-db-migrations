@@ -126,6 +126,10 @@ package object changelogs {
     override def id = "mandrel"
   }
 
+  case object Microsoft extends Vendor {
+    override def id = "ms"
+  }
+
   case object OpenJDK extends Vendor {
     override def id = "open"
   }
