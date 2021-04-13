@@ -134,6 +134,10 @@ package object changelogs {
     override def id = "open"
   }
 
+  case object Oracle extends Vendor {
+    override def id = "oracle"
+  }
+
   case object SAP extends Vendor {
     override def id = "sapmchn"
   }
