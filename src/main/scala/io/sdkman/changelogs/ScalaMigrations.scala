@@ -290,4 +290,32 @@ class ScalaMigrations {
       }
     }
   }
+  
+  @ChangeSet(
+    order = "021",
+    id = "021_add_scala3_3_0_0_RC2",
+    author = "anaumidis"
+  )
+  def migration021(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0-RC2",
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-RC2/scala3-3.0.0-RC2.zip"
+    ).validate()
+      .insert()
+  
+  @ChangeSet(
+    order = "022",
+    id = "022_add_scala3_3_0_0_RC3",
+    author = "anaumidis"
+  )
+  def migration022(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0-RC3",
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-RC3/scala3-3.0.0-RC3.zip"
+    ).validate()
+      .insert()
 }
