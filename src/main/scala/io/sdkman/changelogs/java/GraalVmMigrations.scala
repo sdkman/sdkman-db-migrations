@@ -528,4 +528,95 @@ class GraalVmMigrations {
   def migrate012(implicit db: MongoDatabase): Unit =
     Seq("21.0.0.r8-grl", "21.0.0.r11-grl", "20.3.1.r8-grl", "20.3.1.r11-grl")
       .foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "013",
+    id = "013-add_graalvm_21_1_0",
+    author = "nicokosi"
+  )
+  def migrate013(implicit db: MongoDatabase): Unit = {
+    List(
+      Version(
+        candidate = "java",
+        version = "21.1.0.r16-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-linux-aarch64-21.1.0.tar.gz",
+        platform = LinuxARM64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r16-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-linux-amd64-21.1.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r16-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-darwin-amd64-21.1.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r16-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-windows-amd64-21.1.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-linux-aarch64-21.1.0.tar.gz",
+        platform = LinuxARM64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-linux-amd64-21.1.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-darwin-amd64-21.1.0.tar.gz",
+        platform = MacOSX,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r11-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-windows-amd64-21.1.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java8-linux-amd64-21.1.0.tar.gz",
+        platform = Linux64,
+        vendor = Some(Graal)
+      ),
+      Version(
+        candidate = "java",
+        version = "21.1.0.r8-grl",
+        url =
+          "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java8-windows-amd64-21.1.0.zip",
+        platform = Windows,
+        vendor = Some(Graal)
+      )
+    ).validate()
+      .insert()
+  }
 }
