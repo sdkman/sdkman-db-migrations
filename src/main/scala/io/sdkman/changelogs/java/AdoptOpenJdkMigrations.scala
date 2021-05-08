@@ -217,41 +217,6 @@ class AdoptOpenJdkMigrations {
   }
 
   @ChangeSet(
-    order = "0007",
-    id = "0007-add_adoptopenjdk-hs_13_0_2",
-    author = "poad"
-  )
-  def migrate0007(implicit db: MongoDatabase) = {
-    List(
-      Version(
-        "java",
-        "13.0.2.hs-adpt",
-        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_linux_hotspot_13.0.2_8.tar.gz",
-        Linux64,
-        Some(AdoptOpenJDK)
-      ),
-      Version(
-        "java",
-        "13.0.2.hs-adpt",
-        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_mac_hotspot_13.0.2_8.tar.gz",
-        MacOSX,
-        Some(AdoptOpenJDK)
-      ),
-      Version(
-        "java",
-        "13.0.2.hs-adpt",
-        "https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jdk_x64_windows_hotspot_13.0.2_8.zip",
-        Windows,
-        Some(AdoptOpenJDK)
-      )
-    ).validate()
-      .insert()
-    Seq(Linux64, MacOSX, Windows).foreach(
-      removeVersion("java", "13.0.1.hs-adpt", _)
-    )
-  }
-
-  @ChangeSet(
     order = "0008",
     id = "0008-add_adoptopenjdk-j9_13_0_2",
     author = "poad"
@@ -586,33 +551,6 @@ class AdoptOpenJdkMigrations {
     ).validate()
       .insert()
   }
-
-  @ChangeSet(
-    order = "0019",
-    id = "0019-add_adoptopenjdk-hs_11_0_8",
-    author = "poad"
-  )
-  def migrate0019(implicit db: MongoDatabase) =
-    Map(
-      Linux64 -> "OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz",
-      MacOSX  -> "OpenJDK11U-jdk_x64_mac_hotspot_11.0.8_10.tar.gz",
-      Windows -> "OpenJDK11U-jdk_x64_windows_hotspot_11.0.8_10.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "java",
-            "11.0.8.hs-adpt",
-            s"https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8%2B10/$binary",
-            platform,
-            Some(AdoptOpenJDK)
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .foreach { version =>
-        removeVersion("java", "11.0.7.hs-adpt", version.platform)
-      }
 
   @ChangeSet(
     order = "0020",
