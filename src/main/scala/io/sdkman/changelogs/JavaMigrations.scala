@@ -617,41 +617,6 @@ class JavaMigrations {
   }
 
   @ChangeSet(
-    order = "182",
-    id = "182-add_graalvm_19_2_0",
-    author = "eddumelendez"
-  )
-  def migrate182(implicit db: MongoDatabase) = {
-    List(
-      Version(
-        candidate = "java",
-        version = "19.2.0-grl",
-        url =
-          "https://github.com/oracle/graal/releases/download/vm-19.2.0/graalvm-ce-linux-amd64-19.2.0.tar.gz",
-        platform = Linux64,
-        vendor = Some(Graal)
-      ),
-      Version(
-        candidate = "java",
-        version = "19.2.0-grl",
-        url =
-          "https://github.com/oracle/graal/releases/download/vm-19.2.0/graalvm-ce-darwin-amd64-19.2.0.tar.gz",
-        platform = MacOSX,
-        vendor = Some(Graal)
-      ),
-      Version(
-        candidate = "java",
-        version = "19.2.0-grl",
-        url =
-          "https://github.com/oracle/graal/releases/download/vm-19.2.0/graalvm-ce-windows-amd64-19.2.0.zip",
-        platform = Windows,
-        vendor = Some(Graal)
-      )
-    ).validate()
-      .insert()
-  }
-
-  @ChangeSet(
     order = "185",
     id = "185-add_graalvm_19_2_0_1",
     author = "eddumelendez"
