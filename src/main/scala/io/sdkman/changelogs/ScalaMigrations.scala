@@ -290,4 +290,18 @@ class ScalaMigrations {
       }
     }
   }
+
+  @ChangeSet(
+    order = "021",
+    id = "021_add_scala_3.0.0",
+    author = "oweiler"
+  )
+  def migration021(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0",
+      url =
+        "https://github.com/lampepfl/dotty/releases/download/3.0.0/scala3-3.0.0.zip"
+    ).validate()
+      .insert()
 }
