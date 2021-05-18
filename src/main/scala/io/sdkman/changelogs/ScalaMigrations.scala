@@ -294,7 +294,7 @@ class ScalaMigrations {
   @ChangeSet(
     order = "021",
     id = "021_add_scala_3.0.0",
-    author = "oweiler"
+    author = "helpermethod"
   )
   def migration021(implicit db: MongoDatabase): Unit =
     Version(
@@ -308,7 +308,7 @@ class ScalaMigrations {
   @ChangeSet(
     order = "022",
     id = "022_add_scala_2.13.6",
-    author = "oweiler"
+    author = "helpermethod"
   )
   def migration022(implicit db: MongoDatabase): Unit =
     Version(
