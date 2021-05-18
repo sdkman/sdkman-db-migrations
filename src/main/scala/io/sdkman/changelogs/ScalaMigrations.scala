@@ -294,7 +294,7 @@ class ScalaMigrations {
   @ChangeSet(
     order = "021",
     id = "021_add_scala_3.0.0",
-    author = "oweiler"
+    author = "helpermethod"
   )
   def migration021(implicit db: MongoDatabase): Unit =
     Version(
@@ -304,4 +304,18 @@ class ScalaMigrations {
         "https://github.com/lampepfl/dotty/releases/download/3.0.0/scala3-3.0.0.zip"
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "022",
+    id = "022_add_scala_2.13.6",
+    author = "helpermethod"
+  )
+  def migration022(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "2.13.6",
+      url = "https://downloads.lightbend.com/scala/2.13.6/scala-2.13.6.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
 }
