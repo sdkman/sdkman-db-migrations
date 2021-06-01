@@ -52,7 +52,9 @@ class FlinkMigrations {
       "1.12.1",
       "1.12.2",
       "1.12.3",
-      "1.13.0"
+      "1.12.4",
+      "1.13.0",
+      "1.13.1"
     )
     List("2.11", "2.12")
       .flatMap { scalaVersion =>
@@ -84,4 +86,12 @@ class FlinkMigrations {
   )
   def migration003(implicit db: MongoDatabase) =
     setCandidateDefault("flink", "1.12.2")
+
+  @ChangeSet(
+    order = "004",
+    id = "004-set_default_version_1_13_1",
+    author = "ChethanUK"
+  )
+  def migration004(implicit db: MongoDatabase) =
+    setCandidateDefault("flink", "1.13.1")
 }
