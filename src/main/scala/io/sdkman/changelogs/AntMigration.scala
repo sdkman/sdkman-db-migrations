@@ -188,4 +188,33 @@ class AntMigration {
       .asCandidateDefault()
   }
 
+  @ChangeSet(
+    order = "014",
+    id = "014-add_ant_1.10.9",
+    author = "aalmiray"
+  )
+  def migration014(implicit db: MongoDatabase): Unit = {
+    Version(
+      "ant",
+      "1.10.9",
+      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.9-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
+  @ChangeSet(
+    order = "015",
+    id = "015-add_ant_1.10.10",
+    author = "iemejia"
+  )
+  def migration015(implicit db: MongoDatabase): Unit = {
+    Version(
+      "ant",
+      "1.10.10",
+      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.10-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
 }

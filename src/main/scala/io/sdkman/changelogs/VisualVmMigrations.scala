@@ -116,4 +116,19 @@ class VisualVmMigrations {
       .asCandidateDefault()
   }
 
+  @ChangeSet(
+    order = "010",
+    id = "010-add_visualvm_2_0_7",
+    author = "eddumelendez"
+  )
+  def migration010(implicit db: MongoDatabase) = {
+    Version(
+      "visualvm",
+      "2.0.7",
+      "https://github.com/oracle/visualvm/releases/download/2.0.7/visualvm_207.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
 }

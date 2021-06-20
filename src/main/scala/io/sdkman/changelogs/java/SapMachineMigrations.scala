@@ -138,4 +138,12 @@ class SapMachineMigrations {
       "14.0.2-sapmchn",
       "15.0.1-sapmchn"
     ).foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "026",
+    id = "026-hide-java-versions",
+    author = "eddumelendez"
+  )
+  def migrate026(implicit db: MongoDatabase): Unit =
+    hideVersion("java", "15.0.2-sapmchn")
 }

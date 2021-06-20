@@ -94,59 +94,67 @@ package object changelogs {
     }
   }
 
-  trait Vendor {
+  sealed trait Vendor {
     def id: String
   }
 
   case object AdoptOpenJDK extends Vendor {
-    override def id = "adpt"
+    override val id = "adpt"
   }
 
   case object Amazon extends Vendor {
-    override def id = "amzn"
+    override val id = "amzn"
   }
 
   case object Alibaba extends Vendor {
-    override def id = "albba"
+    override val id = "albba"
   }
 
   case object EclipseTemurin extends Vendor {
-    override def id = "tem"
+    override val id = "tem"
   }
 
   case object Graal extends Vendor {
-    override def id = "grl"
+    override val id = "grl"
   }
 
   case object Liberica extends Vendor {
-    override def id = "librca"
+    override val id = "librca"
   }
 
   case object Mandrel extends Vendor {
-    override def id = "mandrel"
+    override val id = "mandrel"
+  }
+
+  case object Microsoft extends Vendor {
+    override def id = "ms"
   }
 
   case object OpenJDK extends Vendor {
-    override def id = "open"
+    override val id = "open"
+  }
+
+  case object Oracle extends Vendor {
+    override val id = "oracle"
   }
 
   case object SAP extends Vendor {
-    override def id = "sapmchn"
+    override val id = "sapmchn"
   }
 
   case object TravaOpenJdk extends Vendor {
-    override def id = "trava"
+    override val id = "trava"
   }
 
   case object Zulu extends Vendor {
-    override def id = "zulu"
+    override val id = "zulu"
   }
 
   case object ZuluFX extends Vendor {
-    override def id = "zulufx"
+    override val id = "zulufx"
   }
 
-  trait Platform {
+  sealed trait Platform {
     def id: String
   }
 

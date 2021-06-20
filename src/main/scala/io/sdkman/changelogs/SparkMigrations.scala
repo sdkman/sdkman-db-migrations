@@ -189,4 +189,33 @@ class SparkMigrations {
       .asCandidateDefault()
   }
 
+  @ChangeSet(
+    order = "015",
+    id = "015-add_spark_3.1.1",
+    author = "ChethanUK"
+  )
+  def migration015(implicit db: MongoDatabase) = {
+    Version(
+      "spark",
+      "3.1.1",
+      "https://archive.apache.org/dist/spark/spark-3.1.1/spark-3.1.1-bin-hadoop2.7.tgz"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
+  @ChangeSet(
+    order = "016",
+    id = "016-add_spark_3.1.1",
+    author = "ChethanUK"
+  )
+  def migration016(implicit db: MongoDatabase) = {
+    Version(
+      "spark",
+      "3.1.2",
+      "https://archive.apache.org/dist/spark/spark-3.1.2/spark-3.1.2-bin-hadoop3.2.tgz"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
 }

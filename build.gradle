@@ -10,17 +10,17 @@ version = '1.0.2'
 mainClassName = "io.sdkman.DbMigration"
 
 repositories {
-  jcenter()
-  maven { url 'https://dl.bintray.com/sdkman/maven'}
+  mavenCentral()
+  maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-  compile 'org.scala-lang:scala-library:2.12.12'
-  compile 'org.javassist:javassist:3.18.2-GA'
-  compile 'com.github.mongobee:mongobee:0.13'
-  compile 'com.typesafe:config:1.3.1'
-  compile 'io.sdkman:sdkman-url-validator_2.12:0.2.5'
-  runtime 'org.slf4j:slf4j-simple:1.7.25'
+  implementation 'org.scala-lang:scala-library:2.12.12'
+  implementation 'org.javassist:javassist:3.18.2-GA'
+  implementation 'com.github.mongobee:mongobee:0.13'
+  implementation 'com.typesafe:config:1.3.1'
+  implementation 'com.github.sdkman:sdkman-url-validator:0.2.5'
+  runtimeOnly 'org.slf4j:slf4j-simple:1.7.25'
 }
 
 compileScala.dependsOn("checkScalafmt")

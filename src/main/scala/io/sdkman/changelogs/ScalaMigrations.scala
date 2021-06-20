@@ -232,4 +232,90 @@ class ScalaMigrations {
       url = "https://downloads.lightbend.com/scala/2.12.13/scala-2.12.13.zip"
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "018",
+    id = "018_add_scala_2_13_5_as_default",
+    author = "ChethanUK"
+  )
+  def migration018(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "2.13.5",
+      url = "https://downloads.lightbend.com/scala/2.13.5/scala-2.13.5.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+
+  @ChangeSet(
+    order = "019",
+    id = "019_add_scala3_3_0_0_RC1",
+    author = "anaumidis"
+  )
+  def migration019(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0-RC1",
+      url = "https://github.com/lampepfl/dotty/releases/download/" +
+        "3.0.0-RC1/scala3-3.0.0-RC1.zip"
+    ).validate()
+      .insert()
+
+  @ChangeSet(
+    order = "020",
+    id = "020_add_scala_2.10.x",
+    author = "eliso"
+  )
+  def migration020(implicit db: MongoDatabase): Unit = {
+    val partialUrl = "https://downloads.lightbend.com/scala"
+    val versions = List(
+      "2.10.1",
+      "2.10.2",
+      "2.10.3",
+      "2.10.4",
+      "2.10.5",
+      "2.10.6",
+      "2.10.7"
+    )
+
+    versions.foreach { version =>
+      {
+        val completeUrl = s"$partialUrl/$version/scala-$version.zip"
+        Version(
+          candidate = "scala",
+          version = version,
+          url = completeUrl
+        ).validate()
+          .insert()
+      }
+    }
+  }
+
+  @ChangeSet(
+    order = "021",
+    id = "021_add_scala_3.0.0",
+    author = "helpermethod"
+  )
+  def migration021(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.0.0",
+      url =
+        "https://github.com/lampepfl/dotty/releases/download/3.0.0/scala3-3.0.0.zip"
+    ).validate()
+      .insert()
+
+  @ChangeSet(
+    order = "022",
+    id = "022_add_scala_2.13.6",
+    author = "helpermethod"
+  )
+  def migration022(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "2.13.6",
+      url = "https://downloads.lightbend.com/scala/2.13.6/scala-2.13.6.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
 }
