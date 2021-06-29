@@ -14,10 +14,10 @@ class ZnaiMigrations {
     Candidate(
       candidate = "znai",
       name = "znai",
-      description = "Build functional, maintainable, beautiful User Guides with Znai. Instant pages navigation. " +
+      description = "Build functional, maintainable, beautiful User Guides with znai. Instant pages navigation. " +
         "Local search. Multiple integrations to work with Python, Java, OpenAPI, etc. " +
-        "Transform \"getting started\" sections into slideshow for your workshops. " +
-        "Enterprise Docs Hub.",
+        "Transform Getting Started sections into slideshow for your workshops. " +
+        "Manage multiple documentations with self-deployed znai hub.",
       websiteUrl = "https://github.com/testingisdocumenting/znai"
     ).insert()
 }
