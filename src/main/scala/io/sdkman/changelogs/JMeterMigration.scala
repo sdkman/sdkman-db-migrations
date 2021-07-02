@@ -27,7 +27,6 @@ class JMeterMigration {
     author = "xshyamx"
   )
   def migration002(implicit db: MongoDatabase) = {
-    removeAllVersions("jmeter")
     List(
       "5.4.1",
       "5.4",
