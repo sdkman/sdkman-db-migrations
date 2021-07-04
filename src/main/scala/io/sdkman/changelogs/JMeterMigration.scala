@@ -49,15 +49,15 @@ class JMeterMigration {
       "2.8",
       "2.7",
       "2.6"
-    ).map {
-        case (version: String) =>
+    ).map(
+        version =>
           Version(
             candidate = "jmeter",
             version = version,
             url =
               s"https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$version.zip"
           )
-      }
+      )
       .validate()
       .insert()
     setCandidateDefault("jmeter", "5.4.1")
