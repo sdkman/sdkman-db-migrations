@@ -8,7 +8,7 @@ jobs:
   build:
     name: "Migration"
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
