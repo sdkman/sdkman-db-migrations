@@ -3,7 +3,7 @@ package io.sdkman.changelogs
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
-@ChangeLog(order = "048")
+@ChangeLog(order = "049")
 class QuarkusMigrations {
 
   @ChangeSet(
@@ -14,7 +14,7 @@ class QuarkusMigrations {
   def migration001(implicit db: MongoDatabase) =
     Candidate(
       candidate = "quarkus",
-      name = "Quarkus",
+      name = "Quarkus CLI",
       description =
         "Quarkus is a Kubernetes Native Java framework tailored for OpenJDK HotSpot and GraalVM, crafted from best-of-breed Java libraries and standards.",
       websiteUrl = "http://quarkus.io"
