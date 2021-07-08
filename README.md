@@ -38,13 +38,13 @@ The domain used for describing releases has two entities: `candidates` and `vers
 
 This collection holds information about the SDK itself including the name, description, website url, distribution and default version. A typical entry would look something like this:
 
-        { 
+        {
                 "_id" : ObjectId("562beacb601daf84cec59999"),
-                "candidate" : "scala", 
-                "default" : "2.12.4", 
-                "description" : "Scala is a programming language for general software applications. Scala has full support for functional programming and a very strong static type system...", 
-                "websiteUrl" : "http://www.scala-lang.org/", 
-                "name" : "Scala", 
+                "candidate" : "scala",
+                "default" : "2.12.4",
+                "description" : "Scala is a programming language for general software applications. Scala has full support for functional programming and a very strong static type system...",
+                "websiteUrl" : "http://www.scala-lang.org/",
+                "name" : "Scala",
                 "distribution" : "UNIVERSAL"
         }
 
@@ -55,10 +55,10 @@ The `distribution` is usually set to `UNIVERSAL` unless platform specific binari
 The `versions` collection will hold information about individual releases for a specific Candidate. It has fields representing the candidate, version, (absolute) URL to the binary, as well as platform.
 
         {
-                "_id" : ObjectId("5a09d2dcffd8c740664b335b"), 
-                "candidate" : "kotlin", 
-                "version" : "1.1.60", 
-                "platform" : "UNIVERSAL", 
+                "_id" : ObjectId("5a09d2dcffd8c740664b335b"),
+                "candidate" : "kotlin",
+                "version" : "1.1.60",
+                "platform" : "UNIVERSAL",
                 "url" : "https://github.com/JetBrains/kotlin/releases/download/v1.1.60/kotlin-compiler-1.1.60.zip"
         }
 
@@ -81,6 +81,15 @@ Simply fork this repository and then add a db migration in the appropriate file 
             //TODO: migrations here
         }
 
+To find next highest in order:
+
+Inside the project folder, run following command:
+
+```bash
+> grep -R --no-filename 'ChangeLog(' | sort
+grep: warning: recursive search of stdin
+```
+
 #### Adding a new default Version (universal binary)
 
         @ChangeSet(order = "007", id = "007-add_scala_2_12_5", author = "marc0der")
@@ -102,7 +111,7 @@ Alternatively, a function is provided on package scope that allows the default v
             Version("scala", "2.12.4", "https://downloads.lightbend.com/scala/2.12.4/scala-2.12.4.zip")
               .validate()
               .insert()
-        
+
 #### Adding a new Version for multiple platforms
 
         @ChangeSet(order = "005", id = "005-add_openjdk_10_0_0", author = "marc0der")
@@ -114,7 +123,7 @@ Alternatively, a function is provided on package scope that allows the default v
             ).validate().insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
-        
+
 Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX` and `Universal` as the default.
 
 #### Adding a new Java Version with Vendor
@@ -123,10 +132,10 @@ Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX`
           def migrate005(implicit db: MongoDatabase) =
             Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows, Some(OpenJDK))
                 .validate().insert()
-        
+
 An optional `vendor` field can be set when instantiating a `Version` defaulting to `None`. It can explicitly
 be set to either `None` or a `Some`, in turn containing `AdoptOpenJDK`, `Amazon`, `Graal`, `Liberica`, `OpenJDK`,
-`SAP` or `Zulu` in the case of `Some`. **This field must now be set for all Java Versions** 
+`SAP` or `Zulu` in the case of `Some`. **This field must now be set for all Java Versions**
 
 #### Adding a new Candidate
 
