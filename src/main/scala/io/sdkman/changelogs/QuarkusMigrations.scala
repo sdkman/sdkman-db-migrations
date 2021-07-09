@@ -3,7 +3,7 @@ package io.sdkman.changelogs
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
-@ChangeLog(order = "049")
+@ChangeLog(order = "053")
 class QuarkusMigrations {
 
   @ChangeSet(
