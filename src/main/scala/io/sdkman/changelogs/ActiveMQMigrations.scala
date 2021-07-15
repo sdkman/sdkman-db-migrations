@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "060")
-class ActiveMQMigration {
+class ActiveMQMigrations {
   @ChangeSet(
     order = "001",
     id = "001-add_activemq_candidate",
