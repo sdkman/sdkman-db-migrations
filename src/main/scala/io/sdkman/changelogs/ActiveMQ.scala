@@ -75,7 +75,7 @@ class ActiveMQMigration {
             candidate = "activemq",
             version = version,
             url =
-              s"http://archive.apache.org/dist/activemq/$version/apache-activemq-$version-bin.zip"
+              s"https://www.apache.org/dyn/closer.cgi?filename=/activemq/$version/apache-activemq-$version-bin.zip&action=download"
           )
       )
       .validate()
