@@ -282,4 +282,40 @@ class BellSoftLibericaMigrations {
       "15.0.2.fx-librca",
       "15.0.2-librca"
     ).foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "049",
+    id = "049-add_bellsoft_16_0_2",
+    author = "philiplourandos"
+  )
+  def migrate0034(implicit db: MongoDatabase): Unit = {
+
+    Map(
+      LinuxARM64 -> "bellsoft-jdk16.0.2+7-linux-aarch64.tar.gz",
+      Linux64    -> "bellsoft-jdk16.0.2+7-linux-amd64.tar.gz",
+      Windows    -> "bellsoft-jdk16.0.2+7-windows-amd64.zip",
+      MacOSX     -> "bellsoft-jdk16.0.2+7-macos-amd64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "16.0.2-librca",
+            s"https://download.bell-sw.com/java/16.0.2+7/$binary",
+            platform,
+            Some(Liberica)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+      .foreach(
+        version =>
+          removeVersion(
+            "java",
+            "16.0.1-librca",
+            version.platform
+          )
+      )
+  }
+
 }
