@@ -288,7 +288,7 @@ class BellSoftLibericaMigrations {
     id = "049-add_bellsoft_16_0_2",
     author = "philiplourandos"
   )
-  def migrate0034(implicit db: MongoDatabase): Unit = {
+  def migrate049(implicit db: MongoDatabase): Unit = {
 
     Map(
       LinuxARM64 -> "bellsoft-jdk16.0.2+7-linux-aarch64.tar.gz",
