@@ -528,4 +528,54 @@ class GraalVmMigrations {
   def migrate012(implicit db: MongoDatabase): Unit =
     Seq("21.0.0.r8-grl", "21.0.0.r11-grl", "20.3.1.r8-grl", "20.3.1.r11-grl")
       .foreach(version => hideVersion("java", version))
+
+  @ChangeSet(
+    order = "013",
+    id = "013-add_graalvm_21_2_0_r8",
+    author = "ilopmar"
+  )
+  def migrate013(implicit db: MongoDatabase): Unit = {
+    Map(
+      Linux64    -> "graalvm-ce-java8-linux-amd64-21.2.0.tar.gz",
+      Windows    -> "graalvm-ce-java8-windows-amd64-21.2.0.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "21.2.0.r8-grl",
+            s"https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/$binary",
+            platform,
+            Some(Graal)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
+
+@ChangeSet(
+    order = "014",
+    id = "014-add_graalvm_21_2_0_r16",
+    author = "ilopmar"
+  )
+  def migrate014(implicit db: MongoDatabase): Unit = {
+    Map(
+      LinuxARM64 -> "graalvm-ce-java16-linux-aarch64-21.2.0.tar.gz",
+      Linux64    -> "graalvm-ce-java16-linux-amd64-21.2.0.tar.gz",
+      MacOSX     -> "graalvm-ce-java16-darwin-amd64-21.2.0.tar.gz",
+      Windows    -> "graalvm-ce-java16-windows-amd64-21.2.0.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "java",
+            "21.2.0.r16-grl",
+            s"https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/$binary",
+            platform,
+            Some(Graal)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+  }
 }
