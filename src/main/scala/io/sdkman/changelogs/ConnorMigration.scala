@@ -15,7 +15,7 @@ class ConnorMigration {
       candidate = "connor",
       name = "Connor",
       description =
-        "Connor (short for: ConnectOffsetReset) is a commandline tool for resetting Kafka Connect source connector offsets.",
+        "Connor, short for ConnectOffsetReset, is a commandline tool for resetting Kafka Connect source connector offsets.",
       websiteUrl = "https://github.com/helpermethod/connor",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
