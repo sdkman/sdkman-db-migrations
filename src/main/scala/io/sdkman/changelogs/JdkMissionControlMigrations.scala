@@ -47,4 +47,27 @@ class JdkMissionControlMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(
+    order = "003",
+    id = "003-add-adoptopenjdk-8.1.0",
+    author = "eddumelendez"
+  )
+  def migrate003(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "org.openjdk.jmc-8.1.0-linux.gtk.x86_64.tar.gz",
+      MacOSX  -> "org.openjdk.jmc-8.1.0-macosx.cocoa.x86_64.tar.gz"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "jmc",
+            "8.1.0-adpt",
+            s"https://github.com/AdoptOpenJDK/openjdk-jmc-overrides/releases/download/8.1.0/$binary",
+            platform,
+            Some(Amazon)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
