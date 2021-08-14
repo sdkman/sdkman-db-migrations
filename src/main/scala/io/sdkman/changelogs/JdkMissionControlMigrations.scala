@@ -23,4 +23,28 @@ class JdkMissionControlMigrations {
       websiteUrl =
         "https://www.oracle.com/java/technologies/jdk-mission-control.html"
     ).insert()
+
+  @ChangeSet(
+    order = "002",
+    id = "002-add-corretto-8.0.0.1",
+    author = "eddumelendez"
+  )
+  def migrate002(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64 -> "amazon-corretto-jmc-8.0.0.1-linux-x64.tar.gz",
+      MacOSX  -> "amazon-corretto-jmc-8.0.0.1-mac-x64.tar.gz"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "jmc",
+            "8.0.0.1-amzn",
+            s"https://corretto.aws/downloads/resources/jmc/8.0.0.1/$binary",
+            platform,
+            Some(Amazon)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
