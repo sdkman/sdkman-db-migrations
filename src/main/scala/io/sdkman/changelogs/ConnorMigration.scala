@@ -19,4 +19,21 @@ class ConnorMigration {
       websiteUrl = "https://github.com/helpermethod/connor",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
+
+  @ChangeSet(
+    order = "002",
+    id = "002_change_connor_name_and_description",
+    author = "helpermethod"
+  )
+  def migration002(implicit db: MongoDatabase) = {
+    removeCandidate("connor")
+    Candidate(
+      candidate = "connor",
+      name = "ConnOR",
+      description =
+        "ConnOR, short for ConnectOffsetReset, is a commandline tool for resetting Kafka Connect source connector offsets.",
+      websiteUrl = "https://github.com/helpermethod/connor",
+      distribution = "PLATFORM_SPECIFIC"
+    ).insert()
+  }
 }
