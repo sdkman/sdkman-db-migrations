@@ -332,4 +332,5 @@ class ScalaMigrations {
         "https://github.com/lampepfl/dotty/releases/download/3.0.1/scala3-3.0.1.zip"
     ).validate()
       .insert()
+      .asCandidateDefault()
 }
