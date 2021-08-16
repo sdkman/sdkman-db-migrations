@@ -83,4 +83,15 @@ class MavenMigration {
       .asCandidateDefault()
   }
 
+  @ChangeSet(order = "007", id = "007-add_maven_3.8.2", author = "clemstoquart")
+  def migration007(implicit db: MongoDatabase) = {
+    Version(
+      "maven",
+      "3.8.2",
+      "https://archive.apache.org/dist/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
 }
