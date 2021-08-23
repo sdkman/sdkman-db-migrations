@@ -81,10 +81,20 @@ class MavenMigration {
     ).validate()
       .insert()
       .asCandidateDefault()
-  }
+  }  
 
-  @ChangeSet(order = "007", id = "007-add_checksums", author = "hgeraldino")
+  @ChangeSet(order = "007", id = "007-add_maven_3.8.2", author = "clemstoquart")
   def migration007(implicit db: MongoDatabase) = {
+    Version(
+      "maven",
+      "3.8.2",
+      "https://archive.apache.org/dist/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+    
+  @ChangeSet(order = "008", id = "008-add_checksums", author = "hgeraldino")
+  def migration008(implicit db: MongoDatabase) = {
     updateChecksum(
       "maven",
       "3.5.4",
@@ -126,7 +136,7 @@ class MavenMigration {
       Universal,
       SHA512,
       "c585847bfbcf8647aeabfd3e8bf0ac3f67a037bd345545e274766f144c2b978b3457cbc3e31545e62c21ad69e732695de01ec96ea2580e5da67bd85df095c0f4"
-    )
+    )    
   }
 
 }
