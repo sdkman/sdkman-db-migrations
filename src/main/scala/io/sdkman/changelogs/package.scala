@@ -28,9 +28,9 @@ package object changelogs {
     new Validator[Version] with UrlValidation with LazyLogging {
 
       override def validVersion(v: Version): Unit = v match {
-        case Version("java", version, _, _, _) =>
+        case Version("java", version, _, _, _, _, _) =>
           if (version.length > 17) throw exception(version)
-        case Version(_, version, _, _, _) =>
+        case Version(_, version, _, _, _, _, _) =>
           if (version.length > 15) throw exception(version)
       }
 
@@ -186,6 +186,30 @@ package object changelogs {
     override val id = "LINUX_ARM32"
   }
 
+  sealed trait HashAlgorithm {
+    def id: String
+  }
+
+  case object SHA1 extends HashAlgorithm {
+    override val id = "SHA-1"
+  }
+
+  case object SHA224 extends HashAlgorithm {
+    override val id = "SHA-224"
+  }
+
+  case object SHA256 extends HashAlgorithm {
+    override val id = "SHA-256"
+  }
+
+  case object SHA384 extends HashAlgorithm {
+    override val id = "SHA-384"
+  }
+
+  case object SHA512 extends HashAlgorithm {
+    override val id = "SHA-512"
+  }
+
   case class Candidate(
       candidate: String,
       name: String,
@@ -200,7 +224,9 @@ package object changelogs {
       version: String,
       url: String,
       platform: Platform = Universal,
-      vendor: Option[Vendor] = None
+      vendor: Option[Vendor] = None,
+      hashAlgorithm: Option[HashAlgorithm] = None,
+      checksum: Option[String] = None
   )
 
   def candidateToDocument(c: Candidate): Document = {
@@ -235,6 +261,12 @@ package object changelogs {
       buildVersionDocument(cv.candidate, cv.version, cv.platform.id, cv.url)
     cv.vendor.fold(doc) { vendor =>
       doc.append("vendor", vendor.id)
+    }
+    cv.hashAlgorithm.fold(doc) { algorithm =>
+      doc.append("algorithm", algorithm.id)
+    }
+    cv.checksum.fold(doc) { hash =>
+      doc.append("hash", hash)
     }
   }
 
@@ -293,5 +325,27 @@ package object changelogs {
       .findOneAndUpdate(
         Filters.eq("candidate", candidate),
         Updates.set("default", version)
+      )
+
+  def updateChecksum(
+      candidate: String,
+      version: String,
+      platform: Platform,
+      hashAlgorithm: HashAlgorithm,
+      checksum: String
+  )(
+      implicit db: MongoDatabase
+  ): Unit =
+    db.getCollection(VersionsCollection)
+      .findOneAndUpdate(
+        Filters.and(
+          Filters.eq("candidate", candidate),
+          Filters.eq("version", version),
+          Filters.eq("platform", platform.id)
+        ),
+        Updates.combine(
+          Updates.set("algorithm", hashAlgorithm.id),
+          Updates.set("checksum", checksum)
+        )
       )
 }
