@@ -361,4 +361,19 @@ class ScalaMigrations {
       url = "https://downloads.lightbend.com/scala/2.12.15/scala-2.12.15.zip"
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "026",
+    id = "026_add_scala_3.1.0",
+    author = "helpermethod"
+  )
+  def migration026(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "3.1.0",
+      url =
+        "https://github.com/lampepfl/dotty/releases/download/3.1.0/scala3-3.1.0.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
 }
