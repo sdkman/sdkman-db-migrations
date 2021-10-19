@@ -15,7 +15,7 @@ class MyBatisMigrations {
       candidate = "migrate",
       name = "Apache MyBatis Migrations",
       description =
-        "Thus, the MyBatis Schema Migration System (or MyBatis Migrations for short) seeks to provide database migrations for any database (new or existing) and make the current status of the database easily accessible and comprehensible.",
+        "The MyBatis Schema Migration System (or MyBatis Migrations for short) seeks to provide database migrations for any database (new or existing) and make the current status of the database easily accessible and comprehensible.",
       websiteUrl = "https://mybatis.org/migrations/",
       distribution = "UNIVERSAL"
     ).insert()
