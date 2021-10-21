@@ -204,4 +204,34 @@ class MandrelMigrations {
       .insert()
   }
 
+  @ChangeSet(
+    order = "008",
+    id = "008-hide_mandrel-21_2_0_0-add_mandrel-21_3_0_0-21_2_0_2",
+    author = "zakkak"
+  )
+  def migrate008(implicit db: MongoDatabase): Unit = {
+    hideVersion("java", "21.2.0.0-mandrel")
+    var platforms = List(
+      (Linux64, "linux-amd64", "tar.gz"),
+      (Windows, "windows-amd64", "zip")
+    )
+    var versions = List("21.3.0.0", "21.2.0.2")
+    versions
+      .map { version =>
+        platforms.map {
+          case (platform, mandrelPlatform, suffix) =>
+            Version(
+              candidate = "java",
+              version = s"$version-mandrel",
+              url =
+                s"https://github.com/graalvm/mandrel/releases/download/mandrel-$version-Final/mandrel-java11-$mandrelPlatform-$version-Final.$suffix",
+              platform = platform,
+              vendor = Some(Mandrel)
+            )
+        }
+      }
+      .validate()
+      .insert()
+  }
+
 }
