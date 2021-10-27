@@ -94,4 +94,20 @@ class FlinkMigrations {
   )
   def migration004(implicit db: MongoDatabase) =
     setCandidateDefault("flink", "1.13.1")
+
+  @ChangeSet(
+    order = "005",
+    id = "005-set_default_version_1_13_3",
+    author = "ChethanUK"
+  )
+  def migration005(implicit db: MongoDatabase) =
+    setCandidateDefault("flink", "1.13.3")
+
+  @ChangeSet(
+    order = "006",
+    id = "006-set_default_version_1_14_0",
+    author = "ChethanUK"
+  )
+  def migration006(implicit db: MongoDatabase) =
+    setCandidateDefault("flink", "1.14.0")
 }
