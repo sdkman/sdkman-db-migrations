@@ -110,4 +110,31 @@ class FlinkMigrations {
   )
   def migration006(implicit db: MongoDatabase) =
     setCandidateDefault("flink", "1.14.0")
+
+  @ChangeSet(
+    order = "007",
+    id = "007-add_flink_1_12_14",
+    author = "ChethanUK"
+  )
+  def migration007(implicit db: MongoDatabase) = {
+    val flinkVersions = List(
+      "1.12.3",
+      "1.12.4",
+      "1.12.5",
+      "1.13.0",
+      "1.13.1",
+      "1.13.2",
+      "1.13.2",
+      "1.13.3",
+      "1.14.0"
+    )
+    List("2.11", "2.12")
+      .flatMap { scalaVersion =>
+        flinkVersions.map { version =>
+          flinkVersion(version, scalaVersion)
+        }
+      }
+      .validate()
+      .insert()
+  }
 }
