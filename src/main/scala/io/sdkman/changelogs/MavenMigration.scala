@@ -114,7 +114,7 @@ class MavenMigration {
     Version(
       "maven",
       "3.8.4",
-      "https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
+      "https://archive.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
