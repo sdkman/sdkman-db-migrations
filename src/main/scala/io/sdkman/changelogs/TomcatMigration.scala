@@ -29,10 +29,10 @@ class TomcatMigration {
   def migration007(implicit db: MongoDatabase) = {
     removeAllVersions("tomcat")
     List(
-      "7"  -> "7.0.106",
-      "8"  -> "8.5.60",
-      "9"  -> "9.0.40",
-      "10" -> "10.0.0-M10"
+      "7"  -> "7.0.109",
+      "8"  -> "8.5.73",
+      "9"  -> "9.0.55",
+      "10" -> "10.0.13"
     ).map {
         case (series: String, version: String) =>
           Version(
@@ -44,6 +44,6 @@ class TomcatMigration {
       }
       .validate()
       .insert()
-    setCandidateDefault("tomcat", "9.0.40")
+    setCandidateDefault("tomcat", "10.0.13")
   }
 }
