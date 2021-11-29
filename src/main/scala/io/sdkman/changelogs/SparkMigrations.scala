@@ -239,7 +239,7 @@ class SparkMigrations {
     id = "018-add_spark_3.0.3",
     author = "ChethanUK"
   )
-  def migration015(implicit db: MongoDatabase) = {
+  def migration018(implicit db: MongoDatabase) = {
     Version(
       "spark",
       "3.1.1",
