@@ -5,116 +5,12 @@ import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "013")
 class MavenMigration {
-  @ChangeSet(
-    order = "001",
-    id = "001-add_maven_3.5.4",
-    author = "philiplourandos"
-  )
-  def migration001(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.5.4",
-      "https://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(order = "002", id = "002-add_maven_3.6.0", author = "hho")
-  def migration002(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.6.0",
-      "https://archive.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(
-    order = "003",
-    id = "003-add_maven_3.6.1",
-    author = "philiplourandos"
-  )
-  def migration003(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.6.1",
-      "https://archive.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(
-    order = "004",
-    id = "004-add_maven_3.6.2",
-    author = "philiplourandos"
-  )
-  def migration004(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.6.2",
-      "https://archive.apache.org/dist/maven/maven-3/3.6.2/binaries/apache-maven-3.6.2-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(order = "005", id = "005-add_maven_3.6.3", author = "eddumelendez")
-  def migration005(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.6.3",
-      "https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(order = "006", id = "006-add_maven_3.8.1", author = "aalmiray")
-  def migration006(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.8.1",
-      "https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(order = "007", id = "007-add_maven_3.8.2", author = "clemstoquart")
-  def migration007(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.8.2",
-      "https://archive.apache.org/dist/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
   @ChangeSet(order = "008", id = "008-add_maven_3.8.3", author = "aalmiray")
-  def migration008(implicit db: MongoDatabase) = {
+  def migration008(implicit db: MongoDatabase): Unit = {
     Version(
       "maven",
       "3.8.3",
       "https://archive.apache.org/dist/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.zip"
-    ).validate()
-      .insert()
-      .asCandidateDefault()
-  }
-
-  @ChangeSet(
-    order = "009",
-    id = "009-add_maven_3.8.4",
-    author = "philiplourandos"
-  )
-  def migration009(implicit db: MongoDatabase) = {
-    Version(
-      "maven",
-      "3.8.4",
-      "https://archive.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
