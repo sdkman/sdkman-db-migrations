@@ -16,7 +16,7 @@ class KcctlMigrations {
       candidate = "kcctl",
       name = "kcctl",
       description =
-        "kcctl - a modern and intuitive command-line client for Kafka Connect. Relying on the idioms and semantics of kubectl, it allows you to register and examine connectors, delete them, restart them, etc.",
+        "A modern and intuitive command-line client for Kafka Connect. Relying on the idioms and semantics of kubectl, it allows you to register and examine connectors, delete them, restart them, etc.",
       websiteUrl = "https://github.com/kcctl/kcctl"
     ).insert()
 }
