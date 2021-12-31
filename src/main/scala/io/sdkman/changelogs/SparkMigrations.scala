@@ -5,6 +5,20 @@ import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "007")
 class SparkMigrations {
+
+  private def url(version: String, hadoop: String) =
+    s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-hadoop$hadoop.tgz"
+
+  private def sparkVersion(
+      sparkVersion: String,
+      hadoopVersion: String
+  ) =
+    Version(
+      candidate = "spark",
+      version = sparkVersion,
+      url = url(sparkVersion, hadoopVersion)
+    )
+
   @ChangeSet(
     order = "017",
     id = "016-add_spark_3.2.0",

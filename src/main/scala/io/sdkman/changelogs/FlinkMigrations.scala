@@ -21,4 +21,39 @@ class FlinkMigrations {
           " and at any scale.",
       websiteUrl = "https://flink.apache.org/"
     ).insert()
+
+  private def url(version: String, scala: String) =
+    s"https://archive.apache.org/dist/flink/flink-$version/flink-$version-bin-scala_$scala.tgz"
+
+  private def flinkVersion(
+      flinkVersion: String,
+      scalaVersion: String
+  ) =
+    Version(
+      candidate = "flink",
+      version = flinkVersion,
+      url = url(flinkVersion, scalaVersion)
+    )
+
+  @ChangeSet(
+    order = "008",
+    id = "008-add_flink_1_14_2",
+    author = "ChethanUK"
+  )
+  def migration008(implicit db: MongoDatabase) = {
+    val flinkVersions = List(
+      "1.11.6",
+      "1.12.7",
+      "1.13.5",
+      "1.14.2"
+    )
+    List("2.11", "2.12")
+      .flatMap { scalaVersion =>
+        flinkVersions.map { version =>
+          flinkVersion(version, scalaVersion)
+        }
+      }
+      .validate()
+      .insert()
+  }
 }
