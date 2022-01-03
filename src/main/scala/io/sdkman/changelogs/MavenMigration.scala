@@ -16,7 +16,11 @@ class MavenMigration {
       .asCandidateDefault()
   }
 
-  @ChangeSet(order = "009", id = "009-add_maven_4.0.0-alpha-1", author = "helpermethod")
+  @ChangeSet(
+    order = "009",
+    id = "009-add_maven_4.0.0-alpha-1",
+    author = "helpermethod"
+  )
   def migration009(implicit db: MongoDatabase) = {
     Version(
       "maven",
