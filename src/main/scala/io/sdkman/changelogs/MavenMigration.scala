@@ -29,5 +29,4 @@ class MavenMigration {
     ).validate()
       .insert()
   }
-
 }
