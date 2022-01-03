@@ -182,8 +182,12 @@ package object changelogs {
     override val id = "LINUX_ARM64"
   }
 
-  case object LinuxARM32 extends Platform {
-    override val id = "LINUX_ARM32"
+  case object LinuxARM32SF extends Platform {
+    override val id = "LINUX_ARM32SF"
+  }
+
+  case object LinuxARM32HF extends Platform {
+    override val id = "LINUX_ARM32HF"
   }
 
   case class Candidate(
