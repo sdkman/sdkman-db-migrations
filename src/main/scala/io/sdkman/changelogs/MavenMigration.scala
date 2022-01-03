@@ -105,4 +105,14 @@ class MavenMigration {
       .asCandidateDefault()
   }
 
+  @ChangeSet(order = "009", id = "009-add_maven_4.0.0-alpha-1-SNAPSHOT", author = "helpermethod")
+  def migration009(implicit db: MongoDatabase) = {
+    Version(
+      "maven",
+      "4.0.0-alpha-1-SNAPSHOT",
+      "https://repository.apache.org/content/repositories/snapshots/org/apache/maven/apache-maven/4.0.0-alpha-1-SNAPSHOT/apache-maven-4.0.0-alpha-1-20211230.155705-237-bin.zip"
+    ).validate()
+      .insert()
+  }
+
 }
