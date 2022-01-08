@@ -38,12 +38,12 @@ class TomcatMigration {
     author = "ahmadshalabi"
   )
   def migration008(implicit db: MongoDatabase): Document = {
-    removeAllVersions("tomcat")
     List(
       "7"  -> "7.0.109",
       "8"  -> "8.5.73",
       "9"  -> "9.0.56",
-      "10" -> "10.0.14"
+      "10" -> "10.0.14",
+      "10" -> "10.1.0-M8"
     ).map {
         case (series: String, version: String) =>
           Version(
