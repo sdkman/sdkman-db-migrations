@@ -17,4 +17,17 @@ class ScalaMigrations {
       url = "https://downloads.lightbend.com/scala/2.13.7/scala-2.13.7.zip"
     ).validate()
       .insert()
+
+  @ChangeSet(
+    order = "028",
+    id = "028_add_scala_2.13.8",
+    author = "helpermethod"
+  )
+  def migration028(implicit db: MongoDatabase): Unit =
+    Version(
+      candidate = "scala",
+      version = "2.13.8",
+      url = "https://downloads.lightbend.com/scala/2.13.8/scala-2.13.8.zip"
+    ).validate()
+      .insert()
 }
