@@ -6,15 +6,15 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "009")
 class VisualVmMigrations {
   @ChangeSet(
-    order = "012",
-    id = "012-add_visualvm_2_1_1",
+    order = "013",
+    id = "013-add_visualvm_2_1_2",
     author = "eddumelendez"
   )
-  def migration012(implicit db: MongoDatabase): Unit = {
+  def migration(implicit db: MongoDatabase): Unit = {
     Version(
       "visualvm",
-      "2.1.1",
-      "https://github.com/oracle/visualvm/releases/download/2.1.1/visualvm_211.zip"
+      "2.1.2",
+      "https://github.com/oracle/visualvm/releases/download/2.1.2/visualvm_212.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
