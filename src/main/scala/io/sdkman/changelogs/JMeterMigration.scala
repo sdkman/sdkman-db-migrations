@@ -6,8 +6,6 @@ import org.bson.Document
 
 @ChangeLog(order = "051")
 class JMeterMigration {
-  val CandidateName  = "jmeter"
-  val DefaultVersion = "5.4.3"
 
   @ChangeSet(
     order = "003",
@@ -16,12 +14,12 @@ class JMeterMigration {
   )
   def migration003(implicit db: MongoDatabase): List[Version] = {
     List(
-      DefaultVersion,
+      "5.4.3",
       "5.4.2"
     ).map(
         version =>
           Version(
-            candidate = CandidateName,
+            candidate = "jmeter",
             version = version,
             url =
               s"https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$version.zip"
@@ -36,7 +34,7 @@ class JMeterMigration {
     author = "xshyamx"
   )
   def migration004(implicit db: MongoDatabase): Document = {
-    setCandidateDefault(CandidateName, DefaultVersion)
+    setCandidateDefault("jmeter", "5.4.3")
   }
 
 }
