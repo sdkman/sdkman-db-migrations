@@ -15,8 +15,9 @@ class TaxiMigrations {
       candidate = "taxi",
       name = "Taxi",
       description =
-        "Taxi is a language for semantically describing data and services.  Taxi allows describing any data format (XML, CSV, JSON etc), and any data service (OpenAPI, Kafka, CSV files).  Taxi goes beyond simple scalar types (Int,String,Date) to support rich semantic types (FirstName, LastName, EmailAddress), which enables smart automated integration tools like Vyne.  The SDK provides command line tooling to create and manage your taxi project. ",
-      websiteUrl = "https://taxilang.org",
-      distribution = "UNIVERSAL"
+        "Taxi is a language for documenting data - such as data models - and the contracts of APIs. It describes " +
+          "data semantically, allowing powerful tooling to discover and map data based on it's meaning, rather " +
+          "than the name of a field.",
+      websiteUrl = "https://taxilang.org"
     ).insert()
 }
