@@ -109,13 +109,13 @@ Alternatively, a function is provided on package scope that allows the default v
           def migrate005(implicit db: MongoDatabase) = {
             List(
               Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
-              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
+              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux64),
               Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
             ).validate().insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
         
-Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX` and `Universal` as the default.
+Currently, four platforms identifiers are provided: `Linux64`, `Windows`, `MacOSX` and `Universal` as the default.
 
 #### Adding a new Java Version with Vendor
 
