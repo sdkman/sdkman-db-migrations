@@ -6,15 +6,30 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "032")
 class AntMigration {
   @ChangeSet(
-    order = "015",
-    id = "015-add_ant_1.10.10",
-    author = "iemejia"
+    order = "016",
+    id = "016-add_ant_1.10.11",
+    author = "aalmiray"
   )
-  def migration015(implicit db: MongoDatabase): Unit = {
+  def migration016(implicit db: MongoDatabase): Unit = {
     Version(
       "ant",
-      "1.10.10",
-      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.10-bin.zip"
+      "1.10.11",
+      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.11-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
+  }
+
+  @ChangeSet(
+    order = "017",
+    id = "017-add_ant_1.10.12",
+    author = "aalmiray"
+  )
+  def migration017(implicit db: MongoDatabase): Unit = {
+    Version(
+      "ant",
+      "1.10.12",
+      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.12-bin.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
