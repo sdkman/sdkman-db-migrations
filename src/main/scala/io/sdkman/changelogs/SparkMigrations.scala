@@ -21,15 +21,15 @@ class SparkMigrations {
   }
 
   @ChangeSet(
-    order = "018",
-    id = "018-add_spark_3.0.3",
+    order = "019",
+    id = "019-add_spark_3.2.1",
     author = "ChethanUK"
   )
-  def migration018(implicit db: MongoDatabase) = {
+  def migration019(implicit db: MongoDatabase) = {
     Version(
       "spark",
-      "3.1.1",
-      "https://archive.apache.org/dist/spark/spark-3.0.3/spark-3.0.3-bin-hadoop3.2.tgz"
+      "3.2.1",
+      "https://archive.apache.org/dist/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz"
     ).validate()
       .insert()
   }
