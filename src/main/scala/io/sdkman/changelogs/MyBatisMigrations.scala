@@ -22,27 +22,21 @@ class MyBatisMigrations {
       websiteUrl = "https://mybatis.org/migrations/"
     ).insert()
   }
-
   @ChangeSet(
-    order = "003",
-    id = "003-add_non_bundle_mybatis_migrations",
+    order = "004",
+    id = "004-add_latest_mybatis_migrations",
     author = "xshyamx"
   )
-  def migration003(implicit db: MongoDatabase): Seq[Version] = {
-    List(
-      "3.2.1",
-      "3.2.0",
-      "3.1.0"
-    ).map(
-        version =>
-          Version(
-            candidate = CandidateName,
-            version = version,
-            url =
-              s"https://github.com/mybatis/migrations/releases/download/mybatis-migrations-$version/mybatis-migrations-$version.zip"
-          )
-      )
-      .validate()
+  def migration004(implicit db: MongoDatabase): Unit = {
+    val version = "3.3.10"
+    Version(
+      candidate = CandidateName,
+      version = version,
+      url =
+        s"https://github.com/mybatis/migrations/releases/download/mybatis-migrations-$version/mybatis-migrations-$version-bundle.zip"
+    ).validate()
       .insert()
+      .asCandidateDefault()
   }
+
 }
