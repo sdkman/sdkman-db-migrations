@@ -27,7 +27,7 @@ class JMeterMigration {
     id = "005-add_5.5_jmeter_candidate",
     author = "xshyamx"
   )
-  def migration003(implicit db: MongoDatabase): Unit = {
+  def migration005(implicit db: MongoDatabase): Unit = {
     val version = "5.5"
     Version(
       candidate = "jmeter",
