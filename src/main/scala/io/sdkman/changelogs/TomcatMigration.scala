@@ -58,4 +58,18 @@ class TomcatMigration {
     setCandidateDefault("tomcat", "10.0.14")
   }
 
+  @ChangeSet(
+    order = "009",
+    id = "009-add_tomcat_10.0.22",
+    author = "helpermethod"
+  )
+  def migration009(implicit db: MongoDatabase) =
+    Version(
+      candidate = "tomcat",
+      version = "10.0.22",
+      url =
+        "https://archive.apache.org/dist/tomcat/tomcat-10/v10.0.22/bin/apache-tomcat-10.0.22.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
 }
