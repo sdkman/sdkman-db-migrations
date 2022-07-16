@@ -23,12 +23,12 @@ class MyBatisMigrations {
     ).insert()
   }
   @ChangeSet(
-    order = "004",
-    id = "004-add_latest_mybatis_migrations",
+    order = "005",
+    id = "005-add_latest_mybatis_migrations",
     author = "xshyamx"
   )
-  def migration004(implicit db: MongoDatabase): Unit = {
-    val version = "3.3.10"
+  def migration005(implicit db: MongoDatabase): Unit = {
+    val version = "3.3.11"
     Version(
       candidate = CandidateName,
       version = version,
