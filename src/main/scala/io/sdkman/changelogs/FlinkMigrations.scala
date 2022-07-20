@@ -54,4 +54,15 @@ class FlinkMigrations {
       .validate()
       .insert()
   }
+
+  @ChangeSet(
+    order = "009",
+    id = "009-add_flink_1.15.1",
+    author = "ChethanUK"
+  )
+  def migration009(implicit db: MongoDatabase) = {
+    flinkVersion("1.15.1", "2.12")
+      .validate()
+      .insert()
+  }
 }
