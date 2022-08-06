@@ -19,7 +19,7 @@ class ToolkitMigrations {
       name = "Toolkit Migrations",
       description =
         "Toolkit is a client command line tool that supports multiple IoT protocols. for example, MQTT and COAP protocols" +
-        "Provide a user optimized client tool for IoT developers and learners",
+          "Provide a user optimized client tool for IoT developers and learners",
       websiteUrl = "https://github.com/IoT-Technology/IoT-Toolkit"
     ).insert()
   }
