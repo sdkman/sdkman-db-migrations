@@ -25,11 +25,11 @@ class ToolkitMigrations {
   }
 
   @ChangeSet(
-    order = "003",
-    id = "003-add_toolkit_0.4.0_as_default",
+    order = "002",
+    id = "002-add_toolkit_0.4.0_as_default",
     author = "iot-technology"
   )
-  def migration003(implicit db: MongoDatabase) =
+  def migration002(implicit db: MongoDatabase) =
     Map(
       MacOSX  -> "toolkit-0.4.0-osx-x86_64.zip",
       Linux64 -> "toolkit-0.4.0-linux-x86_64.zip",
