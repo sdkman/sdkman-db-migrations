@@ -35,14 +35,14 @@ class ToolkitMigrations {
       Linux64 -> "toolkit-0.4.0-linux-x86_64.zip",
       Windows -> "toolkit-0.4.0-windows-x86_64.zip"
     ).map {
-      case (platform, binary) =>
-        Version(
-          "toolkit",
-          "0.4.0",
-          s"https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.0/$binary",
-          platform
-        )
-    }
+        case (platform, binary) =>
+          Version(
+            "toolkit",
+            "0.4.0",
+            s"https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.0/$binary",
+            platform
+          )
+      }
       .toList
       .validate()
       .insert()
