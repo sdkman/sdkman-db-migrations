@@ -11,7 +11,7 @@ class ToolkitMigrations {
   @ChangeSet(
     order = "001",
     id = "001-add_toolkit_migrations_candidate",
-    author = "iot-technology"
+    author = "sanshengshui"
   )
   def migration001(implicit db: MongoDatabase): Candidate = {
     Candidate(
