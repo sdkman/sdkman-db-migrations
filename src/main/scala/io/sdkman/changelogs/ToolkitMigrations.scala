@@ -27,7 +27,7 @@ class ToolkitMigrations {
   @ChangeSet(
     order = "002",
     id = "002-add_toolkit_0.4.0_as_default",
-    author = "iot-technology"
+    author = "sanshengshui"
   )
   def migration002(implicit db: MongoDatabase) =
     Map(
