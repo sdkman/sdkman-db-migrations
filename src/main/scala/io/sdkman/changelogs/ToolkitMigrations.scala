@@ -46,5 +46,6 @@ class ToolkitMigrations {
       .toList
       .validate()
       .insert()
+      .asCandidateDefault()
 
 }
