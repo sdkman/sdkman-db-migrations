@@ -26,26 +26,31 @@ class ToolkitMigrations {
 
   @ChangeSet(
     order = "002",
-    id = "002-add_toolkit_0.4.0_as_default",
+    id = "002-add_toolkit_0_4_5",
     author = "sanshengshui"
   )
-  def migration002(implicit db: MongoDatabase) =
-    Map(
-      MacOSX  -> "toolkit-0.4.0-osx-x86_64.zip",
-      Linux64 -> "toolkit-0.4.0-linux-x86_64.zip",
-      Windows -> "toolkit-0.4.0-windows-x86_64.zip"
-    ).map {
-        case (platform, binary) =>
-          Version(
-            "toolkit",
-            "0.4.0",
-            s"https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.0/$binary",
-            platform
-          )
-      }
-      .toList
-      .validate()
-      .insert()
-      .asCandidateDefault()
+  def migration002(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "toolkit",
+        "0.4.5",
+        "https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.5/toolkit-0.4.5-osx-x86_64.zip",
+        MacOSX
+      ),
+      Version(
+        "toolkit",
+        "0.4.5",
+        "https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.5/toolkit-0.4.5-linux-x86_64.zip",
+        Linux64
+      ),
+      Version(
+        "toolkit",
+        "0.4.5",
+        "https://github.com/IoT-Technology/IoT-Toolkit/releases/download/0.4.5/toolkit-0.4.5-windows-x86_64.zip",
+        Windows
+      )
+    ).validate().insert()
+    setCandidateDefault("toolkit", "0.4.5")
+  }
 
 }
