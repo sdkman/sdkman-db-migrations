@@ -46,6 +46,6 @@ class ToolkitMigrations {
       .toList
       .validate()
       .insert()
-      .asCandidateDefault()
+  setCandidateDefault("toolkit", "0.4.0")
 
 }
