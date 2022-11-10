@@ -142,6 +142,10 @@ package object changelogs {
     override val id = "sapmchn"
   }
 
+  case object Tencent extends Vendor {
+    override val id = "tencent"
+  }
+
   case object TravaOpenJdk extends Vendor {
     override val id = "trava"
   }
