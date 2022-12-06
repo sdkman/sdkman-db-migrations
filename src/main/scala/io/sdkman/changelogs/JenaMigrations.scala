@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 import org.bson.Document
 
-@ChangeLog(order = "100")
+@ChangeLog(order = "74")
 class JenaMigrations {
 
   val CandidateName = "jena"
@@ -17,9 +17,9 @@ class JenaMigrations {
   def migration001(implicit db: MongoDatabase): Candidate = {
     Candidate(
       candidate = CandidateName,
-      name = "Apache Jena",
+      name = "Jena",
       description =
-        "Apache Jena (or Jena in short) is a free and open source Java framework for building semantic web and Linked Data applications. The framework is composed of different APIs and CLI tools interacting together to process RDF data.",
+        "Apache Jena is a free and open source Java framework for building semantic web and Linked Data applications. The framework is composed of different APIs and CLI tools interacting together to process RDF data.",
       websiteUrl = "https://jena.apache.org/"
     ).insert()
   }
