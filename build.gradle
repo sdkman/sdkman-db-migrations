@@ -1,11 +1,8 @@
-import com.bmuschko.gradle.docker.tasks.container.*
-
 plugins {
   id "java"
   id "scala"
   id "application"
   id "cz.alenkacz.gradle.scalafmt" version "1.16.2"
-  id 'com.bmuschko.docker-remote-api' version '9.0.1'
 }
 
 version = '1.0.2'
@@ -27,23 +24,3 @@ dependencies {
 }
 
 compileScala.dependsOn("checkScalafmt")
-
-task createMongoContainer(type: DockerCreateContainer) {
-  targetImageId 'mongo:3.2'
-  containerName = 'mongo'
-  hostConfig.portBindings = ['27017:27017']
-  hostConfig.autoRemove = true
-}
-
-task startMongoContainer(type: DockerStartContainer) {
-  dependsOn createMongoContainer
-  targetContainerId createMongoContainer.containerId
-}
-
-task stopMongoContainer(type: DockerStopContainer) {
-  targetContainerId createMongoContainer.containerId
-}
-
-run.dependsOn(startMongoContainer)
-
-run.finalizedBy(stopMongoContainer)
