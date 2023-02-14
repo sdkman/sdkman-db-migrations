@@ -72,4 +72,37 @@ class TomcatMigration {
     ).validate()
       .insert()
       .asCandidateDefault()
+
+  @ChangeSet(
+    order = "010",
+    id = "010-update_tomcat_versions",
+    author = "stefanpenndorf"
+  )
+  def migration010(implicit db: MongoDatabase): Document = {
+    removeVersion("tomcat", "7.0.106")
+    removeVersion("tomcat", "7.0.109")
+    removeVersion("tomcat", "10.0.0-M10")
+    removeVersion("tomcat", "10.0.14")
+    removeVersion("tomcat", "10.0.22")
+    removeVersion("tomcat", "10.1.0-M8")
+
+    List(
+      "8"  -> "8.5.85",
+      "9"  -> "9.0.65",
+      "9"  -> "9.0.71",
+      "10" -> "10.1.5",
+      "11" -> "11.0.0-M1"
+    ).map {
+        case (series: String, version: String) =>
+          Version(
+            candidate = "tomcat",
+            version = version,
+            url =
+              s"https://archive.apache.org/dist/tomcat/tomcat-$series/v$version/bin/apache-tomcat-$version.zip"
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("tomcat", "10.1.5")
+  }
 }
