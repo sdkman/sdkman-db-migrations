@@ -87,11 +87,11 @@ class TomcatMigration {
     removeVersion("tomcat", "10.1.0-M8")
 
     List(
-      "8"  -> "8.5.85",
+      "8"  -> "8.5.86",
       "9"  -> "9.0.65",
-      "9"  -> "9.0.71",
-      "10" -> "10.1.5",
-      "11" -> "11.0.0-M1"
+      "9"  -> "9.0.72",
+      "10" -> "10.1.6",
+      "11" -> "11.0.0-M3"
     ).map {
         case (series: String, version: String) =>
           Version(
@@ -103,6 +103,6 @@ class TomcatMigration {
       }
       .validate()
       .insert()
-    setCandidateDefault("tomcat", "10.1.5")
+    setCandidateDefault("tomcat", "10.1.6")
   }
 }
