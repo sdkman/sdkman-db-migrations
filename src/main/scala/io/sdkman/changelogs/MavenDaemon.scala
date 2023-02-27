@@ -16,6 +16,6 @@ class MavenDaemon {
       name = "Maven Daemon",
       description =
         "The mvnd project aims to provide a daemon infrastructure for maven based builds. It borrows techniques from Gradle and Takari to provide a simple and efficient system.",
-      websiteUrl = "https://github.com/mvndaemon/mvnd/"
+      websiteUrl = "https://github.com/apache/maven-mvnd/"
     ).insert()
 }
