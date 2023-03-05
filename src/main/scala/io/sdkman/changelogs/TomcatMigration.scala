@@ -79,18 +79,17 @@ class TomcatMigration {
     author = "stefanpenndorf"
   )
   def migration010(implicit db: MongoDatabase): Document = {
-    removeVersion("tomcat", "7.0.106")
-    removeVersion("tomcat", "7.0.109")
     removeVersion("tomcat", "10.0.0-M10")
-    removeVersion("tomcat", "10.0.14")
-    removeVersion("tomcat", "10.0.22")
     removeVersion("tomcat", "10.1.0-M8")
 
     List(
       "8"  -> "8.5.86",
+      "8"  -> "8.5.87",
       "9"  -> "9.0.65",
       "9"  -> "9.0.72",
+      "9"  -> "9.0.73",
       "10" -> "10.1.6",
+      "10" -> "10.1.7",
       "11" -> "11.0.0-M3"
     ).map {
         case (series: String, version: String) =>
@@ -103,6 +102,6 @@ class TomcatMigration {
       }
       .validate()
       .insert()
-    setCandidateDefault("tomcat", "10.1.6")
+    setCandidateDefault("tomcat", "10.1.7")
   }
 }
