@@ -18,8 +18,8 @@ class HelidonMigrations {
       name = "Helidon CLI",
       description =
         "The Helidon CLI lets you easily create a Helidon project by picking from a set of archetypes. " +
-        "It also supports a developer loop that performs continuous compilation and application restart, " +
-        "so you can easily iterate over source code changes.",
+          "It also supports a developer loop that performs continuous compilation and application restart, " +
+          "so you can easily iterate over source code changes.",
       websiteUrl = "https://helidon.io"
     ).insert()
 }
