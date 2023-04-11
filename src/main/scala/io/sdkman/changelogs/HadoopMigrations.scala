@@ -22,6 +22,26 @@ class HadoopMigrations {
       websiteUrl = "https://hadoop.apache.org/"
     ).insert()
 
+  @ChangeSet(
+    order = "003",
+    id = "003-add_hadoop_3_3_5",
+    author = "sekikn"
+  )
+  def migration003(implicit db: MongoDatabase) = {
+    val hadoopVersions = List(
+      "2.10.2",
+      "3.2.4",
+      "3.3.5"
+    )
+    hadoopVersions
+      .map { version =>
+        hadoopVersion(version)
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("hadoop", "3.3.5")
+  }
+
   private def hadoopVersion(
       hadoopVersion: String
   ) =
