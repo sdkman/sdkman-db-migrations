@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "078")
-class AntMigration {
+class BldMigration {
   @ChangeSet(
     order = "001",
     id = "001-add_bld_candidate",
