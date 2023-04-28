@@ -23,11 +23,11 @@ class HadoopMigrations {
     ).insert()
 
   @ChangeSet(
-    order = "003",
-    id = "003-add_hadoop_3_3_5",
+    order = "004",
+    id = "004-add_hadoop_3_3_5",
     author = "sekikn"
   )
-  def migration003(implicit db: MongoDatabase) = {
+  def migration004(implicit db: MongoDatabase) = {
     val hadoopVersions = List(
       "2.10.2",
       "3.2.4",
