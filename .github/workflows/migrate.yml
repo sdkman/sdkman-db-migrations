@@ -1,0 +1,26 @@
+name: Migration
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: "Migration"
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Set up JDK 11.0.11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11.0.11
+      - name: Run production migration
+        env:
+          MONGO_HOST: ${{ secrets.MONGO_HOST }}
+          MONGO_PORT: ${{ secrets.MONGO_PORT }}
+          MONGO_DATABASE: ${{ secrets.MONGO_DATABASE }}
+          MONGO_USER: ${{ secrets.MONGO_USER }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+        run: ./gradlew clean run

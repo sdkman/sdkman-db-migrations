@@ -94,43 +94,67 @@ package object changelogs {
     }
   }
 
-  trait Vendor {
+  sealed trait Vendor {
     def id: String
   }
 
   case object AdoptOpenJDK extends Vendor {
-    override def id = "adpt"
+    override val id = "adpt"
   }
 
   case object Amazon extends Vendor {
-    override def id = "amzn"
+    override val id = "amzn"
+  }
+
+  case object Alibaba extends Vendor {
+    override val id = "albba"
+  }
+
+  case object EclipseTemurin extends Vendor {
+    override val id = "tem"
   }
 
   case object Graal extends Vendor {
-    override def id = "grl"
+    override val id = "grl"
   }
 
   case object Liberica extends Vendor {
-    override def id = "librca"
+    override val id = "librca"
+  }
+
+  case object Mandrel extends Vendor {
+    override val id = "mandrel"
+  }
+
+  case object Microsoft extends Vendor {
+    override def id = "ms"
   }
 
   case object OpenJDK extends Vendor {
-    override def id = "open"
+    override val id = "open"
+  }
+
+  case object Oracle extends Vendor {
+    override val id = "oracle"
   }
 
   case object SAP extends Vendor {
-    override def id = "sapmchn"
+    override val id = "sapmchn"
+  }
+
+  case object TravaOpenJdk extends Vendor {
+    override val id = "trava"
   }
 
   case object Zulu extends Vendor {
-    override def id = "zulu"
+    override val id = "zulu"
   }
 
   case object ZuluFX extends Vendor {
-    override def id = "zulufx"
+    override val id = "zulufx"
   }
 
-  trait Platform {
+  sealed trait Platform {
     def id: String
   }
 
@@ -152,6 +176,18 @@ package object changelogs {
 
   case object Linux32 extends Platform {
     override val id = "LINUX_32"
+  }
+
+  case object LinuxARM64 extends Platform {
+    override val id = "LINUX_ARM64"
+  }
+
+  case object LinuxARM32SF extends Platform {
+    override val id = "LINUX_ARM32SF"
+  }
+
+  case object LinuxARM32HF extends Platform {
+    override val id = "LINUX_ARM32HF"
   }
 
   case class Candidate(
@@ -233,6 +269,21 @@ package object changelogs {
         new Document("candidate", candidate)
           .append("version", version)
           .append("platform", platform.id)
+      )
+
+  def hideVersion(
+      candidate: String,
+      version: String
+  )(
+      implicit db: MongoDatabase
+  ): Unit =
+    db.getCollection(VersionsCollection)
+      .updateMany(
+        Filters.and(
+          Filters.eq("candidate", candidate),
+          Filters.eq("version", version)
+        ),
+        Updates.set("visible", false)
       )
 
   def removeAllVersions(candidate: String)(implicit db: MongoDatabase): Unit =

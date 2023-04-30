@@ -7,15 +7,7 @@ This enables the users of SDKMAN to contribute new Installation Candidates and r
 
 ## Tools used
 
-This repo uses [mongobee](https://github.com/mongobee/mongobee) as database migration framework. In order to contribute a PR, it is required to have a local installation of MongoDB on your machine. Alternatively run it up with Docker (works on Linux):
-
-        $ docker run -d --network=host --name=mongo mongo:3.2
-
-**Docker Desktop for Mac**
-
-To connect to MongoDB when using Docker Desktop for Mac you need to forward the port explicitly:
-
-        $ docker run -d -p 27017:27017 --name=mongo mongo:3.2
+This repo uses [mongobee](https://github.com/mongobee/mongobee) as database migration framework. In order to contribute a PR, it is required to have a local installation of Docker on your machine. The Gradle will automatically start and stop the MongoDB Docker container.
 
 ## The Build
 
@@ -72,7 +64,7 @@ When serving up a simple universal zip binary, we always set the `platform` fiel
 
 Migration scripts can be found under [changelogs](https://github.com/sdkman/sdkman-db-migrations/tree/master/src/main/scala/io/sdkman/changelogs) and are divided by candidate. Various helper functions have been provided at package scope to perform simple tasks such as adding a Version / Candidate or setting a new Default version.
 
-#### Adding a new Candidate migration class
+#### Adding a new Candidate migration change log
 
 Simply fork this repository and then add a db migration in the appropriate file (create a new class if your Candidate is not represented). Also ensure that the changelog order is set to the next value available among migration classes:
 
@@ -109,13 +101,13 @@ Alternatively, a function is provided on package scope that allows the default v
           def migrate005(implicit db: MongoDatabase) = {
             List(
               Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_osx-x64_bin.dmg", MacOSX),
-              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux),
+              Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_linux-x64_bin.tar.gz", Linux64),
               Version("java", "10.0.0-open", "http://jdk.java.net/java/jdk/10/7ea/jdk-10_windows-x64_bin.exe", Windows)
             ).validate().insert()
             setCandidateDefault("java", "10.0.0-oracle")
         }
         
-Currently, four platforms identifiers are provided: `Linux`, `Windows`, `MacOSX` and `Universal` as the default.
+Currently, four platforms identifiers are provided: `Linux64`, `Windows`, `MacOSX` and `Universal` as the default.
 
 #### Adding a new Java Version with Vendor
 
