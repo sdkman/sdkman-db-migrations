@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 11.0.11
       - name: Run local migration
-        run: ./gradlew clean run
+        run: ./gradlew clean scalafmt run
       - uses: kentaro-m/auto-assign-action@v1.1.2
         with:
           configuration-path: ".github/auto_assign.yml"
