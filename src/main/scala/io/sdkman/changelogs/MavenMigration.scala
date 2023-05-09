@@ -6,11 +6,11 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "013")
 class MavenMigration {
   @ChangeSet(
-    order = "028",
-    id = "028-rewrite_urls",
+    order = "029",
+    id = "029-rewrite_urls",
     author = "marc0der"
   )
-  def migration028(implicit db: MongoDatabase): Unit =
+  def migration029(implicit db: MongoDatabase): Unit =
     List(
       "3.0.4",
       "3.0.5",
@@ -47,7 +47,7 @@ class MavenMigration {
       removeVersion("maven", version)
       Version(
         "maven",
-        "3.9.1",
+        version,
         s"https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${version}/apache-maven-${version}-bin.zip"
       ).validate()
         .insert()
