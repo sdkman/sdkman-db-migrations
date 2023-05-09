@@ -6,9 +6,9 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "013")
 class MavenMigration {
   @ChangeSet(
-    order = "027",
-    id = "027-add_maven_3.9.1",
-    author = "aalmiray"
+    order = "028",
+    id = "028-rewrite_urls",
+    author = "marc0der"
   )
   def migration028(implicit db: MongoDatabase): Unit =
     List(
