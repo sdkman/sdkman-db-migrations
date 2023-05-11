@@ -6,50 +6,16 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "013")
 class MavenMigration {
   @ChangeSet(
-    order = "029",
-    id = "029-rewrite_urls",
-    author = "marc0der"
+    order = "030",
+    id = "030-maven-3.9.2",
+    author = "aalmiray"
   )
-  def migration029(implicit db: MongoDatabase): Unit =
-    List(
-      "3.0.4",
-      "3.0.5",
-      "3.1.0",
-      "3.1.1",
-      "3.2.1",
-      "3.2.2",
-      "3.2.3",
-      "3.2.5",
-      "3.3.1",
-      "3.3.3",
-      "3.3.9",
-      "3.5.0",
-      "3.5.2",
-      "3.5.3",
-      "3.5.4",
-      "3.6.0",
-      "3.6.1",
-      "3.6.2",
-      "3.6.3",
-      "3.8.1",
-      "3.8.2",
-      "3.8.3",
-      "3.8.4",
-      "3.8.5",
-      "3.8.6",
-      "3.8.7",
-      "3.8.8",
-      "3.9.0",
-      "3.9.1",
-      "4.0.0-alpha-4",
-      "4.0.0-alpha-5"
-    ).foreach { version =>
-      removeVersion("maven", version)
-      Version(
-        "maven",
-        version,
-        s"https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/${version}/apache-maven-${version}-bin.zip"
-      ).validate()
-        .insert()
-    }
+  def migration030(implicit db: MongoDatabase): Unit =
+    Version(
+      "maven",
+      "3.9.2",
+      "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.2/apache-maven-3.9.2-bin.zip"
+    ).validate()
+      .insert()
+      .asCandidateDefault()
 }
