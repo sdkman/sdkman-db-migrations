@@ -8,8 +8,12 @@ class KarafMigrations {
 
   val CandidateName = "karaf"
 
-  @ChangeSet(order = "003", id = "003-add_new_karaf_versions_and_update_default", author = "fcolinet")
-  def migration003(implicit db: MongoDatabase): Document = {
+  @ChangeSet(
+    order = "003",
+    id = "003-add_new_karaf_versions_and_update_default",
+    author = "fcolinet"
+  )
+  def migration003(implicit db: MongoDatabase): Unit = {
     List(
       "4.4.3",
       "4.4.2",
