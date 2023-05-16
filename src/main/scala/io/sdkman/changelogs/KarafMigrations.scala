@@ -2,6 +2,7 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import org.bson.Document
 
 @ChangeLog(order = "025")
 class KarafMigrations {
@@ -13,7 +14,7 @@ class KarafMigrations {
     id = "003-add_new_karaf_versions_and_update_default",
     author = "fcolinet"
   )
-  def migration003(implicit db: MongoDatabase): Unit = {
+  def migration003(implicit db: MongoDatabase): Document = {
     List(
       "4.4.3",
       "4.4.2",
