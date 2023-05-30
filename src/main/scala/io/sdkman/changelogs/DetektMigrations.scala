@@ -6,7 +6,11 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "079")
 class DetektMigrations {
 
-  @ChangeSet(order = "001", id = "001_add_detect_3_2_4", author = "helpermethod")
+  @ChangeSet(
+    order = "001",
+    id = "001_add_detect_3_2_4",
+    author = "helpermethod"
+  )
   def migration001(implicit db: MongoDatabase): Version = {
     Candidate(
       candidate = "detekt",
@@ -20,7 +24,8 @@ class DetektMigrations {
     Version(
       candidate = "detekt",
       version = "1.22.0",
-      url = "https://github.com/detekt/detekt/releases/download/v1.22.0/detekt-cli-1.22.0.zip"
+      url =
+        "https://github.com/detekt/detekt/releases/download/v1.22.0/detekt-cli-1.22.0.zip"
     ).insert()
   }
 }
