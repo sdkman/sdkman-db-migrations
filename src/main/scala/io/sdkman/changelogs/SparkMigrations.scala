@@ -36,7 +36,7 @@ class SparkMigrations {
   
   @ChangeSet(
     order = "025",
-    id = "025-add_spark_3.4.2",
+    id = "025-add_spark_3.4.0",
     author = "sekikn"
   )
   def migration025(implicit db: MongoDatabase) = {
