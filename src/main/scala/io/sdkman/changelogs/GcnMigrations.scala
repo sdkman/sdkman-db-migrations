@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "080")
-class MicronautMigrations {
+class GcnMigrations {
 
   @ChangeSet(
     order = "001",
