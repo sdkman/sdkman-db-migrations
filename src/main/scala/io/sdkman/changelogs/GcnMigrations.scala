@@ -21,4 +21,29 @@ class MicronautMigrations {
       websiteUrl = "https://www.graal.cloud/gcn/"
     ).insert()
   }
+
+  def migrate007(implicit db: MongoDatabase): Unit = {
+    val platforms = List(
+      (MacOSX, "macos-amd64", "tar.gz"),
+      (MacARM64, "macos-aarch64", "tar.gz"),
+      (Linux64, "linux-amd64", "tar.gz"),
+      (LinuxARM64, "linux-aarch64", "tar.gz"),
+      (Windows, "windows-amd64", "zip")
+    )
+    version =>
+      platforms.map {
+        case (platform, gcnPlatform, extension) =>
+          Version(
+            candidate = "gcn",
+            version = "3.8.5",
+            url =
+              s"https://github.com/oracle/gcn/releases/download/$version/gcn-cli-$version-$gcnPlatform.$extension",
+            platform = platform,
+            vendor = Some(Oracle)
+          )
+      }
+    .validate()
+    .insert()
+    .asCandidateDefault()
+  }
 }
