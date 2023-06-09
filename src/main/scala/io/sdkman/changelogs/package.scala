@@ -167,7 +167,7 @@ package object changelogs {
   }
 
   case object MacARM64 extends Platfrom {
-    override val id = "MAC_ARM64
+    override val id = "MAC_ARM64"
   }
 
   case object Windows extends Platform {
