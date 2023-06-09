@@ -22,7 +22,7 @@ class MicronautMigrations {
     ).insert()
   }
 
-  def migrate007(implicit db: MongoDatabase): Unit = {
+  def migrate002(implicit db: MongoDatabase): Unit = {
     val platforms = List(
       (MacOSX, "macos-amd64", "tar.gz"),
       (MacARM64, "macos-aarch64", "tar.gz"),
