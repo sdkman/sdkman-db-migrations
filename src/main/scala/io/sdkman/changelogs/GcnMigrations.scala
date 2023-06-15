@@ -3,7 +3,7 @@ package io.sdkman.changelogs
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
-@ChangeLog(order = "080")
+@ChangeLog(order = "081")
 class GcnMigrations {
 
   @ChangeSet(
@@ -22,6 +22,11 @@ class GcnMigrations {
     ).insert()
   }
 
+  @ChangeSet(
+    order = "002",
+    id = "002_add_gcn_candidate_3.8.5",
+    author = "ezzarghili"
+  )
   def migrate002(implicit db: MongoDatabase): Unit = {
     val platforms = List(
       (MacOSX, "macos-amd64", "tar.gz"),
@@ -30,21 +35,22 @@ class GcnMigrations {
       (LinuxARM64, "linux-aarch64", "tar.gz"),
       (Windows, "windows-amd64", "zip")
     )
-    version =>
-      platforms
-        .map {
-          case (platform, gcnPlatform, extension) =>
-            Version(
-              candidate = "gcn",
-              version = "3.8.5",
-              url =
-                s"https://github.com/oracle/gcn/releases/download/$version/gcn-cli-$version-$gcnPlatform.$extension",
-              platform = platform,
-              vendor = Some(Oracle)
-            )
-        }
-        .validate()
-        .insert()
-        .asCandidateDefault()
+    val version = "3.8.5"
+
+    platforms
+      .map {
+        case (platform, gcnPlatform, extension) =>
+          Version(
+            candidate = "gcn",
+            version = version,
+            url =
+              s"https://github.com/oracle/gcn/releases/download/$version/gcn-cli-$version-$gcnPlatform.$extension",
+            platform = platform
+          )
+      }
+      .validate()
+      .insert()
+
+    setCandidateDefault("gcn", "3.8.5")
   }
 }
