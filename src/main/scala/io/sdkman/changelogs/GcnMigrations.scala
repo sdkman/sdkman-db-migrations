@@ -31,19 +31,20 @@ class GcnMigrations {
       (Windows, "windows-amd64", "zip")
     )
     version =>
-      platforms.map {
-        case (platform, gcnPlatform, extension) =>
-          Version(
-            candidate = "gcn",
-            version = "3.8.5",
-            url =
-              s"https://github.com/oracle/gcn/releases/download/$version/gcn-cli-$version-$gcnPlatform.$extension",
-            platform = platform,
-            vendor = Some(Oracle)
-          )
-      }
-    .validate()
-    .insert()
-    .asCandidateDefault()
+      platforms
+        .map {
+          case (platform, gcnPlatform, extension) =>
+            Version(
+              candidate = "gcn",
+              version = "3.8.5",
+              url =
+                s"https://github.com/oracle/gcn/releases/download/$version/gcn-cli-$version-$gcnPlatform.$extension",
+              platform = platform,
+              vendor = Some(Oracle)
+            )
+        }
+        .validate()
+        .insert()
+        .asCandidateDefault()
   }
 }
