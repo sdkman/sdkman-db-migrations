@@ -23,12 +23,12 @@ class JMeterMigration {
   }
 
   @ChangeSet(
-    order = "005",
-    id = "005-add_5.5_jmeter_candidate",
-    author = "xshyamx"
+    order = "006",
+    id = "006-add_5.6_jmeter_candidate",
+    author = "eddumelendez"
   )
-  def migration005(implicit db: MongoDatabase): Unit = {
-    val version = "5.5"
+  def migration006(implicit db: MongoDatabase): Unit = {
+    val version = "5.6"
     Version(
       candidate = "jmeter",
       version = version,
