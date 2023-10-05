@@ -5,27 +5,23 @@ import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "079")
 class DetektMigrations {
-
   @ChangeSet(
-    order = "001",
-    id = "001_add_detect_3_2_4",
+    order = "002",
+    id = "002_add_detect_1_23_x",
     author = "helpermethod"
   )
-  def migration001(implicit db: MongoDatabase): Version = {
-    Candidate(
-      candidate = "detekt",
-      name = "Detekt",
-      description =
-        "A static code analysis tool for the Kotlin programming language",
-      default = Some("1.22.0"),
-      websiteUrl = "https://detekt.dev/"
-    ).insert()
-
-    Version(
-      candidate = "detekt",
-      version = "1.22.0",
-      url =
-        "https://github.com/detekt/detekt/releases/download/v1.22.0/detekt-cli-1.22.0.zip"
-    ).insert()
+  def migration002(implicit db: MongoDatabase): Unit = {
+    List(
+      "1.23.0",
+      "1.23.1"
+    ).foreach { version =>
+      Version(
+        candidate = "detekt",
+        version = version,
+        url =
+          f"https://github.com/detekt/detekt/releases/download/v$version/detekt-cli-$version.zip"
+      ).validate()
+        .insert()
+    }
   }
 }
