@@ -6,15 +6,12 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "079")
 class DetektMigrations {
   @ChangeSet(
-    order = "002",
-    id = "002_add_detect_1_23_x",
+    order = "003",
+    id = "003_add_detect_1_23_3",
     author = "helpermethod"
   )
-  def migration002(implicit db: MongoDatabase): Unit = {
-    List(
-      "1.23.0",
-      "1.23.1"
-    ).foreach { version =>
+  def migration003(implicit db: MongoDatabase): Unit = {
+      val version = "1.23.3"
       Version(
         candidate = "detekt",
         version = version,
@@ -23,5 +20,4 @@ class DetektMigrations {
       ).validate()
         .insert()
     }
-  }
 }
