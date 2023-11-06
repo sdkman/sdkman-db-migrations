@@ -11,13 +11,13 @@ class DetektMigrations {
     author = "helpermethod"
   )
   def migration003(implicit db: MongoDatabase): Unit = {
-      val version = "1.23.3"
-      Version(
-        candidate = "detekt",
-        version = version,
-        url =
-          f"https://github.com/detekt/detekt/releases/download/v$version/detekt-cli-$version.zip"
-      ).validate()
-        .insert()
-    }
+    val version = "1.23.3"
+    Version(
+      candidate = "detekt",
+      version = version,
+      url =
+        f"https://github.com/detekt/detekt/releases/download/v$version/detekt-cli-$version.zip"
+    ).validate()
+      .insert()
+  }
 }
