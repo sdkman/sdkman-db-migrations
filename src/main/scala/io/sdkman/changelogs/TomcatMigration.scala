@@ -6,59 +6,6 @@ import org.bson.Document
 
 @ChangeLog(order = "038")
 class TomcatMigration {
-  @ChangeSet(
-    order = "012",
-    id = "012-update_tomcat_versions",
-    author = "stefanpenndorf"
-  )
-  def migration012(implicit db: MongoDatabase): Document = {
-    removeVersion("tomcat", "11.0.0-M5")
-
-    List(
-      "8"  -> "8.5.89",
-      "9"  -> "9.0.75",
-      "10" -> "10.1.9",
-      "11" -> "11.0.0-M6"
-    ).map {
-        case (series: String, version: String) =>
-          Version(
-            candidate = "tomcat",
-            version = version,
-            url =
-              s"https://archive.apache.org/dist/tomcat/tomcat-$series/v$version/bin/apache-tomcat-$version.zip"
-          )
-      }
-      .validate()
-      .insert()
-    setCandidateDefault("tomcat", "10.1.9")
-  }
-
-  @ChangeSet(
-    order = "013",
-    id = "013-update_tomcat_versions",
-    author = "stefanpenndorf"
-  )
-  def migration013(implicit db: MongoDatabase): Document = {
-    removeVersion("tomcat", "11.0.0-M6")
-
-    List(
-      "8"  -> "8.5.90",
-      "9"  -> "9.0.76",
-      "10" -> "10.1.10",
-      "11" -> "11.0.0-M7"
-    ).map {
-        case (series: String, version: String) =>
-          Version(
-            candidate = "tomcat",
-            version = version,
-            url =
-              s"https://archive.apache.org/dist/tomcat/tomcat-$series/v$version/bin/apache-tomcat-$version.zip"
-          )
-      }
-      .validate()
-      .insert()
-    setCandidateDefault("tomcat", "10.1.10")
-  }
 
   @ChangeSet(
     order = "014",
@@ -115,6 +62,33 @@ class TomcatMigration {
       .validate()
       .insert()
     setCandidateDefault("tomcat", "10.1.14")
+  }
+
+  @ChangeSet(
+    order = "016",
+    id = "016-update_tomcat_versions",
+    author = "stefanpenndorf"
+  )
+  def migration016(implicit db: MongoDatabase): Document = {
+    removeVersion("tomcat", "11.0.0-M12")
+
+    List(
+      "8"  -> "8.5.96",
+      "9"  -> "9.0.83",
+      "10" -> "10.1.16",
+      "11" -> "11.0.0-M14"
+    ).map {
+        case (series: String, version: String) =>
+          Version(
+            candidate = "tomcat",
+            version = version,
+            url =
+              s"https://archive.apache.org/dist/tomcat/tomcat-$series/v$version/bin/apache-tomcat-$version.zip"
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("tomcat", "10.1.16")
   }
 
 }
