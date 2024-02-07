@@ -6,17 +6,53 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "084")
 class GraceMigrations {
 
+  val CandidateName = "grace"
+
   @ChangeSet(
     order = "001",
     id = "001_add_grace_candidate",
     author = "rainboyan"
   )
-  def migration001(implicit db: MongoDatabase) =
+  def migration001(implicit db: MongoDatabase) : Candidate = {
     Candidate(
-      candidate = "grace",
-      name = "Grace",
+      candidate = CandidateName,
+      name = "Grace Framework",
       description =
-        "An open-source and powerful One Person web application Framework to help developers quickly build Spring Boot applications written in the Groovy programing language. Grace is a forked of Grails 5.1.x that started development in early 2022.",
+        "An open-source and powerful One-Person web application Framework to help developers quickly build Spring Boot applications written in the Groovy programing language. Grace is a forked of Grails 5 that started development in early 2022.",
       websiteUrl = "https://graceframework.org"
     ).insert()
+  }
+
+  @ChangeSet(
+    order = "002",
+    id = "002_add_new_grace_versions_and_update_default",
+    author = "rainboyan"
+  )
+  def migration002(implicit db: MongoDatabase): Document = {
+    List(
+      "2022.0.0-RC1",
+      "2022.0.0-RC2",
+      "2022.0.0",
+      "2022.0.1",
+      "2022.0.2",
+      "2022.0.3",
+      "2022.0.4",
+      "2022.0.5",
+      "2022.1.0-RC1",
+      "2022.1.0",
+      "2023.0.0-M1"
+    ).map(
+        version =>
+          Version(
+            candidate = CandidateName,
+            version = version,
+            url =
+              s"https://github.com/graceframework/grace-framework/releases/download/v$version/grace-$version.zip"
+          )
+      )
+      .validate()
+      .insert()
+    setCandidateDefault(CandidateName, "2022.1.0")
+  }
+
 }
