@@ -2,6 +2,7 @@ package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
+import org.bson.Document
 
 @ChangeLog(order = "084")
 class GraceMigrations {
