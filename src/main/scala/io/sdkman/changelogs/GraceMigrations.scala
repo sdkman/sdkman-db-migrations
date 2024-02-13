@@ -19,7 +19,7 @@ class GraceMigrations {
       candidate = CandidateName,
       name = "Grace Framework",
       description =
-        "An open-source and powerful One-Person web application Framework to help developers quickly build Spring Boot applications written in the Groovy programing language. Grace is a forked of Grails 5 that started development in early 2022.",
+        "Grace is a powerful open-source, One-Person web application Framework to help developers build Spring Boot applications rapidly using the Groovy programming language. Grace is a fork of Grails 5 that started development in early 2022.",
       websiteUrl = "https://graceframework.org"
     ).insert()
   }
