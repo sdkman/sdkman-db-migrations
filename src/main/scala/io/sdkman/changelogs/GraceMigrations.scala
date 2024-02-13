@@ -31,17 +31,13 @@ class GraceMigrations {
   )
   def migration002(implicit db: MongoDatabase): Document = {
     List(
-      "2022.0.0-RC1",
-      "2022.0.0-RC2",
       "2022.0.0",
       "2022.0.1",
       "2022.0.2",
       "2022.0.3",
       "2022.0.4",
       "2022.0.5",
-      "2022.1.0-RC1",
-      "2022.1.0",
-      "2023.0.0-M1"
+      "2022.1.0"
     ).map(
         version =>
           Version(
