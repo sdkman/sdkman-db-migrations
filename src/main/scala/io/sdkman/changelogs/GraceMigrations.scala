@@ -14,7 +14,7 @@ class GraceMigrations {
     id = "001_add_grace_candidate",
     author = "rainboyan"
   )
-  def migration001(implicit db: MongoDatabase) : Candidate = {
+  def migration001(implicit db: MongoDatabase): Candidate = {
     Candidate(
       candidate = CandidateName,
       name = "Grace Framework",
