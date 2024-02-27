@@ -5,7 +5,7 @@ import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "085")
 class LiquibaseMigrations {
-  @ChangeSet(order = "001", id = "001_add_liquibase_1_2_3", author = "jandroav")
+  @ChangeSet(order = "001", id = "001_add_liquibase", author = "jandroav")
   def migration001(implicit db: MongoDatabase) = {
     Candidate(
       candidate = "liquibase",
