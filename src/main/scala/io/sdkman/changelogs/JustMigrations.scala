@@ -15,7 +15,7 @@ class JustMigrations {
       candidate = "just",
       name = "Just",
       description = "\uD83E\uDD16 Just a command runner",
-      websiteUrl = "https://github.com/casey/just",
+      websiteUrl = "https://just.systems",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
 }
