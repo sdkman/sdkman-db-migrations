@@ -35,6 +35,6 @@ class SparkMigrations {
             s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-$distribution.tgz"
         )
     }
-    setCandidateDefault("spark", "2.2.2")
+    setCandidateDefault("spark", "3.5.0")
   }
 }
