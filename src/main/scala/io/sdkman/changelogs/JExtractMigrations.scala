@@ -43,4 +43,19 @@ class JExtractMigrations {
           .insert()
     }
   }
+
+  @ChangeSet(
+    order = "003",
+    id = "003_add_jextract_candidate",
+    author = "helpermethod"
+  )
+  def migration003(implicit db: MongoDatabase): Unit = {
+    Candidate(
+      candidate = "jextract",
+      name = "Jextract",
+      description =
+        "Jextract mechanically generates Java bindings from native library headers. This is an early access build from OpenJDK Jextract which is part of Code Tools",
+      websiteUrl = "https://jdk.java.net/jextract/"
+    ).insert()
+  }
 }
