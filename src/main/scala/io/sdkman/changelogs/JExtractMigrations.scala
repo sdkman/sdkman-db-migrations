@@ -72,4 +72,30 @@ class JExtractMigrations {
         }
       }
   }
+
+  @ChangeSet(
+    order = "005",
+    id = "005_improve_versioning",
+    author = "helpermethod"
+  )
+  def migration005(implicit db: MongoDatabase): Unit = {
+    removeAllVersions("jextract")
+
+    List(
+      (Linux64, "linux-x64"),
+      (MacARM64, "macos-aarch64"),
+      (MacOSX, "macos-x64"),
+      (Windows, "windows-x64")
+    ).map {
+      case (platform, platformIdentifier) =>
+        Version(
+          candidate = "jextract",
+          version = "22.ea.5",
+          url =
+            s"https://download.java.net/java/early_access/jextract/22/5/openjdk-22-jextract+5-33_${platformIdentifier}_bin.tar.gz",
+          platform = platform
+        ).validate()
+          .insert()
+    }
+  }
 }
