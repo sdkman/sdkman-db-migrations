@@ -25,7 +25,11 @@ class SparkMigrations {
       "3.3.4" -> "hadoop3",
       "3.4.2" -> "hadoop3",
       "3.4.3" -> "hadoop3",
-      "3.5.1" -> "hadoop3"
+      "3.5.1" -> "hadoop3",
+      "3.5.2" -> "hadoop3",
+      "3.5.3" -> "hadoop3",
+      "4.0.0-preview1" -> "hadoop3",
+      "4.0.0-preview2" -> "hadoop3"
     ).foreach {
       case (version, distribution) =>
         Version(
@@ -35,6 +39,6 @@ class SparkMigrations {
             s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-$distribution.tgz"
         ).validate().insert()
     }
-    setCandidateDefault("spark", "3.5.1")
+    setCandidateDefault("spark", "3.5.3")
   }
 }
