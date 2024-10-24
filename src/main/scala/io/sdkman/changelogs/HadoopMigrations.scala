@@ -23,15 +23,18 @@ class HadoopMigrations {
     ).insert()
 
   @ChangeSet(
-    order = "004",
-    id = "004-add_hadoop_3_3_5",
-    author = "sekikn"
+    order = "005",
+    id = "005-add_hadoop_3_4_1",
+    author = "noobzik"
   )
-  def migration004(implicit db: MongoDatabase) = {
+  def migration005(implicit db: MongoDatabase) = {
     val hadoopVersions = List(
       "2.10.2",
       "3.2.4",
-      "3.3.5"
+      "3.3.5",
+      "3.3.6",
+      "3.4.0",
+      "3.4.1"
     )
     hadoopVersions
       .map { version =>
@@ -39,7 +42,7 @@ class HadoopMigrations {
       }
       .validate()
       .insert()
-    setCandidateDefault("hadoop", "3.3.5")
+    setCandidateDefault("hadoop", "3.4.1")
   }
 
   private def hadoopVersion(
