@@ -8,9 +8,9 @@ import org.bson.Document
 class SparkMigrations {
 
   @ChangeSet(
-    order = "029",
-    id = "029-latest-spark-versions",
-    author = "cphbrt"
+    order = "030",
+    id = "030-latest-spark-versions",
+    author = "noobzik"
   )
   def migration029(implicit db: MongoDatabase): Document = {
     Map(
