@@ -12,7 +12,7 @@ class SparkMigrations {
     id = "030-latest-spark-versions",
     author = "noobzik"
   )
-  def migration029(implicit db: MongoDatabase): Document = {
+  def migration030(implicit db: MongoDatabase): Document = {
     Map(
       "2.2.2" -> "hadoop2.7",
       "2.2.3" -> "hadoop2.7",
