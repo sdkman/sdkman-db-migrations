@@ -8,11 +8,11 @@ import org.bson.Document
 class SparkMigrations {
 
   @ChangeSet(
-    order = "029",
-    id = "029-latest-spark-versions",
-    author = "cphbrt"
+    order = "030",
+    id = "030-latest-spark-versions",
+    author = "noobzik"
   )
-  def migration029(implicit db: MongoDatabase): Document = {
+  def migration030(implicit db: MongoDatabase): Document = {
     Map(
       "2.2.2" -> "hadoop2.7",
       "2.2.3" -> "hadoop2.7",
@@ -25,7 +25,11 @@ class SparkMigrations {
       "3.3.4" -> "hadoop3",
       "3.4.2" -> "hadoop3",
       "3.4.3" -> "hadoop3",
-      "3.5.1" -> "hadoop3"
+      "3.5.1" -> "hadoop3",
+      "3.5.2" -> "hadoop3",
+      "3.5.3" -> "hadoop3",
+      "4.0.0-preview1" -> "hadoop3",
+      "4.0.0-preview2" -> "hadoop3"
     ).foreach {
       case (version, distribution) =>
         Version(
@@ -35,6 +39,6 @@ class SparkMigrations {
             s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-$distribution.tgz"
         ).validate().insert()
     }
-    setCandidateDefault("spark", "3.5.1")
+    setCandidateDefault("spark", "3.5.3")
   }
 }
