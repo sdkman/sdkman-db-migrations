@@ -141,7 +141,7 @@ be set to either `None` or a `Some`, in turn containing `AdoptOpenJDK`, `Amazon`
 
 ## Fast track
 
-It is usually worth notifying us of the PR on [#cli-development](https://slack.sdkman.io) Slack chat in case we miss your PR.
+It is usually worth notifying us of your PR on our Discord server's [#vendors](https://discord.gg/tgftp8dZVm) channel.
 
 ## Contributors
 
