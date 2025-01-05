@@ -17,7 +17,7 @@ class MicronautMigrations {
       name = "JeKa",
       description =
         "JeKa is a modern build tool for Java, designed to simplify and streamline your development experience. It reshapes Java application building for a generation of developers seeking lightweight, accessible, yet powerful solutions."
-      websiteUrl = "http://jeka.dev"
+      websiteUrl = "https://jeka.dev"
     ).insert()
   }
 }
