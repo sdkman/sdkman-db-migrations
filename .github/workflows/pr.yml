@@ -5,11 +5,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      mongodb:
-        image: mongo:3.2
-        ports:
-          - 27017:27017
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -17,6 +12,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.11
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Run local migration
         run: ./gradlew run
       - uses: kentaro-m/auto-assign-action@v1.1.2
