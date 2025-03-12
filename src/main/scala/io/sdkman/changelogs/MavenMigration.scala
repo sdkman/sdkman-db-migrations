@@ -6,16 +6,15 @@ import com.mongodb.client.MongoDatabase
 @ChangeLog(order = "013")
 class MavenMigration {
   @ChangeSet(
-    order = "044",
-    id = "044-maven-3.9.9",
-    author = "aalmiray"
+    order = "045",
+    id = "045-maven-4.0.0-rc-3",
+    author = "ascheman"
   )
-  def migration042(implicit db: MongoDatabase): Unit =
+  def migration045(implicit db: MongoDatabase): Unit =
     Version(
       "maven",
-      "3.9.9",
-      "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9/apache-maven-3.9.9-bin.zip"
+      "4.0.0-rc-3",
+      "https://dlcdn.apache.org/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip"
     ).validate()
       .insert()
-      .asCandidateDefault()
 }
