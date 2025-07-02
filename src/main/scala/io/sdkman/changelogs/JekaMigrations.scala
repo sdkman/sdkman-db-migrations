@@ -4,7 +4,7 @@ import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "088")
-class MicronautMigrations {
+class JekaMigrations {
 
   @ChangeSet(
     order = "001",
@@ -16,8 +16,10 @@ class MicronautMigrations {
       candidate = "jeka",
       name = "JeKa",
       description =
-        "JeKa is a modern build tool for Java, designed to simplify and streamline your development experience. It reshapes Java application building for a generation of developers seeking lightweight, accessible, yet powerful solutions." websiteUrl =
-          "https://jeka.dev"
+        """JeKa is a modern build tool for Java, designed to simplify and streamline your development experience.
+          |It reshapes Java application building for a generation of developers seeking lightweight, accessible,
+          |yet powerful solutions.""".stripMargin,
+      websiteUrl = "https://jeka.dev"
     ).insert()
   }
 }
