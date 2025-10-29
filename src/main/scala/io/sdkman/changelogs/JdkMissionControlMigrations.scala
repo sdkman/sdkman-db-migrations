@@ -47,4 +47,30 @@ class JdkMissionControlMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(
+    order = "003",
+    id = "003-add-zulu-9.1.1",
+    author = "sciencesakura"
+  )
+  def migrate003(implicit db: MongoDatabase): Unit =
+    Map(
+      Linux64    -> "zmc9.1.1.35-ca-linux_x64.tar.gz",
+      LinuxARM64 -> "zmc9.1.1.35-ca-linux_aarch64.tar.gz",
+      MacOSX     -> "zmc9.1.1.35-ca-macos_x64.tar.gz",
+      MacARM64   -> "zmc9.1.1.35-ca-macos_aarch64.tar.gz",
+      Windows    -> "zmc9.1.1.35-ca-win_x64.zip"
+    ).map {
+        case (platform, binary) =>
+          Version(
+            "jmc",
+            "9.1.1-zulu",
+            s"https://cdn.azul.com/zmc/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .toList
+      .validate()
+      .insert()
+
 }
