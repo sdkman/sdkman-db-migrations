@@ -47,4 +47,66 @@ class JdkMissionControlMigrations {
       .validate()
       .insert()
 
+  @ChangeSet(
+    order = "003",
+    id = "003-add-latest-version-of-each-distribution",
+    author = "sciencesakura"
+  )
+  def migrate003(implicit db: MongoDatabase): Unit = {
+    List(
+      ("adpt", Linux64, "org.openjdk.jmc-9.1.1-linux.gtk.x86_64.tar.gz"),
+      ("adpt", LinuxARM64, "org.openjdk.jmc-9.1.1-linux.gtk.aarch64.tar.gz"),
+      ("adpt", MacOSX, "org.openjdk.jmc-9.1.1-macosx.cocoa.x86_64.tar.gz"),
+      ("adpt", MacARM64, "org.openjdk.jmc-9.1.1-macosx.cocoa.aarch64.tar.gz"),
+      ("adpt", Windows, "org.openjdk.jmc-9.1.1-win32.win32.x86_64.zip"),
+      ("amzn", Linux64, "amazon-corretto-jmc-8.1.1.1-linux-x64.tar.gz"),
+      ("amzn", MacOSX, "amazon-corretto-jmc-8.1.1.1-mac-x64.tar.gz"),
+      ("amzn", Windows, "amazon-corretto-jmc-8.1.1.1-windows-x64.zip"),
+      ("librca", Linux64, "bellsoft-lmc8.3.0-linux-amd64.tar.gz"),
+      ("librca", MacOSX, "bellsoft-lmc8.3.0-macos-amd64.tar.gz"),
+      ("librca", MacARM64, "bellsoft-lmc8.3.0-macos-aarch64.tar.gz"),
+      ("librca", Windows, "bellsoft-lmc8.3.0-windows-amd64.zip"),
+      ("zulu", Linux64, "zmc9.1.1.35-ca-linux_x64.tar.gz"),
+      ("zulu", LinuxARM64, "zmc9.1.1.35-ca-linux_aarch64.tar.gz"),
+      ("zulu", MacOSX, "zmc9.1.1.35-ca-macos_x64.tar.gz"),
+      ("zulu", MacARM64, "zmc9.1.1.35-ca-macos_aarch64.tar.gz"),
+      ("zulu", Windows, "zmc9.1.1.35-ca-win_x64.zip")
+    ).map {
+        case ("adpt", platform, binary) =>
+          Version(
+            "jmc",
+            "9.1.1-adpt",
+            s"https://github.com/adoptium/jmc-build/releases/download/9.1.1/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+        case ("amzn", platform, binary) =>
+          Version(
+            "jmc",
+            "8.1.1.1-amzn",
+            s"https://corretto.aws/downloads/resources/jmc/8.1.1.1/$binary",
+            platform,
+            Some(Amazon)
+          )
+        case ("librca", platform, binary) =>
+          Version(
+            "jmc",
+            "8.3.0-librca",
+            s"https://download.bell-sw.com/lmc/8.3.0/$binary",
+            platform,
+            Some(Liberica)
+          )
+        case ("zulu", platform, binary) =>
+          Version(
+            "jmc",
+            "9.1.1-zulu",
+            s"https://cdn.azul.com/zmc/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("jmc", "9.1.1-zulu")
+  }
 }
