@@ -1,8 +1,7 @@
-package io.sdkman.changelogs.java
+package io.sdkman.changelogs
 
 import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
-import io.sdkman.db.MongoConnector
 
 @ChangeLog(order = "050")
 class TornadoVMMigrations {
@@ -18,8 +17,8 @@ class TornadoVMMigrations {
       name = "TornadoVM",
       description =
         "TornadoVM is a plug-in to OpenJDK and GraalVM that allows Java programmers to automatically run on heterogeneous hardware (GPUs, FPGAs, multi-core CPUs).",
-      websiteUrl = "https://www.tornadovm.org/" distribution =
-        "PLATFORM_SPECIFIC"
+      websiteUrl = "https://www.tornadovm.org/",
+      distribution = "PLATFORM_SPECIFIC"
     ).insert()
   }
 }
