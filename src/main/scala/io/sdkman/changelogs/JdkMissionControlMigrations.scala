@@ -104,9 +104,37 @@ class JdkMissionControlMigrations {
             platform,
             Some(Zulu)
           )
+        case _ => throw new IllegalArgumentException("Invalid version format")
       }
       .validate()
       .insert()
     setCandidateDefault("jmc", "9.1.1-zulu")
+  }
+
+  @ChangeSet(
+    order = "004",
+    id = "004-add-9.1.1.1-zulu",
+    author = "sciencesakura"
+  )
+  def migrate004(implicit db: MongoDatabase): Unit = {
+    List(
+      (Linux64, "zmc9.1.1.1.41-ca-linux_x64.tar.gz"),
+      (LinuxARM64, "zmc9.1.1.1.41-ca-linux_aarch64.tar.gz"),
+      (MacOSX, "zmc9.1.1.1.41-ca-macos_x64.tar.gz"),
+      (MacARM64, "zmc9.1.1.1.41-ca-macos_aarch64.tar.gz"),
+      (Windows, "zmc9.1.1.1.41-ca-win_x64.zip")
+    ).map(
+        it =>
+          Version(
+            "jmc",
+            "9.1.1.1-zulu",
+            s"https://cdn.azul.com/zmc/bin/${it._2}",
+            it._1,
+            Some(Zulu)
+          )
+      )
+      .validate()
+      .insert()
+    setCandidateDefault("jmc", "9.1.1.1-zulu")
   }
 }
