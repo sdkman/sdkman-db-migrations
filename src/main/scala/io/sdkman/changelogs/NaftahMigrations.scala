@@ -36,11 +36,12 @@ class NaftahMigrations {
     author = "chakib-daii"
   )
   def migration002(implicit db: MongoDatabase): Unit = {
+    val version = "0.1.0"
     Version(
       candidate = CandidateName,
-      version = "0.1.0",
+      version = version,
       url =
-        s"https://github.com/Chakib-DAII/Naftah/releases/download/0.1.0/naftah-lang-0.1.0-bin.zip"
+        s"https://github.com/Chakib-DAII/Naftah/releases/download/$version/naftah-lang-$version-bin.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
