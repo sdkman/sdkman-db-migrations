@@ -7,14 +7,14 @@ import com.mongodb.client.MongoDatabase
 class AntMigration {
   @ChangeSet(
     order = "019",
-    id = "019-add_ant_1.10.14",
+    id = "019-add_ant_1.10.15",
     author = "helpermethod"
   )
   def migration019(implicit db: MongoDatabase): Unit = {
     Version(
       "ant",
-      "1.10.14",
-      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.14-bin.zip"
+      "1.10.15",
+      "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.15-bin.zip"
     ).validate()
       .insert()
       .asCandidateDefault()
