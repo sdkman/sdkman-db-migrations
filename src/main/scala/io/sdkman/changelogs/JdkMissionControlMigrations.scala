@@ -104,7 +104,6 @@ class JdkMissionControlMigrations {
             platform,
             Some(Zulu)
           )
-        case _ => throw new IllegalArgumentException("Invalid version format")
       }
       .validate()
       .insert()
