@@ -28,6 +28,30 @@ class JettyMigrations {
       .validate()
       .insert()
     setCandidateDefault("jetty", "12.0.14")
+  }
 
+  @ChangeSet(
+    order = "006",
+    id = "006-update_jetty_versions",
+    author = "lachlan-roberts"
+  )
+  def migration006(implicit db: MongoDatabase) = {
+    List(
+      "10"   -> "10.0.26",
+      "11"   -> "11.0.26",
+      "12.0" -> "12.0.34",
+      "12.1" -> "12.1.8"
+    ).map {
+        case (series: String, version: String) =>
+          Version(
+            candidate = "jetty",
+            version = version,
+            url =
+              s"https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$version/jetty-home-$version.zip"
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("jetty", "12.1.8")
   }
 }
