@@ -8,11 +8,11 @@ import org.bson.Document
 class SparkMigrations {
 
   @ChangeSet(
-    order = "030",
-    id = "030-latest-spark-versions",
-    author = "noobzik"
+    order = "031",
+    id = "031-latest-spark-versions",
+    author = "aganisatria"
   )
-  def migration030(implicit db: MongoDatabase): Document = {
+  def migration031(implicit db: MongoDatabase): Document = {
     Map(
       "2.2.2"          -> "hadoop2.7",
       "2.2.3"          -> "hadoop2.7",
@@ -28,8 +28,26 @@ class SparkMigrations {
       "3.5.1"          -> "hadoop3",
       "3.5.2"          -> "hadoop3",
       "3.5.3"          -> "hadoop3",
+      "3.5.4"          -> "hadoop3",
+      "3.5.5"          -> "hadoop3",
+      "3.5.6"          -> "hadoop3",
+      "3.5.7"          -> "hadoop3",
+      "3.5.8"          -> "hadoop3",
       "4.0.0-preview1" -> "hadoop3",
-      "4.0.0-preview2" -> "hadoop3"
+      "4.0.0-preview2" -> "hadoop3",
+      "4.0.0"          -> "hadoop3",
+      "4.0.1"          -> "hadoop3",
+      "4.0.2"          -> "hadoop3",
+      "4.1.0-preview1" -> "hadoop3",
+      "4.1.0-preview2" -> "hadoop3",
+      "4.1.0-preview3" -> "hadoop3",
+      "4.1.0-preview4" -> "hadoop3",
+      "4.1.0"          -> "hadoop3",
+      "4.1.1"          -> "hadoop3",
+      "4.2.0-preview1" -> "hadoop3",
+      "4.2.0-preview2" -> "hadoop3",
+      "4.2.0-preview3" -> "hadoop3",
+      "4.2.0-preview4" -> "hadoop3"
     ).foreach {
       case (version, distribution) =>
         Version(
@@ -39,6 +57,6 @@ class SparkMigrations {
             s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-$distribution.tgz"
         ).validate().insert()
     }
-    setCandidateDefault("spark", "3.5.3")
+    setCandidateDefault("spark", "4.1.1")
   }
 }
