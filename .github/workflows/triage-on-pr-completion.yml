@@ -16,6 +16,7 @@ jobs:
         env:
           HOOK_URL: ${{ secrets.OPENCLAW_HOOK_URL }}
           HOOK_TOKEN: ${{ secrets.OPENCLAW_HOOK_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Fetch PR details from completed workflow
           PR_DATA=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }} \
@@ -40,5 +41,3 @@ jobs:
             -H "Content-Type: application/json" \
             -d "$PAYLOAD" \
             "$HOOK_URL"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
