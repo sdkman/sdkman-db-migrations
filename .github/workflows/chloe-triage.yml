@@ -5,43 +5,10 @@ on:
     types: [opened]
   issue_comment:
     types: [created]
+  pull_request_target:
+    types: [opened]
 
 jobs:
   notify:
-    runs-on: ubuntu-latest
-    if: github.event.sender.type != 'Bot'
-    steps:
-      - name: Send to OpenClaw
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          REPO: ${{ github.repository }}
-          SENDER: ${{ github.event.sender.login }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_URL: ${{ github.event.issue.html_url }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          COMMENT_BODY: ${{ github.event.comment.body }}
-          COMMENT_URL: ${{ github.event.comment.html_url }}
-          HOOK_URL: ${{ secrets.OPENCLAW_HOOK_URL }}
-          HOOK_TOKEN: ${{ secrets.OPENCLAW_HOOK_TOKEN }}
-        run: |
-          if [ "$EVENT_NAME" = "issues" ]; then
-            MSG="New issue in ${REPO} — #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
-            MSG+=$'\nAuthor: '"${SENDER}"
-            MSG+=$'\nURL: '"${ISSUE_URL}"
-            MSG+=$'\n\n'"${ISSUE_BODY}"
-          else
-            MSG="New comment on ${REPO} — #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
-            MSG+=$'\nFrom: '"${SENDER}"
-            MSG+=$'\nURL: '"${COMMENT_URL}"
-            MSG+=$'\n\n'"${COMMENT_BODY}"
-          fi
-          PAYLOAD=$(jq -n \
-            --arg message "$MSG" \
-            --arg name "GitHub Triage" \
-            '{message: $message, name: $name, deliver: true, channel: "discord", to: "1474759623209783327"}')
-          curl -sf -X POST \
-            -H "Authorization: Bearer ${HOOK_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d "$PAYLOAD" \
-            "$HOOK_URL"
+    uses: sdkman/.github/.github/workflows/reusable-triage.yml@main
+    secrets: inherit
