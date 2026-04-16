@@ -41,4 +41,34 @@ class SparkMigrations {
     }
     setCandidateDefault("spark", "3.5.3")
   }
+
+  @ChangeSet(
+    order = "031",
+    id = "031-latest-spark-versions",
+    author = "aganisatria"
+  )
+  def migration031(implicit db: MongoDatabase): Document = {
+    Map(
+      "3.5.4"          -> "hadoop3",
+      "3.5.5"          -> "hadoop3",
+      "3.5.6"          -> "hadoop3",
+      "3.5.7"          -> "hadoop3",
+      "3.5.8"          -> "hadoop3",
+      "4.0.0"          -> "hadoop3",
+      "4.0.1"          -> "hadoop3",
+      "4.0.2"          -> "hadoop3",
+      "4.1.0"          -> "hadoop3",
+      "4.1.1"          -> "hadoop3",
+      "4.2.0-preview4" -> "hadoop3"
+    ).foreach {
+      case (version, distribution) =>
+        Version(
+          candidate = "spark",
+          version = version,
+          url =
+            s"https://archive.apache.org/dist/spark/spark-$version/spark-$version-bin-$distribution.tgz"
+        ).validate().insert()
+    }
+    setCandidateDefault("spark", "4.1.1")
+  }
 }
