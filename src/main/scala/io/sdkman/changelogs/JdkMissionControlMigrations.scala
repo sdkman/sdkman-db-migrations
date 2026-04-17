@@ -136,4 +136,44 @@ class JdkMissionControlMigrations {
       .insert()
     setCandidateDefault("jmc", "9.1.1.1-zulu")
   }
+
+  @ChangeSet(
+    order = "005",
+    id = "005-add-9.1.2-adpt-and-zulu",
+    author = "sciencesakura"
+  )
+  def migrate005(implicit db: MongoDatabase): Unit = {
+    List(
+      ("adpt", Linux64, "org.openjdk.jmc-9.1.2-linux.gtk.x86_64.tar.gz"),
+      ("adpt", LinuxARM64, "org.openjdk.jmc-9.1.2-linux.gtk.aarch64.tar.gz"),
+      ("adpt", MacOSX, "org.openjdk.jmc-9.1.2-macosx.cocoa.x86_64.tar.gz"),
+      ("adpt", MacARM64, "org.openjdk.jmc-9.1.2-macosx.cocoa.aarch64.tar.gz"),
+      ("adpt", Windows, "org.openjdk.jmc-9.1.2-win32.win32.x86_64.zip"),
+      ("zulu", Linux64, "zmc9.1.2.47-ca-linux_x64.tar.gz"),
+      ("zulu", LinuxARM64, "zmc9.1.2.47-ca-linux_aarch64.tar.gz"),
+      ("zulu", MacOSX, "zmc9.1.2.47-ca-macos_x64.tar.gz"),
+      ("zulu", MacARM64, "zmc9.1.2.47-ca-macos_aarch64.tar.gz"),
+      ("zulu", Windows, "zmc9.1.2.47-ca-win_x64.zip")
+    ).map {
+        case ("adpt", platform, binary) =>
+          Version(
+            "jmc",
+            "9.1.2-adpt",
+            s"https://github.com/adoptium/jmc-build/releases/download/9.1.2/$binary",
+            platform,
+            Some(AdoptOpenJDK)
+          )
+        case ("zulu", platform, binary) =>
+          Version(
+            "jmc",
+            "9.1.2-zulu",
+            s"https://cdn.azul.com/zmc/bin/$binary",
+            platform,
+            Some(Zulu)
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("jmc", "9.1.2-zulu")
+  }
 }
