@@ -14,7 +14,8 @@ class KsrcMigrations {
     Candidate(
       candidate = "ksrc",
       name = "ksrc",
-      description = "Let your AI agents search and read 3rd-party Kotlin dependency sources",
+      description =
+        "Let your AI agents search and read 3rd-party Kotlin dependency sources",
       websiteUrl = "https://github.com/respawn-app/ksrc",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
