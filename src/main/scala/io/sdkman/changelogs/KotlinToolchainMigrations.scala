@@ -12,10 +12,13 @@ class KotlinToolchainMigrations {
   )
   def migration001(implicit db: MongoDatabase) =
     Candidate(
-      candidate = "kotlin-toolchain",
+      candidate = "kotlintoolchain",
       name = "Kotlin Toolchain",
       description =
-        "A set of tools for building and managing Kotlin projects, with a focus on user experience and tooling.",
+        "The Kotlin Toolchain is a unified entry point into Kotlin with a focus on user experience and IDE support." +
+          " It includes build tooling functionality as one of its core components. It can build plain JVM console " +
+          "applications, Android and iOS mobile applications, server-side application like Spring or Ktor, " +
+          "multiplatform projects that share business logic and/or UI, and more.",
       websiteUrl = "https://kotlin-toolchain.org",
       distribution = "UNIVERSAL"
     ).insert()
