@@ -58,8 +58,7 @@ class SparkMigrations {
       "4.0.1"          -> "hadoop3",
       "4.0.2"          -> "hadoop3",
       "4.1.0"          -> "hadoop3",
-      "4.1.1"          -> "hadoop3",
-      "4.2.0-preview4" -> "hadoop3"
+      "4.1.1"          -> "hadoop3"
     ).foreach {
       case (version, distribution) =>
         Version(
