@@ -49,16 +49,16 @@ class SparkMigrations {
   )
   def migration031(implicit db: MongoDatabase): Document = {
     Map(
-      "3.5.4"          -> "hadoop3",
-      "3.5.5"          -> "hadoop3",
-      "3.5.6"          -> "hadoop3",
-      "3.5.7"          -> "hadoop3",
-      "3.5.8"          -> "hadoop3",
-      "4.0.0"          -> "hadoop3",
-      "4.0.1"          -> "hadoop3",
-      "4.0.2"          -> "hadoop3",
-      "4.1.0"          -> "hadoop3",
-      "4.1.1"          -> "hadoop3"
+      "3.5.4" -> "hadoop3",
+      "3.5.5" -> "hadoop3",
+      "3.5.6" -> "hadoop3",
+      "3.5.7" -> "hadoop3",
+      "3.5.8" -> "hadoop3",
+      "4.0.0" -> "hadoop3",
+      "4.0.1" -> "hadoop3",
+      "4.0.2" -> "hadoop3",
+      "4.1.0" -> "hadoop3",
+      "4.1.1" -> "hadoop3"
     ).foreach {
       case (version, distribution) =>
         Version(
