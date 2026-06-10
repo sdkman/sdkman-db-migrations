@@ -114,6 +114,10 @@ package object changelogs {
     override val id = "tem"
   }
 
+  case object Eliya extends Vendor {
+    override val id = "eliya"
+  }
+
   case object Graal extends Vendor {
     override val id = "grl"
   }
