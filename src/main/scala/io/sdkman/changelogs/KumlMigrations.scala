@@ -19,4 +19,41 @@ class KumlMigrations {
       websiteUrl = "https://kuml.dev",
       distribution = "PLATFORM_SPECIFIC"
     ).insert()
+
+  @ChangeSet(order = "002", id = "002_add_kuml_0_20_5", author = "betschwa")
+  def migration002(implicit db: MongoDatabase) = {
+    List(
+      Version(
+        "kuml",
+        "0.20.5",
+        "https://github.com/kuml-dev/kUML/releases/download/v0.20.5/kuml-runtime-0.20.5-darwin-arm64.zip",
+        MacARM64
+      ),
+      Version(
+        "kuml",
+        "0.20.5",
+        "https://github.com/kuml-dev/kUML/releases/download/v0.20.5/kuml-runtime-0.20.5-darwin-x86_64.zip",
+        MacOSX
+      ),
+      Version(
+        "kuml",
+        "0.20.5",
+        "https://github.com/kuml-dev/kUML/releases/download/v0.20.5/kuml-runtime-0.20.5-linux-x86_64.zip",
+        Linux64
+      ),
+      Version(
+        "kuml",
+        "0.20.5",
+        "https://github.com/kuml-dev/kUML/releases/download/v0.20.5/kuml-runtime-0.20.5-linux-aarch64.zip",
+        LinuxARM64
+      ),
+      Version(
+        "kuml",
+        "0.20.5",
+        "https://github.com/kuml-dev/kUML/releases/download/v0.20.5/kuml-runtime-0.20.5-windows-x86_64.zip",
+        Windows
+      )
+    ).validate().insert()
+    setCandidateDefault("kuml", "0.20.5")
+  }
 }
