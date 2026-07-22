@@ -302,4 +302,13 @@ package object changelogs {
         Filters.eq("candidate", candidate),
         Updates.set("default", version)
       )
+
+  def setCandidateDistribution(candidate: String, distribution: String)(
+      implicit db: MongoDatabase
+  ): Document =
+    db.getCollection(CandidatesCollection)
+      .findOneAndUpdate(
+        Filters.eq("candidate", candidate),
+        Updates.set("distribution", distribution)
+      )
 }
