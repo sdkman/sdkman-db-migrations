@@ -56,4 +56,23 @@ class KumlMigrations {
     ).validate().insert()
     setCandidateDefault("kuml", "0.20.5")
   }
+
+  // kUML's SDKMAN! release pipeline no longer bundles a per-platform jlink JRE
+  // (see kuml-dev/kUML's `:kuml-cli:universalDist` Gradle task): SDKMAN!'s
+  // whole purpose is JDK version management via `sdk use java`, so shipping
+  // our own runtime five times over duplicated something the channel already
+  // manages. Switches the existing candidate from PLATFORM_SPECIFIC to
+  // UNIVERSAL and drops the now-inconsistent platform-specific 0.20.5
+  // entries (mixing distribution schemes for one candidate isn't supported).
+  // Future versions are UNIVERSAL archives published by the release
+  // pipeline's `sdkman-release` job once vendor onboarding completes.
+  @ChangeSet(
+    order = "003",
+    id = "003_switch_kuml_to_universal",
+    author = "betschwa"
+  )
+  def migration003(implicit db: MongoDatabase) = {
+    setCandidateDistribution("kuml", "UNIVERSAL")
+    removeAllVersions("kuml")
+  }
 }
