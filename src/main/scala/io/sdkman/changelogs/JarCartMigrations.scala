@@ -1,6 +1,6 @@
 package io.sdkman.changelogs
 
-import com.github.mongobee.changeset.{ChangeLog, ChangeSet}
+import com.github.mongobee.changesets.{ChangeLog, ChangeSet}
 import com.mongodb.client.MongoDatabase
 
 @ChangeLog(order = "096")
@@ -15,7 +15,9 @@ class JarCartMigrations {
     Candidate(
       candidate = "jar-cart",
       name = "Jar-Cart",
-      description = "A lightweight, no-build package manager and CLI tool designed for Java.",
-      websiteUrl = "https://github.com/Sudhanshu-Ambastha/jar-cart"
+      description =
+        "An instant, no-build dependency manager and CLI task runner designed to bring pnpm-style simplicity, lockfile security, and lightweight scripting to Java projects.",
+      websiteUrl = "https://github.com/Sudhanshu-Ambastha/jar-cart",
+      distribution = "PLATFORM_SPECIFIC"
     ).insert()
 }
