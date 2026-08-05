@@ -100,4 +100,27 @@ class JettyMigrations {
       .insert()
     setCandidateDefault("jetty", "12.1.11")
   }
+
+  @ChangeSet(
+    order = "009",
+    id = "009-update_jetty_versions",
+    author = "lachlan-roberts"
+  )
+  def migration009(implicit db: MongoDatabase) = {
+    List(
+      "12.0" -> "12.0.38",
+      "12.1" -> "12.1.12"
+    ).map {
+        case (series: String, version: String) =>
+          Version(
+            candidate = "jetty",
+            version = version,
+            url =
+              s"https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-home/$version/jetty-home-$version.zip"
+          )
+      }
+      .validate()
+      .insert()
+    setCandidateDefault("jetty", "12.1.12")
+  }
 }
