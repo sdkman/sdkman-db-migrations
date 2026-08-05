@@ -5,11 +5,11 @@
 
 ## ⚠️ Read-only mode 🚧
 
-> ⚠️ **This repository is now in read-only mode and is no longer accepting new pull requests.**
+> ⚠️ **This repository is now in read-only mode and is no longer accepting pull requests.**
 
-SDKMAN! is mid-migration from MongoDB to Postgres, and the Mongo-based publishing flow that lives in this repo is being retired as part of that move. To avoid confusion during the transition, we are pausing contributions here rather than merging changes into a pipeline that is on its way out.
+SDKMAN! is completing its migration from MongoDB to Postgres within the coming days. Once that lands, Postgres becomes the master datastore and this Mongo-based publishing repository is being retired for good. This isn't a temporary freeze — it's a permanent wind-down of this repo as part of the move to the new stack.
 
-A new community process and contributor guide for pushing candidates and versions to the Postgres stack is on the way. Once it lands, the door reopens — this is a temporary freeze while we finish the migration, not a shutdown. Thank you for your patience, and watch this space for the new guide.
+A new community process and contributor guide for publishing candidates and versions to the Postgres stack is coming very soon, and all future contributions will flow through it. Thank you for everything you've contributed here over the years — watch this space for the new guide, and we'll see you on the other side.
 
 This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API.
 
