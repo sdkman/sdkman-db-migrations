@@ -5,7 +5,7 @@
 
 ## ⚠️ Read-only mode 🚧
 
-> ⚠️ **This repository is now in read-only mode and is no longer accepting pull requests.**
+> **This repository is now in read-only mode and is no longer accepting pull requests.**
 
 SDKMAN! is completing its migration from MongoDB to Postgres within the coming days. Once that lands, Postgres becomes the master datastore and this Mongo-based publishing repository is being retired for good. This isn't a temporary freeze — it's a permanent wind-down of this repo as part of the move to the new stack.
 
