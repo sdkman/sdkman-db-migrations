@@ -3,9 +3,9 @@
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/sdkman/sdkman-db-migrations/migrate.yml)](https://github.com/sdkman/sdkman-db-migrations/actions/workflows/migrate.yml)
 [![Discord](https://img.shields.io/discord/1245471991117512754)](https://discord.gg/y9mVJYVyu4)
 
-## Read-only mode
+## ⚠️ Read-only mode 🚧
 
-This repository is now in **read-only mode** and is no longer accepting new pull requests.
+> ⚠️ **This repository is now in read-only mode and is no longer accepting new pull requests.**
 
 SDKMAN! is mid-migration from MongoDB to Postgres, and the Mongo-based publishing flow that lives in this repo is being retired as part of that move. To avoid confusion during the transition, we are pausing contributions here rather than merging changes into a pipeline that is on its way out.
 
