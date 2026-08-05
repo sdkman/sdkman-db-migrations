@@ -7,7 +7,7 @@
 
 > **This repository is now in read-only mode and is no longer accepting pull requests.**
 
-SDKMAN! is completing its migration from MongoDB to Postgres within the coming days. Once that lands, Postgres becomes the master datastore and this Mongo-based publishing repository is being retired for good. This isn't a temporary freeze — it's a permanent wind-down of this repo as part of the move to the new stack.
+SDKMAN! is completing its migration from MongoDB to Postgres. Once that lands, Postgres becomes the master datastore and this Mongo-based publishing repository is being retired for good. This isn't a temporary freeze — it's a permanent wind-down of this repo as part of the move to the new stack.
 
 A new community process and contributor guide for publishing candidates and versions to the Postgres stack is coming very soon, and all future contributions will flow through it. Thank you for everything you've contributed here over the years — watch this space for the new guide, and we'll see you on the other side.
 
