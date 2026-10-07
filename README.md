@@ -1,6 +1,6 @@
 # SDKMAN Database Migrations
 
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/sdkman/sdkman-db-migrations/migrate.yml)](https://github.com/sdkman/sdkman-db-migrations/actions/workflows/migrate.yml)
+![Status: archived](https://img.shields.io/badge/status-archived-lightgrey)
 [![Discord](https://img.shields.io/discord/1245471991117512754)](https://discord.gg/y9mVJYVyu4)
 
 ## ⚠️ Read-only mode 🚧
