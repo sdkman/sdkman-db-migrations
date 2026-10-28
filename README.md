@@ -4,9 +4,9 @@
 [![Discord](https://img.shields.io/discord/1245471991117512754)](https://discord.gg/y9mVJYVyu4)
 
 > [!CAUTION]
-> ## 🚚 This repository has moved to [sdkman/sdkman-contrib](https://github.com/sdkman/sdkman-contrib)
+> ## 🔁 This repository has been replaced by [sdkman/sdkman-contrib](https://github.com/sdkman/sdkman-contrib)
 >
-> **This repository is archived and no longer accepts pull requests. All new candidates and versions are now contributed through [sdkman-contrib](https://github.com/sdkman/sdkman-contrib).**
+> **This repository is archived and no longer accepts pull requests. All new candidates and versions are now contributed through [sdkman-contrib](https://github.com/sdkman/sdkman-contrib), a new project that replaces it.**
 >
 > To publish a new version:
 >
