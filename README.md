@@ -3,13 +3,22 @@
 ![Status: archived](https://img.shields.io/badge/status-archived-lightgrey)
 [![Discord](https://img.shields.io/discord/1245471991117512754)](https://discord.gg/y9mVJYVyu4)
 
-## ⚠️ Read-only mode 🚧
+> [!CAUTION]
+> ## 🚚 This repository has moved to [sdkman/sdkman-contrib](https://github.com/sdkman/sdkman-contrib)
+>
+> **This repository is archived and no longer accepts pull requests. All new candidates and versions are now contributed through [sdkman-contrib](https://github.com/sdkman/sdkman-contrib).**
+>
+> To publish a new version:
+>
+> 1. `sdk update`, open a new terminal, then `sdk install contrib`
+> 2. In a fork of [sdkman-contrib](https://github.com/sdkman/sdkman-contrib), run `contrib new release <candidate> <version>`
+> 3. Run `contrib check`, then open a pull request
+>
+> See the [sdkman-contrib README](https://github.com/sdkman/sdkman-contrib#readme) for the full contributor guide.
 
-> **This repository is now in read-only mode and is no longer accepting pull requests.**
+---
 
-SDKMAN! is completing its migration from MongoDB to Postgres. Once that lands, Postgres becomes the master datastore and this Mongo-based publishing repository is being retired for good. This isn't a temporary freeze — it's a permanent wind-down of this repo as part of the move to the new stack.
-
-A new community process and contributor guide for publishing candidates and versions to the Postgres stack is coming very soon, and all future contributions will flow through it. Thank you for everything you've contributed here over the years — watch this space for the new guide, and we'll see you on the other side.
+_The content below is kept for historical reference only._
 
 This enables the users of SDKMAN to contribute new Installation Candidates and related Versions to be served by the API.
 
